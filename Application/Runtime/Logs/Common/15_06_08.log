@@ -1,0 +1,12 @@
+[ 2015-06-08T18:10:09+08:00 ] 127.0.0.1 /classoa/index.php/User/login/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000025s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000939s ]
+ERR: 无法加载模块:User
+
+[ 2015-06-08T18:10:48+08:00 ] 127.0.0.1 /index.php/User/login/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000282s ]
+ERR: 无法加载模块:User
+
