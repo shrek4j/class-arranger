@@ -33,7 +33,7 @@
     
     <style type="text/css">
         .main-view{position:fixed;width:83.5%;height:89%;margin:5.35% 0.5% 0.5% 16%;padding:0.8% 0.8% 0.8% 1.2%;background:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)}
-        .main-view-inner{margin:2% 2% 2% 2%;}
+        .main-view-inner{margin:2% 6% 2% 2%;}
         .main-view-inner-bar{margin:6% 2% 2% 2%;}
         .main-view-inner-table{margin:4% 2% 2% 2%;}
         .cell-operation-gutter{margin-left:10%}
@@ -75,66 +75,95 @@
    <!-- <span>姓名</span><span>角色</span><a href="#">退出</a> -->
 </div>
 
+    
 <div class="main-view">
+    
     <div class="main-view-inner">
         <div class="main-view-inner-bar">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;添加课程
+            <span style="cursor:pointer" data-toggle="modal" data-target="#addClassModal">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;添加课程
+            </span>
             
         </div>
-        <div class="list-group main-view-inner-table container-fluid">
-            <a href="#" class="list-group-item">
-                <h4 class="list-group-item-heading">新概念1</h4>
-                <p class="list-group-item-text">
-                    <div class="row text-center">
-                        <div class="col-md-10">
-                            课程描述
-                        </div>
-                        <div class="col-md-1">
-                            
-                        </div>
-                        <div class="col-md-1">
-                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                            <span class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true"></span>
-                        </div>
-                    </div>
-                </p>
-            </a>
-            <a href="#" class="list-group-item">
-                <h4 class="list-group-item-heading">新概念2</h4>
-                <p class="list-group-item-text">
-                    <div class="row text-center">
-                        <div class="col-md-10">
-                            课程描述
-                        </div>
-                         <div class="col-md-1">
-                            
-                        </div>
-                        <div class="col-md-1">
-                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                            <span class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true"></span>
-                        </div>
-                    </div>
-                </p>
-            </a>
-            <a href="#" class="list-group-item">
-                <h4 class="list-group-item-heading">KET3</h4>
-                <p class="list-group-item-text">
-                    <div class="row text-center">
-                        <div class="col-md-10">
-                            课程描述
-                        </div>
-                         <div class="col-md-1">
-                            
-                        </div>
-                        <div class="col-md-1">
-                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                            <span class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true"></span>
-                        </div>
-                    </div>
-                </p>
-            </a>
-        </div>
+                
+        <table class="main-view-inner-table table table-hover text-center">
+            <thead><tr><td>课程名称</td><td>课程分类</td><td>教师</td><td>教室</td><td>开始日期</td><td>截止日期</td><td>操作</td></tr></thead>
+            <tbody>
+                <tr><td>新概念1 5人班</td>
+                    <td>新概念1</td>
+                    <td>张晓敏</td>
+                    <td>101</td>
+                    <td>2016-02-01</td>
+                    <td>2016-04-12</td>
+                    <td>
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true"></span>
+                    </td>
+                </tr>
+                <tr><td>新概念2 10人班</td>
+                    <td>新概念2</td>
+                    <td>张晓敏</td>
+                    <td>102</td>
+                    <td>2016-02-01</td>
+                    <td>2016-04-12</td>
+                    <td>
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true"></span>
+                    </td>
+                </tr>
+                <tr><td>KET 8人班</td>
+                    <td>KET</td>
+                    <td>日光灯</td>
+                    <td>101</td>
+                    <td>2016-02-01</td>
+                    <td>2016-04-12</td>
+                    <td>
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <nav class="text-center">
+            <ul class="pagination">
+                <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li class="disabled"><a href="#">4</a></li>
+                <li class="disabled"><a href="#">5</a></li>
+                <li class="disabled"><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+            </ul>
+        </nav>
     </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addClassModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">新建课程</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">课程名称:</label>
+            <input type="text" class="form-control" id="class-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="control-label">描述:</label>
+            <textarea class="form-control" id="remark"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 
