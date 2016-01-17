@@ -32,11 +32,12 @@
     </style>
     
     <style type="text/css">
-        .main-view{position:fixed;width:83.5%;height:89%;margin:5.35% 0.5% 0.5% 16%;padding:0.8% 0.8% 0.8% 1.2%;background:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)}
+        .main-view{position:fixed;width:83.5%;height:89%;margin:4.35% 0.5% 0.5% 16%;padding:0.8% 0.8% 0.8% 1.2%;background:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)}
         .main-view-inner{margin:2% 6% 2% 2%;}
         .main-view-inner-bar{margin:6% 2% 2% 2%;}
         .main-view-inner-table{margin:4% 2% 2% 2%;}
         .cell-operation-gutter{margin-left:10%}
+        .modal-body .container-fluid .row{margin-top:2%}
     </style>
     
 </head>
@@ -66,8 +67,14 @@
         <a href="#">教室管理</a>
     </li>
     <li role="presentation" id="headingFour">
-        <a href="#">课程管理</a>
+        <a data-toggle="collapse" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">课程管理</a>
     </li>
+      <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+          <ul class="nav nav-pills nav-stacked sub-nav">
+              <li role="presentation"><a href="#">课程分类</a></li>
+              <li role="presentation"><a href="#">课程设置</a></li>
+          </ul>
+      </div>
   </ul>
 </nav>
 
@@ -147,20 +154,104 @@
         <h4 class="modal-title" id="myModalLabel">新建课程</h4>
       </div>
       <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="recipient-name" class="control-label">课程名称:</label>
-            <input type="text" class="form-control" id="class-name">
+          <div class="container-fluid">
+              <div class="row">
+                  <div class="col-md-2">
+                    <label for="classname" class="control-label">课程名称:</label>
+                  </div>
+                  <div class="col-md-10">
+                    <input type="text" class="form-control" id="classname">
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-2">
+                      <label for="classtype" class="control-label">课程分类:</label>
+                  </div>
+                  <div class="col-md-10">
+                      <div class="dropdown">
+                          <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="classtype" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                              Dropdown
+                              <span class="caret"></span>
+                          </a>
+                          <ul class="dropdown-menu" aria-labelledby="classtype">
+                              <li><a href="#">Action</a></li>
+                              <li><a href="#">Another action</a></li>
+                              <li><a href="#">Something else here</a></li>
+                              <li><a href="#">Separated link</a></li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-2">
+                      <label for="teacher" class="control-label">教师:</label>
+                  </div>
+                  <div class="col-md-10">
+                      <div class="dropdown">
+                          <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="teacher" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                              Dropdown
+                              <span class="caret"></span>
+                          </a>
+                          <ul class="dropdown-menu" aria-labelledby="teacher">
+                              <li><a href="#">Action</a></li>
+                              <li><a href="#">Another action</a></li>
+                              <li><a href="#">Something else here</a></li>
+                              <li><a href="#">Separated link</a></li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-2">
+                      <label for="classroom" class="control-label">教室:</label>
+                  </div>
+                  <div class="col-md-10">
+                      <div class="dropdown">
+                          <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="classroom" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                              Dropdown
+                              <span class="caret"></span>
+                          </a>
+                          <ul class="dropdown-menu" aria-labelledby="classroom">
+                              <li><a href="#">Action</a></li>
+                              <li><a href="#">Another action</a></li>
+                              <li><a href="#">Something else here</a></li>
+                              <li><a href="#">Separated link</a></li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-2">
+                      <label for="student" class="control-label">学生:</label>
+                  </div>
+                  <div class="col-md-10">
+                      <div class="dropdown">
+                          <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="student" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                              Dropdown
+                              <span class="caret"></span>
+                          </a>
+                          <ul class="dropdown-menu" aria-labelledby="student">
+                              <li><a href="#">Action</a></li>
+                              <li><a href="#">Another action</a></li>
+                              <li><a href="#">Something else here</a></li>
+                              <li><a href="#">Separated link</a></li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-2">
+                      <label for="remark" class="control-label">描述:</label>
+                  </div>
+                  <div class="col-md-10">
+                      <textarea class="form-control" id="remark"></textarea>
+                  </div>
+              </div>
           </div>
-          <div class="form-group">
-            <label for="message-text" class="control-label">描述:</label>
-            <textarea class="form-control" id="remark"></textarea>
-          </div>
-        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-primary">保存</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
       </div>
     </div>
   </div>
