@@ -16,8 +16,8 @@
 	<title>console</title>
 	<!-- 新 Bootstrap 核心 CSS 文件 -->
 	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="http://www.daterangepicker.com/daterangepicker.css">
-    
+    <!-- bootstrap datepicker -->
+    <link id="bsdp-css" href="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet">
     
     <style type="text/css">
         .global{
@@ -34,11 +34,16 @@
     </style>
     
     <style type="text/css">
-        .main-view{position:fixed;width:83.5%;height:98%;margin:0.5% 0.5% 0.5% 16%;padding:0.8% 0.8% 0.8% 1.2%;background:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)}
+        .main-view{overflow-y:scroll;position:fixed;width:83.5%;height:98%;margin:0.5% 0.5% 0.5% 16%;padding:0.8% 0.8% 0.8% 1.2%;background:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)}
         .main-view-inner{margin:2% 6% 2% 2%;}
-        .class-detail-list{margin:15% 2% 2% 2%;}
-        .class-detail-list .list-group li{height:60px;margin-top:5px;box-shadow:0 1px 2px 0 rgba(0,0,0,0.2)}
-        .class-detail-list .list-group li.cactive{background-color:#3498DB;color:white;}
+        .main-view-inner-bar{margin:2% 2% 2% 2%;}
+        .class-detail-list{margin:2% 2% 2% 2%;}
+        .list-group{margin-bottom:0px}
+        .class-detail-list .finished .list-group li{padding:15px;margin-top:5px;background-color:#337ab7;color:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.2)}
+        .class-detail-list .finished .list-group li.cactive{background-color:#ffc20e;color:white;}
+        .class-detail-list .unfinished .list-group li{padding:15px;margin-top:5px;background-color:#78cdd1;color:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.2)}
+        .class-detail-list .unfinished .list-group li.cactive{background-color:#ffc20e;color:white;}
+        .cell-operation-gutter{margin-left:10%}
     </style>
     
 </head>
@@ -82,16 +87,130 @@
     
 <div class="main-view">
     <div class="main-view-inner">
-        <div id="play" class="class-detail-list">
-            <ul id="list1" class="list-group">
-              <li class="list-group-item">
-                12121
-              </li>
-              <li class="list-group-item cactive">Dapibus ac facilisis in</li>
-              <li class="list-group-item">Morbi leo risus</li>
-              <li class="list-group-item">Porta ac consectetur ac</li>
-              <li class="list-group-item">Vestibulum at eros</li>
-            </ul>
+        <div class="main-view-inner-bar">
+            <h3 style="display: inline-block;">新概念1 5人班</h3><h4 style="margin:0px 0px 0px 20px;display: inline-block;"><span class="label label-warning">新概念1</span></h4>
+        </div>
+        <div class="class-detail-list">
+            <div id="unplay" class="finished">
+                <ul id="list1" class="list-group">
+                  <li class="list-group-item container-fluid">
+                    <div class="row text-center">
+                        <div class="col-md-2"><input id="datepicker" type="text" class="form-control"/></div>
+                        <div class="col-md-1">星期二</div>
+                        <div class="col-md-2">10:00-12:00</div>
+                        <div class="col-md-1">王老吉</div>
+                        <div class="col-md-1">101</div>
+                        <div class="col-md-1">学生</div>
+                        <div class="col-md-2">
+                            <span style="cursor:pointer" class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑"></span>
+                            <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
+                        </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="row text-center">
+                        <div class="col-md-2">2016-01-14</div>
+                        <div class="col-md-1">星期二</div>
+                        <div class="col-md-2">10:00-12:00</div>
+                        <div class="col-md-1">王老吉</div>
+                        <div class="col-md-1">101</div>
+                        <div class="col-md-1">学生</div>
+                        <div class="col-md-2">
+                            <span style="cursor:pointer" class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑"></span>
+                            <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
+                        </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="row text-center">
+                        <div class="col-md-2">2016-01-14</div>
+                        <div class="col-md-1">星期二</div>
+                        <div class="col-md-2">10:00-12:00</div>
+                        <div class="col-md-1">王老吉</div>
+                        <div class="col-md-1">101</div>
+                        <div class="col-md-1">学生</div>
+                        <div class="col-md-2">
+                            <span style="cursor:pointer" class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑"></span>
+                            <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
+                        </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="row text-center">
+                        <div class="col-md-2">2016-01-14</div>
+                        <div class="col-md-1">星期二</div>
+                        <div class="col-md-2">10:00-12:00</div>
+                        <div class="col-md-1">王老吉</div>
+                        <div class="col-md-1">101</div>
+                        <div class="col-md-1">学生</div>
+                        <div class="col-md-2">
+                            <span style="cursor:pointer" class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑"></span>
+                            <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
+                        </div>
+                    </div>
+                  </li>
+                </ul>
+            </div>
+            <div id="play" class="unfinished">
+                <ul id="list1" class="list-group">
+                  <li class="list-group-item">
+                    <div class="row text-center">
+                        <div class="col-md-2">2016-01-14</div>
+                        <div class="col-md-1">星期二</div>
+                        <div class="col-md-2">10:00-12:00</div>
+                        <div class="col-md-1">王老吉</div>
+                        <div class="col-md-1">101</div>
+                        <div class="col-md-1">学生</div>
+                        <div class="col-md-2">
+                            <span style="cursor:pointer" class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑"></span>
+                            <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
+                        </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item cactive">
+                    <div class="row text-center">
+                        <div class="col-md-2">2016-01-14</div>
+                        <div class="col-md-1">星期二</div>
+                        <div class="col-md-2">10:00-12:00</div>
+                        <div class="col-md-1">王老吉</div>
+                        <div class="col-md-1">101</div>
+                        <div class="col-md-1">学生</div>
+                        <div class="col-md-2">
+                            <span style="cursor:pointer" class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑"></span>
+                            <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
+                        </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="row text-center">
+                        <div class="col-md-2">2016-01-14</div>
+                        <div class="col-md-1">星期二</div>
+                        <div class="col-md-2">10:00-12:00</div>
+                        <div class="col-md-1">王老吉</div>
+                        <div class="col-md-1">101</div>
+                        <div class="col-md-1">学生</div>
+                        <div class="col-md-2">
+                            <span style="cursor:pointer" class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑"></span>
+                            <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
+                        </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="row text-center">
+                        <div class="col-md-2">2016-01-14</div>
+                        <div class="col-md-1">星期二</div>
+                        <div class="col-md-2">10:00-12:00</div>
+                        <div class="col-md-1">王老吉</div>
+                        <div class="col-md-1">101</div>
+                        <div class="col-md-1">学生</div>
+                        <div class="col-md-2">
+                            <span style="cursor:pointer" class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑"></span>
+                            <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
+                        </div>
+                    </div>
+                  </li>
+                </ul>
+            </div>
         </div>
     </div>
     
@@ -107,11 +226,11 @@
 	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <!-- daterangepicker -->
-    <script src="http://www.daterangepicker.com/moment.min.js"></script>
-    <script src="http://www.daterangepicker.com/daterangepicker.js"></script>
     <!-- YUI -->
     <script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
+    <!-- bootstrap datepicker -->
+    <script src="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
     
     <script type="text/javascript">
         $("li[role='presentation']").click(function(){
@@ -123,14 +242,6 @@
           $('[data-toggle="tooltip"]').tooltip()
         });
         
-        $('#timerange').daterangepicker({
-            "showWeekNumbers": true,
-            "startDate": "01/12/2016",
-            "endDate": "01/18/2016"
-        }, function(start, end, label) {
-          console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
-        });
- 
     </script>
     
     <script type="text/javascript">
@@ -229,6 +340,13 @@
                 });
             });
         
+        });
+        
+        $('#datepicker').datepicker({
+            format: "yyyy-mm-dd",
+            weekStart: 1,
+            language: "zh-CN",
+            autoclose: true
         });
     </script>
 </body>
