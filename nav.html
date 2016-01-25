@@ -1,0 +1,63 @@
+	<link rel="icon" href="../../favicon.ico">
+    
+    <style type="text/css">
+        .global{
+            font-family: "微软雅黑","华文细黑",Helvetica,Tahoma,Arial,STXihei,"Microsoft YaHei",SimSun,"宋体",Heiti,"黑体",sans-serif;
+            background:#ebebeb;
+        }
+        .favico{margin-top:8%;margin-bottom:15%;padding-left:23%;}
+        .main-nav{position:fixed;width:15%;height:98%;margin:0.5%;padding:0.8% 0.8% 0.8% 1.2%;background:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)}
+        .main-nav li{font-size:16px;}
+        .sub-nav{padding-left: 30px;}
+        .sub-nav li{font-size:12px;}
+        
+        .info-bar{position:fixed;width:83.5%;height:8%;margin:0.5% 0.5% 0.5% 16%;padding:0.8% 0.8% 0.8% 1.2%;background:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)}
+    </style>
+
+<nav>
+  <ul class="nav nav-pills nav-stacked main-nav">
+    <li class="favico"><img width="60%" height="60%" src="./Public/img/logo.png"/></li>
+    <li role="presentation" id="headingOne" class="active">
+        <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">教师管理</a>
+    </li>
+    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+        <ul class="nav nav-pills nav-stacked sub-nav">
+            <li role="presentation"><a href="#">分组管理</a></li>
+        </ul>
+    </div>
+    <li role="presentation" id="headingTwo">
+        <a data-toggle="collapse" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">学生管理</a>
+    </li>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+        <ul class="nav nav-pills nav-stacked sub-nav">
+            <li role="presentation"><a href="#">分组管理</a></li>
+            <li role="presentation"><a href="#">批量操作</a></li>
+        </ul>
+    </div>
+    <li role="presentation" id="headingThree">
+        <a href="#">教室管理</a>
+    </li>
+    <li role="presentation" id="headingFour">
+        <a data-toggle="collapse" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">课程管理</a>
+    </li>
+      <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+          <ul class="nav nav-pills nav-stacked sub-nav">
+              <li role="presentation"><a href="#">课程分类设置</a></li>
+              <li role="presentation"><a href="./classmain.html">课程设置</a></li>
+			  <li role="presentation"><a href="./showclass.html">课程查询</a></li>
+          </ul>
+      </div>
+  </ul>
+</nav>
+
+<!--
+<div class="info-bar">
+    <span>姓名</span><span>角色</span><a href="#">退出</a> 
+</div>
+-->
+    <script type="text/javascript">
+        $("li[role='presentation']").click(function(){
+           $("li[role='presentation']").removeClass("active");
+           $(this).addClass("active"); 
+        });
+    </script>

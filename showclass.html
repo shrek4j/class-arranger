@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="icon" href="../../favicon.ico">
+
+	<title>console</title>
+	<!-- 新 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- bootstrap datepicker -->
+    <link id="bsdp-css" href="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet">
+    
+    <style type="text/css">
+        .main-view{overflow-y:scroll;position:fixed;width:83.5%;height:98%;margin:0.5% 0.5% 0.5% 16%;padding:0.8% 0.8% 0.8% 1.2%;background:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)}
+        .main-view-inner{margin:2% 2% 2% 2%;}
+        .main-view-inner-bar{margin:2% 2% 2% 2%;}
+        .class-detail-monthly{margin:2% 1% 2% 1%;}
+        .class-detail-monthly .title{font-weight:bold;font-size:16px;background-color:#34495e;color:white;}
+        .class-detail-monthly table tr td{width:150px;}
+        .class-detail-monthly .classinfo{}
+        .class-detail-monthly .calendar-day{font-size:10px;margin-left:65%;}
+        .class-detail-monthly .classinfo-one{font-size:10px;margin: 2px 2px 2px 2px;}
+        .class-detail-monthly .classname{}
+        .class-detail-monthly .morning{}
+        .class-detail-monthly .afternoon{}
+        .class-detail-monthly .weekend{background-color:#eaeded;}
+    </style>
+    
+</head>
+ <body class="global">   
+ <!-- 导航 -->
+<div id="navLoader"></div>
+
+<div class="main-view">
+    <div class="main-view-inner">
+        <div class="main-view-inner-bar text-center">
+            <h3 style="display: inline-block;">2016一月</h3>
+        </div>
+        
+        <div class="class-detail-monthly">
+          <table class="table table-bordered">
+            <tr class="title text-center">
+                <td >星期一</td>
+                <td >星期二</td>
+                <td >星期三</td>
+                <td >星期四</td>
+                <td >星期五</td>
+                <td>星期六</td>
+                <td>星期日</td>
+          </tr>
+          <tr class="classinfo">
+                <td >
+                    <div class="calendar-day">25 十六</div>
+                    <div class="classinfo-one"><span class="classname">新概念1 5人班</span><span class="classtime">4:00-6:00</span></div>
+                </td>
+                <td >
+                    <div class="calendar-day">26 十七</div>
+                    <div class="classinfo-one"><span class="classname">新概念1 5人班</span><span class="classtime">10:00-12:00</span></div>
+                    <div class="classinfo-one"><span class="classname">PET 5人班</span><span class="classtime">1:30-3:30</span></div>
+                    <div class="classinfo-one"><span class="classname">新概念2 6人班</span><span class="classtime">4:00-6:00</span></div>
+                </td>
+                <td >
+                    <div class="calendar-day">27 十八</div>
+                    <div class="classinfo-one afternoon"><span class="classname">NCE1</span><span class="classtime">1:30-3:30</span></div>
+                </td>
+                <td >
+                    <div class="calendar-day">28 十九</div>
+                    <div class="classinfo-one afternoon"><span class="classname">PET 5人班</span><span class="classtime">1:30-3:30</span></div>
+                    <div class="classinfo-one"><span class="classname">新概念2 4人班</span><span class="classtime">4:00-6:00</span></div>
+                </td>
+                <td >
+                    <div class="calendar-day">29 二十</div>
+                    <div class="classinfo-one afternoon"><span class="classname">NCE1</span><span class="classtime">1:30-3:30</span></div>
+                    <div class="classinfo-one"><span class="classname">新概念2 6人班</span><span class="classtime">4:00-6:00</span></div>
+                </td>
+                <td class="weekend">
+                    <div class="calendar-day">30 廿一</div>
+                    <div class="classinfo-one afternoon"><span class="classname">PET 5人班</span><span class="classtime">1:30-3:30</span></div>
+                </td>
+                <td class="weekend">
+                    <div class="calendar-day">31 廿二</div>
+                </td>
+          </tr>
+          <tr class="classinfo">
+                <td >
+                    <div class="calendar-day">25 十六</div>
+                    <div class="classinfo-one"><span class="classname">新概念1 5人班</span><span class="classtime">4:00-6:00</span></div>
+                </td>
+                <td >
+                    <div class="calendar-day">26 十七</div>
+                    <div class="classinfo-one"><span class="classname">新概念1 5人班</span><span class="classtime">10:00-12:00</span></div>
+                    <div class="classinfo-one"><span class="classname">PET 5人班</span><span class="classtime">1:30-3:30</span></div>
+                    <div class="classinfo-one"><span class="classname">新概念2 6人班</span><span class="classtime">4:00-6:00</span></div>
+                </td>
+                <td >
+                    <div class="calendar-day">27 十八</div>
+                    <div class="classinfo-one"><span class="classname">NCE1</span><span class="classtime">1:30-3:30</span></div>
+                </td>
+                <td >
+                    <div class="calendar-day">28 十九</div>
+                    <div class="classinfo-one"><span class="classname">PET 5人班</span><span class="classtime">1:30-3:30</span></div>
+                    <div class="classinfo-one"><span class="classname">新概念2 4人班</span><span class="classtime">4:00-6:00</span></div>
+                </td>
+                <td >
+                    <div class="calendar-day">29 二十</div>
+                    <div class="classinfo-one"><span class="classname">NCE1</span><span class="classtime">1:30-3:30</span></div>
+                    <div class="classinfo-one"><span class="classname">新概念2 6人班</span><span class="classtime">4:00-6:00</span></div>
+                </td>
+                <td class="weekend">
+                    <div class="calendar-day">30 廿一</div>
+                    <div class="classinfo-one"><span class="classname">PET 5人班</span><span class="classtime">1:30-3:30</span></div>
+                    <div class="classinfo-one"><span class="classname">新概念1 5人班</span><span class="classtime">10:00-12:00</span></div>
+                    <div class="classinfo-one"><span class="classname">新概念2 6人班</span><span class="classtime">4:00-6:00</span></div>
+                </td>
+                <td class="weekend">
+                    <div class="calendar-day">31 廿二</div>
+                </td>
+          </tr>
+          <tr class="classinfo">
+                <td >
+                    <div class="calendar-day">25 十六</div>
+                    <div class="classinfo-one"><span class="classname">新概念1 5人班</span><span class="classtime">4:00-6:00</span></div>
+                </td>
+                <td >
+                    <div class="calendar-day">26 十七</div>
+                    <div class="classinfo-one"><span class="classname">新概念1 5人班</span><span class="classtime">10:00-12:00</span></div>
+                    <div class="classinfo-one"><span class="classname">PET 5人班</span><span class="classtime">1:30-3:30</span></div>
+                    <div class="classinfo-one"><span class="classname">新概念2 6人班</span><span class="classtime">4:00-6:00</span></div>
+                </td>
+                <td >
+                    <div class="calendar-day">27 十八</div>
+                    <div class="classinfo-one"><span class="classname">NCE1</span><span class="classtime">1:30-3:30</span></div>
+                </td>
+                <td >
+                    <div class="calendar-day">28 十九</div>
+                    <div class="classinfo-one"><span class="classname">PET 5人班</span><span class="classtime">1:30-3:30</span></div>
+                    <div class="classinfo-one"><span class="classname">新概念2 4人班</span><span class="classtime">4:00-6:00</span></div>
+                </td>
+                <td >
+                    <div class="calendar-day">29 二十</div>
+                    <div class="classinfo-one"><span class="classname">NCE1</span><span class="classtime">1:30-3:30</span></div>
+                    <div class="classinfo-one"><span class="classname">新概念2 6人班</span><span class="classtime">4:00-6:00</span></div>
+                </td>
+                <td class="weekend">
+                    <div class="calendar-day">30 廿一</div>
+                    <div class="classinfo-one"><span class="classname">PET 5人班</span><span class="classtime">1:30-3:30</span></div>
+                </td>
+                <td class="weekend">
+                    <div class="calendar-day">31 廿二</div>
+                    <div class="classinfo-one"><span class="classname">新概念1 5人班</span><span class="classtime">10:00-12:00</span></div>
+                    <div class="classinfo-one"><span class="classname">PET 5人班</span><span class="classtime">1:30-3:30</span></div>
+                    <div class="classinfo-one"><span class="classname">新概念2 6人班</span><span class="classtime">4:00-6:00</span></div>
+                    <div class="classinfo-one"><span class="classname">新概念1 5人班</span><span class="classtime">10:00-12:00</span></div>
+                </td>
+          </tr>
+          <tr class="classinfo">
+                <td >
+                    <div class="calendar-day">25 十六</div>
+                    <div class="classinfo-one"><span class="classname">新概念1 5人班</span><span class="classtime">4:00-6:00</span></div>
+                </td>
+                <td >
+                    <div class="calendar-day">26 十七</div>
+                    <div class="classinfo-one"><span class="classname">新概念1 5人班</span><span class="classtime">10:00-12:00</span></div>
+                    <div class="classinfo-one"><span class="classname">PET 5人班</span><span class="classtime">1:30-3:30</span></div>
+                    <div class="classinfo-one"><span class="classname">新概念2 6人班</span><span class="classtime">4:00-6:00</span></div>
+                </td>
+                <td >
+                    <div class="calendar-day">27 十八</div>
+                    <div class="classinfo-one"><span class="classname">NCE1</span><span class="classtime">1:30-3:30</span></div>
+                </td>
+                <td >
+                    <div class="calendar-day">28 十九</div>
+                    <div class="classinfo-one"><span class="classname">PET 5人班</span><span class="classtime">1:30-3:30</span></div>
+                    <div class="classinfo-one"><span class="classname">新概念2 4人班</span><span class="classtime">4:00-6:00</span></div>
+                </td>
+                <td >
+                    <div class="calendar-day">29 二十</div>
+                    <div class="classinfo-one"><span class="classname">NCE1</span><span class="classtime">1:30-3:30</span></div>
+                    <div class="classinfo-one"><span class="classname">新概念2 6人班</span><span class="classtime">4:00-6:00</span></div>
+                </td>
+                <td class="weekend">
+                    <div class="calendar-day">30 廿一</div>
+                    <div class="classinfo-one"><span class="classname">PET 5人班</span><span class="classtime">1:30-3:30</span></div>
+                </td>
+                <td class="weekend">
+                    <div class="calendar-day">31 廿二</div>
+                </td>
+          </tr>
+          <tr class="classinfo">
+                <td >
+                    <div class="calendar-day">25 十六</div>
+                    <div class="classinfo-one"><span class="classname">新概念1 5人班</span><span class="classtime">4:00-6:00</span></div>
+                </td>
+                <td >
+                    <div class="calendar-day">26 十七</div>
+                    <div class="classinfo-one"><span class="classname">新概念1 5人班</span><span class="classtime">10:00-12:00</span></div>
+                    <div class="classinfo-one"><span class="classname">PET 5人班</span><span class="classtime">1:30-3:30</span></div>
+                    <div class="classinfo-one"><span class="classname">新概念2 6人班</span><span class="classtime">4:00-6:00</span></div>
+                </td>
+                <td >
+                    <div class="calendar-day">27 十八</div>
+                    <div class="classinfo-one"><span class="classname">NCE1</span><span class="classtime">1:30-3:30</span></div>
+                </td>
+                <td >
+                    <div class="calendar-day">28 十九</div>
+                    <div class="classinfo-one"><span class="classname">PET 5人班</span><span class="classtime">1:30-3:30</span></div>
+                    <div class="classinfo-one"><span class="classname">新概念2 4人班</span><span class="classtime">4:00-6:00</span></div>
+                </td>
+                <td >
+                    <div class="calendar-day">29 二十</div>
+                    <div class="classinfo-one"><span class="classname">NCE1</span><span class="classtime">1:30-3:30</span></div>
+                    <div class="classinfo-one"><span class="classname">新概念2 6人班</span><span class="classtime">4:00-6:00</span></div>
+                </td>
+                <td class="weekend">
+                    <div class="calendar-day">30 廿一</div>
+                    <div class="classinfo-one"><span class="classname">PET 5人班</span><span class="classtime">1:30-3:30</span></div>
+                </td>
+                <td class="weekend">
+                    <div class="calendar-day">31 廿二</div>
+                </td>
+          </tr>
+        </div>
+        
+    </div>
+    
+    
+</div>
+
+	<!-- 可选的Bootstrap主题文件（一般不用引入） -->
+	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>
+	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- YUI -->
+    <script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
+    <!-- bootstrap datepicker -->
+    <script src="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
+    
+    <script type="text/javascript">
+		$('#navLoader').load("nav.html");
+    </script>
+    
+    <script type="text/javascript">
+	        $(function () {
+			  $('[data-toggle="tooltip"]').tooltip()
+			});
+    </script>
+</body>
+</html>
