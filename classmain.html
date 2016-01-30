@@ -24,6 +24,7 @@
         .main-view-inner{margin:2% 6% 2% 2%;}
         .main-view-inner-bar{margin:14% 2% 2% 2%;}
         .main-view-inner-table{margin:4% 2% 2% 2%;}
+        .main-view-inner-table .title{font-weight:bold;font-size:16px;background-color:#33CC33;color:white;}
         .cell-operation-gutter{margin-left:10%}
         .modal-body .container-fluid .row{margin-top:2%}
         .calendar-inner{ position: absolute; bottom: 10px; right: 24px; top: auto; cursor: pointer; display:inline-block;font:normal normal normal 14px/1 FontAwesome;font-size:inherit;text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;transform:translate(0, 0)}
@@ -46,9 +47,42 @@
             </span>
         </div>
                 
-        <table class="main-view-inner-table table table-hover text-center">
-            <thead><tr><td>课程名称</td><td>课程分类</td><td>教师</td><td>教室</td><td>开始日期</td><td>截止日期</td><td>操作</td></tr></thead>
+        <table class="main-view-inner-table table table-bordered text-center">
+            <thead><tr class="title"><td>课程名称</td><td>课程分类</td><td>教师</td><td>教室</td><td>开始日期</td><td>截止日期</td><td>操作</td></tr></thead>
             <tbody>
+                <tr><td>新概念1 5人班</td>
+                    <td>新概念1</td>
+                    <td>张晓敏</td>
+                    <td>101</td>
+                    <td>2016-02-01</td>
+                    <td>2016-04-12</td>
+                    <td>
+                        <span id="editClass" style="cursor:pointer" class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑"></span>
+                        <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
+                    </td>
+                </tr>
+                <tr><td>新概念2 10人班</td>
+                    <td>新概念2</td>
+                    <td>张晓敏</td>
+                    <td>102</td>
+                    <td>2016-02-01</td>
+                    <td>2016-04-12</td>
+                    <td>
+                        <span id="editClass" style="cursor:pointer" class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑"></span>
+                        <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
+                    </td>
+                </tr>
+                <tr><td>KET 8人班</td>
+                    <td>KET</td>
+                    <td>日光灯</td>
+                    <td>101</td>
+                    <td>2016-02-01</td>
+                    <td>2016-04-12</td>
+                    <td>
+                        <span id="editClass" style="cursor:pointer" class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑"></span>
+                        <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
+                    </td>
+                </tr>
                 <tr><td>新概念1 5人班</td>
                     <td>新概念1</td>
                     <td>张晓敏</td>
