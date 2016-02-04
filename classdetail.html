@@ -25,10 +25,10 @@
         .main-view-inner-bar{margin:2% 2% 2% 2%;}
         .class-detail-list{margin:2% 2% 2% 2%;}
         .class-detail-list .list-group{margin-bottom:0px}
-        .class-detail-list .finished .list-group li{padding:10px;margin-top:5px;background-color:#669999;color:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.2)}
-        .class-detail-list .finished .list-group li.cactive{background-color:#33CC33;color:white;}
-        .class-detail-list .unfinished .list-group li{padding:10px;margin-top:5px;background-color:#CCCCCC;color:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.2)}
-        .class-detail-list .unfinished .list-group li.cactive{background-color:#666666;color:white;}
+        .class-detail-list .finished .list-group li{padding:10px;margin-top:5px;background-color:#339966;color:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.2)}
+        .class-detail-list .finished .list-group li.cactive{background-color:#339966;color:white;}
+        .class-detail-list .unfinished .list-group li{padding:10px;margin-top:5px;background-color:white;color:#339966;box-shadow:0 1px 2px 0 rgba(0,0,0,0.2)}
+        .class-detail-list .unfinished .list-group li.cactive{background-color:#FF9933;color:white;}
         .cell-operation-gutter{margin-left:10%}
     </style>
     
@@ -47,7 +47,7 @@
                 <ul id="list1" class="list-group">
                   <li class="list-group-item container-fluid">
                     <div class="row text-center">
-                        <div class="col-md-2"><input id="datepicker" type="text" class="form-control text-center"/></div>
+                        <div class="col-md-2">2016-01-08</div>
                         <div class="col-md-1">星期二</div>
                         <div class="col-md-2">10:00-12:00</div>
                         <div class="col-md-1">王老吉</div>
@@ -121,7 +121,7 @@
                   </li>
                   <li class="list-group-item cactive">
                     <div class="row text-center">
-                        <div class="col-md-2">2016-01-14</div>
+                        <div class="col-md-2"><input id="datepicker" type="text" class="form-control text-center"/></div>
                         <div class="col-md-1">星期二</div>
                         <div class="col-md-2">10:00-12:00</div>
                         <div class="col-md-1">王老吉</div>
@@ -169,8 +169,6 @@
     
 </div>
 
-	<!-- 可选的Bootstrap主题文件（一般不用引入） -->
-	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>
 	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
@@ -182,7 +180,7 @@
     <script src="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
     
     <script type="text/javascript">
-		$('#navLoader').load("nav.html");
+		$('#navLoader').load("nav.html?"+new Date().getTime());
     </script>
     
     <script type="text/javascript">

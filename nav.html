@@ -20,7 +20,7 @@
     <li role="presentation" id="headingOne" class="active">
         <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">教师管理</a>
     </li>
-    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
         <ul class="nav nav-pills nav-stacked sub-nav">
             <li role="presentation"><a href="#">分组管理</a></li>
         </ul>
@@ -40,13 +40,38 @@
     <li role="presentation" id="headingFour">
         <a data-toggle="collapse" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">课程管理</a>
     </li>
-      <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-          <ul class="nav nav-pills nav-stacked sub-nav">
-              <li role="presentation"><a href="#">课程分类设置</a></li>
-              <li role="presentation"><a href="./classmain.html">课程设置</a></li>
-			  <li role="presentation"><a href="./showclass.html">课程查询</a></li>
-          </ul>
-      </div>
+    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+        <ul class="nav nav-pills nav-stacked sub-nav">
+            <li role="presentation"><a href="#">课程分类设置</a></li>
+            <li role="presentation"><a href="./classmain.html">课程设置</a></li>
+            <li role="presentation"><a href="./showclass.html">课程查询</a></li>
+        </ul>
+    </div>
+    <li role="presentation" id="headingFive">
+        <a data-toggle="collapse" href="#collapseFive" aria-expanded="true" aria-controls="collapseFive">财务管理</a>
+    </li>
+    <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+        <ul class="nav nav-pills nav-stacked sub-nav">
+            <li role="presentation"><a href="./financefee.html">学费管理</a></li>
+            <li role="presentation"><a href="#">支出管理</a></li>
+        </ul>
+    </div>
+    <li role="presentation" id="headingSix">
+        <a data-toggle="collapse" href="#collapseSix" aria-expanded="true" aria-controls="collapseSix">统计信息</a>
+    </li>
+    <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+        <ul class="nav nav-pills nav-stacked sub-nav">
+            <li role="presentation"><a href="#">统计明细</a></li>
+        </ul>
+    </div>
+    <li role="presentation" id="headingSeven">
+        <a data-toggle="collapse" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">人员管理</a>
+    </li>
+    <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+        <ul class="nav nav-pills nav-stacked sub-nav">
+            <li role="presentation"><a href="#">角色设置</a></li>
+        </ul>
+    </div>
   </ul>
 </nav>
 
@@ -58,6 +83,7 @@
     <script type="text/javascript">
         $("li[role='presentation']").click(function(){
            $("li[role='presentation']").removeClass("active");
-           $(this).addClass("active"); 
+           $(this).addClass("active");
+           
         });
     </script>
