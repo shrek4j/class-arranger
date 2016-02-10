@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="icon" href="../../favicon.ico">
+
+	<title>console</title>
+	<!-- 新 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- bootstrap datepicker -->
+    <link id="bsdp-css" href="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet">
+    
+    <style type="text/css">
+        .main-view{position:fixed;width:83.5%;height:98%;margin:0.5% 0.5% 0.5% 16%;padding:0.8% 0.8% 0.8% 1.2%;background:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)}
+        .main-view-inner{margin:2% 6% 2% 2%;}
+        .main-view-inner-bar{margin:10% 2% 2% 2%;}
+        .main-view-inner-table{margin:4% 2% 2% 2%;}
+        .main-view-inner-table .title{font-weight:bold;font-size:16px;background-color:#339966;color:white;}
+        .cell-operation-gutter{margin-left:10%}
+        .row-gutter{margin-top:10px;}
+        .main-view-inner-bar-input{width:250px;}
+        .main-view-inner-bar-button{width:150px;}
+    </style>
+    
+</head>
+<body class="global">
+
+ <!-- 导航 -->
+<div id="navLoader"></div>
+    
+<div class="main-view">
+    <div class="main-view-inner">
+                    <div class="main-view-inner-bar container-fluid">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <input type="text" class="form-control main-view-inner-bar-input" placeholder="学生姓名" aria-describedby="basic-addon1"/>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control main-view-inner-bar-input" placeholder="家长姓名" aria-describedby="basic-addon1"/>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control main-view-inner-bar-input" placeholder="联系电话" aria-describedby="basic-addon1"/>
+                            </div>
+                        </div>
+                        <div class="row row-gutter">
+                            <div class="col-md-2">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle main-view-inner-bar-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        学生状态 <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">已咨询</a></li>
+                                        <li><a href="#">课程中</a></li>
+                                        <li><a href="#">已结课</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle main-view-inner-bar-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        学费余额 <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">从少到多</a></li>
+                                        <li><a href="#">从多到少</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle main-view-inner-bar-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        课时剩余 <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">从少到多</a></li>
+                                        <li><a href="#">从多到少</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-default main-view-inner-bar-input">查询</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    
+                    <table class="main-view-inner-table table table-bordered table-hover table-striped text-center">
+                        <thead class="title">
+                            <tr><td>学生</td><td>家长</td><td>联系电话</td><td>余额</td><td>状态</td><td>管理</td></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>张可多</td><td>张大胖</td><td>13358746578</td><td>300.00元</td><td>已咨询</td>
+                                <td>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-folder-open student-detail" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="详情"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-education cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="报名"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
+                                </td>
+                            </tr>
+                            <tr><td>张可多</td><td>张大胖</td><td>13358746578</td><td>300.00元</td><td>课程中</td>
+                                <td>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-folder-open student-detail" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="详情"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-education cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="报名"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-yen cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="续费"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
+                                </td>
+                            </tr>
+                            <tr><td>张可多</td><td>张大胖</td><td>13358746578</td><td>300.00元</td><td>课程中</td>
+                                <td>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-folder-open student-detail" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="详情"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-education cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="报名"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-yen cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="续费"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
+                                </td>
+                            </tr>
+                            <tr><td>张可多</td><td>张大胖</td><td>13358746578</td><td>300.00元</td><td>课程中</td>
+                                <td>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-folder-open student-detail" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="详情"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-education cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="报名"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-yen cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="续费"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
+                                </td>
+                            </tr>
+                            <tr><td>张可多</td><td>张大胖</td><td>13358746578</td><td>300.00元</td><td>课程中</td>
+                                <td>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-folder-open student-detail" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="详情"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-education cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="报名"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-yen cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="续费"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
+                                </td>
+                            </tr>
+                            <tr><td>张可多</td><td>张大胖</td><td>13358746578</td><td>300.00元</td><td>课程中</td>
+                                <td>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-folder-open student-detail" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="详情"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-education cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="报名"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-yen cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="续费"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
+                                </td>
+                            </tr>
+                            <tr><td>张可多</td><td>张大胖</td><td>13358746578</td><td>300.00元</td><td>课程中</td>
+                                <td>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-folder-open student-detail" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="详情"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-education cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="报名"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-yen cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="续费"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
+                                </td>
+                            </tr>
+                            <tr><td>张可多</td><td>张大胖</td><td>13358746578</td><td>300.00元</td><td>课程中</td>
+                                <td>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-folder-open student-detail" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="详情"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-education cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="报名"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-yen cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="续费"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
+                                </td>
+                            </tr>
+                            <tr><td>张可多</td><td>张大胖</td><td>13358746578</td><td>300.00元</td><td>课程中</td>
+                                <td>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-folder-open student-detail" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="详情"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-education cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="报名"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-yen cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="续费"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
+                                </td>
+                            </tr>
+                            <tr><td>张可多</td><td>张大胖</td><td>13358746578</td><td>300.00元</td><td>已结课</td>
+                                <td>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-folder-open student-detail" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="详情"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-education cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="报名"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-yen cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="续费"></span>
+                                    <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <nav class="text-center">
+                        <ul class="pagination">
+                            <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                            <li class="active"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li class="disabled"><a href="#">4</a></li>
+                            <li class="disabled"><a href="#">5</a></li>
+                            <li class="disabled"><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                        </ul>
+                    </nav>
+                </div>
+    </div>    
+</div>
+
+
+	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- bootstrap datepicker -->
+    <script src="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
+        
+    <script type="text/javascript">
+		$('#navLoader').load("nav.html?"+new Date().getTime());
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        });
+
+        $('.input-daterange').datepicker({
+            format: "yyyy-mm-dd",
+            weekStart: 1,
+            language: "zh-CN",
+            autoclose: true
+        });
+
+		$('.student-detail').click(function(){
+			window.location.href="studentdetail.html";
+		});
+
+    </script>
+</body>
+</html>
