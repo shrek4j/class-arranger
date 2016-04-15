@@ -12,17 +12,24 @@
         .sub-nav li{font-size:12px;}
         
         .info-bar{position:fixed;width:83.5%;height:8%;margin:0.5% 0.5% 0.5% 16%;padding:0.8% 0.8% 0.8% 1.2%;background:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)}
+
+        .operator-info span{margin:10px 10px 20px 15px;font-size:14px;font-weight: bold;color:#009ad6;}
     </style>
 
 <nav>
   <ul class="nav nav-pills nav-stacked main-nav">
     <li class="favico"><img width="60%" height="60%" src="/Public/img/logo.png"/></li>
+    <li class="operator-info">
+        <span class="role">{$_SESSION['role']},{$_SESSION['operatorName']}</span>
+        <span><a href="/index.php/Home/Operator/logout">退出</a></span>
+    </li>
     <li role="presentation" id="headingOne" nav="10">
         <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">教师管理</a>
     </li>
     <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" pnav="10">
         <ul class="nav nav-pills nav-stacked sub-nav">
-            <li role="presentation" nav="11"><a href="#">分组管理</a></li>
+            <li role="presentation" nav="11"><a href="#">添加教师</a></li>
+            <li role="presentation" nav="12"><a href="#">教师列表</a></li>
         </ul>
     </div>
     <li role="presentation" id="headingTwo" nav="20">
@@ -35,16 +42,24 @@
         </ul>
     </div>
     <li role="presentation" id="headingThree" nav="30">
-        <a href="#">教室管理</a>
+        <a data-toggle="collapse" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">教室管理</a>
     </li>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" pnav="30">
+        <ul class="nav nav-pills nav-stacked sub-nav">
+            <li role="presentation" nav="31"><a href="#">添加教室</a></li>
+            <li role="presentation" nav="32"><a href="#">教室列表</a></li>
+        </ul>
+    </div>
     <li role="presentation" id="headingFour" nav="40">
         <a data-toggle="collapse" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">课程管理</a>
     </li>
     <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour" pnav="40">
         <ul class="nav nav-pills nav-stacked sub-nav">
-            <li role="presentation" nav="41"><a href="#">课程分类设置</a></li>
-            <li role="presentation" nav="42"><a href="./classmain.html?nav=42&pnav=40">课程设置</a></li>
-            <li role="presentation" nav="43"><a href="./showclass.html?nav=43&pnav=40">课程查询</a></li>
+            <li role="presentation" nav="41"><a href="#">新建课程分类</a></li>
+            <li role="presentation" nav="42"><a href="#">课程分类列表</a></li>
+            <li role="presentation" nav="43"><a href="#">新建课程</a></li>
+            <li role="presentation" nav="44"><a href="./classmain.html?nav=44&pnav=40">课程列表</a></li>
+            <li role="presentation" nav="45"><a href="./showclass.html?nav=45&pnav=40">课程查询</a></li>
         </ul>
     </div>
     <li role="presentation" id="headingFive" nav="50">
@@ -52,7 +67,7 @@
     </li>
     <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive" pnav="50">
         <ul class="nav nav-pills nav-stacked sub-nav">
-            <li role="presentation" nav="51"><a href="#">学费管理</a></li>
+            <li role="presentation" nav="51"><a href="#">收入管理</a></li>
             <li role="presentation" nav="52"><a href="#">支出管理</a></li>
         </ul>
     </div>
@@ -85,11 +100,12 @@
 
     <script type="text/javascript">
         $("li[role='presentation']").click(function(){
-           $("li[role='presentation']").removeClass("active");
-           $(this).addClass("active");       
+            $("div[role='tabpanel']").removeClass("in");
+            $("li[role='presentation']").removeClass("active");
+            $(this).addClass("active");       
         });
 
-        $(document).ready(function() { 
+        $(document).ready(function() {
             $("div[pnav='{$_SESSION['pnav']}']").addClass("in");
             $("li[nav='{$_SESSION['nav']}']").addClass("active");
         }); 
