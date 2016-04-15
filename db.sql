@@ -28,9 +28,6 @@ CREATE TABLE `classoa_class_detail_student_rela` (
   `is_absent` int(1) NOT NULL DEFAULT '0' COMMENT '0：上课 1：缺勤'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-Create Table
-
 CREATE TABLE `classoa_classroom` (
   `classroom_id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
