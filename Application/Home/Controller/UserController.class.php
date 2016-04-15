@@ -2,6 +2,7 @@
 namespace Home\Controller;
 use Think\Controller;
 class UserController extends Controller {
+    // entrance:   http://localhost/index.php/Home/User/login
     public function login(){
         $this->display();
     }
@@ -16,7 +17,7 @@ class UserController extends Controller {
         if(!empty($result) && count($result) == 1){
             session('userId',$result[0]['user_id']);
             session('instId',$result[0]['inst_id']);
-            $this->success('登陆成功', '/index.php/Home/Schedule/show',2);
+            $this->success('登陆成功', '/index.php/Home/Class/classmain',1);
         }else{
             $this->error('登陆失败');
         }    

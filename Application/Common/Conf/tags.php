@@ -1,4 +1,5 @@
 <?php
 return array(
-	'action_begin'=>array('Home\Behaviors\AuthCheckBehavior')
+	'action_begin'=>array('Home\Behaviors\AuthCheckBehavior',
+						  'Home\Behaviors\NavBehavior')
 );

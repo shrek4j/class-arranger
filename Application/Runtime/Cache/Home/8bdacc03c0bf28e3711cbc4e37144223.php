@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 	<meta charset="utf-8">
@@ -40,7 +40,103 @@
 </head>
  <body class="global">   
  <!-- 导航 -->
-<div id="navLoader"></div>
+	<link rel="icon" href="../../favicon.ico">
+    
+    <style type="text/css">
+        .global{
+            font-family: "微软雅黑","华文细黑",Helvetica,Tahoma,Arial,STXihei,"Microsoft YaHei",SimSun,"宋体",Heiti,"黑体",sans-serif;
+            background:#ebebeb;
+        }
+        .favico{margin-top:8%;margin-bottom:15%;padding-left:23%;}
+        .main-nav{position:fixed;width:15%;height:98%;margin:0.5%;padding:0.8% 0.8% 0.8% 1.2%;background:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)}
+        .main-nav li{font-size:16px;}
+        .sub-nav{padding-left: 30px;}
+        .sub-nav li{font-size:12px;}
+        
+        .info-bar{position:fixed;width:83.5%;height:8%;margin:0.5% 0.5% 0.5% 16%;padding:0.8% 0.8% 0.8% 1.2%;background:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)}
+    </style>
+
+<nav>
+  <ul class="nav nav-pills nav-stacked main-nav">
+    <li class="favico"><img width="60%" height="60%" src="/Public/img/logo.png"/></li>
+    <li role="presentation" id="headingOne" nav="10">
+        <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">教师管理</a>
+    </li>
+    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" pnav="10">
+        <ul class="nav nav-pills nav-stacked sub-nav">
+            <li role="presentation" nav="11"><a href="#">分组管理</a></li>
+        </ul>
+    </div>
+    <li role="presentation" id="headingTwo" nav="20">
+        <a data-toggle="collapse" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">学生管理</a>
+    </li>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" pnav="20">
+        <ul class="nav nav-pills nav-stacked sub-nav">
+            <li role="presentation" nav="21"><a href="./addstudent.html?nav=21&pnav=20">添加学生</a></li>
+            <li role="presentation" nav="22"><a href="./studentlist.html?nav=22&pnav=20">学生列表</a></li>
+        </ul>
+    </div>
+    <li role="presentation" id="headingThree" nav="30">
+        <a href="#">教室管理</a>
+    </li>
+    <li role="presentation" id="headingFour" nav="40">
+        <a data-toggle="collapse" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">课程管理</a>
+    </li>
+    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour" pnav="40">
+        <ul class="nav nav-pills nav-stacked sub-nav">
+            <li role="presentation" nav="41"><a href="#">课程分类设置</a></li>
+            <li role="presentation" nav="42"><a href="./classmain.html?nav=42&pnav=40">课程设置</a></li>
+            <li role="presentation" nav="43"><a href="./showclass.html?nav=43&pnav=40">课程查询</a></li>
+        </ul>
+    </div>
+    <li role="presentation" id="headingFive" nav="50">
+        <a data-toggle="collapse" href="#collapseFive" aria-expanded="true" aria-controls="collapseFive">财务管理</a>
+    </li>
+    <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive" pnav="50">
+        <ul class="nav nav-pills nav-stacked sub-nav">
+            <li role="presentation" nav="51"><a href="#">学费管理</a></li>
+            <li role="presentation" nav="52"><a href="#">支出管理</a></li>
+        </ul>
+    </div>
+    <li role="presentation" id="headingSix" nav="60">
+        <a data-toggle="collapse" href="#collapseSix" aria-expanded="true" aria-controls="collapseSix">统计信息</a>
+    </li>
+    <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix" pnav="60">
+        <ul class="nav nav-pills nav-stacked sub-nav">
+            <li role="presentation" nav="61"><a href="#">统计明细</a></li>
+        </ul>
+    </div>
+    <li role="presentation" id="headingSeven" nav="70">
+        <a data-toggle="collapse" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">人员管理</a>
+    </li>
+    <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven" pnav="70">
+        <ul class="nav nav-pills nav-stacked sub-nav">
+            <li role="presentation" nav="71"><a href="#">角色设置</a></li>
+        </ul>
+    </div>
+  </ul>
+</nav>
+
+<!--
+<div class="info-bar">
+    <span>姓名</span><span>角色</span><a href="#">退出</a> 
+</div>
+-->
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $("li[role='presentation']").click(function(){
+           $("li[role='presentation']").removeClass("active");
+           $(this).addClass("active");       
+        });
+
+        $(document).ready(function() { 
+            $("div[pnav='<?php echo ($_SESSION['pnav']); ?>']").addClass("in");
+            $("li[nav='<?php echo ($_SESSION['nav']); ?>']").addClass("active");
+        }); 
+    </script>
+
 
 <div class="main-view">
     <div class="main-view-inner">

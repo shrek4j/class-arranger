@@ -1,0 +1,10 @@
+[ 2016-02-20T10:37:12+08:00 ] 10.103.9.73 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001051s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.013972s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.014088s ]
+INFO: [ action_begin ] --START--
+NOTIC: [8] Undefined index: HTTP_REFERER D:\langs\php\wamp\www\Application\Home\Behaviors\AuthCheckBehavior.class.php 第 15 行.
+

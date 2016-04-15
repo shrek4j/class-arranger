@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="icon" href="../../favicon.ico">
+
+	<title>console</title>
+	<!-- 新 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- bootstrap datepicker -->
+    <link id="bsdp-css" href="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet">
+    
+    <style type="text/css">
+        .main-view{position:fixed;width:83.5%;height:98%;margin:0.5% 0.5% 0.5% 16%;padding:0.8% 0.8% 0.8% 1.2%;background:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)}
+        .main-view-inner{margin:4% 6% 2% 2%;}
+        .main-view-inner-left-bar{margin:14% 2% 2% 4%;width:200px;}
+        .main-view-inner-left-table{margin:10% 2% 2% 4%;width:440px;}
+        .main-view-inner-left-table .title{font-weight:bold;font-size:16px;background-color:#339966;color:white;}
+        .container-fluid .row{margin-top:1%}
+        .seperate-line{border-right:#BBBBBB solid 1px;height:600px;}
+        .main-view-inner-right{margin:14% 2% 2% 10%;font-size:14px;width:400px;}
+        .main-view-inner-right .key{width:80px;padding:0px;}
+        .main-view-inner-right .value{padding-left:0px;}
+        .calendar-inner{position: absolute; bottom: 10px; right: 24px; top: auto; cursor: pointer; display:inline-block;font:normal normal normal 14px/1 FontAwesome;font-size:inherit;text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;transform:translate(0, 0)}
+        .week-picker{height:200px;min-width:100px;}
+        .time-picker{overflow-y:scroll;height:200px;min-width:100px;}
+    </style>
+    
+</head>
+<body class="global">
+
+ <!-- 导航 -->
+<include file="Public:nav" />
+    
+<div class="main-view">
+    <div class="main-view-inner">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 seperate-line">
+                
+                    <div class="main-view-inner-left-bar">
+                        <div class="input-group">
+                          <input type="text" class="form-control" placeholder="学生姓名" aria-describedby="basic-addon1"/>
+                          <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">查询</button>
+                          </span>
+                        </div>
+                    </div>
+                    
+                    <table class="main-view-inner-left-table table table-bordered">
+                        <thead class="title">
+                            <tr><td>学生</td><td>余额</td><td>状态</td><td>管理</td></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>张可多</td><td>300.00元</td><td>新概念1</td><td>管理</td></tr>
+                            <tr><td>张可多</td><td>300.00元</td><td>新概念1</td><td>管理</td></tr>
+                            <tr><td>张可多</td><td>300.00元</td><td>新概念1</td><td>管理</td></tr>
+                            <tr><td>张可多</td><td>300.00元</td><td>新概念1</td><td>管理</td></tr>
+                            <tr><td>张可多</td><td>300.00元</td><td>新概念1</td><td>管理</td></tr>
+                            <tr><td>张可多</td><td>300.00元</td><td>新概念1</td><td>管理</td></tr>
+                            <tr><td>张可多</td><td>300.00元</td><td>新概念1</td><td>管理</td></tr>
+                            <tr><td>张可多</td><td>300.00元</td><td>新概念1</td><td>管理</td></tr>
+                            <tr><td>张可多</td><td>300.00元</td><td>新概念1</td><td>管理</td></tr>
+                            <tr><td>张可多</td><td>300.00元</td><td>新概念1</td><td>管理</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    
+                    <div class="main-view-inner-right container-fluid">
+                        <div class="row">
+                            <div class="col-md-4 key">学生：</div>
+                            <div class="col-md-4 value">张可多</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 key">余额：</div>
+                            <div class="col-md-4 value">300.00元</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 key">课程：</div>
+                            <div class="col-md-4 value">新概念1</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 key">剩余课时：</div>
+                            <div class="col-md-4 value">2小时</div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>    
+
+    
+
+
+    
+</div>
+
+
+	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- bootstrap datepicker -->
+    <script src="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
+        
+    <script type="text/javascript">
+		$('#navLoader').load("nav.html?"+new Date().getTime());
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        });
+
+        $('.input-daterange').datepicker({
+            format: "yyyy-mm-dd",
+            weekStart: 1,
+            language: "zh-CN",
+            autoclose: true
+        });
+
+		$('#editClass').click(function(){
+			window.location.href="classdetail.html";
+		});
+
+    </script>
+</body>
+</html>

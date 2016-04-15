@@ -1,9 +1,40 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-class ScheduleController extends Controller {
+class ClassController extends Controller {
 
-    public function show($tId=0,$effectMonday=0){ 
+    public function addClass(){
+        
+    }
+
+    public function updateClass(){
+
+    }
+
+    public function delClass($classId){
+
+    }
+
+    public function showClasses(){
+        
+        layout(true);
+        $this->display();
+    }
+
+    public function showClassDetail($classId){
+
+    }
+
+
+
+
+
+
+
+
+
+
+    public function show(){ 
         //$instId = session('instId');
 //        $teacher = new \Home\Model\TeacherModel();
 //        $teacherList = $teacher->queryAllTeachersByInstId($instId);
@@ -91,10 +122,10 @@ class ScheduleController extends Controller {
 }
 
 
-//公共方法
+
 function getDateList($total){
     $thisMonday = getThisMonday();
-    //默认添加三个月的，10周
+
     $dateList[0] = $thisMonday;
     for($i=1;$i<$total;$i++){
         $dateList[$i] = getAnyMonday($thisMonday,$i);

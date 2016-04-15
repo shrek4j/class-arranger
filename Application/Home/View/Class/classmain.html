@@ -17,7 +17,7 @@
 	<!-- 新 Bootstrap 核心 CSS 文件 -->
 	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- bootstrap datepicker -->
-    <link id="bsdp-css" href="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet">
+    <link id="bsdp-css" href="/Public/css/bootstrap/bootstrap-datepicker/datepicker3.css" rel="stylesheet">
     
     <style type="text/css">
         .main-view{position:fixed;width:83.5%;height:98%;margin:0.5% 0.5% 0.5% 16%;padding:0.8% 0.8% 0.8% 1.2%;background:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)}
@@ -36,7 +36,7 @@
 <body class="global">
 
  <!-- 导航 -->
-<div id="navLoader"></div>
+ <include file="Public:nav" />
     
 <div class="main-view">
 
@@ -319,17 +319,13 @@
 </div>
 
 
-	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+  	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+  	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+  	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <!-- bootstrap datepicker -->
-    <script src="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-    <script src="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
-        
-    <script type="text/javascript">
-		$('#navLoader').load("nav.html?"+new Date().getTime());
-    </script>
+    <script src="/Public/js/bootstrap/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+    <script src="/Public/js/bootstrap/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
 
     <script type="text/javascript">
         $(function () {
@@ -343,9 +339,9 @@
             autoclose: true
         });
 
-		$('#editClass').click(function(){
-			window.location.href="classdetail.html";
-		});
+//		$('#editClass').click(function(){
+//			window.location.href="classdetail.html";
+//		});
 
     </script>
 </body>
