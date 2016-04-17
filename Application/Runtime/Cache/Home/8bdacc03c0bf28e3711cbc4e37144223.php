@@ -55,7 +55,7 @@
         
         .info-bar{position:fixed;width:83.5%;height:8%;margin:0.5% 0.5% 0.5% 16%;padding:0.8% 0.8% 0.8% 1.2%;background:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)}
 
-        .operator-info span{margin:10px 10px 10px 15px;font-size:14px;font-weight: bold;color:#009ad6;}
+        .operator-info span{margin:10px 10px 20px 15px;font-size:14px;font-weight: bold;color:#009ad6;}
     </style>
 
 <nav>

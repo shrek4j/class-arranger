@@ -93,8 +93,8 @@
     </li>
     <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour" pnav="40">
         <ul class="nav nav-pills nav-stacked sub-nav">
-            <li role="presentation" nav="41"><a href="#">新建课程分类</a></li>
-            <li role="presentation" nav="42"><a href="#">课程分类列表</a></li>
+            <li role="presentation" nav="41"><a href="/index.php/Home/Class/addClassType?nav=41&pnav=40">新建课程分类</a></li>
+            <li role="presentation" nav="42"><a href="/index.php/Home/Class/showClassTypes?nav=42&pnav=40">课程分类列表</a></li>
             <li role="presentation" nav="43"><a href="#">新建课程</a></li>
             <li role="presentation" nav="44"><a href="./classmain.html?nav=44&pnav=40">课程列表</a></li>
             <li role="presentation" nav="45"><a href="./showclass.html?nav=45&pnav=40">课程查询</a></li>
@@ -265,7 +265,7 @@
                     <label for="classname" class="control-label">课程名称:</label>
                   </div>
                   <div class="col-md-6">
-                    <input type="text" class="form-control" id="classname">
+                    <input type="text" class="form-control" id="classname" name="classnamee">
                   </div>
               </div>
               <div class="row">
@@ -279,10 +279,10 @@
                               <span class="caret"></span>
                           </a>
                           <ul class="dropdown-menu" aria-labelledby="classtype">
-                              <li><a href="#">Action</a></li>
-                              <li><a href="#">Another action</a></li>
-                              <li><a href="#">Something else here</a></li>
-                              <li><a href="#">Separated link</a></li>
+                              <li name="classtype"><a href="#">Action</a></li>
+                              <li name="classtype"><a href="#">Another action</a></li>
+                              <li name="classtype"><a href="#">Something else here</a></li>
+                              <li name="classtype"><a href="#">Separated link</a></li>
                           </ul>
                       </div>
                   </div>
@@ -298,10 +298,10 @@
                               <span class="caret"></span>
                           </a>
                           <ul class="dropdown-menu" aria-labelledby="teacher">
-                              <li><a href="#">Action</a></li>
-                              <li><a href="#">Another action</a></li>
-                              <li><a href="#">Something else here</a></li>
-                              <li><a href="#">Separated link</a></li>
+                              <li name="teacher"><a href="#">Action</a></li>
+                              <li name="teacher"><a href="#">Another action</a></li>
+                              <li name="teacher"><a href="#">Something else here</a></li>
+                              <li name="teacher"><a href="#">Separated link</a></li>
                           </ul>
                       </div>
                   </div>
@@ -317,10 +317,10 @@
                               <span class="caret"></span>
                           </a>
                           <ul class="dropdown-menu" aria-labelledby="classroom">
-                              <li><a href="#">Action</a></li>
-                              <li><a href="#">Another action</a></li>
-                              <li><a href="#">Something else here</a></li>
-                              <li><a href="#">Separated link</a></li>
+                              <li name="classroom"><a href="#">Action</a></li>
+                              <li name="classroom"><a href="#">Another action</a></li>
+                              <li name="classroom"><a href="#">Something else here</a></li>
+                              <li name="classroom"><a href="#">Separated link</a></li>
                           </ul>
                       </div>
                   </div>
@@ -336,10 +336,10 @@
                               <span class="caret"></span>
                           </a>
                           <ul class="dropdown-menu" aria-labelledby="student">
-                              <li><a href="#">Action</a></li>
-                              <li><a href="#">Another action</a></li>
-                              <li><a href="#">Something else here</a></li>
-                              <li><a href="#">Separated link</a></li>
+                              <li name="student"><a href="#">Action</a></li>
+                              <li name="student"><a href="#">Another action</a></li>
+                              <li name="student"><a href="#">Something else here</a></li>
+                              <li name="student"><a href="#">Separated link</a></li>
                           </ul>
                       </div>
                   </div>
@@ -350,9 +350,9 @@
                   </div>
                   <div class="col-md-6">
                       <div class="input-daterange input-group" id="datepicker">
-                          <input type="text" class="input-sm form-control" name="start" />
+                          <input type="text" class="input-sm form-control" name="startDate" />
                           <span class="input-group-addon">到</span>
-                          <input type="text" class="input-sm form-control" name="end" />
+                          <input type="text" class="input-sm form-control" name="endDate" />
                       </div>
                   </div>
               </div>
@@ -366,22 +366,22 @@
                               选择星期
                           </a>
                           <ul class="dropdown-menu week-picker" aria-labelledby="weekpicker">
-                              <li><a href="#">星期一</a></li>
-                              <li><a href="#">星期二</a></li>
-                              <li><a href="#">星期三</a></li>
-                              <li><a href="#">星期四</a></li>
-                              <li><a href="#">星期五</a></li>
-                              <li><a href="#">星期六</a></li>
-                              <li><a href="#">星期日</a></li>
+                              <li name="week"><a href="#">星期一</a></li>
+                              <li name="week"><a href="#">星期二</a></li>
+                              <li name="week"><a href="#">星期三</a></li>
+                              <li name="week"><a href="#">星期四</a></li>
+                              <li name="week"><a href="#">星期五</a></li>
+                              <li name="week"><a href="#">星期六</a></li>
+                              <li name="week"><a href="#">星期日</a></li>
                           </ul>
                       </div>
                       
                       <div class="dropdown" style="display: inline-block;margin-left:10%;">
-                          <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="weekpicker" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                          <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="starttimepicker" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                              开始时间
                           </a>
-                          <ul class="dropdown-menu time-picker" aria-labelledby="weekpicker">
-                              <li><a href="#">7:00</a></li>
+                          <ul class="dropdown-menu time-picker" aria-labelledby="starttimepicker">
+                              <li name="starttime"><a href="#">7:00</a></li>
                               <li><a href="#">7:30</a></li>
                               <li><a href="#">8:00</a></li>
                               <li><a href="#">8:30</a></li>
@@ -394,11 +394,11 @@
                       </div>
                     <span style="display: inline-block;">-</span>
                     <div class="dropdown" style="display: inline-block;">
-                          <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="weekpicker" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                          <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="endtimepicker" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                              结束时间
                           </a>
-                          <ul class="dropdown-menu time-picker" aria-labelledby="weekpicker">
-                              <li><a href="#">7:00</a></li>
+                          <ul class="dropdown-menu time-picker" aria-labelledby="endtimepicker">
+                              <li name="endtime"><a href="#">7:00</a></li>
                               <li><a href="#">7:30</a></li>
                               <li><a href="#">8:00</a></li>
                               <li><a href="#">8:30</a></li>
@@ -423,7 +423,7 @@
           </div>
       </div>
       <div class="modal-footer">
-          <button type="button" class="btn btn-primary">保存</button>
+          <button type="button" class="btn btn-primary add-class">保存</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
       </div>
     </div>
@@ -440,6 +440,7 @@
     <script src="/Public/js/bootstrap/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
 
     <script type="text/javascript">
+
         $(function () {
           $('[data-toggle="tooltip"]').tooltip()
         });

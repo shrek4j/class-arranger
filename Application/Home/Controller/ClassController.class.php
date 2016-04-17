@@ -3,8 +3,15 @@ namespace Home\Controller;
 use Think\Controller;
 class ClassController extends Controller {
 
-    public function addClass(){
-        
+    public function addClass($classname,$classtype,$teacher,$students,$classroom,
+                            $startdate,$enddate,$week,$starttime,$endtime,$remark){
+        //insert classoa_class
+
+        //insert classoa_class_detail
+
+        //insert classoa_class_detail_student_rela
+
+
     }
 
     public function updateClass(){
@@ -27,51 +34,23 @@ class ClassController extends Controller {
 
 
 
+    /////////////////////////////////////////////////////
+    /////////////////////classtype///////////////////////
+    /////////////////////////////////////////////////////
 
-
-
-
-
-
-
-    public function show(){ 
-        //$instId = session('instId');
-//        $teacher = new \Home\Model\TeacherModel();
-//        $teacherList = $teacher->queryAllTeachersByInstId($instId);
-//
-//        if(count($teacherList) > 0){
-//            if($tId == 0){
-//                $tId = $teacherList[0]['teacher_id'];   
-//            }
-//            session('tId',$tId);
-//            
-//            if($effectMonday == 0){
-//                $effectMonday = getThisMonday();
-//            }
-//            session('effectMonday',$effectMonday);
-//            
-//            $schedule = new \Home\Model\ScheduleModel(); 
-//            $scheduleList = $schedule->queryByTeacherId($tId,$effectMonday);
-//            
-//            $thisMonday = getThisMonday();
-//            $dateList = getDateList(10);
-//            $this->assign('thisMonday',$thisMonday);
-//            $this->assign('dateList',$dateList);
-//            $this->assign('scheduleList',$scheduleList);
-//            $this->assign('teacherList',$teacherList);
-//            $this->assign('effectMonday',$effectMonday);
-//            $this->assign('tId',$tId);
-//        }
-        
+    public function addClassType(){
         layout(true);
         $this->display();
     }
-    
-    public function updateSchedule($schedId,$dayOfWeek,$startTime,$endTime){
-        $tId = session('tId');
-        
-        $schedule = new \Home\Model\ScheduleModel();
-        $result = $schedule->updateScheduleByTId($tId,$schedId,$dayOfWeek,$startTime,$endTime);
+
+    public function saveClassType($classtype){
+        if($classtype == "")
+            return;
+        $instId = session('instId');
+        if(!$instId)
+            return;
+        $model = new \Home\Model\ClassModel();
+        $result = $model->saveClasstype($classtype,$instId);
         if($result == 1){
            $data = 'ok'; 
         }else{
@@ -79,79 +58,39 @@ class ClassController extends Controller {
         }
         $this->ajaxReturn($data);
     }
-    
-    public function saveSchedule($classTag,$dayOfWeek,$startTime,$endTime){
-        $tId = session('tId');
-        $effectMonday = session('effectMonday');
-    
-        $schedule = new \Home\Model\ScheduleModel();
-        $result = $schedule->saveScheduleByTId($tId,$classTag,$dayOfWeek,$startTime,$endTime,$effectMonday);
-        if(empty($result)){
-            $result = "false";
-        }else{
-            
-        }
-        $this->ajaxReturn($result);
+
+    public function showClassTypes($pageNo=1,$pageSize=10){
+        $instId = session('instId');
+        if(!$instId)
+            return;
+        $start = ($pageNo - 1)*$pageSize;
+        $model = new \Home\Model\ClassModel();
+        $classtypeList = $model->showClassTypes($instId,$start,$pageSize);
+        $totals = $model->total($instId);
+        $total = $totals[0]['total'];
+        $this->assign('classtypeList',$classtypeList);
+        $this->assign('total',$total);
+        $this->assign('pageNo',$pageNo);
+        $this->assign('pageSize',$pageSize);
+        $this->assign("howMangPages",ceil($total/$pageSize-1)+1);
+        $this->assign('num',1);//记录编号
+        layout(true);
+        $this->display();
     }
-    
-    public function deleteSchedule($schedId,$expireMonday){
-        $tId = session('tId');
-        
-        $schedule = new \Home\Model\ScheduleModel();
-        $result = $schedule->deleteScheduleByTId($tId,$schedId,$expireMonday);
+
+    public function deleteClassType($classTypeId){
+        $instId = session('instId');
+        if(!$instId)
+            return;
+        $model = new \Home\Model\ClassModel();
+        $result = $model->deleteClassType($instId,$classTypeId);
         if($result == 1){
-            $result = true;
+           $data = 'ok'; 
         }else{
-            $result = false;
+            $data = "false";
         }
-        $this->ajaxReturn($result);
+        $this->ajaxReturn($data);
     }
-    
-    public function updateClassTag($schedId,$classTag){
-        $tId = session('tId');
-        $schedule = new \Home\Model\ScheduleModel();
-        $result = $schedule->updateClassTagBySchedId($tId,$schedId,$classTag);
-        if($result == 1){
-            $result = true;
-        }else{
-            $result = false;
-        }
-        $this->ajaxReturn($result);
-    }
-    
-}
 
 
-
-function getDateList($total){
-    $thisMonday = getThisMonday();
-
-    $dateList[0] = $thisMonday;
-    for($i=1;$i<$total;$i++){
-        $dateList[$i] = getAnyMonday($thisMonday,$i);
-    }
-    return $dateList;
-}
-
-function getThisMonday(){
-    $timestamp=0;
-    $is_return_timestamp=false;
-    static $cache ;  
-    $id = $timestamp.$is_return_timestamp;  
-    if(!isset($cache[$id])){  
-        if(!$timestamp) $timestamp = time();  
-        $monday_date = date('Ymd', $timestamp-86400*date('w',$timestamp)+(date('w',$timestamp)>0?86400:-/*6*86400*/518400));  
-        if($is_return_timestamp){  
-            $cache[$id] = strtotime($monday_date);  
-        }else{  
-            $cache[$id] = $monday_date;  
-        }  
-    }  
-    return $cache[$id];
-}  
-
-function getAnyMonday($anyMonday,$weekCount){
-    $anyDate = strtotime($anyMonday);
-    $thismonday = $anyDate + 7*86400*$weekCount;
-    return date('Ymd',$thismonday);
 }

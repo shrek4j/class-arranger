@@ -1,3 +1,42 @@
+<?php if (!defined('THINK_PATH')) exit();?>
+ <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="icon" href="../../favicon.ico">
+
+	<title>新建课程分类</title>
+	<!-- 新 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- bootstrap datepicker -->
+    <link id="bsdp-css" href="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet">
+    
+    <style type="text/css">
+        .main-view{position:fixed;width:83.5%;height:98%;margin:0.5% 0.5% 0.5% 16%;padding:0.8% 0.8% 0.8% 1.2%;background:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)}
+        .container-fluid .row{margin-top:2%;}
+        .main-view-inner{margin:8% 2% 2% 6%;font-size:14px;width:600px;}
+        .main-view-inner .key{width:120px;padding:0px;}
+        .main-view-inner .value{width:200px;padding-left:0px;}
+        .main-view-inner .remark{padding-left:2px;margin-top:8px;color:red;}
+        .row-gutter{margin-top:5px;}
+        .btn-submit{width:305px;height:40px;}
+        .btn-class-type{width:185px;}
+        .btn-class-list{width:200px;}
+    </style>
+    
+</head>
+<body class="global">
+
+ <!-- 导航 -->
 	<link rel="icon" href="../../favicon.ico">
     
     <style type="text/css">
@@ -20,7 +59,7 @@
   <ul class="nav nav-pills nav-stacked main-nav">
     <li class="favico"><img width="60%" height="60%" src="/Public/img/logo.png"/></li>
     <li class="operator-info">
-        <span class="role">{$_SESSION['role']},{$_SESSION['operatorName']}</span>
+        <span class="role"><?php echo ($_SESSION['role']); ?>,<?php echo ($_SESSION['operatorName']); ?></span>
         <span><a href="/index.php/Home/Operator/logout">退出</a></span>
     </li>
     <li role="presentation" id="headingOne" nav="10">
@@ -106,7 +145,39 @@
         });
 
         $(document).ready(function() {
-            $("div[pnav='{$_SESSION['pnav']}']").addClass("in");
-            $("li[nav='{$_SESSION['nav']}']").addClass("active");
+            $("div[pnav='<?php echo ($_SESSION['pnav']); ?>']").addClass("in");
+            $("li[nav='<?php echo ($_SESSION['nav']); ?>']").addClass("active");
         }); 
     </script>
+
+
+<div class="main-view">
+        <div class="main-view-inner container-fluid">
+            <div class="row">
+                <div class="col-md-4 key row-gutter">课程分类名称：</div>
+                <div class="col-md-4 value"><input id="classtype" type="text" class="form-control" value="" aria-describedby="basic-addon1"/></div>
+                <div class="col-md-2 remark"><span>必填</span></div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 key row-gutter"><button type="button" class="btn btn-default btn-submit add-classtype">保存</button></div>
+            </div>
+    </div>
+
+    
+
+
+    
+</div>
+
+
+	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- bootstrap datepicker -->
+    <script src="/Public/js/bootstrap/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+    <script src="/Public/js/bootstrap/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
+    <script src="/Public/js/class.js"></script>
+
+</body>
+</html>
