@@ -4,7 +4,9 @@ use Think\Model;
 class ClassModel extends Model {
     protected $connection = 'DB_CONFIG1';//调用配置文件中的数据库配置1
     protected $autoCheckFields =false;//模型和数据表无需一一对应
-
+    //////////////////////////
+    ///////////class//////////
+    //////////////////////////
     public function saveClass($className,$classtypeId,$remark,$tId){
         $sql = "insert into classoa_class(class_name,class_type_id,remark,inst_id) values('".$className."',".$classtypeId.",'".$remark."',".$tId.")";
         $this->execute($sql);
@@ -22,6 +24,29 @@ class ClassModel extends Model {
     public function saveClassDetailAndStudentRela($classDetailId,$classId,$studentId,$tuition,$tId){
         $sql = "insert into classoa_class_detail_student_rela(class_detail_id,class_id,student_id,tuition_per_class,is_absent,inst_id) values(".$classDetailId.",".$classId.",".$studentId.",".$tuitionPerStud.",".$tId.")";
         $this->execute($sql);
+    }
+
+    public function updateClass($classId,$className,$tId){
+        $sql = "update classoa_class set class_name='".$classname."' where class_id=".$classId." and inst_id=".$tId;
+        return $this->execute($sql);
+    }
+
+    //classoa_class: `status` int(1) NOT NULL DEFAULT '0',
+    public function delClass($classId,$tId){
+        $sql = "update classoa_class set status=1 where class_id=".$classId." and inst_id=".$tId;
+        return $this->execute($sql);
+    }
+    
+    //classoa_class_detail: `status` int(1) NOT NULL DEFAULT '0',
+    public function showClassDetails($classId,$tId){
+        $sql = "select * from classoa_class_detail where inst_id=".$tId." and class_id=".$classId." and status=0 order by class_detail_id asc";
+        return $this->query($sql);
+    }
+
+
+    public function delClassDetail($classId,$classDetailId,$tId){
+        $sql = "update classoa_class set status=1 where class_id=".$classId." and class_detail_id=".$classDetailId." and inst_id=".$tId;
+        return $this->execute($sql);
     }
     
 
