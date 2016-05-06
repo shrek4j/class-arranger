@@ -95,7 +95,7 @@ class ClassController extends Controller {
     }
 
     //apply context: when one class detail needs to change classroom, a teacher, date, time.
-    public function updateClassDetail($classId,$classDetailId,$classroomId,$teacherId,$){
+    public function updateClassDetail($classId,$classDetailId,$classroomId,$teacherId,$date="2015-01-05",$startTime="10:00",$endTime="12:00"){
         
     }
 
