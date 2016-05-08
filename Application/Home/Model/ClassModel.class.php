@@ -14,8 +14,8 @@ class ClassModel extends Model {
         return $this->query($queryIdSql);
     }
     
-    public function saveClassDetail($date,$month,$dayOfWeek,$startTime,$endTime,$teacherId,$classroomId,$classId,$tuition,$tId){
-        $sql = "insert into classoa_class_detail(date,month,day_of_week,start_time,end_time,teacher_id,classroom_id,class_id,tuition_per_class,inst_id) values('".$date."',".$month.",".$dayOfWeek.",'".$startTime."','".$endTime."',".$teacherId.",".$classroomId.",".$classId.",".$tuition.",".$tId.")";
+    public function saveClassDetail($date,$year,$month,$dayOfWeek,$startTime,$endTime,$teacherId,$classroomId,$classId,$tuition,$tId){
+        $sql = "insert into classoa_class_detail(date,year,month,day_of_week,start_time,end_time,teacher_id,classroom_id,class_id,tuition_per_class,inst_id) values('".$date."','".$year."',".$month.",".$dayOfWeek.",'".$startTime."','".$endTime."',".$teacherId.",".$classroomId.",".$classId.",".$tuition.",".$tId.")";
         $this->execute($sql);
         $queryIdSql = "SELECT @@IDENTITY as class_detail_id";
         return $this->query($queryIdSql);
@@ -23,6 +23,11 @@ class ClassModel extends Model {
 
     public function saveClassDetailAndStudentRela($classDetailId,$classId,$studentId,$tuition,$tId){
         $sql = "insert into classoa_class_detail_student_rela(class_detail_id,class_id,student_id,tuition_per_class,is_absent,inst_id) values(".$classDetailId.",".$classId.",".$studentId.",".$tuitionPerStud.",".$tId.")";
+        $this->execute($sql);
+    }
+
+    public function delClassDetailAndStudentRela($classDetailId,$studentId,$tId){
+        $sql = "update classoa_class_detail_student_rela set status=1 where $inst_id=".$tId." and $class_detail_id=".$classDetailId." and student_id=".$studentId;
         $this->execute($sql);
     }
 
@@ -43,12 +48,25 @@ class ClassModel extends Model {
         return $this->query($sql);
     }
 
+    public function updateClassDetail($date,$year,$month,$dayOfWeek,$startTime,$endTime,$teacherId,$classroomId,$classId,$tuition,$tId){
+        $sql = "update classoa_class_detail set date='".$date."',year='".$year."',month=".$month.",day_of_week=".$dayOfWeek.",start_time='".$startTime."',end_time='".$endTime."',teacher_id=".$teacherId.",tuition_per_class=".$tuition." where class_id=".$classId."and classroom_id=".$classroomId." and inst_id=".$tId;
+        return $this->execute($sql);
+    }
 
     public function delClassDetail($classId,$classDetailId,$tId){
         $sql = "update classoa_class set status=1 where class_id=".$classId." and class_detail_id=".$classDetailId." and inst_id=".$tId;
         return $this->execute($sql);
     }
     
+    public function showClassesByTeacher($tId,$year,$month,$teacherId){
+        $sql = "select * from classoa_class_detail where inst_id=".$tId." and year='".$year."' and month='".$month."' and teacher_id=".$teacherId." and status=0 order by date asc,start_time asc";
+        return $this->query($sql);
+    }
+
+    public function showClassesByClassroom($tId,$year,$month,$classroomId){
+        $sql = "select * from classoa_class_detail where inst_id=".$tId." and year='".$year."' and month='".$month."' and classroom_id=".$classroomId." and status=0 order by date asc,start_time asc";
+        return $this->query($sql);
+    }
 
     ////////////////////////////////////
     ////////////classtype///////////////

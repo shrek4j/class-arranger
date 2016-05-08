@@ -88,8 +88,8 @@
     </li>
     <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" pnav="30">
         <ul class="nav nav-pills nav-stacked sub-nav">
-            <li role="presentation" nav="31"><a href="#">添加教室</a></li>
-            <li role="presentation" nav="32"><a href="#">教室列表</a></li>
+            <li role="presentation" nav="31"><a href="/index.php/Home/Classroom/addClassroom?nav=31&pnav=30">添加教室</a></li>
+            <li role="presentation" nav="32"><a href="/index.php/Home/Classroom/showClassrooms?nav=32&pnav=30">教室列表</a></li>
         </ul>
     </div>
     <li role="presentation" id="headingFour" nav="40">
@@ -97,8 +97,8 @@
     </li>
     <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour" pnav="40">
         <ul class="nav nav-pills nav-stacked sub-nav">
-            <li role="presentation" nav="41"><a href="#">新建课程分类</a></li>
-            <li role="presentation" nav="42"><a href="#">课程分类列表</a></li>
+            <li role="presentation" nav="41"><a href="/index.php/Home/Class/addClassType?nav=41&pnav=40">新建课程分类</a></li>
+            <li role="presentation" nav="42"><a href="/index.php/Home/Class/showClassTypes?nav=42&pnav=40">课程分类列表</a></li>
             <li role="presentation" nav="43"><a href="#">新建课程</a></li>
             <li role="presentation" nav="44"><a href="./classmain.html?nav=44&pnav=40">课程列表</a></li>
             <li role="presentation" nav="45"><a href="./showclass.html?nav=45&pnav=40">课程查询</a></li>

@@ -1,22 +1,21 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-class StudentController extends Controller {
-    
-    public function addStudent(){
+class TeacherController extends Controller {
+
+    public function addTeacher(){
         layout(true);
         $this->display();
     }
 
-    public function saveStudent($studentName="",$gender,$grade,$school,$parentName,$mobile,$tuition){
-        if($studentName == "")
+    public function saveTeacher($teacher){
+        if($teacher == "")
             return;
         $instId = session('instId');
         if(!$instId)
             return;
-        $model = new \Home\Model\StudentModel();
-        $result = $model->saveStudent($studentName,$gender,$grade,$school,$parentName,$mobile,$tuition,$instId);
-        $data;
+        $model = new \Home\Model\TeacherModel();
+        $result = $model->saveTeacher($teacher,$instId);
         if($result == 1){
            $data = 'ok'; 
         }else{
@@ -25,16 +24,16 @@ class StudentController extends Controller {
         $this->ajaxReturn($data);
     }
 
-    public function showStudents($pageNo=1,$pageSize=10){
+    public function showTeachers($pageNo=1,$pageSize=10){
         $instId = session('instId');
         if(!$instId)
             return;
         $start = ($pageNo - 1)*$pageSize;
-        $model = new \Home\Model\StudentModel();
-        $studentList = $model->showStudents($instId,$start,$pageSize);
+        $model = new \Home\Model\TeacherModel();
+        $teacherList = $model->showTeachers($instId,$start,$pageSize);
         $totals = $model->total($instId);
         $total = $totals[0]['total'];
-        $this->assign('studentList',$studentList);
+        $this->assign('teacherList',$teacherList);
         $this->assign('total',$total);
         $this->assign('pageNo',$pageNo);
         $this->assign('pageSize',$pageSize);
@@ -44,12 +43,12 @@ class StudentController extends Controller {
         $this->display();
     }
 
-    public function deleteStudent($studentId){
+    public function deleteTeacher($teacherId){
         $instId = session('instId');
         if(!$instId)
             return;
-        $model = new \Home\Model\StudentModel();
-        $result = $model->deleteStudent($instId,$studentId);
+        $model = new \Home\Model\TeacherModel();
+        $result = $model->deleteTeacher($instId,$teacherId);
         if($result == 1){
            $data = 'ok'; 
         }else{
@@ -57,5 +56,6 @@ class StudentController extends Controller {
         }
         $this->ajaxReturn($data);
     }
+
 
 }

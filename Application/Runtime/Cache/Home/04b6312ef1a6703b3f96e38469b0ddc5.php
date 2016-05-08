@@ -14,11 +14,11 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="icon" href="../../favicon.ico">
 
-	<title>教室列表</title>
+	<title>console</title>
 	<!-- 新 Bootstrap 核心 CSS 文件 -->
 	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- bootstrap datepicker -->
-    <link id="bsdp-css" href="/Public/css/bootstrap/bootstrap-datepicker/datepicker3.css" rel="stylesheet">
+    <link id="bsdp-css" href="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet">
     
     <style type="text/css">
         .main-view{position:fixed;width:83.5%;height:98%;margin:0.5% 0.5% 0.5% 16%;padding:0.8% 0.8% 0.8% 1.2%;background:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)}
@@ -27,17 +27,16 @@
         .main-view-inner-table{margin:4% 2% 2% 2%;}
         .main-view-inner-table .title{font-weight:bold;font-size:16px;background-color:#339966;color:white;}
         .cell-operation-gutter{margin-left:10%}
-        .modal-body .container-fluid .row{margin-top:2%}
-        .calendar-inner{ position: absolute; bottom: 10px; right: 24px; top: auto; cursor: pointer; display:inline-block;font:normal normal normal 14px/1 FontAwesome;font-size:inherit;text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;transform:translate(0, 0)}
-        .week-picker{height:200px;min-width:100px;}
-        .time-picker{overflow-y:scroll;height:200px;min-width:100px;}
+        .row-gutter{margin-top:10px;}
+        .main-view-inner-bar-input{width:250px;}
+        .main-view-inner-bar-button{width:150px;}
     </style>
     
 </head>
 <body class="global">
 
  <!-- 导航 -->
- 	<link rel="icon" href="../../favicon.ico">
+	<link rel="icon" href="../../favicon.ico">
     
     <style type="text/css">
         .global{
@@ -152,90 +151,119 @@
 
     
 <div class="main-view">
-
     <div class="main-view-inner">
-        <div class="main-view-inner-bar">
-            <span style="cursor:pointer" data-toggle="modal" data-target="#addClassroomModal">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;新建教室
-            </span>
+        <div class="main-view-inner-bar container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <input type="text" class="form-control main-view-inner-bar-input" placeholder="学生姓名" aria-describedby="basic-addon1"/>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" class="form-control main-view-inner-bar-input" placeholder="家长姓名" aria-describedby="basic-addon1"/>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" class="form-control main-view-inner-bar-input" placeholder="联系电话" aria-describedby="basic-addon1"/>
+                </div>
+            </div>
+            <div class="row row-gutter">
+                <div class="col-md-2">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle main-view-inner-bar-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            学生状态 <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">已咨询</a></li>
+                            <li><a href="#">课程中</a></li>
+                            <li><a href="#">已结课</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle main-view-inner-bar-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            学费余额 <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">从少到多</a></li>
+                            <li><a href="#">从多到少</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle main-view-inner-bar-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            课时剩余 <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">从少到多</a></li>
+                            <li><a href="#">从多到少</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-default main-view-inner-bar-input">查询</button>
+                </div>
+            </div>
+
         </div>
-                
+
         <table class="main-view-inner-table table table-bordered table-striped table-hover text-center">
-            <thead><tr class="title"><td>编号</td><td>教室名称</td><td>操作</td></tr></thead>
+            <thead class="title"><tr><td>编号</td><td>学生</td><td>家长</td><td>联系电话</td><td>余额</td><td>状态</td><td>管理</td></tr></thead>
             <tbody>
-              <?php if(is_array($classroomList)): foreach($classroomList as $key=>$vo): ?><tr>
+              <?php if(is_array($studentList)): foreach($studentList as $key=>$vo): ?><tr>
                   <td><?php echo ($num++); ?></td>
-                  <td><?php echo ($vo["name"]); ?></td>
+                  <td><?php echo ($vo["student_name"]); ?></td>
+                  <td><?php echo ($vo["parent_name"]); ?></td>
+                  <td><?php echo ($vo["phone"]); ?></td>
+                  <td><?php echo ($vo["balance"]); ?></td>
+                  <td>课程中</td>
                     <td>
-                        <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除" onclick="deleteClassroom(<?php echo ($vo["classroom_id"]); ?>,'<?php echo ($vo["name"]); ?>')"></span>
+                        <span style="cursor:pointer" class="glyphicon glyphicon-folder-open student-detail" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="详情"></span>
+                        <span style="cursor:pointer" class="glyphicon glyphicon-education cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="报名"></span>
+                        <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top"  onclick="deleteStudent(<?php echo ($vo["student_id"]); ?>,'<?php echo ($vo["student_name"]); ?>')" title="删除">
                     </td>
                 </tr><?php endforeach; endif; ?>
             </tbody>
         </table>
         <nav class="text-center">
             <ul class="pagination">
-                <li><a href="showClassrooms?pageNo=1" aria-label="Begin"><span aria-hidden="true">首页</span></a></li>
+                <li><a href="showStudents?pageNo=1" aria-label="Begin"><span aria-hidden="true">首页</span></a></li>
                 <li <?php if($pageNo == 1): ?>class="disabled"<?php else: endif; ?>>
-                  <a <?php if($pageNo == 1): else: ?>href="showClassrooms?pageNo=<?php echo ($pageNo-1); ?>"<?php endif; ?> aria-label="Previous">
+                  <a <?php if($pageNo == 1): else: ?>href="showStudents?pageNo=<?php echo ($pageNo-1); ?>"<?php endif; ?> aria-label="Previous">
                     <span aria-hidden="true">上一页</span>
                   </a>
                 </li>
                 <li class="active"><a href="#"><?php echo ($pageNo); ?></a></li>
                 <li <?php if($pageNo*$pageSize < $total): else: ?>class="disabled"<?php endif; ?>>
-                  <a <?php if($pageNo*$pageSize < $total): ?>href="showClassrooms?pageNo=<?php echo ($pageNo+1); ?>"<?php else: endif; ?> aria-label="Next">
+                  <a <?php if($pageNo*$pageSize < $total): ?>href="showStudents?pageNo=<?php echo ($pageNo+1); ?>"<?php else: endif; ?> aria-label="Next">
                     <span aria-hidden="true">下一页</span>
                   </a>
                 </li>
-                <li><a href="showClassrooms?pageNo=<?php echo ($howMangPages); ?>" aria-label="End"><span aria-hidden="true">尾页</span></a></li>
+                <li><a href="showStudents?pageNo=<?php echo ($howMangPages); ?>" aria-label="End"><span aria-hidden="true">尾页</span></a></li>
             </ul>
         </nav>
-    </div>
-</div>
 
-<!-- Modal -->
-<div class="modal fade" id="addClassroomModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">添加教室</h4>
-      </div>
-      <div class="modal-body">
-          <div class="container-fluid">
-              <div class="row">
-                  <div class="col-md-2">
-                    <label for="classroom" class="control-label">教室名称:</label>
-                  </div>
-                  <div class="col-md-6">
-                    <input type="text" class="form-control" id="classroom"/>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="modal-footer">
-          <button type="button" class="btn btn-primary add-classroom">保存</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-      </div>
-    </div>
-  </div>
+    </div>    
 </div>
 
 
-  	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-  	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-  	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-  	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <!-- bootstrap datepicker -->
-    <script src="/Public/js/bootstrap/bootstrap-datepicker/bootstrap-datepicker.js"></script>
-    <script src="/Public/js/bootstrap/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
-    <script src="/Public/js/classroom.js"></script>
+    <script src="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
+    <script src="/Public/js/student.js"></script>
 
     <script type="text/javascript">
-
         $(function () {
           $('[data-toggle="tooltip"]').tooltip()
         });
 
+
+		$('.student-detail').click(function(){
+			window.location.href="studentdetail.html";
+		});
 
     </script>
 </body>

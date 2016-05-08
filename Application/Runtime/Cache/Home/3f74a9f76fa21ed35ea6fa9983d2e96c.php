@@ -1,5 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit();?>
- <!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 	<meta charset="utf-8">
@@ -14,30 +13,29 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="icon" href="../../favicon.ico">
 
-	<title>教室列表</title>
+	<title>console</title>
 	<!-- 新 Bootstrap 核心 CSS 文件 -->
 	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- bootstrap datepicker -->
-    <link id="bsdp-css" href="/Public/css/bootstrap/bootstrap-datepicker/datepicker3.css" rel="stylesheet">
+    <link id="bsdp-css" href="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet">
     
     <style type="text/css">
         .main-view{position:fixed;width:83.5%;height:98%;margin:0.5% 0.5% 0.5% 16%;padding:0.8% 0.8% 0.8% 1.2%;background:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)}
-        .main-view-inner{margin:2% 6% 2% 2%;}
-        .main-view-inner-bar{margin:10% 2% 2% 2%;}
-        .main-view-inner-table{margin:4% 2% 2% 2%;}
-        .main-view-inner-table .title{font-weight:bold;font-size:16px;background-color:#339966;color:white;}
-        .cell-operation-gutter{margin-left:10%}
-        .modal-body .container-fluid .row{margin-top:2%}
-        .calendar-inner{ position: absolute; bottom: 10px; right: 24px; top: auto; cursor: pointer; display:inline-block;font:normal normal normal 14px/1 FontAwesome;font-size:inherit;text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;transform:translate(0, 0)}
-        .week-picker{height:200px;min-width:100px;}
-        .time-picker{overflow-y:scroll;height:200px;min-width:100px;}
+        .container-fluid .row{margin-top:2%;}
+        .main-view-inner{margin:8% 2% 2% 6%;font-size:14px;width:400px;}
+        .main-view-inner .key{width:80px;padding:0px;}
+        .main-view-inner .value{width:200px;padding-left:0px;}
+
+        .row-gutter{margin-top:5px;}
+        .text-gutter{margin-top:5px;margin-bottom:5px;}
+        .text-gutter-value{margin-top:5px;margin-bottom:5px;margin-left:10px;}
     </style>
     
 </head>
 <body class="global">
 
  <!-- 导航 -->
- 	<link rel="icon" href="../../favicon.ico">
+	<link rel="icon" href="../../favicon.ico">
     
     <style type="text/css">
         .global{
@@ -96,7 +94,7 @@
         <ul class="nav nav-pills nav-stacked sub-nav">
             <li role="presentation" nav="41"><a href="/index.php/Home/Class/addClassType?nav=41&pnav=40">新建课程分类</a></li>
             <li role="presentation" nav="42"><a href="/index.php/Home/Class/showClassTypes?nav=42&pnav=40">课程分类列表</a></li>
-            <li role="presentation" nav="43"><a href="/index.php/Home/Class/addClass?nav=43&pnav=40">新建课程</a></li>
+            <li role="presentation" nav="43"><a href="#">新建课程</a></li>
             <li role="presentation" nav="44"><a href="./classmain.html?nav=44&pnav=40">课程列表</a></li>
             <li role="presentation" nav="45"><a href="./showclass.html?nav=45&pnav=40">课程查询</a></li>
         </ul>
@@ -152,90 +150,108 @@
 
     
 <div class="main-view">
+        <div class="main-view-inner container-fluid">
+            <div class="row">
+                <div class="col-md-4 key row-gutter">学生姓名：</div>
+                <div class="col-md-4 value"><input type="text" class="form-control" value="张可多" aria-describedby="basic-addon1"/></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 key row-gutter">性别：</div>
+                <div class="col-md-4 value"><input type="text" class="form-control" value="男" aria-describedby="basic-addon1"/></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 key row-gutter">年级：</div>
+                <div class="col-md-4 value"><input type="text" class="form-control" value="小学五年级" aria-describedby="basic-addon1"/></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 key row-gutter">学校：</div>
+                <div class="col-md-4 value"><input type="text" class="form-control" value="徐州第一小学" aria-describedby="basic-addon1"/></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 key row-gutter">家长姓名：</div>
+                <div class="col-md-4 value"><input type="text" class="form-control" value="张大胖" aria-describedby="basic-addon1"/></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 key row-gutter">联系电话：</div>
+                <div class="col-md-4 value"><input type="text" class="form-control" value="13358746578" aria-describedby="basic-addon1"/></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 key text-gutter">余额(元)：</div>
+                <div class="col-md-4 value text-gutter-value">300.00</div>
+            </div>
+            <div class="row" style="margin-bottom:40px;">
+                <div class="col-md-4 key row-gutter">充值(元)：</div>
+                <div class="col-md-4 value"><input type="text" class="form-control" value="0.00" aria-describedby="basic-addon1"/></div>
+            </div>
 
-    <div class="main-view-inner">
-        <div class="main-view-inner-bar">
-            <span style="cursor:pointer" data-toggle="modal" data-target="#addClassroomModal">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;新建教室
-            </span>
-        </div>
-                
-        <table class="main-view-inner-table table table-bordered table-striped table-hover text-center">
-            <thead><tr class="title"><td>编号</td><td>教室名称</td><td>操作</td></tr></thead>
-            <tbody>
-              <?php if(is_array($classroomList)): foreach($classroomList as $key=>$vo): ?><tr>
-                  <td><?php echo ($num++); ?></td>
-                  <td><?php echo ($vo["name"]); ?></td>
-                    <td>
-                        <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除" onclick="deleteClassroom(<?php echo ($vo["classroom_id"]); ?>,'<?php echo ($vo["name"]); ?>')"></span>
-                    </td>
-                </tr><?php endforeach; endif; ?>
-            </tbody>
-        </table>
-        <nav class="text-center">
-            <ul class="pagination">
-                <li><a href="showClassrooms?pageNo=1" aria-label="Begin"><span aria-hidden="true">首页</span></a></li>
-                <li <?php if($pageNo == 1): ?>class="disabled"<?php else: endif; ?>>
-                  <a <?php if($pageNo == 1): else: ?>href="showClassrooms?pageNo=<?php echo ($pageNo-1); ?>"<?php endif; ?> aria-label="Previous">
-                    <span aria-hidden="true">上一页</span>
-                  </a>
-                </li>
-                <li class="active"><a href="#"><?php echo ($pageNo); ?></a></li>
-                <li <?php if($pageNo*$pageSize < $total): else: ?>class="disabled"<?php endif; ?>>
-                  <a <?php if($pageNo*$pageSize < $total): ?>href="showClassrooms?pageNo=<?php echo ($pageNo+1); ?>"<?php else: endif; ?> aria-label="Next">
-                    <span aria-hidden="true">下一页</span>
-                  </a>
-                </li>
-                <li><a href="showClassrooms?pageNo=<?php echo ($howMangPages); ?>" aria-label="End"><span aria-hidden="true">尾页</span></a></li>
-            </ul>
-        </nav>
+            <div class="row">
+                <div class="col-md-4 key">课程名称：</div>
+                <div class="col-md-4 value">新概念1-20160112-5人班</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 key">状态：</div>
+                <div class="col-md-4 value">课程中</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 key">课次时长：</div>
+                <div class="col-md-4 value">2小时/次</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 key">课次总计：</div>
+                <div class="col-md-4 value">24次</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 key">费用总计：</div>
+                <div class="col-md-4 value">4800元</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 key">课次剩余：</div>
+                <div class="col-md-4 value">2次</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 key">费用剩余：</div>
+                <div class="col-md-4 value">200元</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 key">需缴费：</div>
+                <div class="col-md-4 value">200元</div>
+            </div>
     </div>
+
+    
+
+
+    
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="addClassroomModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">添加教室</h4>
-      </div>
-      <div class="modal-body">
-          <div class="container-fluid">
-              <div class="row">
-                  <div class="col-md-2">
-                    <label for="classroom" class="control-label">教室名称:</label>
-                  </div>
-                  <div class="col-md-6">
-                    <input type="text" class="form-control" id="classroom"/>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="modal-footer">
-          <button type="button" class="btn btn-primary add-classroom">保存</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-      </div>
-    </div>
-  </div>
-</div>
 
-
-  	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-  	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-  	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-  	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <!-- bootstrap datepicker -->
-    <script src="/Public/js/bootstrap/bootstrap-datepicker/bootstrap-datepicker.js"></script>
-    <script src="/Public/js/bootstrap/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
-    <script src="/Public/js/classroom.js"></script>
+    <script src="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
+        
+    <script type="text/javascript">
+		$('#navLoader').load("nav.html?"+new Date().getTime());
+    </script>
 
     <script type="text/javascript">
-
         $(function () {
           $('[data-toggle="tooltip"]').tooltip()
         });
 
+        $('.input-daterange').datepicker({
+            format: "yyyy-mm-dd",
+            weekStart: 1,
+            language: "zh-CN",
+            autoclose: true
+        });
+
+		$('#editClass').click(function(){
+			window.location.href="classdetail.html";
+		});
 
     </script>
 </body>

@@ -42,34 +42,34 @@
         <div class="main-view-inner container-fluid">
             <div class="row">
                 <div class="col-md-4 key row-gutter">学生姓名：</div>
-                <div class="col-md-4 value"><input type="text" class="form-control" value="" aria-describedby="basic-addon1"/></div>
+                <div class="col-md-4 value"><input id="studentName" type="text" class="form-control" value="" aria-describedby="basic-addon1"/></div>
                 <div class="col-md-2 remark"><span>必填</span></div>
             </div>
             <div class="row">
                 <div class="col-md-4 key row-gutter">性别：</div>
-                <div class="col-md-4 value"><input type="text" class="form-control" value="" aria-describedby="basic-addon1"/></div>
+                <div class="col-md-4 value"><input id="gender" type="text" class="form-control" value="" aria-describedby="basic-addon1"/></div>
                 <div class="col-md-2 remark"><span>必填</span></div>
             </div>
             <div class="row">
                 <div class="col-md-4 key row-gutter">年级：</div>
-                <div class="col-md-4 value"><input type="text" class="form-control" value="" aria-describedby="basic-addon1"/></div>
+                <div class="col-md-4 value"><input id="grade" type="text" class="form-control" value="" aria-describedby="basic-addon1"/></div>
                 <div class="col-md-2 remark"><span>必填</span></div>
             </div>
             <div class="row">
                 <div class="col-md-4 key row-gutter">学校：</div>
-                <div class="col-md-4 value"><input type="text" class="form-control" value="" aria-describedby="basic-addon1"/></div>
+                <div class="col-md-4 value"><input id="school" type="text" class="form-control" value="" aria-describedby="basic-addon1"/></div>
             </div>
             <div class="row">
                 <div class="col-md-4 key row-gutter">家长姓名：</div>
-                <div class="col-md-4 value"><input type="text" class="form-control" value="" aria-describedby="basic-addon1"/></div>
+                <div class="col-md-4 value"><input id="parentName" type="text" class="form-control" value="" aria-describedby="basic-addon1"/></div>
                 <div class="col-md-2 remark"><span>必填</span></div>
             </div>
             <div class="row">
                 <div class="col-md-4 key row-gutter">联系电话：</div>
-                <div class="col-md-4 value"><input type="text" class="form-control" value="" aria-describedby="basic-addon1"/></div>
+                <div class="col-md-4 value"><input id="mobile" type="text" class="form-control" value="" aria-describedby="basic-addon1"/></div>
                 <div class="col-md-2 remark"><span>必填</span></div>
             </div>
-            <div class="row">
+<!--            <div class="row">
                 <div class="col-md-4 key row-gutter">报名课程：</div>
                 <div class="col-md-4 value">
                     <div class="btn-group">
@@ -98,12 +98,13 @@
                     </div>
                 </div>
             </div>
+-->
             <div class="row" style="margin-bottom:30px;">
                 <div class="col-md-4 key row-gutter">缴费(元)：</div>
-                <div class="col-md-4 value"><input type="text" class="form-control" value="" aria-describedby="basic-addon1"/></div>
+                <div class="col-md-4 value"><input id="tuition" type="text" class="form-control" value="" aria-describedby="basic-addon1"/></div>
             </div>
             <div class="row">
-                <div class="col-md-6 key row-gutter"><button type="button" class="btn btn-default btn-submit">保存</button></div>
+                <div class="col-md-6 key row-gutter"><button type="button" class="btn btn-default btn-submit add-student">保存</button></div>
             </div>
     </div>
 
@@ -121,6 +122,7 @@
     <!-- bootstrap datepicker -->
     <script src="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script src="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
+    <script src="/Public/js/student.js"></script>
         
     <script type="text/javascript">
 		$('#navLoader').load("nav.html?"+new Date().getTime());
@@ -130,17 +132,6 @@
         $(function () {
           $('[data-toggle="tooltip"]').tooltip()
         });
-
-        $('.input-daterange').datepicker({
-            format: "yyyy-mm-dd",
-            weekStart: 1,
-            language: "zh-CN",
-            autoclose: true
-        });
-
-		$('#editClass').click(function(){
-			window.location.href="classdetail.html";
-		});
 
     </script>
 </body>

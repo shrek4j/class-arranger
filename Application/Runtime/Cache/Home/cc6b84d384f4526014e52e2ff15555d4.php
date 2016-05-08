@@ -155,45 +155,45 @@
 
     <div class="main-view-inner">
         <div class="main-view-inner-bar">
-            <span style="cursor:pointer" data-toggle="modal" data-target="#addClassroomModal">
+            <span style="cursor:pointer" data-toggle="modal" data-target="#addTeacherModal">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;新建教室
             </span>
         </div>
                 
         <table class="main-view-inner-table table table-bordered table-striped table-hover text-center">
-            <thead><tr class="title"><td>编号</td><td>教室名称</td><td>操作</td></tr></thead>
+            <thead><tr class="title"><td>编号</td><td>教师姓名</td><td>操作</td></tr></thead>
             <tbody>
-              <?php if(is_array($classroomList)): foreach($classroomList as $key=>$vo): ?><tr>
+              <?php if(is_array($teacherList)): foreach($teacherList as $key=>$vo): ?><tr>
                   <td><?php echo ($num++); ?></td>
                   <td><?php echo ($vo["name"]); ?></td>
                     <td>
-                        <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除" onclick="deleteClassroom(<?php echo ($vo["classroom_id"]); ?>,'<?php echo ($vo["name"]); ?>')"></span>
+                        <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除" onclick="deleteTeacher(<?php echo ($vo["teacher_id"]); ?>,'<?php echo ($vo["name"]); ?>')"></span>
                     </td>
                 </tr><?php endforeach; endif; ?>
             </tbody>
         </table>
         <nav class="text-center">
             <ul class="pagination">
-                <li><a href="showClassrooms?pageNo=1" aria-label="Begin"><span aria-hidden="true">首页</span></a></li>
+                <li><a href="showTeachers?pageNo=1" aria-label="Begin"><span aria-hidden="true">首页</span></a></li>
                 <li <?php if($pageNo == 1): ?>class="disabled"<?php else: endif; ?>>
-                  <a <?php if($pageNo == 1): else: ?>href="showClassrooms?pageNo=<?php echo ($pageNo-1); ?>"<?php endif; ?> aria-label="Previous">
+                  <a <?php if($pageNo == 1): else: ?>href="showTeachers?pageNo=<?php echo ($pageNo-1); ?>"<?php endif; ?> aria-label="Previous">
                     <span aria-hidden="true">上一页</span>
                   </a>
                 </li>
                 <li class="active"><a href="#"><?php echo ($pageNo); ?></a></li>
                 <li <?php if($pageNo*$pageSize < $total): else: ?>class="disabled"<?php endif; ?>>
-                  <a <?php if($pageNo*$pageSize < $total): ?>href="showClassrooms?pageNo=<?php echo ($pageNo+1); ?>"<?php else: endif; ?> aria-label="Next">
+                  <a <?php if($pageNo*$pageSize < $total): ?>href="showTeachers?pageNo=<?php echo ($pageNo+1); ?>"<?php else: endif; ?> aria-label="Next">
                     <span aria-hidden="true">下一页</span>
                   </a>
                 </li>
-                <li><a href="showClassrooms?pageNo=<?php echo ($howMangPages); ?>" aria-label="End"><span aria-hidden="true">尾页</span></a></li>
+                <li><a href="showTeachers?pageNo=<?php echo ($howMangPages); ?>" aria-label="End"><span aria-hidden="true">尾页</span></a></li>
             </ul>
         </nav>
     </div>
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="addClassroomModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="addTeacherModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -204,16 +204,16 @@
           <div class="container-fluid">
               <div class="row">
                   <div class="col-md-2">
-                    <label for="classroom" class="control-label">教室名称:</label>
+                    <label for="teacher" class="control-label">教室名称:</label>
                   </div>
                   <div class="col-md-6">
-                    <input type="text" class="form-control" id="classroom"/>
+                    <input type="text" class="form-control" id="teacher"/>
                   </div>
               </div>
           </div>
       </div>
       <div class="modal-footer">
-          <button type="button" class="btn btn-primary add-classroom">保存</button>
+          <button type="button" class="btn btn-primary add-teacher">保存</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
       </div>
     </div>
@@ -228,7 +228,7 @@
     <!-- bootstrap datepicker -->
     <script src="/Public/js/bootstrap/bootstrap-datepicker/bootstrap-datepicker.js"></script>
     <script src="/Public/js/bootstrap/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
-    <script src="/Public/js/classroom.js"></script>
+    <script src="/Public/js/teacher.js"></script>
 
     <script type="text/javascript">
 

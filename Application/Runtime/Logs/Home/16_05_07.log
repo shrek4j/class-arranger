@@ -1,0 +1,1131 @@
+[ 2016-05-07T09:30:28+08:00 ] 127.0.0.1 /index.php/Home/Operator/login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000459s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000624s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000726s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000589s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 6 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 7 行.
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000327s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.000996s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000040s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000094s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009823s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009890s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000360s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000410s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000612s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000667s ]
+
+[ 2016-05-07T09:32:35+08:00 ] 127.0.0.1 /index.php/Home/Operator/doLogin
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000455s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000631s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000690s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000568s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 6 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 7 行.
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000322s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.000968s ]
+NOTIC: [8] Undefined index: lite C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Db.class.php 第 37 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000037s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000099s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011393s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011468s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000372s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000424s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000608s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000662s ]
+
+[ 2016-05-07T09:32:37+08:00 ] 127.0.0.1 /index.php/Home/Class/classmain
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000340s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000499s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000549s ]
+
+[ 2016-05-07T10:27:18+08:00 ] 127.0.0.1 /index.php/Home/Class/classmain
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000453s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000683s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000749s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000707s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 6 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 7 行.
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000395s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.001208s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000095s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000160s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\db122e033f9b6e73e50fcee49ad0397f.php 第 147 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\db122e033f9b6e73e50fcee49ad0397f.php 第 148 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014291s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014385s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000398s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000461s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000815s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000888s ]
+
+[ 2016-05-07T10:49:47+08:00 ] 127.0.0.1 /index.php/Home/Class/showclass.html?nav=45&pnav=40
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000606s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000796s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000878s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000693s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000282s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.001078s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000137s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000204s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.019177s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.019277s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000642s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000713s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000623s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000676s ]
+
+[ 2016-05-07T11:29:41+08:00 ] 127.0.0.1 /index.php/Home/Operator/login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000572s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000624s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000688s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.001121s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 6 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 7 行.
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000520s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.001794s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000045s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000117s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014563s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014666s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000572s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000654s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000890s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000972s ]
+
+[ 2016-05-07T12:06:04+08:00 ] 127.0.0.1 /index.php/Home/Classroom/addClassroom?nav=31&pnav=30
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000515s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000987s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001065s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000719s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000280s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.001132s ]
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/manu.html) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000053s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000116s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009089s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009172s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000478s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000554s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000821s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000911s ]
+
+[ 2016-05-07T12:06:11+08:00 ] 127.0.0.1 /index.php/Home/Classroom/saveClassroom
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000563s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000567s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000617s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000579s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 6 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 7 行.
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000323s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.000971s ]
+NOTIC: [8] Undefined index: lite C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Db.class.php 第 37 行.
+
+[ 2016-05-07T12:06:11+08:00 ] 127.0.0.1 /index.php/Home/Classroom/addClassroom?nav=31&pnav=30
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000575s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000541s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000603s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000468s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000371s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.000966s ]
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/manu.html) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000098s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000232s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011617s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011748s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000521s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000617s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000873s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000976s ]
+
+[ 2016-05-07T12:06:12+08:00 ] 127.0.0.1 /index.php/Home/Classroom/showClassrooms?nav=32&pnav=30
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000349s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000513s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000561s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000442s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000272s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.000796s ]
+NOTIC: [8] Undefined index: lite C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Db.class.php 第 37 行.
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/manu.html) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000080s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000160s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011218s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011328s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000394s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000454s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000558s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000620s ]
+
+[ 2016-05-07T12:06:14+08:00 ] 127.0.0.1 /index.php/Home/Classroom/showClassrooms?pageNo=2
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000351s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000540s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000596s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000449s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 6 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 7 行.
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000312s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.000838s ]
+NOTIC: [8] Undefined index: lite C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Db.class.php 第 37 行.
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/manu.html) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000102s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000164s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\31ccec4c1db682605a9ec5692026c73e.php 第 148 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\31ccec4c1db682605a9ec5692026c73e.php 第 149 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011360s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011422s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000414s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000491s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000808s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000878s ]
+
+[ 2016-05-07T12:06:16+08:00 ] 127.0.0.1 /index.php/Home/Classroom/showClassrooms?pageNo=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000362s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000512s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000567s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000414s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 6 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 7 行.
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000274s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.000765s ]
+NOTIC: [8] Undefined index: lite C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Db.class.php 第 37 行.
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/manu.html) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000062s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000146s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\31ccec4c1db682605a9ec5692026c73e.php 第 148 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\31ccec4c1db682605a9ec5692026c73e.php 第 149 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.010819s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010918s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000297s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000346s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000547s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000597s ]
+
+[ 2016-05-07T12:06:21+08:00 ] 127.0.0.1 /index.php/Home/Classroom/deleteClassroom
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000556s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000909s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001015s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000799s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 6 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 7 行.
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000669s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.001647s ]
+NOTIC: [8] Undefined index: lite C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Db.class.php 第 37 行.
+
+[ 2016-05-07T12:06:21+08:00 ] 127.0.0.1 /index.php/Home/Classroom/showClassrooms?pageNo=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000382s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000495s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000545s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000903s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 6 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 7 行.
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000610s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.001634s ]
+NOTIC: [8] Undefined index: lite C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Db.class.php 第 37 行.
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/manu.html) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000065s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000125s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\31ccec4c1db682605a9ec5692026c73e.php 第 148 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\31ccec4c1db682605a9ec5692026c73e.php 第 149 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.010705s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010818s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000290s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000345s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000551s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000601s ]
+
+[ 2016-05-07T12:06:22+08:00 ] 127.0.0.1 /index.php/Home/Classroom/showClassrooms?pageNo=2
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000512s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000766s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000851s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000660s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 6 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 7 行.
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000434s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.001219s ]
+NOTIC: [8] Undefined index: lite C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Db.class.php 第 37 行.
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/manu.html) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000104s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000191s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\31ccec4c1db682605a9ec5692026c73e.php 第 148 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\31ccec4c1db682605a9ec5692026c73e.php 第 149 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.013800s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013878s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000471s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000547s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000780s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000854s ]
+
+[ 2016-05-07T12:06:25+08:00 ] 127.0.0.1 /index.php/Home/Classroom/deleteClassroom
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000027s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000765s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000652s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000728s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000620s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 6 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 7 行.
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000391s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.001112s ]
+NOTIC: [8] Undefined index: lite C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Db.class.php 第 37 行.
+
+[ 2016-05-07T12:06:25+08:00 ] 127.0.0.1 /index.php/Home/Classroom/showClassrooms?pageNo=2
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000050s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000996s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000726s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000849s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000493s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 6 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 7 行.
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000311s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.000895s ]
+NOTIC: [8] Undefined index: lite C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Db.class.php 第 37 行.
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/manu.html) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000062s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000122s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\31ccec4c1db682605a9ec5692026c73e.php 第 148 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\31ccec4c1db682605a9ec5692026c73e.php 第 149 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011560s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011745s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000379s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000456s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000829s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000909s ]
+
+[ 2016-05-07T12:06:26+08:00 ] 127.0.0.1 /index.php/Home/Classroom/showClassrooms?pageNo=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000372s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000600s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000655s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000631s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 6 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 7 行.
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000323s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.001033s ]
+NOTIC: [8] Undefined index: lite C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Db.class.php 第 37 行.
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/manu.html) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000106s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000166s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\31ccec4c1db682605a9ec5692026c73e.php 第 148 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\31ccec4c1db682605a9ec5692026c73e.php 第 149 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011134s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011249s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000615s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000703s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001112s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001203s ]
+
+[ 2016-05-07T12:19:20+08:00 ] 127.0.0.1 /index.php/Home/Classroom/showClassrooms?pageNo=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000431s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000675s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000744s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.001067s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 6 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 7 行.
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000482s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.001680s ]
+NOTIC: [8] Undefined index: lite C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Db.class.php 第 37 行.
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/manu.html) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000064s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000130s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\31ccec4c1db682605a9ec5692026c73e.php 第 148 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\31ccec4c1db682605a9ec5692026c73e.php 第 149 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.017738s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.017839s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000521s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000607s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001102s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001195s ]
+
+[ 2016-05-07T12:21:31+08:00 ] 127.0.0.1 /index.php/Home/Class/addClassType?nav=41&pnav=40
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000674s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000786s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000859s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000691s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000314s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.001116s ]
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/manu.html) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000061s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000142s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.013862s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013951s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000497s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000593s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000967s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001043s ]
+
+[ 2016-05-07T12:21:33+08:00 ] 127.0.0.1 /index.php/Home/Class/showClassTypes?nav=42&pnav=40
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000305s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000544s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000594s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000508s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000230s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.000836s ]
+
+[ 2016-05-07T12:23:22+08:00 ] 127.0.0.1 /index.php/Home/Class/classmain.html?nav=44&pnav=40
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000403s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001197s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001301s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000949s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000292s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.001360s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000094s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000254s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.012116s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012267s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000663s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000731s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000617s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000672s ]
+
+[ 2016-05-07T12:23:23+08:00 ] 127.0.0.1 /index.php/Home/Class/addClassType?nav=41&pnav=40
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000647s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000647s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000735s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000412s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000220s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.000715s ]
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/manu.html) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000056s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000115s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008599s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008693s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000361s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000425s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000555s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000607s ]
+
+[ 2016-05-07T12:23:26+08:00 ] 127.0.0.1 /index.php/Home/Class/showClassTypes?nav=42&pnav=40
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000381s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000514s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000570s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000708s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000298s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.001161s ]
+
+[ 2016-05-07T12:24:36+08:00 ] 127.0.0.1 /index.php/Home/Teacher/addTeacher?nav=11&pnav=10
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000305s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000736s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000806s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000424s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000283s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.000802s ]
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/manu.html) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000053s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000111s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009540s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009619s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000263s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000311s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000644s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000699s ]
+
+[ 2016-05-07T12:24:38+08:00 ] 127.0.0.1 /index.php/Home/Teacher/showTeachers?nav=12&pnav=10
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000411s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000489s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000547s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000453s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000222s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.000754s ]
+NOTIC: [8] Undefined index: lite C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Db.class.php 第 37 行.
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/manu.html) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000076s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000151s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.010822s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010935s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000452s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000556s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000817s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000890s ]
+
+[ 2016-05-07T12:24:42+08:00 ] 127.0.0.1 /index.php/Home/Teacher/addTeacher?nav=11&pnav=10
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000304s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000692s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000770s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000410s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000218s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.000710s ]
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/manu.html) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000088s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000204s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009725s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009840s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000401s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000461s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000818s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000897s ]
+
+[ 2016-05-07T12:24:44+08:00 ] 127.0.0.1 /index.php/Home/Teacher/saveTeacher
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000344s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000560s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000620s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000438s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 6 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 7 行.
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000301s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.000810s ]
+NOTIC: [8] Undefined index: lite C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Db.class.php 第 37 行.
+
+[ 2016-05-07T12:24:44+08:00 ] 127.0.0.1 /index.php/Home/Teacher/addTeacher?nav=11&pnav=10
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000343s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000495s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000545s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000440s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000219s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.000747s ]
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/manu.html) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000054s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000121s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008682s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008763s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000331s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000390s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000567s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000622s ]
+
+[ 2016-05-07T12:24:45+08:00 ] 127.0.0.1 /index.php/Home/Teacher/showTeachers?nav=12&pnav=10
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000340s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000529s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000592s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000431s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000233s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.000751s ]
+NOTIC: [8] Undefined index: lite C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Db.class.php 第 37 行.
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/manu.html) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000105s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000204s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.012015s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012104s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000347s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000413s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000777s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000856s ]
+
+[ 2016-05-07T12:24:52+08:00 ] 127.0.0.1 /index.php/Home/Teacher/saveTeacher
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000676s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000818s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000948s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000621s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 6 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 7 行.
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000371s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.001077s ]
+NOTIC: [8] Undefined index: lite C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Db.class.php 第 37 行.
+
+[ 2016-05-07T12:24:52+08:00 ] 127.0.0.1 /index.php/Home/Teacher/showTeachers?nav=12&pnav=10
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000317s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000463s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000512s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000440s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000231s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.000769s ]
+NOTIC: [8] Undefined index: lite C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Db.class.php 第 37 行.
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/manu.html) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000059s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000118s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011531s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011636s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001238s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001313s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000661s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000716s ]
+
+[ 2016-05-07T12:24:55+08:00 ] 127.0.0.1 /index.php/Home/Teacher/showTeachers?pageNo=2
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000401s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000687s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000764s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000576s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 6 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 7 行.
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000371s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.001026s ]
+NOTIC: [8] Undefined index: lite C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Db.class.php 第 37 行.
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/manu.html) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000059s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000120s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\cc6b84d384f4526014e52e2ff15555d4.php 第 148 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\cc6b84d384f4526014e52e2ff15555d4.php 第 149 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011180s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011257s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000706s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000796s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001051s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001144s ]
+
+[ 2016-05-07T12:24:56+08:00 ] 127.0.0.1 /index.php/Home/Teacher/showTeachers?pageNo=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000346s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000495s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000552s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000803s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 6 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 7 行.
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000569s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.001554s ]
+NOTIC: [8] Undefined index: lite C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Db.class.php 第 37 行.
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/manu.html) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000063s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000130s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\cc6b84d384f4526014e52e2ff15555d4.php 第 148 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\cc6b84d384f4526014e52e2ff15555d4.php 第 149 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011254s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011331s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000383s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000448s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000522s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000572s ]
+
+[ 2016-05-07T12:24:59+08:00 ] 127.0.0.1 /index.php/Home/Teacher/deleteTeacher
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000575s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000738s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000827s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000743s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 6 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 7 行.
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000358s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.001220s ]
+NOTIC: [8] Undefined index: lite C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Db.class.php 第 37 行.
+
+[ 2016-05-07T12:24:59+08:00 ] 127.0.0.1 /index.php/Home/Teacher/showTeachers?pageNo=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000326s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000627s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000693s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000455s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 6 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 7 行.
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000356s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.000940s ]
+NOTIC: [8] Undefined index: lite C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Db.class.php 第 37 行.
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/manu.html) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000059s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000139s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\cc6b84d384f4526014e52e2ff15555d4.php 第 148 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\cc6b84d384f4526014e52e2ff15555d4.php 第 149 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.010823s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010908s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000698s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000784s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001473s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001600s ]
+
+[ 2016-05-07T12:25:04+08:00 ] 127.0.0.1 /index.php/Home/Teacher/showTeachers?pageNo=2
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000366s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000550s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000602s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000417s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 6 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 7 行.
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000293s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.000823s ]
+NOTIC: [8] Undefined index: lite C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Db.class.php 第 37 行.
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/manu.html) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000063s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000129s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\cc6b84d384f4526014e52e2ff15555d4.php 第 148 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\cc6b84d384f4526014e52e2ff15555d4.php 第 149 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.010470s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010544s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000373s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000449s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000764s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000867s ]
+
+[ 2016-05-07T13:30:42+08:00 ] 127.0.0.1 /index.php/Home/Teacher/addstudent.html?nav=21&pnav=20
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000396s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000620s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000675s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000650s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000275s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.001010s ]
+ERR: 非法操作:addstudent
+
+[ 2016-05-07T21:50:02+08:00 ] 127.0.0.1 /index.php/Home/Operator/login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000737s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001044s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001120s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.001357s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 6 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 7 行.
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000491s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.001962s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000041s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000108s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007967s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008039s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000713s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000775s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000942s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001003s ]
+
+[ 2016-05-07T21:50:16+08:00 ] 127.0.0.1 /index.php/Home/Operator/doLogin
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000421s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000608s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000677s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000553s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 6 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 7 行.
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000321s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.000952s ]
+NOTIC: [8] Undefined index: lite C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Db.class.php 第 37 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000041s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000102s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006510s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006603s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000434s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000492s ]
+
+[ 2016-05-07T21:50:22+08:00 ] 127.0.0.1 /index.php/Home/Operator/doLogin
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000405s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000587s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000639s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000596s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 6 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 7 行.
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000321s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.000995s ]
+NOTIC: [8] Undefined index: lite C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Db.class.php 第 37 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000036s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000095s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006411s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006488s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000394s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000446s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000611s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000667s ]
+
+[ 2016-05-07T21:50:24+08:00 ] 127.0.0.1 /index.php/Home/Class/classmain
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000306s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000459s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000509s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000541s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 6 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 7 行.
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000327s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.000967s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000096s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000161s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\db122e033f9b6e73e50fcee49ad0397f.php 第 147 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\db122e033f9b6e73e50fcee49ad0397f.php 第 148 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.013706s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013764s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000400s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000467s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000748s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000819s ]
+
+[ 2016-05-07T21:55:40+08:00 ] 127.0.0.1 /index.php/Home/Class/studentlist.html?nav=22&pnav=20
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000353s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000596s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000648s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000609s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000301s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.001010s ]
+ERR: 非法操作:studentlist
+
+[ 2016-05-07T22:23:45+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000350s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000595s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000649s ]
+ERR: 无法加载控制器:Index
+
+[ 2016-05-07T22:48:58+08:00 ] 127.0.0.1 /index.php/Home/Class/studentlist.html?nav=22&pnav=20
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000351s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000622s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000692s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.001011s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000609s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.001812s ]
+ERR: 非法操作:studentlist
+
+[ 2016-05-07T22:49:01+08:00 ] 127.0.0.1 /index.php/Home/Class/addstudent.html?nav=21&pnav=20
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000030s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000377s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000589s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000645s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000470s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000226s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.000778s ]
+ERR: 非法操作:addstudent
+
+[ 2016-05-07T22:50:05+08:00 ] 127.0.0.1 /index.php/Home/Class/addstudent.html?nav=21&pnav=20
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000380s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000590s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000644s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000634s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000319s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.001036s ]
+ERR: 非法操作:addstudent
+
+[ 2016-05-07T22:51:51+08:00 ] 127.0.0.1 /index.php/Home/Class/addstudent.html?nav=21&pnav=20
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000364s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000577s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000639s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000617s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000286s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.000994s ]
+ERR: 非法操作:addstudent
+
+[ 2016-05-07T22:52:24+08:00 ] 127.0.0.1 /index.php/Home/Class/classmain
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000671s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000990s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001069s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000692s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 6 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Home\Behaviors\NavBehavior.class.php 第 7 行.
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000371s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.001159s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000120s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000192s ]
+NOTIC: [8] Undefined index: pnav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\db122e033f9b6e73e50fcee49ad0397f.php 第 147 行.
+NOTIC: [8] Undefined index: nav C:\Users\shrek\wamp\www\Application\Runtime\Cache\Home\db122e033f9b6e73e50fcee49ad0397f.php 第 148 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.013092s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013161s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000539s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000704s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000949s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001016s ]
+
+[ 2016-05-07T22:52:25+08:00 ] 127.0.0.1 /index.php/Home/Student/addStudent?nav=21&pnav=20
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000082s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002188s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000535s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000602s ]
+INFO: [ action_begin ] --START--
+INFO: Run Home\Behaviors\AuthCheckBehavior [ RunTime:0.000447s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.000234s ]
+INFO: [ action_begin ] --END-- [ RunTime:0.000773s ]
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/manu.html) [<a href='function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: No such file or directory C:\Users\shrek\wamp\www\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000090s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000167s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011112s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011204s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000348s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000416s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001270s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001447s ]
+

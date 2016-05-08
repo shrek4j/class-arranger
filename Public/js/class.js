@@ -1,30 +1,55 @@
 $(".add-class").click(function(){
     var classname = $("#classname").val();
-    var classtype = $("li[name='classtype'][selected='selected']").children().text();
-	var teacher = $("li[name='teacher'][selected='selected']").children().text();
-	var students = "12,34,64";
-	var classroom = $("li[name='classroom'][selected='selected']").children().text();
+    var classtype = $("input[name='classtype']:checked").val();
+	var teacher = $("input[name='teacher']:checked").val();
+	var classroom = $("input[name='classroom']:checked").val();
+	var studentInputs = $("input[name='student']:checked");
+	var students = getStudentStr(studentInputs);
 	var startdate = $("input[name='startDate']").val();
 	var enddate = $("input[name='endDate']").val();
-	var week = $("li[name='week'][selected='selected']").children().text();
-	var starttime = $("li[name='starttime'][selected='selected']").children().text();
-	var endtime = $("li[name='endtime'][selected='selected']").children().text();
+	var week = "1";//$("li[name='week'][selected='selected']").children().text();
+	var starttime = "9:00";//$("li[name='starttime'][selected='selected']").children().text();
+	var endtime = "11:00";//$("li[name='endtime'][selected='selected']").children().text();
+	var tuition = "1000";
 	var remark = $("#remark").val();
+	var time = "1|9:00-11:00;3|9:00-11:00";
 
 	$.ajax({
 	   	type: "POST",
-	   	url: "addClass",
-	   	data: "classname="+classname+"&classtype="+classtype+"&teacher="+teacher+
-	   		"&students="+students+"&classroom="+classroom+"&startdate="+startdate+
-	   		"&enddate="+enddate+"&week="+week+"&starttime="+starttime+"&endtime="+endtime+"&remark="+remark,
+	   	url: "saveClass",
+	   	data: "className="+classname+"&classtypeId="+classtype+"&teacherId="+teacher+
+	   		"&studentIds="+students+"&classroomId="+classroom+"&startDate="+startdate+
+	   		"&endDate="+enddate+"&time="+time+"&tuition="+tuition+"&remark="+remark,
 	   	success: function(msg){
-			window.location.reload();
+	   		if(msg == 'ok'){
+	   			//提示保存成功
+	   			window.location.reload();
+	   		}else{
+	   			//提示保存失败
+	   		}
 	   	}
 	});
 
 });
 
+function getStudentStr(studentInputs){
+	var students = "";
+	for(var i=0;i<studentInputs.length;i++){
+		students += studentInputs[i].value;
+		if(i<studentInputs.length-1){
+			students += "|";
+		}
+	}
+	return students;
+}
 
+$(".add-classtimerow").click(function(){
+	
+});
+
+$('.remove-classtime').bind('click',function(){
+	$(this).parent().parent().remove();
+});
 
 //classtype
 $(".add-classtype").click(function(){
