@@ -66,6 +66,8 @@ class ClassController extends Controller {
 
         while($start < $end){
             $dayOfWeek = date('w',$start);//get the dayOfWeek of this timestamp
+            if($dayOfWeek == 0)
+                $dayOfWeek = 7;
             if($classTimeArr[$dayOfWeek-1] != ""){//has class on that day
                 $date = date("Y-m-d", $start) ;
                 $ymd = explode('-',$date);
@@ -78,7 +80,7 @@ class ClassController extends Controller {
                 $classDetailId = $class->saveClassDetail($date,$year,$month,$dayOfWeek,$startTime,$endTime,$teacherId,$classroomId,$classId,$tuition,$tId);
 
                 //save students that join this class
-                for($i;$i<count($students);$i++){
+                for($i=0;$i<count($students);$i++){
                     $class->saveClassDetailAndStudentRela($classDetailId,$classId,$students[$i],$tuition,$tId);
                 }
             }
