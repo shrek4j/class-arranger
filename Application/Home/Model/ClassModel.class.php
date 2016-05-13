@@ -59,7 +59,7 @@ class ClassModel extends Model {
     }
     
     public function showClassesByTeacher($tId,$year,$month,$teacherId){
-        $sql = "select * from classoa_class_detail where inst_id=".$tId." and year='".$year."' and month='".$month."' and teacher_id=".$teacherId." and status=0 order by date asc,start_time asc";
+        $sql = "select d.*,c.class_name class_name,r.name classroom_name from classoa_class_detail d left join classoa_class c on d.class_id=c.class_id left join classoa_classroom r on d.classroom_id=r.classroom_id where d.inst_id=".$tId." and d.year='".$year."' and d.month='".$month."' and d.teacher_id=".$teacherId." and d.status=0 order by d.date asc,d.start_time asc";
         return $this->query($sql);
     }
 

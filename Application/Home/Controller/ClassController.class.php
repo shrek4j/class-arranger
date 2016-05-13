@@ -202,19 +202,49 @@ class ClassController extends Controller {
         }
     }
 
-
     //showcase of the classes of a teacher or a classroom in a month
     public function showClasses($teacherId=null,$classroomId=null,$ym){
         //inst_Id
         $tId = session('instId');
         $class = new \Home\Model\ClassModel();
+        $yearAndMonth = explode("-",$ym);
+        $year = $yearAndMonth[0];
+        $month = $yearAndMonth[1];
         $result;
         if($teacherId!=null)
             $result = $class->showClassesByTeacher($tId,$year,$month,$teacherId);
         if($classroomId!=null)
             $result = $class->showClassesByClassroom($tId,$year,$month,$classroomId);
-        
-        $this->assign('classes',$result);//记录编号
+
+        $monthly = array();
+        $weekly;
+        $daily;
+        $currDay;
+        for($i=0;$i<count($result);$i++){
+            $class = $result[$i];
+            $date = $class['date'];
+            $month = $class['month'];
+            $dayOfMonth = explode('-',$date)[2];
+            $dayOfWeek = $class['day_of_week'];
+            $startTime = $class['start_time'];
+            $endTime = $class['end_time'];
+            $className = $class['class_name'];
+            $classroomName = $class['classroom_name'];
+
+            $perClass = array("month"=>$month,"dayOfMonth"=>$dayOfMonth,"dayOfWeek"=>$dayOfWeek,"startTime"=>$startTime,"endTime"=>$endTime,"className"=>$className,"classroomName"=>$classroomName);
+            if($currDay != $dayOfMonth){//a new day
+                $currDay = $dayOfMonth;
+                $daily = array();
+                if($dayOfWeek == 1){//a new week
+                    $weekly = array();
+                    array_push($monthly, $weekly);
+                }
+                array_push($weekly, $daily);
+            }
+            array_push($daily,$perClass);
+        }
+
+        $this->assign('monthlyClasses',$monthly);//记录编号
         layout(true);
         $this->display();
     }
