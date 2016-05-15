@@ -30,7 +30,7 @@ class ClassController extends Controller {
         $this->assign("clnum",$clnum);
 
         $student = new \Home\Model\StudentModel();
-        $studentList = $student->showStudents($tId,0,20);   
+        $studentList = $student->showStudents($tId,0,20);
         $this->assign("studentList",$studentList);
         $snum=0;
         $this->assign("snum",$snum);
@@ -39,7 +39,7 @@ class ClassController extends Controller {
         $this->display();
     }
 
-    public function saveClass($className="",$classtypeId,$teacherId,$classroomId,$studentIds="1|2|3",$startDate="",$endDate="",$time="1|9:00-11:00;3|9:00-11:00",$tuition,$remark){
+    public function saveClass($className="",$classtypeId,$teacherId,$classroomId,$studentIds="",$startDate="",$endDate="",$time="",$tuition,$remark){
 
         //inst_Id
         $tId = session('instId');
@@ -47,7 +47,7 @@ class ClassController extends Controller {
         //handle time format
         $classTimeArr = array("","","","","","","");
         $timeArr = explode(';',$time);
-        for($x=0;$x<count($timeArr);$x++) {
+        for($x=0;$x<count($timeArr)-1;$x++) {
             $tuple = explode('|',$timeArr[$x]);
             $classTimeArr[$tuple[0]-1] = $tuple[1];
         }
@@ -77,11 +77,11 @@ class ClassController extends Controller {
                 $startTime = $times[0];
                 $endTime = $times[1];
                 //save class detail
-                $classDetailId = $class->saveClassDetail($date,$year,$month,$dayOfWeek,$startTime,$endTime,$teacherId,$classroomId,$classId,$tuition,$tId);
+                $classDetailId = $class->saveClassDetail($date,$year,$month,$dayOfWeek,$startTime,$endTime,$teacherId,$classroomId,$classId[0]['class_id'],$tuition,$tId);
 
                 //save students that join this class
                 for($i=0;$i<count($students);$i++){
-                    $class->saveClassDetailAndStudentRela($classDetailId,$classId,$students[$i],$tuition,$tId);
+                    $class->saveClassDetailAndStudentRela($classDetailId[0]['class_detail_id'],$classId[0]['class_id'],(int)$students[$i],(int)$tuition,$tId);
                 }
             }
             $start += $oneDay;//check next day
@@ -202,49 +202,131 @@ class ClassController extends Controller {
         }
     }
 
+
     //showcase of the classes of a teacher or a classroom in a month
-    public function showClasses($teacherId=null,$classroomId=null,$ym){
-        //inst_Id
+    public function showClasses($teacherId=0,$classroomId=0,$ym){
+
+         //inst_id
         $tId = session('instId');
-        $class = new \Home\Model\ClassModel();
-        $yearAndMonth = explode("-",$ym);
-        $year = $yearAndMonth[0];
-        $month = $yearAndMonth[1];
-        $result;
-        if($teacherId!=null)
-            $result = $class->showClassesByTeacher($tId,$year,$month,$teacherId);
-        if($classroomId!=null)
-            $result = $class->showClassesByClassroom($tId,$year,$month,$classroomId);
+        
+        $teacher = new \Home\Model\TeacherModel();
+        $teacherList = $teacher->showTeachers($tId,0,50);   
+        $this->assign("teacherList",$teacherList);
 
-        $monthly = array();
-        $weekly;
-        $daily;
-        $currDay;
-        for($i=0;$i<count($result);$i++){
-            $class = $result[$i];
-            $date = $class['date'];
-            $month = $class['month'];
-            $dayOfMonth = explode('-',$date)[2];
-            $dayOfWeek = $class['day_of_week'];
-            $startTime = $class['start_time'];
-            $endTime = $class['end_time'];
-            $className = $class['class_name'];
-            $classroomName = $class['classroom_name'];
+        $classroom = new \Home\Model\ClassroomModel();
+        $classroomList = $classroom->showClassrooms($tId,0,20);   
+        $this->assign("classroomList",$classroomList);
 
-            $perClass = array("month"=>$month,"dayOfMonth"=>$dayOfMonth,"dayOfWeek"=>$dayOfWeek,"startTime"=>$startTime,"endTime"=>$endTime,"className"=>$className,"classroomName"=>$classroomName);
-            if($currDay != $dayOfMonth){//a new day
-                $currDay = $dayOfMonth;
-                $daily = array();
-                if($dayOfWeek == 1){//a new week
-                    $weekly = array();
-                    array_push($monthly, $weekly);
-                }
-                array_push($weekly, $daily);
-            }
-            array_push($daily,$perClass);
+        //年月list
+        $ymList = array();
+        $currym = date('Y-m');
+        for($i=0;$i<6;$i++){
+            $nextmonth=date('Y-m',strtotime("$currym + ".$i." month"));
+            array_push($ymList,$nextmonth);
         }
+        $this->assign("ymList",$ymList);
 
-        $this->assign('monthlyClasses',$monthly);//记录编号
+        if(($teacherId != 0 || $classroomId != 0) && $ym != null){
+            $class = new \Home\Model\ClassModel();
+            $yearAndMonth = explode("-",$ym);
+            $year = $yearAndMonth[0];
+            $month = $yearAndMonth[1];
+            $result;
+            if($teacherId!=0){
+                $result = $class->showClassesByTeacher($tId,$year,(int)$month,$teacherId);
+            }
+           // else if($classroomId!=0)
+           //     $result = $class->showClassesByClassroom($tId,$year,$month,$classroomId);
+
+            $nextmonth=date('Y-m-d',strtotime("$ym + 1 month"));
+            $daysInMonth = date('d',strtotime($nextmonth)-24*3600);
+            $lastDayInWeek = date('w',strtotime($nextmonth)-24*3600);
+            $firstDayInWeek = date('w',strtotime($ym));
+            if($lastDayInWeek == 0)
+                $lastDayInWeek = 7;
+
+            //设定空集合
+            $newResult = array();
+            for($n=0;$n<$daysInMonth;$n++){
+                $nullDay = array();
+                $nullDay['date'] = date('Y-m-d',strtotime("$ym + ".$n." day"));
+                $nullDay['day_of_week'] = $firstDayInWeek;
+
+                $firstDayInWeek++;
+                if($firstDayInWeek==8)
+                    $firstDayInWeek = 1;
+                $newResult[$n]=$nullDay;
+            }
+
+            //填充有效数据
+            for($n=0;$n<count($newResult);$n++){
+                $day = $newResult[$n];
+                $date = $day['date'];
+                for($m=0;$m<count($result);$m++){
+                    if($date == $result[$m]['date']){
+                        $newResult[$n] = $result[$m];
+                    }
+                }
+            }
+
+            //组装成表格的格式
+            $monthly = array();
+            $weekly;
+            $daily;
+            $currDay;
+            $currDayOfWeek;
+            $perClass;
+            for($i=0;$i<count($newResult);$i++){
+                $class = $newResult[$i];
+                $date = $class['date'];
+                $month = $class['month'];
+                $ymd = explode('-',$date);
+                $dayOfMonth = $ymd[2];
+                $dayOfWeek = $class['day_of_week'];
+                $startTime = $class['start_time'];
+                $endTime = $class['end_time'];
+                $className = $class['class_name'];
+                $classroomName = $class['classroom_name'];
+                if($className != null){
+                    $perClass = array("month"=>$month,"dayOfMonth"=>$dayOfMonth,"dayOfWeek"=>$dayOfWeek,"startTime"=>$startTime,"endTime"=>$endTime,"className"=>$className,"classroomName"=>$classroomName);
+                }else{
+                    $perClass = array("month"=>$month,"dayOfMonth"=>$dayOfMonth,"dayOfWeek"=>$dayOfWeek);
+                }
+                if($currDay != $dayOfMonth){//a new day
+                    $currDay = $dayOfMonth;
+                    $isNextDay = true;
+                    $daily = array();
+                    if($isNextDay && ($currDayOfWeek >= $dayOfWeek)){//a new week
+                        $weekly = array();
+                        array_push($monthly, &$weekly);//php区分值传递和引用传递！！
+                    }
+                    $currDayOfWeek = $dayOfWeek;
+                    //补全上个月
+//                    if($dayOfMonth==1 && $dayOfWeek > 1){
+ //                       for($n=1;$n<$firstDayInWeek;$n++){
+ //                           $nullDay = array();
+ //                           array_push($weekly,&$nullDay);
+ //                       }
+ //                   }
+                    array_push($weekly, &$daily);
+                }
+                
+                array_push($daily,&$perClass);//添加月内数据
+                //补全下个月
+ //               if($dayOfMonth == $daysInMonth && $dayOfWeek < 7){
+  //                  for($n=$lastDayInWeek+1;$n<=7;$n++){
+  //                      $nullDay = array();
+   //                     array_push($weekly,&$nullDay);
+   //                 }
+  //              }
+            }
+die;
+            print_r($monthly);die;
+
+            $dayCounter = 1;
+            $this->assign('monthlyClasses',$monthly);//记录编号
+            $this->assign('dayCounter',$dayCounter);
+        }
         layout(true);
         $this->display();
     }

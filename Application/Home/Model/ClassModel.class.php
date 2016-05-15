@@ -22,7 +22,7 @@ class ClassModel extends Model {
     }
 
     public function saveClassDetailAndStudentRela($classDetailId,$classId,$studentId,$tuition,$tId){
-        $sql = "insert into classoa_class_detail_student_rela(class_detail_id,class_id,student_id,tuition_per_class,is_absent,inst_id) values(".$classDetailId.",".$classId.",".$studentId.",".$tuitionPerStud.",".$tId.")";
+        $sql = "insert into classoa_class_detail_student_rela(class_detail_id,class_id,student_id,tuition_per_class,inst_id) values(".$classDetailId.",".$classId.",".$studentId.",".$tuition.",".$tId.")";
         $this->execute($sql);
     }
 

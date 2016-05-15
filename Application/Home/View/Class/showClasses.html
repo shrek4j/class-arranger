@@ -16,8 +16,6 @@
 	<title>console</title>
 	<!-- 新 Bootstrap 核心 CSS 文件 -->
 	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <!-- bootstrap datepicker -->
-    <link id="bsdp-css" href="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet">
     
     <style type="text/css">
         .main-view{overflow-y:scroll;position:fixed;width:83.5%;height:98%;margin:0.5% 0.5% 0.5% 16%;padding:0.8% 0.8% 0.8% 1.2%;background:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)}
@@ -46,264 +44,75 @@
     <div class="main-view-inner">
         <div class="main-view-inner-bar text-center">
             <!-- Single button -->
+            <form action="showClasses" method="post" id="showClassesForm">
+                <input type="hidden" name="teacherId" id="teacherId"/>
+                <input type="hidden" name="classroomId" id="classroomId"/>
+                <input type="hidden" name="ym" id="ym"/>
+            </form>
             <div class="btn-group">
               <button type="button" class="btn btn-success dropdown-toggle teacher" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                教师 <span class="caret"></span>
+                <span id="teacherShow">教师</span> <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
-                <li><a href="#">张三</a></li>
-                <li><a href="#">李四</a></li>
-                <li><a href="#">刘万东</a></li>
-                <li><a href="#">陈世超</a></li>
+                <foreach name="teacherList" item="teacher">
+                <li teacherId="{$teacher.teacher_id}" teacherName="{$teacher.name}" class="teacherId"><a href="#">{$teacher.name}</a></li>
+                </foreach>
               </ul>
             </div>
-            <div class="btn-group">
+    <!--        <div class="btn-group">
               <button type="button" class="btn btn-success dropdown-toggle classroom" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 教室 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
-                <li><a href="#">203</a></li>
-                <li><a href="#">503</a></li>
-                <li><a href="#">607</a></li>
-                <li><a href="#">744</a></li>
+                <foreach name="classroomList" item="classroom">
+                <li classroomId="{$classroom.classroom_id}" class="classroom"><a href="#">{$classroom.name}</a></li>
+                </foreach>
               </ul>
-            </div>
+            </div>   -->
             <div class="btn-group">
               <button type="button" class="btn btn-success dropdown-toggle classroom" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                月份 <span class="caret"></span>
+                <span id="ymShow">月份</span> <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
-                <li><a href="#">2016一月</a></li>
-                <li><a href="#">2016二月</a></li>
-                <li><a href="#">2016三月</a></li>
-                <li><a href="#">2016四月</a></li>
+                <foreach name="ymList" item="date">
+                <li ym="{$date}" class="ym"><a href="#">{$date}</a></li>
+                </foreach>
               </ul>
             </div>
+
+            <button type="button" class="btn btn-default show-classes">查询</button>
         </div>
+
+
         
+        <notempty name="monthlyClasses">
         <div class="class-detail-monthly">
-          <table class="table table-bordered">
-            <tr class="title text-center">
-                <td >星期一</td>
-                <td >星期二</td>
-                <td >星期三</td>
-                <td >星期四</td>
-                <td >星期五</td>
-                <td>星期六</td>
-                <td>星期日</td>
-          </tr>
-          <foreach name="classes" item="cls" >
+            <table class="table table-bordered">
+                <tr class="title text-center">
+                    <td >星期一</td>
+                    <td >星期二</td>
+                    <td >星期三</td>
+                    <td >星期四</td>
+                    <td >星期五</td>
+                    <td>星期六</td>
+                    <td>星期日</td>
+                </tr>
+                <foreach name="monthlyClasses" item="weekly" >
                 <tr class="classinfo">
+                    <foreach name="weekly" item="daily">
                     <td >
-                        <div class="calendar-day">25 十六</div>
-                        <div class="classinfo-one"><span class="classtime">8:00-10:00</span><div><span class="classtype">新概念1</span><span class="classroom">504</span></div></div>
+                        <div class="calendar-day">{$dayCounter++}</div>
+                        <foreach name="daily" item="perClass">
+                        <div class="classinfo-one"><span class="classtime">{$perClass.startTime}-{$perClass.endTime}</span><div><span class="classtype">{$perClass.ClassName}</span><span class="classroom">{$perClass.classroomName}</span></div></div>
+                        </foreach>
                     </td>
-                    <td >
-                        <div class="calendar-day">26 十七</div>
-                        <div class="classinfo-one"><span class="classtime">10:00-12:00</span><div><span class="classtype">新概念1</span><span class="classroom">504</span></div></div>
-                        <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">PET</span><span class="classroom">504</span></div></div>
-                        <div class="classinfo-one"><span class="classtime">16:00-18:00</span><div><span class="classtype">新概念2</span><span class="classroom">504</span></div></div>
-                    </td>
-                    <td >
-                        <div class="calendar-day">27 十八</div>
-                        <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">NCE1</span><span class="classroom">504</span></div></div>
-                    </td>
-                    <td >
-                        <div class="calendar-day">28 十九</div>
-                        <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">PET</span><span class="classroom">504</span></div></div>
-                        <div class="classinfo-one"><span class="classtime">16:00-18:00</span><div><span class="classtype">新概念2</span><span class="classroom">504</span></div></div>
-                    </td>
-                    <td >
-                        <div class="calendar-day">29 二十</div>
-                        <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">NCE1</span><span class="classroom">504</span></div></div>
-                        <div class="classinfo-one"><span class="classtime">17:00-19:00</span><div><span class="classtype">新概念2</span><span class="classroom">504</span></div></div>
-                    </td>
-                    <td class="weekend">
-                        <div class="calendar-day">30 廿一</div>
-                        <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">PET</span><span class="classroom">504</span></div></div>
-                    </td>
-                    <td class="weekend">
-                        <div class="calendar-day">31 廿二</div>
-                    </td>
-              </tr>
-          </foreach>
-
-
-          <tr class="classinfo">
-                <td >
-                    <div class="calendar-day">25 十六</div>
-                    <div class="classinfo-one"><span class="classtime">8:00-10:00</span><div><span class="classtype">新概念1</span><span class="classroom">504</span></div></div>
-                </td>
-                <td >
-                    <div class="calendar-day">26 十七</div>
-                    <div class="classinfo-one"><span class="classtime">10:00-12:00</span><div><span class="classtype">新概念1</span><span class="classroom">504</span></div></div>
-                    <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">PET</span><span class="classroom">504</span></div></div>
-                    <div class="classinfo-one"><span class="classtime">16:00-18:00</span><div><span class="classtype">新概念2</span><span class="classroom">504</span></div></div>
-                </td>
-                <td >
-                    <div class="calendar-day">27 十八</div>
-                    <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">NCE1</span><span class="classroom">504</span></div></div>
-                </td>
-                <td >
-                    <div class="calendar-day">28 十九</div>
-                    <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">PET</span><span class="classroom">504</span></div></div>
-                    <div class="classinfo-one"><span class="classtime">16:00-18:00</span><div><span class="classtype">新概念2</span><span class="classroom">504</span></div></div>
-                </td>
-                <td >
-                    <div class="calendar-day">29 二十</div>
-                    <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">NCE1</span><span class="classroom">504</span></div></div>
-                    <div class="classinfo-one"><span class="classtime">17:00-19:00</span><div><span class="classtype">新概念2</span><span class="classroom">504</span></div></div>
-                </td>
-                <td class="weekend">
-                    <div class="calendar-day">30 廿一</div>
-                    <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">PET</span><span class="classroom">504</span></div></div>
-                </td>
-                <td class="weekend">
-                    <div class="calendar-day">31 廿二</div>
-                </td>
-          </tr>
-          <tr class="classinfo">
-                <td >
-                    <div class="calendar-day">25 十六</div>
-                    <div class="classinfo-one"><span class="classtime">8:00-10:00</span><div><span class="classtype">新概念1</span><span class="classroom">504</span></div></div>
-                </td>
-                <td >
-                    <div class="calendar-day">26 十七</div>
-                </td>
-                <td >
-                    <div class="calendar-day">27 十八</div>
-                    <div class="classinfo-one"><span class="classtime">10:00-12:00</span><div><span class="classtype">新概念1</span><span class="classroom">504</span></div></div>
-                    <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">PET</span><span class="classroom">504</span></div></div>
-                    <div class="classinfo-one"><span class="classtime">16:00-18:00</span><div><span class="classtype">新概念2</span><span class="classroom">504</span></div></div>
-                </td>
-                <td >
-                    <div class="calendar-day">28 十九</div>
-                    <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">PET</span><span class="classroom">504</span></div></div>
-                    <div class="classinfo-one"><span class="classtime">16:00-18:00</span><div><span class="classtype">新概念2</span><span class="classroom">504</span></div></div>
-                </td>
-                <td >
-                    <div class="calendar-day">29 二十</div>
-                    <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">NCE1</span><span class="classroom">504</span></div></div>
-                    <div class="classinfo-one"><span class="classtime">17:00-19:00</span><div><span class="classtype">新概念2</span><span class="classroom">504</span></div></div>
-                </td>
-                <td class="weekend">
-                    <div class="calendar-day">30 廿一</div>
-                    <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">PET</span><span class="classroom">504</span></div></div>
-                </td>
-                <td class="weekend">
-                    <div class="calendar-day">31 廿二</div>
-                </td>
-          </tr>
-          <tr class="classinfo">
-                <td >
-                    <div class="calendar-day">25 十六</div>
-                    <div class="classinfo-one"><span class="classtime">8:00-10:00</span><div><span class="classtype">新概念1</span><span class="classroom">504</span></div></div>
-                </td>
-                <td >
-                    <div class="calendar-day">26 十七</div>
-                    <div class="classinfo-one"><span class="classtime">10:00-12:00</span><div><span class="classtype">新概念1</span><span class="classroom">504</span></div></div>
-                    <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">PET</span><span class="classroom">504</span></div></div>
-                    <div class="classinfo-one"><span class="classtime">16:00-18:00</span><div><span class="classtype">新概念2</span><span class="classroom">504</span></div></div>
-                </td>
-                <td >
-                    <div class="calendar-day">27 十八</div>
-                    <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">NCE1</span><span class="classroom">504</span></div></div>
-                </td>
-                <td >
-                    <div class="calendar-day">28 十九</div>
-                    <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">PET</span><span class="classroom">504</span></div></div>
-                    <div class="classinfo-one"><span class="classtime">16:00-18:00</span><div><span class="classtype">新概念2</span><span class="classroom">504</span></div></div>
-                </td>
-                <td >
-                    <div class="calendar-day">29 二十</div>
-                    <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">NCE1</span><span class="classroom">504</span></div></div>
-                    <div class="classinfo-one"><span class="classtime">17:00-19:00</span><div><span class="classtype">新概念2</span><span class="classroom">504</span></div></div>
-                </td>
-                <td class="weekend">
-                    <div class="calendar-day">30 廿一</div>
-                    <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">PET</span><span class="classroom">504</span></div></div>
-                    <div class="classinfo-one"><span class="classtime">17:00-19:00</span><div><span class="classtype">新概念2</span><span class="classroom">504</span></div></div>
-                </td>
-                <td class="weekend">
-                    <div class="calendar-day">31 廿二</div>
-                    <div class="classinfo-one"><span class="classtime">8:00-10:00</span><div><span class="classtype">新概念1</span><span class="classroom">504</span></div></div>
-                    <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">NCE1</span><span class="classroom">504</span></div></div>
-                    <div class="classinfo-one"><span class="classtime">17:00-19:00</span><div><span class="classtype">新概念2</span><span class="classroom">504</span></div></div>
-                </td>
-          </tr>
-          <tr class="classinfo">
-                <td >
-                    <div class="calendar-day">25 十六</div>
-                    <div class="classinfo-one"><span class="classtime">8:00-10:00</span><div><span class="classtype">新概念1</span><span class="classroom">504</span></div></div>
-                </td>
-                <td >
-                    <div class="calendar-day">26 十七</div>
-                    <div class="classinfo-one"><span class="classtime">10:00-12:00</span><div><span class="classtype">新概念1</span><span class="classroom">504</span></div></div>
-                    <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">PET</span><span class="classroom">504</span></div></div>
-                    <div class="classinfo-one"><span class="classtime">16:00-18:00</span><div><span class="classtype">新概念2</span><span class="classroom">504</span></div></div>
-                </td>
-                <td >
-                    <div class="calendar-day">27 十八</div>
-                    <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">NCE1</span><span class="classroom">504</span></div></div>
-                </td>
-                <td >
-                    <div class="calendar-day">28 十九</div>
-                    <div class="classinfo-one"><span class="classtime">8:00-10:00</span><div><span class="classtype">新概念1</span><span class="classroom">504</span></div></div>
-                    <div class="classinfo-one"><span class="classtime">10:00-12:00</span><div><span class="classtype">新概念1</span><span class="classroom">504</span></div></div>
-                    <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">PET</span><span class="classroom">504</span></div></div>
-                    <div class="classinfo-one"><span class="classtime">16:00-18:00</span><div><span class="classtype">新概念2</span><span class="classroom">504</span></div></div>
-                </td>
-                <td >
-                    <div class="calendar-day">29 二十</div>
-                    <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">NCE1</span><span class="classroom">504</span></div></div>
-                    <div class="classinfo-one"><span class="classtime">17:00-19:00</span><div><span class="classtype">新概念2</span><span class="classroom">504</span></div></div>
-                </td>
-                <td class="weekend">
-                    <div class="calendar-day">30 廿一</div>
-                    <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">PET</span><span class="classroom">504</span></div></div>
-                </td>
-                <td class="weekend">
-                    <div class="calendar-day">31 廿二</div>
-                </td>
-          </tr>
-          <tr class="classinfo">
-                <td >
-                    <div class="calendar-day">25 十六</div>
-                    <div class="classinfo-one"><span class="classtime">8:00-10:00</span><div><span class="classtype">新概念1</span><span class="classroom">504</span></div></div>
-                </td>
-                <td >
-                    <div class="calendar-day">26 十七</div>
-                    <div class="classinfo-one"><span class="classtime">10:00-12:00</span><div><span class="classtype">新概念1</span><span class="classroom">504</span></div></div>
-                    <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">PET</span><span class="classroom">504</span></div></div>
-                    <div class="classinfo-one"><span class="classtime">16:00-18:00</span><div><span class="classtype">新概念2</span><span class="classroom">504</span></div></div>
-                </td>
-                <td >
-                    <div class="calendar-day">27 十八</div>
-                </td>
-                <td >
-                    <div class="calendar-day">28 十九</div>
-                    <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">PET</span><span class="classroom">504</span></div></div>
-                    <div class="classinfo-one"><span class="classtime">16:00-18:00</span><div><span class="classtype">新概念2</span><span class="classroom">504</span></div></div>
-                </td>
-                <td >
-                    <div class="calendar-day">29 二十</div>
-                    <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">NCE1</span><span class="classroom">504</span></div></div>
-                    <div class="classinfo-one"><span class="classtime">17:00-19:00</span><div><span class="classtype">新概念2</span><span class="classroom">504</span></div></div>
-                </td>
-                <td class="weekend">
-                    <div class="calendar-day">30 廿一</div>
-                    <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">PET</span><span class="classroom">504</span></div></div>
-                    <div class="classinfo-one"><span class="classtime">13:30-15:30</span><div><span class="classtype">NCE1</span><span class="classroom">504</span></div></div>
-                    <div class="classinfo-one"><span class="classtime">17:00-19:00</span><div><span class="classtype">新概念2</span><span class="classroom">504</span></div></div>
-                </td>
-                <td class="weekend">
-                    <div class="calendar-day">31 廿二</div>
-                </td>
-          </tr>
+                    </foreach>
+                </tr>
+                </foreach>
+            </table>
         </div>
-        
+        </notempty>
     </div>
-    
     
 </div>
 
@@ -313,13 +122,8 @@
 	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <!-- YUI -->
     <script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
-    <!-- bootstrap datepicker -->
-    <script src="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-    <script src="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
-    
-    <script type="text/javascript">
-		$('#navLoader').load("nav.html?"+new Date().getTime());
-    </script>
+
+    <script src="/Public/js/class.js"></script>
     
     <script type="text/javascript">
 	        $(function () {
