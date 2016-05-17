@@ -62,7 +62,7 @@ class ClassController extends Controller {
 
         //save class
         $class = new \Home\Model\ClassModel(); 
-        $classId = $class->saveClass($className,$classtypeId,$remark,$tId);
+        $classId = $class->saveClass($className,$classtypeId,$startDate,$endDate,$teacherId,$classroomId,$remark,$tId);
 
         while($start < $end){
             $dayOfWeek = date('w',$start);//get the dayOfWeek of this timestamp
@@ -103,11 +103,11 @@ class ClassController extends Controller {
         $this->ajaxReturn($data);
     }
 
-    public function delClass($classId){
+    public function deleteClass($classId){
         //inst_Id
         $tId = session('instId');
         $class = new \Home\Model\ClassModel(); 
-        $result = $class->delClass($classId,$tId);
+        $result = $class->deleteClass($classId,$tId);
         if($result == 1){
            $data = 'ok'; 
         }else{
@@ -116,12 +116,31 @@ class ClassController extends Controller {
         $this->ajaxReturn($data);
     }
 
+    public function showClassList($pageNo=1,$pageSize=10){
+        //inst_Id
+        $instId = session('instId');
+        $start = ($pageNo - 1)*$pageSize;
+        $class = new \Home\Model\ClassModel();
+        $classList = $class->showClassList($instId,$start,$pageSize);
+        $totals = $class->totalClasses($instId);
+        $total = $totals[0]['total'];
+        $this->assign('total',$total);
+        $this->assign('pageNo',$pageNo);
+        $this->assign('pageSize',$pageSize);
+        $this->assign("howMangPages",ceil($total/$pageSize-1)+1);
+        $this->assign('num',1);//记录编号
+        $this->assign('classList',$classList);
+        layout(true);
+        $this->display();
+    }
+
     public function showClassDetails($classId){
         //inst_Id
         $tId = session('instId');
+
         $class = new \Home\Model\ClassModel();
-        $result = $class->showClassDetails($classId,$tId);
-        $this->assign('classDetails',$result);//记录编号
+        $classDetails = $class->showClassDetails($classId,$tId);
+        $this->assign('classDetails',$classDetails);//记录编号
         layout(true);
         $this->display();
     }
@@ -201,6 +220,17 @@ class ClassController extends Controller {
         for($i;$i<count($students);$i++){
             $class->delClassDetailAndStudentRela($classDetailId,$students[$i],$tId);
         }
+    }
+
+    public function showStudentsFromClassDetail($classDetailId){
+        //inst_Id
+        $tId = session('instId');
+        //students
+        $students = explode('|',$studentIds);
+        $class = new \Home\Model\ClassModel();
+        $result = $class->showStudentsFromClassDetail($classDetailId,$tId);
+
+        $this->ajaxReturn($result);
     }
 
 
@@ -318,8 +348,10 @@ class ClassController extends Controller {
                 $className = $class['class_name'];
                 $classroomName = $class['classroom_name'];
                 $showDate = $class['show_date'];
+                $classId = $class['class_id'];
+                $classDetailId = $class['class_detail_id'];
                 if($className != null){
-                    $perClass = array("month"=>$month,"dayOfMonth"=>$dayOfMonth,"dayOfWeek"=>$dayOfWeek,"startTime"=>$startTime,"endTime"=>$endTime,"className"=>$className,"classroomName"=>$classroomName,"showDate"=>$showDate);
+                    $perClass = array("month"=>$month,"dayOfMonth"=>$dayOfMonth,"dayOfWeek"=>$dayOfWeek,"startTime"=>$startTime,"endTime"=>$endTime,"className"=>$className,"classroomName"=>$classroomName,"showDate"=>$showDate,"classDetailId"=>$classDetailId,"classId"=>$classId);
                 }else{
                     $perClass = array("month"=>$month,"dayOfMonth"=>$dayOfMonth,"dayOfWeek"=>$dayOfWeek,"showDate"=>$showDate);
                 }
@@ -336,7 +368,7 @@ class ClassController extends Controller {
                     //补全上个月
                     if($dayOfMonth==1 && $dayOfWeek > 1 && $isLeftPadding == false){
                         for($n=1;$n<$firstDayInWeek;$n++){
-                            array_push($weekly,array());
+                            array_push($weekly,array("dayOfWeek"=>$n));
                             $isLeftPadding = true;
                         }
                     }
@@ -348,7 +380,7 @@ class ClassController extends Controller {
                 //补全下个月
                 if($dayOfMonth == $daysInMonth && $dayOfWeek < 7 && $isRightPadding == false){
                     for($n=$lastDayInWeek+1;$n<=7;$n++){
-                        array_push($weekly,array());
+                        array_push($weekly,array("dayOfWeek"=>$n));
                         $isRightPadding = true;
                     }
                 }
@@ -359,6 +391,7 @@ class ClassController extends Controller {
         $this->assign('teacherId',$teacherId);
         $this->assign('teacherName',$teacherName);
         $this->assign('ym',$ym);
+        $this->assign('weekCounter',1);
         layout(true);
         $this->display();
     }
@@ -399,7 +432,7 @@ class ClassController extends Controller {
         $start = ($pageNo - 1)*$pageSize;
         $model = new \Home\Model\ClassModel();
         $classtypeList = $model->showClassTypes($instId,$start,$pageSize);
-        $totals = $model->total($instId);
+        $totals = $model->totalClasstypes($instId);
         $total = $totals[0]['total'];
         $this->assign('classtypeList',$classtypeList);
         $this->assign('total',$total);

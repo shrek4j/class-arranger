@@ -21,7 +21,7 @@ class OperatorController extends Controller {
             session('instId',$result[0]['inst_id']);
             session('operatorName',$result[0]['user_name']);
             session('role',"管理员");
-            $this->success('登陆成功', '/index.php/Home/Class/classmain',2);
+            $this->success('登陆成功', '/index.php/Home/Class/showClassList?nav=44&pnav=40',2);
         }else{
             $this->error('登陆失败');
         }    

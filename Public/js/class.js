@@ -1,4 +1,5 @@
 $(".add-class").click(function(){
+	$(this).attr("disabled","disabled");
     var classname = $("#classname").val();
     var classtype = $("input[name='classtype']:checked").val();
 	var teacher = $("input[name='teacher']:checked").val();
@@ -36,6 +37,28 @@ $(".add-class").click(function(){
 	});
 
 });
+
+function editClass(id){
+  window.location.href = "/index.php/Home/Class/showClassDetails?classId="+id;
+}
+
+function deleteClass(id,name){
+  if(confirm("是否删除课程："+name+"？")){
+  	$.ajax({
+	   	type: "POST",
+	   	url: "deleteClass",
+	   	data: "classId="+id,
+	   	success: function(msg){
+	   		if(msg == 'false'){
+	   			//提示保存失败
+	   		}else{
+	   			//提示保存成功
+	   			window.location.reload();
+	   		}
+	   	}
+	});
+  }
+}
 
 function getStudentStr(studentInputs){
 	var students = "";
@@ -217,6 +240,14 @@ $('.ym').click(function(){
 	$("#ym").val(ym);
 });
 
+$(".list-group-item").mousedown(function(){
+	$(".list-group-item").removeClass("cactive");
+	$(this).addClass("cactive");
+});
+
+function editVacancy(classId,classDetailId){
+	$("#myModal").modal('show');
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////classtype//////////////////////////////////////

@@ -42,97 +42,49 @@
 
     <div class="main-view-inner">
         <div class="main-view-inner-bar">
-            <span style="cursor:pointer" data-toggle="modal" data-target="#addClassModal">
+     <!--       <span style="cursor:pointer" data-toggle="modal" data-target="#addClassModal">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;新建课程
             </span>
+      -->
         </div>
                 
         <table class="main-view-inner-table table table-bordered table-striped table-hover text-center">
-            <thead><tr class="title"><td>课程名称</td><td>课程分类</td><td>教师</td><td>教室</td><td>开始日期</td><td>截止日期</td><td>学费</td><td>操作</td></tr></thead>
+            <thead><tr class="title"><td>编号</td><td>课程名称</td><td>课程分类</td><td>教师</td><td>教室</td><td>开始日期</td><td>截止日期</td><td>学费</td><td>操作</td></tr></thead>
             <tbody>
-                <tr><td>新概念1 5人班</td>
-                    <td>新概念1</td>
-                    <td>张晓敏</td>
-                    <td>101</td>
-                    <td>2016-02-01</td>
-                    <td>2016-04-12</td>
-                    <td>4800.00元</td>
+              <foreach name="classList" item="vo" >
+                <tr><td>{$num++}</td>
+                    <td>{$vo.class_name}</td>
+                    <td>{$vo.classtype_name}</td>
+                    <td>{$vo.teacher_name}</td>
+                    <td>{$vo.classroom_name}</td>
+                    <td>{$vo.start_date}</td>
+                    <td>{$vo.end_date}</td>
+                    <td>{$vo.tuition_total}元</td>
                     <td>
-                        <span id="editClass" style="cursor:pointer" class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑"></span>
-                        <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
+                      <span id="editClass" style="cursor:pointer" class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑"  onclick="editClass({$vo.class_id})"></span>
+                      <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除" onclick="deleteClass({$vo.class_id},'{$vo.class_name}')"></span>
                     </td>
                 </tr>
-                <tr><td>新概念2 10人班</td>
-                    <td>新概念2</td>
-                    <td>张晓敏</td>
-                    <td>102</td>
-                    <td>2016-02-01</td>
-                    <td>2016-04-12</td>
-                    <td>4800.00元</td>
-                    <td>
-                        <span id="editClass" style="cursor:pointer" class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑"></span>
-                        <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
-                    </td>
-                </tr>
-                <tr><td>KET 8人班</td>
-                    <td>KET</td>
-                    <td>日光灯</td>
-                    <td>101</td>
-                    <td>2016-02-01</td>
-                    <td>2016-04-12</td>
-                    <td>4800.00元</td>
-                    <td>
-                        <span id="editClass" style="cursor:pointer" class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑"></span>
-                        <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
-                    </td>
-                </tr>
-                <tr><td>新概念1 5人班</td>
-                    <td>新概念1</td>
-                    <td>张晓敏</td>
-                    <td>101</td>
-                    <td>2016-02-01</td>
-                    <td>2016-04-12</td>
-                    <td>4800.00元</td>
-                    <td>
-                        <span id="editClass" style="cursor:pointer" class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑"></span>
-                        <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
-                    </td>
-                </tr>
-                <tr><td>新概念2 10人班</td>
-                    <td>新概念2</td>
-                    <td>张晓敏</td>
-                    <td>102</td>
-                    <td>2016-02-01</td>
-                    <td>2016-04-12</td>
-                    <td>4800.00元</td>
-                    <td>
-                        <span id="editClass" style="cursor:pointer" class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑"></span>
-                        <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
-                    </td>
-                </tr>
-                <tr><td>KET 8人班</td>
-                    <td>KET</td>
-                    <td>日光灯</td>
-                    <td>101</td>
-                    <td>2016-02-01</td>
-                    <td>2016-04-12</td>
-                    <td>4800.00元</td>
-                    <td>
-                        <span id="editClass" style="cursor:pointer" class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑"></span>
-                        <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
-                    </td>
-                </tr>
+              </foreach>
             </tbody>
         </table>
         <nav class="text-center">
             <ul class="pagination">
-                <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li class="disabled"><a href="#">4</a></li>
-                <li class="disabled"><a href="#">5</a></li>
-                <li class="disabled"><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                <li><a href="showClassList?pageNo=1" aria-label="Begin"><span aria-hidden="true">首页</span></a></li>
+                <li <if condition="$pageNo eq 1">class="disabled"<else/></if>>
+                  <a <if condition="$pageNo eq 1">
+                  <else/>href="showClassList?pageNo={$pageNo-1}"</if> aria-label="Previous">
+                    <span aria-hidden="true">上一页</span>
+                  </a>
+                </li>
+                <li class="active"><a href="#">{$pageNo}</a></li>
+                <li <if condition="$pageNo*$pageSize lt $total"><else/>class="disabled"</if>>
+                  <a <if condition="$pageNo*$pageSize lt $total">
+                  href="showClassList?pageNo={$pageNo+1}"<else/></if> aria-label="Next">
+                    <span aria-hidden="true">下一页</span>
+                  </a>
+                </li>
+                <li><a href="showClassList?pageNo={$howMangPages}" aria-label="End"><span aria-hidden="true">尾页</span></a></li>
             </ul>
         </nav>
     </div>
@@ -326,9 +278,9 @@
     <!-- bootstrap datepicker -->
     <script src="/Public/js/bootstrap/bootstrap-datepicker/bootstrap-datepicker.js"></script>
     <script src="/Public/js/bootstrap/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
+    <script src="/Public/js/class.js"></script>
 
     <script type="text/javascript">
-
         $(function () {
           $('[data-toggle="tooltip"]').tooltip()
         });
@@ -339,10 +291,6 @@
             language: "zh-CN",
             autoclose: true
         });
-
-//		$('#editClass').click(function(){
-//			window.location.href="classdetail.html";
-//		});
 
     </script>
 </body>

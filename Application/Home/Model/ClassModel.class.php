@@ -7,8 +7,8 @@ class ClassModel extends Model {
     //////////////////////////
     ///////////class//////////
     //////////////////////////
-    public function saveClass($className,$classtypeId,$remark,$tId){
-        $sql = "insert into classoa_class(class_name,class_type_id,remark,inst_id) values('".$className."',".$classtypeId.",'".$remark."',".$tId.")";
+    public function saveClass($className,$classtypeId,$startDate,$endDate,$teacherId,$classroomId,$remark,$tId){
+        $sql = "insert into classoa_class(class_name,class_type_id,start_date,end_date,teacher_id,classroom_id,remark,inst_id) values('".$className."',".$classtypeId.",'".$startDate."','".$endDate."',".$teacherId.",".$classroomId.",'".$remark."',".$tId.")";
         $this->execute($sql);
         $queryIdSql = "SELECT @@IDENTITY as class_id";
         return $this->query($queryIdSql);
@@ -31,20 +31,35 @@ class ClassModel extends Model {
         $this->execute($sql);
     }
 
+    public function showStudentsFromClassDetail($classDetailId,$tId){
+        $sql = "select * from classoa_class_detail_student_rela r left join classoa_student s on r.student_id=s.student_id where $inst_id=".$tId." and $class_detail_id=".$classDetailId;
+        return $this->query($sql);
+    }
+
     public function updateClass($classId,$className,$tId){
         $sql = "update classoa_class set class_name='".$classname."' where class_id=".$classId." and inst_id=".$tId;
         return $this->execute($sql);
     }
 
     //classoa_class: `status` int(1) NOT NULL DEFAULT '0',
-    public function delClass($classId,$tId){
+    public function deleteClass($classId,$tId){
         $sql = "update classoa_class set status=1 where class_id=".$classId." and inst_id=".$tId;
         return $this->execute($sql);
+    }
+
+    public function totalClasses($instId){
+        $sql = "select count(1) total from classoa_classtype where inst_id=".$instId." and status=0";
+        return $this->query($sql);
+    }
+
+    public function showClassList($instId,$start,$pageSize){
+        $sql = "select cc.*,ct.name classtype_name,t.name teacher_name,cr.name classroom_name from classoa_class cc left join classoa_classtype ct on cc.class_type_id=ct.id left join classoa_teacher t on cc.teacher_id=t.teacher_id left join classoa_classroom cr on cc.classroom_id=cr.classroom_id where cc.inst_id=".$instId." and cc.status=0 order by cc.class_id desc limit ".$start.",".$pageSize;
+        return $this->query($sql);
     }
     
     //classoa_class_detail: `status` int(1) NOT NULL DEFAULT '0',
     public function showClassDetails($classId,$tId){
-        $sql = "select * from classoa_class_detail where inst_id=".$tId." and class_id=".$classId." and status=0 order by class_detail_id asc";
+        $sql = "select cd.*,ct.name teacher_name,cc.name classroom_name from classoa_class_detail cd left join classoa_teacher ct on cd.teacher_id=ct.teacher_id left join classoa_classroom cc on cd.classroom_id=cc.classroom_id where cd.inst_id=".$tId." and cd.class_id=".$classId." and cd.status=0 order by cd.class_detail_id asc";
         return $this->query($sql);
     }
 
@@ -53,7 +68,7 @@ class ClassModel extends Model {
         return $this->execute($sql);
     }
 
-    public function delClassDetail($classId,$classDetailId,$tId){
+    public function deleteClassDetail($classId,$classDetailId,$tId){
         $sql = "update classoa_class set status=1 where class_id=".$classId." and class_detail_id=".$classDetailId." and inst_id=".$tId;
         return $this->execute($sql);
     }
@@ -76,7 +91,7 @@ class ClassModel extends Model {
         return $this->execute($sql);
     }
     
-    public function total($instId){
+    public function totalClasstypes($instId){
     	$sql = "select count(1) total from classoa_classtype where inst_id=".$instId." and status=0";
         return $this->query($sql);
     }
