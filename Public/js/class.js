@@ -197,10 +197,6 @@ function bindClicks(rowCount){
 
 
 $('.show-classes').click(function(){
-	var teacherId = $('.teacherId').filter('.selected').attr('teacherId');
-	var ym = $('.ym').filter('.selected').attr('ym');
-	$("#teacherId").val(teacherId);
-	$("#ym").val(ym);
 	$("#showClassesForm").submit();
 });
 
@@ -208,12 +204,17 @@ $('.teacherId').click(function(){
 	$('.teacherId').removeClass('selected');
 	$(this).addClass('selected');
 	$("#teacherShow").text($(this).children("a").text());
+	$("#teacherName").val($(this).children("a").text());
+	var teacherId = $('.teacherId').filter('.selected').attr('teacherId');
+	$("#teacherId").val(teacherId);
 });
 
 $('.ym').click(function(){
 	$('.ym').removeClass('selected');
 	$(this).addClass('selected');
 	$("#ymShow").text($(this).attr('ym'));
+	var ym = $('.ym').filter('.selected').attr('ym');
+	$("#ym").val(ym);
 });
 
 

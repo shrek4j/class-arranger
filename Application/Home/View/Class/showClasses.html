@@ -27,7 +27,7 @@
         .class-detail-monthly .title{font-weight:bold;font-size:16px;background-color:#339966;color:white;}
         .class-detail-monthly table tr td{width:150px;}
         .class-detail-monthly .classinfo{color:#34495e;}
-        .class-detail-monthly .calendar-day{font-size:10px;margin-left:62%;background-color:#777777;color:white;}
+        .class-detail-monthly .calendar-day{font-size:10px;padding:1px;margin-left:86%;background-color:#777777;color:white;}
         .class-detail-monthly .classinfo-one{font-size:10px;margin: 2px 2px 2px 2px;}
         .class-detail-monthly .classtime{font-size:10px;font-weight:900;}
         .class-detail-monthly .classtype{}
@@ -45,13 +45,17 @@
         <div class="main-view-inner-bar text-center">
             <!-- Single button -->
             <form action="showClasses" method="post" id="showClassesForm">
-                <input type="hidden" name="teacherId" id="teacherId"/>
+                <input type="hidden" name="teacherId" id="teacherId" value="{$teacherId}"/>
+                <input type="hidden" name="teacherName" id="teacherName" value="{$teacherName}"/>
                 <input type="hidden" name="classroomId" id="classroomId"/>
-                <input type="hidden" name="ym" id="ym"/>
+                <input type="hidden" name="ym" id="ym" value="{$ym}"/>
             </form>
             <div class="btn-group">
               <button type="button" class="btn btn-success dropdown-toggle teacher" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span id="teacherShow">教师</span> <span class="caret"></span>
+                <span id="teacherShow">
+                    <empty name="teacherName">教师<else/>{$teacherName}</empty>
+                </span>
+                <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
                 <foreach name="teacherList" item="teacher">
@@ -71,7 +75,10 @@
             </div>   -->
             <div class="btn-group">
               <button type="button" class="btn btn-success dropdown-toggle classroom" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span id="ymShow">月份</span> <span class="caret"></span>
+                <span id="ymShow">
+                    <empty name="ym">月份<else/>{$ym}</empty>
+                </span>
+                <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
                 <foreach name="ymList" item="date">
@@ -89,11 +96,11 @@
         <div class="class-detail-monthly">
             <table class="table table-bordered">
                 <tr class="title text-center">
-                    <td >星期一</td>
-                    <td >星期二</td>
-                    <td >星期三</td>
-                    <td >星期四</td>
-                    <td >星期五</td>
+                    <td>星期一</td>
+                    <td>星期二</td>
+                    <td>星期三</td>
+                    <td>星期四</td>
+                    <td>星期五</td>
                     <td>星期六</td>
                     <td>星期日</td>
                 </tr>
@@ -101,9 +108,13 @@
                 <tr class="classinfo">
                     <foreach name="weekly" item="daily">
                     <td >
-                        <div class="calendar-day">{$dayCounter++}</div>
                         <foreach name="daily" item="perClass">
-                        <div class="classinfo-one"><span class="classtime">{$perClass.startTime}-{$perClass.endTime}</span><div><span class="classtype">{$perClass.ClassName}</span><span class="classroom">{$perClass.classroomName}</span></div></div>
+                        <if condition="$perClass.showDate eq 1 ">
+                        <div class="calendar-day">{$perClass.dayOfMonth}</div>
+                        </if>
+                        <div class="classinfo-one"><span class="classtime">{$perClass.startTime}
+                        <notempty name="perClass.className">-</notempty>
+                        {$perClass.endTime}</span><div><span class="classtype">{$perClass.className}</span><span class="classroom">{$perClass.classroomName}</span></div></div>
                         </foreach>
                     </td>
                     </foreach>

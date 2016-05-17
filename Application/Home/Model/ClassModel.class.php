@@ -14,8 +14,8 @@ class ClassModel extends Model {
         return $this->query($queryIdSql);
     }
     
-    public function saveClassDetail($date,$year,$month,$dayOfWeek,$startTime,$endTime,$teacherId,$classroomId,$classId,$tuition,$tId){
-        $sql = "insert into classoa_class_detail(date,year,month,day_of_week,start_time,end_time,teacher_id,classroom_id,class_id,tuition_per_class,inst_id) values('".$date."','".$year."',".$month.",".$dayOfWeek.",'".$startTime."','".$endTime."',".$teacherId.",".$classroomId.",".$classId.",".$tuition.",".$tId.")";
+    public function saveClassDetail($date,$year,$month,$dayOfWeek,$startTime,$startTimeInt,$endTime,$teacherId,$classroomId,$classId,$tuition,$tId){
+        $sql = "insert into classoa_class_detail(date,year,month,day_of_week,start_time,start_time_int,end_time,teacher_id,classroom_id,class_id,tuition_per_class,inst_id) values('".$date."','".$year."',".$month.",".$dayOfWeek.",'".$startTime."',".$startTimeInt.",'".$endTime."',".$teacherId.",".$classroomId.",".$classId.",".$tuition.",".$tId.")";
         $this->execute($sql);
         $queryIdSql = "SELECT @@IDENTITY as class_detail_id";
         return $this->query($queryIdSql);
@@ -59,7 +59,7 @@ class ClassModel extends Model {
     }
     
     public function showClassesByTeacher($tId,$year,$month,$teacherId){
-        $sql = "select d.*,c.class_name class_name,r.name classroom_name from classoa_class_detail d left join classoa_class c on d.class_id=c.class_id left join classoa_classroom r on d.classroom_id=r.classroom_id where d.inst_id=".$tId." and d.year='".$year."' and d.month='".$month."' and d.teacher_id=".$teacherId." and d.status=0 order by d.date asc,d.start_time asc";
+        $sql = "select d.*,c.class_name class_name,r.name classroom_name from classoa_class_detail d left join classoa_class c on d.class_id=c.class_id left join classoa_classroom r on d.classroom_id=r.classroom_id where d.inst_id=".$tId." and d.year='".$year."' and d.month='".$month."' and d.teacher_id=".$teacherId." and d.status=0 order by d.date asc,d.start_time_int asc";
         return $this->query($sql);
     }
 
