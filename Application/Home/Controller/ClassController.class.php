@@ -225,12 +225,51 @@ class ClassController extends Controller {
     public function showStudentsFromClassDetail($classDetailId){
         //inst_Id
         $tId = session('instId');
-        //students
-        $students = explode('|',$studentIds);
         $class = new \Home\Model\ClassModel();
         $result = $class->showStudentsFromClassDetail($classDetailId,$tId);
+        $return;
+        if(count($result)==0){
+            $return = "false";
+        }else{
+            for($i=0;$i<count($result);$i++){
+                $id = $result[$i]['id'];
+                $studentName = $result[$i]['student_name'];
+                $mobile = $result[$i]['mobile'];
+                $isAbsent = $result[$i]['isAbsent'];
+                $return = $return.$id.":".$studentName.":".$mobile.":".$isAbsent.";";
+            }
+        }
+        $this->ajaxReturn($return);
+    }
 
-        $this->ajaxReturn($result);
+
+    public function updateClassDetailStudentRela($cameRelaIds,$notCameRelaIds){
+         //inst_Id
+        $tId = session('instId');
+        $cameRelaIdsArr = explode('|',$cameRelaIds);
+        $notCameRelaIdsArr = explode('|',$notCameRelaIds);
+        $class = new \Home\Model\ClassModel();
+        $count = 0;
+        for($i=0;$i<count($cameRelaIdsArr)-1;$i++){
+            $result = $class->updateClassDetailStudentRela($cameRelaIdsArr[$i],0,$tId);
+            if($result != 1){
+                $count++;
+            }
+        }
+
+        for($i=0;$i<count($notCameRelaIdsArr)-1;$i++){
+            $result = $class->updateClassDetailStudentRela($notCameRelaIdsArr[$i],1,$tId);
+            if($result != 1){
+                $count++;
+            }
+        }
+
+        $return = "true";
+        if($count > 0){
+            $return = "false";
+        }
+
+        $this->ajaxReturn($return);
     }
 
 

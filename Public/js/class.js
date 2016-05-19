@@ -245,8 +245,58 @@ $(".list-group-item").mousedown(function(){
 	$(this).addClass("cactive");
 });
 
-function editVacancy(classId,classDetailId){
-	$("#myModal").modal('show');
+function editVacancy(className,classDetailId){
+	//clear
+	clearVacancyInfo();
+	//load
+	$.ajax({
+	   	type: "POST",
+	   	url: "showStudentsFromClassDetail",
+	   	data: "classDetailId="+classDetailId,
+	   	success: function(msg){
+	   		if(msg == 'false'){
+	   			//提示保存失败
+	   		}else{
+	   			var html = "";
+	   			var studentArr = msg.split(";");
+	   			for(var i=0;i<studentArr.length-1;i++){
+	   				var s = studentArr[i].split(":");
+	   				html += '<div><input tabindex="'+i+'" id="student_'+i+'" type="checkbox" '+ if(s[3] == 0){'checked="checked"'}+' name="student" value="'+s[0]+'"><span class="radio-text">"'+s[1]+'"</span><span class="radio-text">"'+s[2]+'"</span></div>';
+	   			}
+	   			$("#className").innerHTML = className;
+	   			$("#students").innerHTML = html;
+				$("#myModal").modal('show');
+	   		}
+	   	}
+	});
+}
+
+$(".save-vacancy").click(function(){
+	var cameStudentInputs = $("input[name='student']:checked");
+	var cameRelaIds = getStudentStr(studentInputs);
+	var notCameStudentInputs = $("input[name='student']:not(checked)");
+	var notCameRelaIds = getStudentStr(studentInputs);
+
+	//save
+	$.ajax({
+	   	type: "POST",
+	   	url: "updateClassDetailStudentRela",
+	   	data: "cameRelaIds="+cameRelaIds+"&notCameRelaIds"+notCameRelaIds,
+	   	success: function(msg){
+	   		if(msg == 'false'){
+	   			//提示保存失败
+	   		}else{
+				$("#myModal").modal('hide');
+				//clear
+				clearVacancyInfo();
+	   		}
+	   	}
+	});
+});
+
+function clearVacancyInfo(){
+	$("#className").innerHTML = "";
+	$("#students").innerHTML = "";
 }
 
 ///////////////////////////////////////////////////////////////////////////////

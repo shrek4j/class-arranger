@@ -31,8 +31,13 @@ class ClassModel extends Model {
         $this->execute($sql);
     }
 
+    public function updateClassDetailStudentRela($relaId,$isAbsent,$tId){
+        $sql = "update classoa_class_detail_student_rela set is_absent='".$isAbsent."' where id=".$relaId." and inst_id=".$tId;
+        return $this->execute($sql);
+    }
+
     public function showStudentsFromClassDetail($classDetailId,$tId){
-        $sql = "select * from classoa_class_detail_student_rela r left join classoa_student s on r.student_id=s.student_id where $inst_id=".$tId." and $class_detail_id=".$classDetailId;
+        $sql = "select r.*, s.name student_name,s.mobile mobile from classoa_class_detail_student_rela r left join classoa_student s on r.student_id=s.student_id where $inst_id=".$tId." and $class_detail_id=".$classDetailId;
         return $this->query($sql);
     }
 

@@ -117,7 +117,7 @@
                             <span class="classtime">{$perClass.startTime}
                             <notempty name="perClass.className">-</notempty>
                             {$perClass.endTime}</span>
-                            <notempty name="perClass.className"><span class="vacancy" onclick="editVacancy({$perClass.classId},{$perClass.classDetailId});">考勤</span></notempty>
+                            <notempty name="perClass.className"><span class="vacancy" onclick="editVacancy('{$perClass.className}',{$perClass.classDetailId});">考勤</span></notempty>
                             <div>
                             <span class="classtype">{$perClass.className}</span><span class="classroom">{$perClass.classroomName}</span>
                             </div>
@@ -144,9 +144,14 @@
       </div>
       <div class="modal-body">
         //TODO
+        <div id="className"></div>
+        <div id="students">
+            <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+        </div>
+
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">保存</button>
+        <button type="button" class="btn btn-primary save-vacancy">保存</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
       </div>
     </div>
