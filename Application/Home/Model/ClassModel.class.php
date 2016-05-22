@@ -13,6 +13,11 @@ class ClassModel extends Model {
         $queryIdSql = "SELECT @@IDENTITY as class_id";
         return $this->query($queryIdSql);
     }
+
+    public function showClassById($classId,$tId){
+        $sql = "select c.class_name class_name,cc.name classtype_name from classoa_class c left join classoa_classtype cc on c.class_type_id=cc.id where c.inst_id=".$tId." and c.class_id=".$classId;
+        return $this->query($sql);
+    }
     
     public function saveClassDetail($date,$year,$month,$dayOfWeek,$startTime,$startTimeInt,$endTime,$teacherId,$classroomId,$classId,$tuition,$tId){
         $sql = "insert into classoa_class_detail(date,year,month,day_of_week,start_time,start_time_int,end_time,teacher_id,classroom_id,class_id,tuition_per_class,inst_id) values('".$date."','".$year."',".$month.",".$dayOfWeek.",'".$startTime."',".$startTimeInt.",'".$endTime."',".$teacherId.",".$classroomId.",".$classId.",".$tuition.",".$tId.")";
@@ -37,7 +42,7 @@ class ClassModel extends Model {
     }
 
     public function showStudentsFromClassDetail($classDetailId,$tId){
-        $sql = "select r.*, s.name student_name,s.mobile mobile from classoa_class_detail_student_rela r left join classoa_student s on r.student_id=s.student_id where $inst_id=".$tId." and $class_detail_id=".$classDetailId;
+        $sql = "select r.*, s.student_name student_name,s.phone mobile from classoa_class_detail_student_rela r left join classoa_student s on r.student_id=s.student_id where r.inst_id=".$tId." and r.class_detail_id=".$classDetailId;
         return $this->query($sql);
     }
 
@@ -74,7 +79,7 @@ class ClassModel extends Model {
     }
 
     public function deleteClassDetail($classId,$classDetailId,$tId){
-        $sql = "update classoa_class set status=1 where class_id=".$classId." and class_detail_id=".$classDetailId." and inst_id=".$tId;
+        $sql = "update classoa_class_detail set status=1 where class_id=".$classId." and class_detail_id=".$classDetailId." and inst_id=".$tId;
         return $this->execute($sql);
     }
     

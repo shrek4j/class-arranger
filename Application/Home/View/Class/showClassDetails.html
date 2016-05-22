@@ -13,7 +13,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="icon" href="../../favicon.ico">
 
-	<title>console</title>
+	<title>课程明细</title>
 	<!-- 新 Bootstrap 核心 CSS 文件 -->
 	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- bootstrap datepicker -->
@@ -40,7 +40,7 @@
 <div class="main-view">
     <div class="main-view-inner">
         <div class="main-view-inner-bar">
-            <h3 style="display: inline-block;">新概念1 5人班</h3><h4 style="margin:0px 0px 0px 20px;display: inline-block;"><span class="label" style="background-color: #333366;">新概念1</span></h4>
+            <h3 style="display: inline-block;">{$classInfo[0].class_name}</h3><h4 style="margin:0px 0px 0px 20px;display: inline-block;"><span class="label" style="background-color: #333366;">{$classInfo[0].classtype_name}</span></h4>
         </div>
         <div class="class-detail-list">
             <div id="unplay" class="finished">
@@ -50,7 +50,23 @@
                   <li class="list-group-item container-fluid finished">
                     <div class="row text-center">
                         <div class="col-md-2">{$vo.date}</div>
-                        <div class="col-md-1">{$vo.day_of_week}</div>
+                        <div class="col-md-1">
+                            <if condition="$vo.day_of_week eq 1">
+                                星期一
+                            <elseif condition="$vo.day_of_week eq 2"/>
+                                星期二
+                            <elseif condition="$vo.day_of_week eq 3"/>
+                                星期三
+                            <elseif condition="$vo.day_of_week eq 4"/>
+                                星期四
+                            <elseif condition="$vo.day_of_week eq 5"/>
+                                星期五
+                            <elseif condition="$vo.day_of_week eq 6"/>
+                                星期六
+                            <else /> 
+                                星期日
+                            </if>
+                        </div>
                         <div class="col-md-2">{$vo.start_time}-{$vo.end_time}</div>
                         <div class="col-md-1">{$vo.teacher_name}</div>
                         <div class="col-md-1">{$vo.classroom_name}</div>
@@ -72,14 +88,30 @@
                   <li class="list-group-item">
                     <div class="row text-center">
                         <div class="col-md-2">{$vo.date}</div>
-                        <div class="col-md-1">{$vo.day_of_week}</div>
+                        <div class="col-md-1">
+                            <if condition="$vo.day_of_week eq 1">
+                                星期一
+                            <elseif condition="$vo.day_of_week eq 2"/>
+                                星期二
+                            <elseif condition="$vo.day_of_week eq 3"/>
+                                星期三
+                            <elseif condition="$vo.day_of_week eq 4"/>
+                                星期四
+                            <elseif condition="$vo.day_of_week eq 5"/>
+                                星期五
+                            <elseif condition="$vo.day_of_week eq 6"/>
+                                星期六
+                            <else /> 
+                                星期日
+                            </if>
+                        </div>
                         <div class="col-md-2">{$vo.start_time}-{$vo.end_time}</div>
                         <div class="col-md-1">{$vo.teacher_name}</div>
                         <div class="col-md-1">{$vo.classroom_name}</div>
                         <div class="col-md-1">学生</div>
                         <div class="col-md-2">
                             <span style="cursor:pointer" class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑"></span>
-                            <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
+                            <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除" onclick="deleteClassDetail({$vo.class_id},{$vo.class_detail_id});"></span>
                         </div>
                     </div>
                   </li>

@@ -39,7 +39,7 @@ $(".add-class").click(function(){
 });
 
 function editClass(id){
-  window.location.href = "/index.php/Home/Class/showClassDetails?classId="+id;
+  window.location.href = "/index.php/Home/Class/showClassDetails?classId="+id+"&nav=44&pnav=40";
 }
 
 function deleteClass(id,name){
@@ -133,7 +133,7 @@ $('.add-classtimerow').click(function(){
                     '<li class="startTime_'+rowCount+'"><a href="#">22:00</a></li>'+
                 '</ul>'+
             '</div>'+
-            '<span style="display: inline-block;">-</span>'+
+            '<span style="display: inline-block;">&nbsp;-&nbsp;</span>'+
             '<div class="dropdown" style="display: inline-block;">'+
                 '<a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="endtimepicker" href="#" role="button" aria-haspopup="true" aria-expanded="false">'+
                     '<span id="endTimeShow_'+rowCount+'">结束时间</span>'+
@@ -261,10 +261,14 @@ function editVacancy(className,classDetailId){
 	   			var studentArr = msg.split(";");
 	   			for(var i=0;i<studentArr.length-1;i++){
 	   				var s = studentArr[i].split(":");
-	   				html += '<div><input tabindex="'+i+'" id="student_'+i+'" type="checkbox" '+ if(s[3] == 0){'checked="checked"'}+' name="student" value="'+s[0]+'"><span class="radio-text">"'+s[1]+'"</span><span class="radio-text">"'+s[2]+'"</span></div>';
+	   				html += '<div><input tabindex="'+i+'" id="student_'+i+'" type="checkbox" '; 
+	   				if(s[3] == 0){
+	   					html += 'checked="checked"';
+	   				} 
+	   				html += ' name="student" value="'+s[0]+'"><span class="radio-text">'+s[1]+'</span><span class="radio-text">(电话：'+s[2]+')</span></div>';
 	   			}
-	   			$("#className").innerHTML = className;
-	   			$("#students").innerHTML = html;
+	   			$("#className").text("课程："+className);
+	   			$("#students").append(html);
 				$("#myModal").modal('show');
 	   		}
 	   	}
@@ -273,15 +277,15 @@ function editVacancy(className,classDetailId){
 
 $(".save-vacancy").click(function(){
 	var cameStudentInputs = $("input[name='student']:checked");
-	var cameRelaIds = getStudentStr(studentInputs);
-	var notCameStudentInputs = $("input[name='student']:not(checked)");
-	var notCameRelaIds = getStudentStr(studentInputs);
+	var cameRelaIds = getStudentStr(cameStudentInputs);
+	var notCameStudentInputs = $("input[name='student']:not(:checked)");
+	var notCameRelaIds = getStudentStr(notCameStudentInputs);
 
 	//save
 	$.ajax({
 	   	type: "POST",
 	   	url: "updateClassDetailStudentRela",
-	   	data: "cameRelaIds="+cameRelaIds+"&notCameRelaIds"+notCameRelaIds,
+	   	data: "cameRelaIds="+cameRelaIds+"&notCameRelaIds="+notCameRelaIds,
 	   	success: function(msg){
 	   		if(msg == 'false'){
 	   			//提示保存失败
@@ -295,8 +299,27 @@ $(".save-vacancy").click(function(){
 });
 
 function clearVacancyInfo(){
-	$("#className").innerHTML = "";
-	$("#students").innerHTML = "";
+	$("#className").text("");
+	$("#students").empty();
+}
+
+function deleteClassDetail(classId,classDetailId){
+
+  if(confirm("是否删除课程此课程？")){
+  	$.ajax({
+	   	type: "POST",
+	   	url: "deleteClassDetail",
+	   	data: "classId="+classId+"&classDetailId="+classDetailId,
+	   	success: function(msg){
+	   		if(msg == 'false'){
+	   			//提示保存失败
+	   		}else{
+	   			//提示保存成功
+	   			window.location.reload();
+	   		}
+	   	}
+	});
+  }
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -13,7 +13,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="icon" href="../../favicon.ico">
 
-	<title>console</title>
+	<title>课程查询</title>
 	<!-- 新 Bootstrap 核心 CSS 文件 -->
 	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     
@@ -27,12 +27,14 @@
         .class-detail-monthly .title{font-weight:bold;font-size:16px;background-color:#339966;color:white;}
         .class-detail-monthly table tr td{width:150px;}
         .class-detail-monthly .classinfo{color:#34495e;}
-        .class-detail-monthly .calendar-day{font-size:10px;margin-left:86%;background-color:#777777;color:white;}
+        .class-detail-monthly .calendar-day{font-size:10px;margin-left:86%;background-color:#777777;color:white;padding-left:2px;}
         .class-detail-monthly .classinfo-one{font-size:10px;margin: 2px 2px 2px 2px;}
         .class-detail-monthly .classtime{font-size:10px;font-weight:900;}
         .class-detail-monthly .classtype{}
         .class-detail-monthly .classroom{margin-left:5px;}
         .class-detail-monthly .weekend{background-color:#eaeded;}
+        .teacherList{min-width:100px;}
+        .monthList{min-width:100px;}
         .vacancy{margin-left:3px;font-weight:bold;cursor:pointer;color:#FF6633;}
     </style>
     
@@ -58,7 +60,7 @@
                 </span>
                 <span class="caret"></span>
               </button>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu teacherList">
                 <foreach name="teacherList" item="teacher">
                 <li teacherId="{$teacher.teacher_id}" teacherName="{$teacher.name}" class="teacherId"><a href="#">{$teacher.name}</a></li>
                 </foreach>
@@ -81,7 +83,7 @@
                 </span>
                 <span class="caret"></span>
               </button>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu monthList">
                 <foreach name="ymList" item="date">
                 <li ym="{$date}" class="ym"><a href="#">{$date}</a></li>
                 </foreach>
@@ -143,10 +145,11 @@
         <h4 class="modal-title" id="myModalLabel">考勤记录</h4>
       </div>
       <div class="modal-body">
-        //TODO
-        <div id="className"></div>
+
+        <div id="className" style="font-weight:bold;"></div>
+        </br>
         <div id="students">
-            <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+            
         </div>
 
       </div>
