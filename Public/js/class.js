@@ -323,7 +323,7 @@ function deleteClassDetail(classId,classDetailId){
 }
 
 function editClassDetail(){
-	
+	$("#myModal").modal("show");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
