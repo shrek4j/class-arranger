@@ -7,8 +7,8 @@ class ClassModel extends Model {
     //////////////////////////
     ///////////class//////////
     //////////////////////////
-    public function saveClass($className,$classtypeId,$startDate,$endDate,$teacherId,$classroomId,$remark,$tId){
-        $sql = "insert into classoa_class(class_name,class_type_id,start_date,end_date,teacher_id,classroom_id,remark,inst_id) values('".$className."',".$classtypeId.",'".$startDate."','".$endDate."',".$teacherId.",".$classroomId.",'".$remark."',".$tId.")";
+    public function saveClass($className,$classtypeId,$tuition,$startDate,$endDate,$teacherId,$classroomId,$remark,$tId){
+        $sql = "insert into classoa_class(class_name,class_type_id,tuition_per_class,start_date,end_date,teacher_id,classroom_id,remark,inst_id) values('".$className."',".$classtypeId.",".$tuition.",'".$startDate."','".$endDate."',".$teacherId.",".$classroomId.",'".$remark."',".$tId.")";
         $this->execute($sql);
         $queryIdSql = "SELECT @@IDENTITY as class_id";
         return $this->query($queryIdSql);
@@ -20,7 +20,7 @@ class ClassModel extends Model {
     }
     
     public function saveClassDetail($date,$year,$month,$dayOfWeek,$startTime,$startTimeInt,$endTime,$teacherId,$classroomId,$classId,$tuition,$tId){
-        $sql = "insert into classoa_class_detail(date,year,month,day_of_week,start_time,start_time_int,end_time,teacher_id,classroom_id,class_id,tuition_per_class,inst_id) values('".$date."','".$year."',".$month.",".$dayOfWeek.",'".$startTime."',".$startTimeInt.",'".$endTime."',".$teacherId.",".$classroomId.",".$classId.",".$tuition.",".$tId.")";
+        $sql = "insert into classoa_class_detail(date,year,month,day_of_week,start_time,start_time_int,end_time,teacher_id,classroom_id,class_id,inst_id) values('".$date."','".$year."',".$month.",".$dayOfWeek.",'".$startTime."',".$startTimeInt.",'".$endTime."',".$teacherId.",".$classroomId.",".$classId.",".$tId.")";
         $this->execute($sql);
         $queryIdSql = "SELECT @@IDENTITY as class_detail_id";
         return $this->query($queryIdSql);
@@ -28,6 +28,11 @@ class ClassModel extends Model {
 
     public function saveClassDetailAndStudentRela($classDetailId,$classId,$studentId,$tuition,$tId){
         $sql = "insert into classoa_class_detail_student_rela(class_detail_id,class_id,student_id,tuition_per_class,inst_id) values(".$classDetailId.",".$classId.",".$studentId.",".$tuition.",".$tId.")";
+        $this->execute($sql);
+    }
+
+    public function saveClassAndStudentRela($classId,$studentId,$tuition,$tId){
+        $sql = "insert into classoa_class_detail_student_rela(class_id,student_id,tuition_per_class,inst_id) values(".$classId.",".$studentId.",".$tuition.",".$tId.")";
         $this->execute($sql);
     }
 

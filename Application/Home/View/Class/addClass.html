@@ -22,9 +22,9 @@
     
     <style type="text/css">
         .main-view{overflow-y:scroll;position:fixed;width:83.5%;height:98%;margin:0.5% 0.5% 0.5% 16%;padding:0.8% 0.8% 0.8% 1.2%;background:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)}
-        .main-view-inner{margin:8% 2% 2% 6%;font-size:14px;width:1000px;}
+        .main-view-inner{margin:8% 2% 2% 6%;font-size:15px;width:1000px;}
         .main-view-inner .row{margin-top:2%;}
-        .main-view-inner .row .col-md-2{width:90px;}
+        .main-view-inner .row .col-md-2{width:110px;}
         .row-gutter{margin-top:5px;}
         .btn-submit{width:265px;height:40px;}
         .btn-class-type{width:185px;}
@@ -50,6 +50,14 @@
             </div>
             <div class="col-md-6">
                 <input type="text" class="form-control" id="classname" name="classnamee">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label for="tuition" class="control-label">学费(元):</label>
+            </div>
+            <div class="col-md-6">
+                <input  style="display:inline;width:150px;" type="text" class="form-control" id="tuition" name="tuition"><span style="font-size:12px;">&nbsp;每次课每人<span style="color:red;">*</span></span>
             </div>
         </div>
         <div class="row">
@@ -208,7 +216,7 @@
         </div>
         <div class="row" id="classTimeInsertBefore">
             <div class="col-md-2">
-                <label for="remark" class="control-label">添加时间:</label>
+                <label for="remark" class="control-label" style="font-size:5px;">添加上课时间:</label>
             </div>
             <div class="col-md-10">
                 <span class="glyphicon glyphicon-plus add-classtimerow" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="添加"></span>
