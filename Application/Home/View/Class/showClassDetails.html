@@ -17,7 +17,8 @@
 	<!-- 新 Bootstrap 核心 CSS 文件 -->
 	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- bootstrap datepicker -->
-     <link id="bsdp-css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker3.min.css" rel="stylesheet">
+    <link id="bsdp-css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker3.min.css" rel="stylesheet">
+    <link href="/Public/css/bootstrap/icheck/square.css" rel="stylesheet">
     
     <style type="text/css">
         .main-view{overflow-y:scroll;position:fixed;width:83.5%;height:98%;margin:0.5% 0.5% 0.5% 16%;padding:0.8% 0.8% 0.8% 1.2%;background:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)}
@@ -49,8 +50,8 @@
                   <if condition="strtotime($vo['date']) lt time()">
                   <li class="list-group-item container-fluid finished">
                     <div class="row text-center">
-                        <div class="col-md-2">{$vo.date}</div>
-                        <div class="col-md-1">
+                        <div class="col-md-2" id="unplay_date_{$upnum}">{$vo.date}</div>
+                        <div class="col-md-1" id="unplay_dayOfWeek_{$upnum}" value="{$vo.day_of_week}">
                             <if condition="$vo.day_of_week eq 1">
                                 星期一
                             <elseif condition="$vo.day_of_week eq 2"/>
@@ -67,12 +68,12 @@
                                 星期日
                             </if>
                         </div>
-                        <div class="col-md-2">{$vo.start_time}-{$vo.end_time}</div>
-                        <div class="col-md-1">{$vo.teacher_name}</div>
-                        <div class="col-md-1">{$vo.classroom_name}</div>
+                        <div class="col-md-2" id="unplay_time_{$upnum}" startTime="{$vo.start_time}" endTime="{$vo.end_time}">{$vo.start_time}-{$vo.end_time}</div>
+                        <div class="col-md-1" id="unplay_teacher_{$upnum}" value="{$vo.teacher_name}">{$vo.teacher_name}</div>
+                        <div class="col-md-1" id="unplay_classroom_{$upnum}" value="{$vo.classroom_name}">{$vo.classroom_name}</div>
                         <div class="col-md-1">学生</div>
                         <div class="col-md-2">
-                            <span style="cursor:pointer" class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑"></span>
+                            <span style="cursor:pointer" class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑" onclick="editClassDetail({$upnum++},{$vo.class_detail_id});"></span>
                             <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除" onclick="deleteClassDetail({$vo.class_id},{$vo.class_detail_id});"></span>
                         </div>
                     </div>
@@ -131,7 +132,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">修改课程信息</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body container-fluid">
 
         <div class="row">
             <div class="col-md-2">
@@ -284,6 +285,7 @@
     <!-- bootstrap datepicker -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/locales/bootstrap-datepicker.zh-CN.min.js" charset="UTF-8"></script>
+    <script src="http://7xl53o.com1.z0.glb.clouddn.com/dingdingenglish/js/jquery.icheck.min.js"></script>
     <script src="/Public/js/class.js"></script>
     
     <script type="text/javascript">
@@ -393,6 +395,14 @@
             weekStart: 1,
             language: "zh-CN",
             autoclose: true
+        });
+
+        $(document).ready(function(){
+          $('input').iCheck({
+            checkboxClass: 'icheckbox_square',
+            radioClass: 'iradio_square',
+            increaseArea: '20%' // optional
+          });
         });
     </script>
 </body>

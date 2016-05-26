@@ -143,6 +143,29 @@ class ClassController extends Controller {
         $classDetails = $class->showClassDetails($classId,$tId);
         $this->assign('classInfo',$classInfo);
         $this->assign('classDetails',$classDetails);//记录编号
+        $upnum=0;
+        $pnum=0;
+        $this->assign("upnum",$upnum);
+        $this->assign("pnum",$pnum);
+
+        $teacher = new \Home\Model\TeacherModel();
+        $teacherList = $teacher->showTeachers($tId,0,50);   
+        $this->assign("teacherList",$teacherList);
+        $tnum=0;
+        $this->assign("tnum",$tnum);
+
+        $classroom = new \Home\Model\ClassroomModel();
+        $classroomList = $classroom->showClassrooms($tId,0,20);   
+        $this->assign("classroomList",$classroomList);
+        $clnum=0;
+        $this->assign("clnum",$clnum);
+
+        $student = new \Home\Model\StudentModel();
+        $studentList = $student->showStudents($tId,0,20);
+        $this->assign("studentList",$studentList);
+        $snum=0;
+        $this->assign("snum",$snum);
+
         layout(true);
         $this->display();
     }

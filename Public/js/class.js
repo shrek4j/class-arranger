@@ -322,7 +322,8 @@ function deleteClassDetail(classId,classDetailId){
   }
 }
 
-function editClassDetail(){
+function editClassDetail(num,classDetailId){
+	
 	$("#myModal").modal("show");
 }
 
