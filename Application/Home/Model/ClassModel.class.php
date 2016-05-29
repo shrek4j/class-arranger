@@ -19,7 +19,7 @@ class ClassModel extends Model {
         return $this->query($sql);
     }
     
-    public function saveClassDetail($date,$year,$month,$dayOfWeek,$startTime,$startTimeInt,$endTime,$teacherId,$classroomId,$classId,$tuition,$tId){
+    public function saveClassDetail($date,$year,$month,$dayOfWeek,$startTime,$startTimeInt,$endTime,$teacherId,$classroomId,$classId,$tId){
         $sql = "insert into classoa_class_detail(date,year,month,day_of_week,start_time,start_time_int,end_time,teacher_id,classroom_id,class_id,inst_id) values('".$date."','".$year."',".$month.",".$dayOfWeek.",'".$startTime."',".$startTimeInt.",'".$endTime."',".$teacherId.",".$classroomId.",".$classId.",".$tId.")";
         $this->execute($sql);
         $queryIdSql = "SELECT @@IDENTITY as class_detail_id";

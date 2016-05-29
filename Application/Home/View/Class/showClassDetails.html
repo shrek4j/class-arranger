@@ -31,6 +31,7 @@
         .class-detail-list .unfinished .list-group li{padding:10px;margin-top:5px;background-color:white;color:#339966;box-shadow:0 1px 2px 0 rgba(0,0,0,0.2)}
         .class-detail-list .unfinished .list-group li.cactive{background-color:#FF9933;color:white;}
         .cell-operation-gutter{margin-left:10%}
+        .modal-body .row{margin-top:2%;}
     </style>
     
 </head>
@@ -44,14 +45,15 @@
             <h3 style="display: inline-block;">{$classInfo[0].class_name}</h3><h4 style="margin:0px 0px 0px 20px;display: inline-block;"><span class="label" style="background-color: #333366;">{$classInfo[0].classtype_name}</span></h4>
         </div>
         <div class="class-detail-list">
+        <div><span style="cursor:pointer" class="glyphicon glyphicon-plus" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="添加一节课" onclick="addClassDetail();">添加一节课</span></div>
             <div id="unplay" class="finished">
                 <ul id="list1" class="list-group">
                 <foreach name="classDetails" item="vo">
                   <if condition="strtotime($vo['date']) lt time()">
                   <li class="list-group-item container-fluid finished">
                     <div class="row text-center">
-                        <div class="col-md-2" id="unplay_date_{$upnum}">{$vo.date}</div>
-                        <div class="col-md-1" id="unplay_dayOfWeek_{$upnum}" value="{$vo.day_of_week}">
+                        <div class="col-md-2" id="date_{$pnum}">{$vo.date}</div>
+                        <div class="col-md-1" id="dayOfWeek_{$pnum}" value="{$vo.day_of_week}">
                             <if condition="$vo.day_of_week eq 1">
                                 星期一
                             <elseif condition="$vo.day_of_week eq 2"/>
@@ -68,12 +70,12 @@
                                 星期日
                             </if>
                         </div>
-                        <div class="col-md-2" id="unplay_time_{$upnum}" startTime="{$vo.start_time}" endTime="{$vo.end_time}">{$vo.start_time}-{$vo.end_time}</div>
-                        <div class="col-md-1" id="unplay_teacher_{$upnum}" value="{$vo.teacher_name}">{$vo.teacher_name}</div>
-                        <div class="col-md-1" id="unplay_classroom_{$upnum}" value="{$vo.classroom_name}">{$vo.classroom_name}</div>
+                        <div class="col-md-2" id="time_{$pnum}" startTime="{$vo.start_time}" endTime="{$vo.end_time}">{$vo.start_time}-{$vo.end_time}</div>
+                        <div class="col-md-1" id="teacher_{$pnum}" value="{$vo.teacher_id}">{$vo.teacher_name}</div>
+                        <div class="col-md-1" id="classroom_{$pnum}" value="{$vo.classroom_id}">{$vo.classroom_name}</div>
                         <div class="col-md-1">学生</div>
                         <div class="col-md-2">
-                            <span style="cursor:pointer" class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑" onclick="editClassDetail({$upnum++},{$vo.class_detail_id});"></span>
+                            <span style="cursor:pointer" class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑" onclick="editClassDetail({$pnum++},{$vo.class_detail_id});"></span>
                             <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除" onclick="deleteClassDetail({$vo.class_id},{$vo.class_detail_id});"></span>
                         </div>
                     </div>
@@ -88,8 +90,8 @@
                   <if condition="strtotime($vo['date']) gt time()">
                   <li class="list-group-item">
                     <div class="row text-center">
-                        <div class="col-md-2">{$vo.date}</div>
-                        <div class="col-md-1">
+                        <div class="col-md-2" id="date_{$pnum}">{$vo.date}</div>
+                        <div class="col-md-1" id="dayOfWeek_{$pnum}" value="{$vo.day_of_week}">
                             <if condition="$vo.day_of_week eq 1">
                                 星期一
                             <elseif condition="$vo.day_of_week eq 2"/>
@@ -106,12 +108,12 @@
                                 星期日
                             </if>
                         </div>
-                        <div class="col-md-2">{$vo.start_time}-{$vo.end_time}</div>
-                        <div class="col-md-1">{$vo.teacher_name}</div>
-                        <div class="col-md-1">{$vo.classroom_name}</div>
+                        <div class="col-md-2" id="time_{$pnum}" startTime="{$vo.start_time}" endTime="{$vo.end_time}">{$vo.start_time}-{$vo.end_time}</div>
+                        <div class="col-md-1" id="teacher_{$pnum}" value="{$vo.teacher_id}">{$vo.teacher_name}</div>
+                        <div class="col-md-1" id="classroom_{$pnum}" value="{$vo.classroom_id}">{$vo.classroom_name}</div>
                         <div class="col-md-1">学生</div>
                         <div class="col-md-2">
-                            <span style="cursor:pointer" class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑" onclick="editClassDetail();"></span>
+                            <span style="cursor:pointer" class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑" onclick="editClassDetail({$pnum++},{$vo.class_detail_id});"></span>
                             <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除" onclick="deleteClassDetail({$vo.class_id},{$vo.class_detail_id});"></span>
                         </div>
                     </div>
@@ -125,21 +127,21 @@
 </div>
 
  <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">修改课程信息</h4>
+        <h4 class="modal-title" id="updateModalLabel">修改课程信息</h4>
       </div>
       <div class="modal-body container-fluid">
-
+        <input type="hidden" id="classDetailId"/>
         <div class="row">
             <div class="col-md-2">
                 <label for="classname" class="control-label">课程日期:</label>
             </div>
             <div class="col-md-6">
-                <input id="datepicker" type="text" class="input-sm form-control" name="date" value=""/>
+                <input id="datepicker_u" type="text" class="input-sm form-control" name="date" value=""/>
             </div>
         </div>
         
@@ -150,97 +152,246 @@
             <div class="col-md-10">
                 <div class="dropdown" style="display: inline-block;">
                     <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="weekpicker" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        <span id="weekShow_0">选择星期</span>
+                        <span id="weekShow_u">选择星期</span>
                     </a>
                     <ul class="dropdown-menu week-picker" aria-labelledby="weekpicker">
-                        <li class="week_0" week="1"><a href="#">星期一</a></li>
-                        <li class="week_0" week="2"><a href="#">星期二</a></li>
-                        <li class="week_0" week="3"><a href="#">星期三</a></li>
-                        <li class="week_0" week="4"><a href="#">星期四</a></li>
-                        <li class="week_0" week="5"><a href="#">星期五</a></li>
-                        <li class="week_0" week="6"><a href="#">星期六</a></li>
-                        <li class="week_0" week="7"><a href="#">星期日</a></li>
+                        <li class="week_u" id="week_1" week="1"><a href="#">星期一</a></li>
+                        <li class="week_u" id="week_2" week="2"><a href="#">星期二</a></li>
+                        <li class="week_u" id="week_3" week="3"><a href="#">星期三</a></li>
+                        <li class="week_u" id="week_4" week="4"><a href="#">星期四</a></li>
+                        <li class="week_u" id="week_5" week="5"><a href="#">星期五</a></li>
+                        <li class="week_u" id="week_6" week="6"><a href="#">星期六</a></li>
+                        <li class="week_u" id="week_7" week="7"><a href="#">星期日</a></li>
                     </ul>
                 </div>
                   
                 <div class="dropdown" style="display: inline-block;margin-left:10%;">
                     <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="starttimepicker" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        <span id="startTimeShow_0">开始时间</span>
+                        <span id="startTimeShow_u">开始时间</span>
                     </a>
                     <ul class="dropdown-menu time-picker" aria-labelledby="starttimepicker">
-                        <li class="startTime_0"><a href="#">7:00</a></li>
-                        <li class="startTime_0"><a href="#">7:30</a></li>
-                        <li class="startTime_0"><a href="#">8:00</a></li>
-                        <li class="startTime_0"><a href="#">8:30</a></li>
-                        <li class="startTime_0"><a href="#">9:00</a></li>
-                        <li class="startTime_0"><a href="#">9:30</a></li>
-                        <li class="startTime_0"><a href="#">10:00</a></li>
-                        <li class="startTime_0"><a href="#">10:30</a></li>
-                        <li class="startTime_0"><a href="#">11:00</a></li>
-                        <li class="startTime_0"><a href="#">11:30</a></li>
-                        <li class="startTime_0"><a href="#">12:00</a></li>
-                        <li class="startTime_0"><a href="#">12:30</a></li>
-                        <li class="startTime_0"><a href="#">13:00</a></li>
-                        <li class="startTime_0"><a href="#">13:30</a></li>
-                        <li class="startTime_0"><a href="#">14:00</a></li>
-                        <li class="startTime_0"><a href="#">14:30</a></li>
-                        <li class="startTime_0"><a href="#">15:00</a></li>
-                        <li class="startTime_0"><a href="#">15:30</a></li>
-                        <li class="startTime_0"><a href="#">16:00</a></li>
-                        <li class="startTime_0"><a href="#">16:30</a></li>
-                        <li class="startTime_0"><a href="#">17:00</a></li>
-                        <li class="startTime_0"><a href="#">17:30</a></li>
-                        <li class="startTime_0"><a href="#">18:00</a></li>
-                        <li class="startTime_0"><a href="#">18:30</a></li>
-                        <li class="startTime_0"><a href="#">19:00</a></li>
-                        <li class="startTime_0"><a href="#">19:30</a></li>
-                        <li class="startTime_0"><a href="#">20:00</a></li>
-                        <li class="startTime_0"><a href="#">20:30</a></li>
-                        <li class="startTime_0"><a href="#">21:00</a></li>
-                        <li class="startTime_0"><a href="#">21:30</a></li>
-                        <li class="startTime_0"><a href="#">22:00</a></li>
+                        <li class="startTime_u"><a href="#">7:00</a></li>
+                        <li class="startTime_u"><a href="#">7:30</a></li>
+                        <li class="startTime_u"><a href="#">8:00</a></li>
+                        <li class="startTime_u"><a href="#">8:30</a></li>
+                        <li class="startTime_u"><a href="#">9:00</a></li>
+                        <li class="startTime_u"><a href="#">9:30</a></li>
+                        <li class="startTime_u"><a href="#">10:00</a></li>
+                        <li class="startTime_u"><a href="#">10:30</a></li>
+                        <li class="startTime_u"><a href="#">11:00</a></li>
+                        <li class="startTime_u"><a href="#">11:30</a></li>
+                        <li class="startTime_u"><a href="#">12:00</a></li>
+                        <li class="startTime_u"><a href="#">12:30</a></li>
+                        <li class="startTime_u"><a href="#">13:00</a></li>
+                        <li class="startTime_u"><a href="#">13:30</a></li>
+                        <li class="startTime_u"><a href="#">14:00</a></li>
+                        <li class="startTime_u"><a href="#">14:30</a></li>
+                        <li class="startTime_u"><a href="#">15:00</a></li>
+                        <li class="startTime_u"><a href="#">15:30</a></li>
+                        <li class="startTime_u"><a href="#">16:00</a></li>
+                        <li class="startTime_u"><a href="#">16:30</a></li>
+                        <li class="startTime_u"><a href="#">17:00</a></li>
+                        <li class="startTime_u"><a href="#">17:30</a></li>
+                        <li class="startTime_u"><a href="#">18:00</a></li>
+                        <li class="startTime_u"><a href="#">18:30</a></li>
+                        <li class="startTime_u"><a href="#">19:00</a></li>
+                        <li class="startTime_u"><a href="#">19:30</a></li>
+                        <li class="startTime_u"><a href="#">20:00</a></li>
+                        <li class="startTime_u"><a href="#">20:30</a></li>
+                        <li class="startTime_u"><a href="#">21:00</a></li>
+                        <li class="startTime_u"><a href="#">21:30</a></li>
+                        <li class="startTime_u"><a href="#">22:00</a></li>
                     </ul>
                 </div>
                 <span style="display: inline-block;">-</span>
                 <div class="dropdown" style="display: inline-block;">
                     <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="endtimepicker" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        <span id="endTimeShow_0">结束时间</span>
+                        <span id="endTimeShow_u">结束时间</span>
                     </a>
                     <ul class="dropdown-menu time-picker" aria-labelledby="endtimepicker">
-                        <li class="endTime_0"><a href="#">7:00</a></li>
-                        <li class="endTime_0"><a href="#">7:30</a></li>
-                        <li class="endTime_0"><a href="#">8:00</a></li>
-                        <li class="endTime_0"><a href="#">8:30</a></li>
-                        <li class="endTime_0"><a href="#">9:00</a></li>
-                        <li class="endTime_0"><a href="#">9:30</a></li>
-                        <li class="endTime_0"><a href="#">10:00</a></li>
-                        <li class="endTime_0"><a href="#">10:30</a></li>
-                        <li class="endTime_0"><a href="#">11:00</a></li>
-                        <li class="endTime_0"><a href="#">11:30</a></li>
-                        <li class="endTime_0"><a href="#">12:00</a></li>
-                        <li class="endTime_0"><a href="#">12:30</a></li>
-                        <li class="endTime_0"><a href="#">13:00</a></li>
-                        <li class="endTime_0"><a href="#">13:30</a></li>
-                        <li class="endTime_0"><a href="#">14:00</a></li>
-                        <li class="endTime_0"><a href="#">14:30</a></li>
-                        <li class="endTime_0"><a href="#">15:00</a></li>
-                        <li class="endTime_0"><a href="#">15:30</a></li>
-                        <li class="endTime_0"><a href="#">16:00</a></li>
-                        <li class="endTime_0"><a href="#">16:30</a></li>
-                        <li class="endTime_0"><a href="#">17:00</a></li>
-                        <li class="endTime_0"><a href="#">17:30</a></li>
-                        <li class="endTime_0"><a href="#">18:00</a></li>
-                        <li class="endTime_0"><a href="#">18:30</a></li>
-                        <li class="endTime_0"><a href="#">19:00</a></li>
-                        <li class="endTime_0"><a href="#">19:30</a></li>
-                        <li class="endTime_0"><a href="#">20:00</a></li>
-                        <li class="endTime_0"><a href="#">20:30</a></li>
-                        <li class="endTime_0"><a href="#">21:00</a></li>
-                        <li class="endTime_0"><a href="#">21:30</a></li>
-                        <li class="endTime_0"><a href="#">22:00</a></li>
+                        <li class="endTime_u"><a href="#">7:00</a></li>
+                        <li class="endTime_u"><a href="#">7:30</a></li>
+                        <li class="endTime_u"><a href="#">8:00</a></li>
+                        <li class="endTime_u"><a href="#">8:30</a></li>
+                        <li class="endTime_u"><a href="#">9:00</a></li>
+                        <li class="endTime_u"><a href="#">9:30</a></li>
+                        <li class="endTime_u"><a href="#">10:00</a></li>
+                        <li class="endTime_u"><a href="#">10:30</a></li>
+                        <li class="endTime_u"><a href="#">11:00</a></li>
+                        <li class="endTime_u"><a href="#">11:30</a></li>
+                        <li class="endTime_u"><a href="#">12:00</a></li>
+                        <li class="endTime_u"><a href="#">12:30</a></li>
+                        <li class="endTime_u"><a href="#">13:00</a></li>
+                        <li class="endTime_u"><a href="#">13:30</a></li>
+                        <li class="endTime_u"><a href="#">14:00</a></li>
+                        <li class="endTime_u"><a href="#">14:30</a></li>
+                        <li class="endTime_u"><a href="#">15:00</a></li>
+                        <li class="endTime_u"><a href="#">15:30</a></li>
+                        <li class="endTime_u"><a href="#">16:00</a></li>
+                        <li class="endTime_u"><a href="#">16:30</a></li>
+                        <li class="endTime_u"><a href="#">17:00</a></li>
+                        <li class="endTime_u"><a href="#">17:30</a></li>
+                        <li class="endTime_u"><a href="#">18:00</a></li>
+                        <li class="endTime_u"><a href="#">18:30</a></li>
+                        <li class="endTime_u"><a href="#">19:00</a></li>
+                        <li class="endTime_u"><a href="#">19:30</a></li>
+                        <li class="endTime_u"><a href="#">20:00</a></li>
+                        <li class="endTime_u"><a href="#">20:30</a></li>
+                        <li class="endTime_u"><a href="#">21:00</a></li>
+                        <li class="endTime_u"><a href="#">21:30</a></li>
+                        <li class="endTime_u"><a href="#">22:00</a></li>
                     </ul>
                 </div>
-                <span id="tooltip_del_0" style="margin-left:5%;" class="glyphicon glyphicon-trash remove-classtime" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <label for="teacher" class="control-label">教师:</label>
+            </div>
+            <div class="col-md-10">
+                <foreach name="teacherList" item="vo" >
+                    <input tabindex="{$tnum}" id="teacher_{$tnum++}" type="radio" name="teacher" value="{$vo.teacher_id}"><span class="radio-text">{$vo.name}</span>
+                </foreach>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <label for="classroom" class="control-label">教室:</label>
+            </div>
+            <div class="col-md-10">
+                <foreach name="classroomList" item="vo" >
+                    <input tabindex="{$clnum}" id="classroom_{$clnum++}" type="radio" name="classroom" value="{$vo.classroom_id}"><span class="radio-text">{$vo.name}</span>
+                </foreach>
+            </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary edit-classdetail">保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+ <!-- Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="addModalLabel">修改课程信息</h4>
+      </div>
+      <div class="modal-body container-fluid">
+        <input type="hidden" id="classDetailId"/>
+        <div class="row">
+            <div class="col-md-2">
+                <label for="classname" class="control-label">课程日期:</label>
+            </div>
+            <div class="col-md-6">
+                <input id="datepicker_a" type="text" class="input-sm form-control" name="date" value=""/>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-2">
+                <label for="weekpicker" class="control-label">上课时间:</label>
+            </div>
+            <div class="col-md-10">
+                <div class="dropdown" style="display: inline-block;">
+                    <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="weekpicker" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span id="weekShow_a">选择星期</span>
+                    </a>
+                    <ul class="dropdown-menu week-picker" aria-labelledby="weekpicker">
+                        <li class="week_a" id="week_1" week="1"><a href="#">星期一</a></li>
+                        <li class="week_a" id="week_2" week="2"><a href="#">星期二</a></li>
+                        <li class="week_a" id="week_3" week="3"><a href="#">星期三</a></li>
+                        <li class="week_a" id="week_4" week="4"><a href="#">星期四</a></li>
+                        <li class="week_a" id="week_5" week="5"><a href="#">星期五</a></li>
+                        <li class="week_a" id="week_6" week="6"><a href="#">星期六</a></li>
+                        <li class="week_a" id="week_7" week="7"><a href="#">星期日</a></li>
+                    </ul>
+                </div>
+                  
+                <div class="dropdown" style="display: inline-block;margin-left:10%;">
+                    <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="starttimepicker" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span id="startTimeShow_a">开始时间</span>
+                    </a>
+                    <ul class="dropdown-menu time-picker" aria-labelledby="starttimepicker">
+                        <li class="startTime_a"><a href="#">7:00</a></li>
+                        <li class="startTime_a"><a href="#">7:30</a></li>
+                        <li class="startTime_a"><a href="#">8:00</a></li>
+                        <li class="startTime_a"><a href="#">8:30</a></li>
+                        <li class="startTime_a"><a href="#">9:00</a></li>
+                        <li class="startTime_a"><a href="#">9:30</a></li>
+                        <li class="startTime_a"><a href="#">10:00</a></li>
+                        <li class="startTime_a"><a href="#">10:30</a></li>
+                        <li class="startTime_a"><a href="#">11:00</a></li>
+                        <li class="startTime_a"><a href="#">11:30</a></li>
+                        <li class="startTime_a"><a href="#">12:00</a></li>
+                        <li class="startTime_a"><a href="#">12:30</a></li>
+                        <li class="startTime_a"><a href="#">13:00</a></li>
+                        <li class="startTime_a"><a href="#">13:30</a></li>
+                        <li class="startTime_a"><a href="#">14:00</a></li>
+                        <li class="startTime_a"><a href="#">14:30</a></li>
+                        <li class="startTime_a"><a href="#">15:00</a></li>
+                        <li class="startTime_a"><a href="#">15:30</a></li>
+                        <li class="startTime_a"><a href="#">16:00</a></li>
+                        <li class="startTime_a"><a href="#">16:30</a></li>
+                        <li class="startTime_a"><a href="#">17:00</a></li>
+                        <li class="startTime_a"><a href="#">17:30</a></li>
+                        <li class="startTime_a"><a href="#">18:00</a></li>
+                        <li class="startTime_a"><a href="#">18:30</a></li>
+                        <li class="startTime_a"><a href="#">19:00</a></li>
+                        <li class="startTime_a"><a href="#">19:30</a></li>
+                        <li class="startTime_a"><a href="#">20:00</a></li>
+                        <li class="startTime_a"><a href="#">20:30</a></li>
+                        <li class="startTime_a"><a href="#">21:00</a></li>
+                        <li class="startTime_a"><a href="#">21:30</a></li>
+                        <li class="startTime_a"><a href="#">22:00</a></li>
+                    </ul>
+                </div>
+                <span style="display: inline-block;">-</span>
+                <div class="dropdown" style="display: inline-block;">
+                    <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="endtimepicker" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span id="endTimeShow_a">结束时间</span>
+                    </a>
+                    <ul class="dropdown-menu time-picker" aria-labelledby="endtimepicker">
+                        <li class="endTime_a"><a href="#">7:00</a></li>
+                        <li class="endTime_a"><a href="#">7:30</a></li>
+                        <li class="endTime_a"><a href="#">8:00</a></li>
+                        <li class="endTime_a"><a href="#">8:30</a></li>
+                        <li class="endTime_a"><a href="#">9:00</a></li>
+                        <li class="endTime_a"><a href="#">9:30</a></li>
+                        <li class="endTime_a"><a href="#">10:00</a></li>
+                        <li class="endTime_a"><a href="#">10:30</a></li>
+                        <li class="endTime_a"><a href="#">11:00</a></li>
+                        <li class="endTime_a"><a href="#">11:30</a></li>
+                        <li class="endTime_a"><a href="#">12:00</a></li>
+                        <li class="endTime_a"><a href="#">12:30</a></li>
+                        <li class="endTime_a"><a href="#">13:00</a></li>
+                        <li class="endTime_a"><a href="#">13:30</a></li>
+                        <li class="endTime_a"><a href="#">14:00</a></li>
+                        <li class="endTime_a"><a href="#">14:30</a></li>
+                        <li class="endTime_a"><a href="#">15:00</a></li>
+                        <li class="endTime_a"><a href="#">15:30</a></li>
+                        <li class="endTime_a"><a href="#">16:00</a></li>
+                        <li class="endTime_a"><a href="#">16:30</a></li>
+                        <li class="endTime_a"><a href="#">17:00</a></li>
+                        <li class="endTime_a"><a href="#">17:30</a></li>
+                        <li class="endTime_a"><a href="#">18:00</a></li>
+                        <li class="endTime_a"><a href="#">18:30</a></li>
+                        <li class="endTime_a"><a href="#">19:00</a></li>
+                        <li class="endTime_a"><a href="#">19:30</a></li>
+                        <li class="endTime_a"><a href="#">20:00</a></li>
+                        <li class="endTime_a"><a href="#">20:30</a></li>
+                        <li class="endTime_a"><a href="#">21:00</a></li>
+                        <li class="endTime_a"><a href="#">21:30</a></li>
+                        <li class="endTime_a"><a href="#">22:00</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -289,9 +440,9 @@
     <script src="/Public/js/class.js"></script>
     
     <script type="text/javascript">
-	        $(function () {
-			  $('[data-toggle="tooltip"]').tooltip()
-			});
+        $(function () {
+		  $('[data-toggle="tooltip"]').tooltip()
+		});
 
         YUI().use('dd-constrain', 'dd-proxy', 'dd-drop', function(Y) {
             //Listen for all drop:over events
@@ -390,7 +541,14 @@
         
         });
         
-        $('#datepicker').datepicker({
+        $('#datepicker_a').datepicker({
+            format: "yyyy-mm-dd",
+            weekStart: 1,
+            language: "zh-CN",
+            autoclose: true
+        });
+
+        $('#datepicker_u').datepicker({
             format: "yyyy-mm-dd",
             weekStart: 1,
             language: "zh-CN",
@@ -399,7 +557,7 @@
 
         $(document).ready(function(){
           $('input').iCheck({
-            checkboxClass: 'icheckbox_square',
+          //  checkboxClass: 'icheckbox_square',
             radioClass: 'iradio_square',
             increaseArea: '20%' // optional
           });

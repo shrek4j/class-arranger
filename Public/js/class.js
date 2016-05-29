@@ -17,7 +17,7 @@ $(".add-class").click(function(){
 		time += week + "|" + startTime + "-" + endTime + ";";
 	}
 	
-	var tuition = "1000";
+	var tuition = $("#tuition").val();
 	var remark = $("#remark").val();
 
 	$.ajax({
@@ -323,9 +323,60 @@ function deleteClassDetail(classId,classDetailId){
 }
 
 function editClassDetail(num,classDetailId){
-	
-	$("#myModal").modal("show");
+	$("#classDetailId").val(classDetailId);
+	$("#datepicker").val($("#date_"+num).text());
+	var dayOfWeek = $("#dayOfWeek_"+num).attr("value");
+	$("#weekShow_u").text($("#dayOfWeek_"+num).text());
+	$("#week_"+dayOfWeek).attr('selected','selected');
+	$("#startTimeShow_u").text($("#time_"+num).attr("startTime"));
+	$("#endTimeShow_u").text($("#time_"+num).attr("endTime"));
+	var teacherId = $("#teacher_"+num).attr("value");
+	$("input[name='teacher'][value='"+teacherId+"']").iCheck('check');
+	var classroomId = $("#classroom_"+num).attr("value");
+	$("input[name='classroom'][value='"+classroomId+"']").iCheck('check');
+	$("#updateModal").modal("show");
 }
+
+$('.week_u').click(function(){
+	$('.week_u').removeClass('selected');
+	$(this).addClass('selected');
+	$("#weekShow_u").text($(this).children('a').text());
+});
+
+$('.startTime_u').click(function(){
+	$('.startTime_u').removeClass('selected');
+	$(this).addClass('selected');
+	$("#startTimeShow_u").text($(this).children('a').text());
+});
+
+$('.endTime_u').click(function(){
+	$('.endTime_u').removeClass('selected');
+	$(this).addClass('selected');
+	$("#endTimeShow_u").text($(this).children('a').text());
+});
+
+$('.week_a').click(function(){
+	$('.week_a').removeClass('selected');
+	$(this).addClass('selected');
+	$("#weekShow_a").text($(this).children('a').text());
+});
+
+$('.startTime_a').click(function(){
+	$('.startTime_a').removeClass('selected');
+	$(this).addClass('selected');
+	$("#startTimeShow_a").text($(this).children('a').text());
+});
+
+$('.endTime_a').click(function(){
+	$('.endTime_a').removeClass('selected');
+	$(this).addClass('selected');
+	$("#endTimeShow_a").text($(this).children('a').text());
+});
+
+function addClassDetail(){
+	$("#addModal").modal("show");
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////classtype//////////////////////////////////////
