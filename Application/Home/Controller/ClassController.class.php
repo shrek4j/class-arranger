@@ -1,6 +1,7 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
+    
 class ClassController extends Controller {
 
     //////////////////////////////////////////////////////////////////////////////////////////////
@@ -8,6 +9,8 @@ class ClassController extends Controller {
     //////////////////////////////////////////////////////////////////////////////////////////////
 
     public function addClass(){
+        $pinyin = new \Org\Util\Pinyin();
+        echo $pinyin->getPinyin("早上好");
         //inst_Id
         $tId = session('instId');
 
