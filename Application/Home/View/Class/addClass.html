@@ -92,7 +92,7 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-                <label for="student" class="control-label">学生:</label>
+                <label for="student" class="control-label" onclick="$('#studentModal').modal('show')">学生:</label>
             </div>
             <div class="col-md-10">
                 <foreach name="studentList" item="vo" >
@@ -236,10 +236,50 @@
         </div>
     </div>
 
-    
+</div>
 
 
-    
+ <!-- Modal -->
+<div class="modal fade" id="studentModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="studentModalLabel">选择学生</h4>
+      </div>
+      <div class="modal-body container-fluid">
+        <div class="row">
+            <div class="col-md-12" style="background-color:grey;color:white;">
+                <label for="letter_a" class="control-label">a</label>
+            </div>
+            <div class="col-md-12">
+                <foreach name="studentList" item="vo" >
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                    </div>
+                </foreach>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" style="background-color:grey;color:white;">
+                <label for="letter_b" class="control-label">b</label>
+            </div>
+            <div class="col-md-12">
+                <foreach name="studentList" item="vo" >
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                    </div>
+                </foreach>
+            </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary edit-classdetail">保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 

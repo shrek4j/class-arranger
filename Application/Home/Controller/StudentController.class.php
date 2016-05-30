@@ -11,11 +11,13 @@ class StudentController extends Controller {
     public function saveStudent($studentName="",$gender,$grade,$school,$parentName,$mobile,$tuition){
         if($studentName == "")
             return;
+        $pyUtil = new \Org\Util\Pinyin();
+        $studPinyin = $pyUtil->getPinyin($studentName);
         $instId = session('instId');
         if(!$instId)
             return;
         $model = new \Home\Model\StudentModel();
-        $result = $model->saveStudent($studentName,$gender,$grade,$school,$parentName,$mobile,$tuition,$instId);
+        $result = $model->saveStudent($studentName,$studPinyin,$gender,$grade,$school,$parentName,$mobile,$tuition,$instId);
         $data;
         if($result == 1){
            $data = 'ok'; 

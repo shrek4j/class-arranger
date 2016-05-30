@@ -198,6 +198,7 @@ DROP TABLE IF EXISTS `classoa_student`;
 CREATE TABLE `classoa_student` (
   `student_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'PK',
   `student_name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `pinyin` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '姓名拼音全拼',
   `gender` int(1) NOT NULL COMMENT '0:女 1:男',
   `grade` int(10) DEFAULT '0' COMMENT '年级',
   `school` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '学校',
@@ -207,11 +208,11 @@ CREATE TABLE `classoa_student` (
   `status` int(1) NOT NULL DEFAULT '0' COMMENT '0 正常 1 删除',
   `inst_id` int(10) DEFAULT NULL,
   PRIMARY KEY (`student_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `classoa_student` */
 
-insert  into `classoa_student`(`student_id`,`student_name`,`gender`,`grade`,`school`,`parent_name`,`phone`,`balance`,`status`,`inst_id`) values (1,'12',22,21,'12','1212','12',12,1,1),(2,'张馨予',0,6,'实验小学','张涵予','12033222334',10000,0,1),(3,'李晨',1,8,'石景山小学','范冰冰','12938382382',8000,0,1),(4,'路飞',1,5,'千阳号','龙','122342932',323,0,1),(5,'乔巴',1,5,'千阳号','121','2323',323,0,1),(6,'艾斯',1,23,'33','232','12121',1212,0,1),(7,'白胡子',1,12,'3','4','55',3,0,1),(8,'娜美',0,5,'6','额外','323232',11122,0,1),(9,'克罗克戴尔',2323,232,'32323','2323','2323',2323,0,1),(10,'香客斯',12,34,'34','3433','4343',434321,0,1),(11,'罗宾',1,23423,'2342','23423','23423',4545,0,1),(12,'多弗朗明哥',1,343,'232323','232322','323232',3232,0,1),(13,'刘速度',1,2,'22','22','23',44,0,1),(14,'阿黑哥',1,33,'44','rr','343',232,0,1),(15,'科技额',1,3,'4','5','67',78,0,1),(16,'百分点',0,1,'34','43','7766',8765,0,1),(17,'微软',1,2323,'2323','23','2323',23,0,1),(18,'梵蒂冈',1,121,'12121','2112','1212',1212,0,1);
+insert  into `classoa_student`(`student_id`,`student_name`,`pinyin`,`gender`,`grade`,`school`,`parent_name`,`phone`,`balance`,`status`,`inst_id`) values (1,'12',NULL,22,21,'12','1212','12',12,1,1),(2,'张馨予',NULL,0,6,'实验小学','张涵予','12033222334',10000,0,1),(3,'李晨',NULL,1,8,'石景山小学','范冰冰','12938382382',8000,0,1),(4,'路飞',NULL,1,5,'千阳号','龙','122342932',323,0,1),(5,'乔巴',NULL,1,5,'千阳号','121','2323',323,0,1),(6,'艾斯',NULL,1,23,'33','232','12121',1212,0,1),(7,'白胡子',NULL,1,12,'3','4','55',3,0,1),(8,'娜美',NULL,0,5,'6','额外','323232',11122,0,1),(9,'克罗克戴尔',NULL,2323,232,'32323','2323','2323',2323,0,1),(10,'香客斯',NULL,12,34,'34','3433','4343',434321,0,1),(11,'罗宾',NULL,1,23423,'2342','23423','23423',4545,0,1),(12,'多弗朗明哥',NULL,1,343,'232323','232322','323232',3232,0,1),(13,'刘速度',NULL,1,2,'22','22','23',44,0,1),(14,'阿黑哥',NULL,1,33,'44','rr','343',232,0,1),(15,'科技额',NULL,1,3,'4','5','67',78,0,1),(16,'百分点',NULL,0,1,'34','43','7766',8765,0,1),(17,'微软',NULL,1,2323,'2323','23','2323',23,0,1),(18,'梵蒂冈',NULL,1,121,'12121','2112','1212',1212,0,1),(19,'杜海涛','duhaitao',1,4,'3','士大夫','12133434322',1129,0,1),(20,'小天使','xiaotianshi',1,12,'323','12速度','312121212',11,0,1),(21,'Alice','Alice',0,12,'1212','121212','12121212',12121,0,1);
 
 /*Table structure for table `classoa_teacher` */
 
