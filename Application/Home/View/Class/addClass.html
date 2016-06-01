@@ -29,7 +29,7 @@
         .btn-submit{width:265px;height:40px;}
         .btn-class-type{width:185px;}
         .btn-class-list{width:200px;}
-        .margin{display:inline;}
+        .margin{display:inline;margin:5px 0px 5px 0px;}
         .radio-text{margin:0px 12px 0px 8px;font-size:14px;}
         .week-picker{min-width:60px;}
         .day-picker{min-width:80px;}
@@ -239,7 +239,7 @@
 </div>
 
 
- <!-- Modal -->
+<!-- Modal -->
 <div class="modal fade" id="studentModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -247,32 +247,473 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="studentModalLabel">选择学生</h4>
       </div>
-      <div class="modal-body container-fluid">
-        <div class="row">
-            <div class="col-md-12" style="background-color:grey;color:white;">
-                <label for="letter_a" class="control-label">a</label>
+      <div class="modal-body">
+        <div style="display:inline-block;margin:5px 0px 5px 10px;font-size:16px;" class="container-fluid">
+            <div class="row">
+                    <a href="#letter_a" style="margin-right:5px;">A</a>
+                    <a href="#letter_b" style="margin-right:5px;">B</a>
+                    <a href="#letter_c" style="margin-right:5px;">C</a>
+                    <a href="#letter_d" style="margin-right:5px;">D</a>
+                    <a href="#letter_e" style="margin-right:5px;">E</a>
+                    <a href="#letter_f" style="margin-right:5px;">F</a>
+                    <a href="#letter_g" style="margin-right:5px;">G</a>
+                    <a href="#letter_h" style="margin-right:5px;">H</a>
+                    <a href="#letter_i" style="margin-right:5px;">I</a>
+                    <a href="#letter_j" style="margin-right:5px;">J</a>
+                    <a href="#letter_k" style="margin-right:5px;">K</a>
+                    <a href="#letter_l" style="margin-right:5px;">L</a>
+                    <a href="#letter_m" style="margin-right:5px;">M</a>
+                    <a href="#letter_n" style="margin-right:5px;">N</a>
+                    <a href="#letter_o" style="margin-right:5px;">O</a>
+                    <a href="#letter_p" style="margin-right:5px;">P</a>
+                    <a href="#letter_q" style="margin-right:5px;">Q</a>
+                    <a href="#letter_r" style="margin-right:5px;">R</a>
+                    <a href="#letter_s" style="margin-right:5px;">S</a>
+                    <a href="#letter_t" style="margin-right:5px;">T</a>
+                    <a href="#letter_u" style="margin-right:5px;">U</a>
+                    <a href="#letter_v" style="margin-right:5px;">V</a>
+                    <a href="#letter_w" style="margin-right:5px;">W</a>
+                    <a href="#letter_x" style="margin-right:5px;">X</a>
+                    <a href="#letter_y" style="margin-right:5px;">Y</a>
+                    <a href="#letter_z" style="margin-right:5px;">Z</a>
+                    <a href="#letter_#" style="margin-right:5px;">#</a>
             </div>
-            <div class="col-md-12">
+        </div>
+        <div style="display:inline-block;overflow-y:scroll;height:400px;width:570px;" class="container-fluid">
+            <div class="row">
+                <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_a" class="control-label" id="letter_a">A</label>
+                </div>
+            </div> 
+            <div class="row">
                 <foreach name="studentList" item="vo" >
+                    <if condition="($vo.capital eq a) or ($vo.capital eq A)">
+                    <div class="col-md-4">
                     <div class="margin">
                         <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
                     </div>
+                    </div>
+                    </if>
                 </foreach>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12" style="background-color:grey;color:white;">
-                <label for="letter_b" class="control-label">b</label>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_b" class="control-label" id="letter_b">B</label>
+                </div>
+            </div> 
+            <div class="row">
+                    <foreach name="studentList" item="vo" >
+                       <if condition="($vo.capital eq b) or ($vo.capital eq B)">
+                       <div class="col-md-4">
+                        <div class="margin">
+                            <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                        </div>
+                        </div>
+                        </if>
+                    </foreach>
             </div>
-            <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_c" class="control-label" id="letter_c">C</label>
+                </div>
+            </div> 
+            <div class="row">
                 <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq c) or ($vo.capital eq C)">
+                   <div class="col-md-4">
                     <div class="margin">
                         <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
                     </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_d" class="control-label" id="letter_d">D</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq d) or ($vo.capital eq D)">
+                   <div class="col-md-4">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_e" class="control-label" id="letter_e">E</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq e) or ($vo.capital eq E)">
+                   <div class="col-md-4">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_f" class="control-label" id="letter_f">F</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq f) or ($vo.capital eq F)">
+                   <div class="col-md-4">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_g" class="control-label" id="letter_g">G</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq g) or ($vo.capital eq G)">
+                   <div class="col-md-4">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_h" class="control-label" id="letter_h">H</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq h) or ($vo.capital eq H)">
+                   <div class="col-md-4">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_i" class="control-label" id="letter_i">I</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq i) or ($vo.capital eq I)">
+                   <div class="col-md-4">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_j" class="control-label" id="letter_j">J</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq j) or ($vo.capital eq J)">
+                   <div class="col-md-4">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_k" class="control-label" id="letter_k">K</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq k) or ($vo.capital eq K)">
+                   <div class="col-md-4">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_l" class="control-label" id="letter_l">L</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq l) or ($vo.capital eq L)">
+                   <div class="col-md-4">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_m" class="control-label" id="letter_m">M</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq m) or ($vo.capital eq M)">
+                   <div class="col-md-4">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_n" class="control-label" id="letter_n">N</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq n) or ($vo.capital eq N)">
+                   <div class="col-md-4">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_o" class="control-label" id="letter_o">O</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq o) or ($vo.capital eq O)">
+                   <div class="col-md-4">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_p" class="control-label" id="letter_p">P</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq p) or ($vo.capital eq P)">
+                   <div class="col-md-4">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_q" class="control-label" id="letter_q">Q</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq q) or ($vo.capital eq Q)">
+                   <div class="col-md-4">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_r" class="control-label" id="letter_r">R</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq r) or ($vo.capital eq R)">
+                   <div class="col-md-4">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_s" class="control-label" id="letter_s">S</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq s) or ($vo.capital eq S)">
+                   <div class="col-md-4">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_t" class="control-label" id="letter_t">T</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq t) or ($vo.capital eq T)">
+                   <div class="col-md-4">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_u" class="control-label" id="letter_u">U</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq u) or ($vo.capital eq U)">
+                   <div class="col-md-4">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_v" class="control-label" id="letter_v">V</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq v) or ($vo.capital eq V)">
+                   <div class="col-md-4">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_w" class="control-label" id="letter_w">W</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq w) or ($vo.capital eq W)">
+                   <div class="col-md-4">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_x" class="control-label" id="letter_x">X</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq x) or ($vo.capital eq X)">
+                   <div class="col-md-4">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_y" class="control-label" id="letter_y">Y</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq y) or ($vo.capital eq Y)">
+                   <div class="col-md-4">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_z" class="control-label" id="letter_z">Z</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq z) or ($vo.capital eq Z)">
+                   <div class="col-md-4">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_#" class="control-label" id="letter_#">#</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <in name="vo.capital" value="a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z">
+                    <else/>
+                        <div class="col-md-4">
+                        <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                    </div>
+                    </div>
+                    </in>
                 </foreach>
             </div>
         </div>
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary edit-classdetail">保存</button>

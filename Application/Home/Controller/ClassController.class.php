@@ -32,6 +32,10 @@ class ClassController extends Controller {
 
         $student = new \Home\Model\StudentModel();
         $studentList = $student->showStudents($tId,0,20);
+        for($i=0;$i<count($studentList);$i++){
+            $captial = substr($studentList[$i]['pinyin'],0,1);
+            $studentList[$i]['capital'] = $captial;
+        }
         $this->assign("studentList",$studentList);
         $snum=0;
         $this->assign("snum",$snum);
