@@ -29,7 +29,7 @@
         .btn-submit{width:265px;height:40px;}
         .btn-class-type{width:185px;}
         .btn-class-list{width:200px;}
-        .margin{display:inline;margin:5px 0px 5px 0px;}
+        .margin{display:inline;margin:15px 0px 15px 0px;}
         .radio-text{margin:0px 12px 0px 8px;font-size:14px;}
         .week-picker{min-width:60px;}
         .day-picker{min-width:80px;}
@@ -288,9 +288,9 @@
             <div class="row">
                 <foreach name="studentList" item="vo" >
                     <if condition="($vo.capital eq a) or ($vo.capital eq A)">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -302,15 +302,15 @@
                 </div>
             </div> 
             <div class="row">
-                    <foreach name="studentList" item="vo" >
-                       <if condition="($vo.capital eq b) or ($vo.capital eq B)">
-                       <div class="col-md-4">
-                        <div class="margin">
-                            <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
-                        </div>
-                        </div>
-                        </if>
-                    </foreach>
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq b) or ($vo.capital eq B)">
+                   <div class="col-md-6">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
             </div>
             <div class="row">
                 <div class="col-md-12" style="background-color:#339966;color:white;margin:5px 0px 5px 0px;">
@@ -320,9 +320,9 @@
             <div class="row">
                 <foreach name="studentList" item="vo" >
                    <if condition="($vo.capital eq c) or ($vo.capital eq C)">
-                   <div class="col-md-4">
+                   <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -336,9 +336,9 @@
             <div class="row">
                 <foreach name="studentList" item="vo" >
                    <if condition="($vo.capital eq d) or ($vo.capital eq D)">
-                   <div class="col-md-4">
+                   <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -352,9 +352,9 @@
             <div class="row">
                 <foreach name="studentList" item="vo" >
                    <if condition="($vo.capital eq e) or ($vo.capital eq E)">
-                   <div class="col-md-4">
+                   <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -368,9 +368,9 @@
             <div class="row">
                 <foreach name="studentList" item="vo" >
                    <if condition="($vo.capital eq f) or ($vo.capital eq F)">
-                   <div class="col-md-4">
+                   <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -384,9 +384,9 @@
             <div class="row">
                 <foreach name="studentList" item="vo" >
                    <if condition="($vo.capital eq g) or ($vo.capital eq G)">
-                   <div class="col-md-4">
+                   <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -400,9 +400,9 @@
             <div class="row">
                 <foreach name="studentList" item="vo" >
                    <if condition="($vo.capital eq h) or ($vo.capital eq H)">
-                   <div class="col-md-4">
+                   <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -416,9 +416,9 @@
             <div class="row">
                 <foreach name="studentList" item="vo" >
                    <if condition="($vo.capital eq i) or ($vo.capital eq I)">
-                   <div class="col-md-4">
+                   <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -432,9 +432,9 @@
             <div class="row">
                 <foreach name="studentList" item="vo" >
                    <if condition="($vo.capital eq j) or ($vo.capital eq J)">
-                   <div class="col-md-4">
+                   <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -448,9 +448,9 @@
             <div class="row">
                 <foreach name="studentList" item="vo" >
                    <if condition="($vo.capital eq k) or ($vo.capital eq K)">
-                   <div class="col-md-4">
+                   <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -464,9 +464,9 @@
             <div class="row">
                 <foreach name="studentList" item="vo" >
                    <if condition="($vo.capital eq l) or ($vo.capital eq L)">
-                   <div class="col-md-4">
+                   <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -480,9 +480,9 @@
             <div class="row">
                 <foreach name="studentList" item="vo" >
                    <if condition="($vo.capital eq m) or ($vo.capital eq M)">
-                   <div class="col-md-4">
+                   <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -496,9 +496,9 @@
             <div class="row">
                 <foreach name="studentList" item="vo" >
                    <if condition="($vo.capital eq n) or ($vo.capital eq N)">
-                   <div class="col-md-4">
+                   <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -512,9 +512,9 @@
             <div class="row">
                 <foreach name="studentList" item="vo" >
                    <if condition="($vo.capital eq o) or ($vo.capital eq O)">
-                   <div class="col-md-4">
+                   <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -528,9 +528,9 @@
             <div class="row">
                 <foreach name="studentList" item="vo" >
                    <if condition="($vo.capital eq p) or ($vo.capital eq P)">
-                   <div class="col-md-4">
+                   <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -544,9 +544,9 @@
             <div class="row">
                 <foreach name="studentList" item="vo" >
                    <if condition="($vo.capital eq q) or ($vo.capital eq Q)">
-                   <div class="col-md-4">
+                   <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -560,9 +560,9 @@
             <div class="row">
                 <foreach name="studentList" item="vo" >
                    <if condition="($vo.capital eq r) or ($vo.capital eq R)">
-                   <div class="col-md-4">
+                   <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -576,9 +576,9 @@
             <div class="row">
                 <foreach name="studentList" item="vo" >
                    <if condition="($vo.capital eq s) or ($vo.capital eq S)">
-                   <div class="col-md-4">
+                   <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -592,9 +592,9 @@
             <div class="row">
                 <foreach name="studentList" item="vo" >
                    <if condition="($vo.capital eq t) or ($vo.capital eq T)">
-                   <div class="col-md-4">
+                   <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -608,9 +608,9 @@
             <div class="row">
                 <foreach name="studentList" item="vo" >
                    <if condition="($vo.capital eq u) or ($vo.capital eq U)">
-                   <div class="col-md-4">
+                   <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -624,9 +624,9 @@
             <div class="row">
                 <foreach name="studentList" item="vo" >
                    <if condition="($vo.capital eq v) or ($vo.capital eq V)">
-                   <div class="col-md-4">
+                   <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -640,9 +640,9 @@
             <div class="row">
                 <foreach name="studentList" item="vo" >
                    <if condition="($vo.capital eq w) or ($vo.capital eq W)">
-                   <div class="col-md-4">
+                   <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -656,9 +656,9 @@
             <div class="row">
                 <foreach name="studentList" item="vo" >
                    <if condition="($vo.capital eq x) or ($vo.capital eq X)">
-                   <div class="col-md-4">
+                   <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -672,9 +672,9 @@
             <div class="row">
                 <foreach name="studentList" item="vo" >
                    <if condition="($vo.capital eq y) or ($vo.capital eq Y)">
-                   <div class="col-md-4">
+                   <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -688,9 +688,9 @@
             <div class="row">
                 <foreach name="studentList" item="vo" >
                    <if condition="($vo.capital eq z) or ($vo.capital eq Z)">
-                   <div class="col-md-4">
+                   <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -705,9 +705,9 @@
                 <foreach name="studentList" item="vo" >
                    <in name="vo.capital" value="a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z">
                     <else/>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                         <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </in>

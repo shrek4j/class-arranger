@@ -44,7 +44,7 @@ class ClassController extends Controller {
         $this->display();
     }
 
-    public function saveClass($className="",$classtypeId,$teacherId,$classroomId,$studentIds="",$startDate="",$endDate="",$time="",$tuition,$remark){
+    public function saveClass($className="",$classtypeId,$teacherId,$classroomId,$studentIds="",$startDate="",$endDate="",$time="",$timecn="",$tuition,$remark){
 
         //inst_Id
         $tId = session('instId');
@@ -67,9 +67,9 @@ class ClassController extends Controller {
 
         //save class
         $class = new \Home\Model\ClassModel(); 
-        $classId = $class->saveClass($className,$classtypeId,$tuition,$startDate,$endDate,$teacherId,$classroomId,$remark,$tId);
+        $classId = $class->saveClass($className,$classtypeId,$tuition,$startDate,$endDate,$teacherId,$classroomId,$remark,$timecn,$tId);
 
-        while($start < $end){
+        while($start <= $end){
             $dayOfWeek = date('w',$start);//get the dayOfWeek of this timestamp
             if($dayOfWeek == 0)
                 $dayOfWeek = 7;
@@ -113,6 +113,8 @@ class ClassController extends Controller {
         $tId = session('instId');
         $class = new \Home\Model\ClassModel(); 
         $result = $class->deleteClass($classId,$tId);
+		$class->deleteClassDetails($classId,$tId);
+		$class->deleteClassDetailAndStudentRelas($classId,$tId);
         if($result == 1){
            $data = 'ok'; 
         }else{

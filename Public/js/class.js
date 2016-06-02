@@ -10,11 +10,14 @@ $(".add-class").click(function(){
 	var enddate = $("input[name='endDate']").val();
 
 	var time = "";
+	var timecn = "";
 	for(var i=0;i<=rowCount;i++){
 		var week = $('.week_'+i).filter('.selected').attr('week');
+		var weekcn = $('.week_'+i).filter('.selected').find('a').text();
 		var startTime = $('.startTime_'+i).filter('.selected').children('a').text();
 		var endTime = $('.endTime_'+i).filter('.selected').children('a').text();
 		time += week + "|" + startTime + "-" + endTime + ";";
+		timecn += weekcn + "  " + startTime + "-" + endTime + "</br>";
 	}
 	
 	var tuition = $("#tuition").val();
@@ -25,7 +28,7 @@ $(".add-class").click(function(){
 	   	url: "saveClass",
 	   	data: "className="+classname+"&classtypeId="+classtype+"&teacherId="+teacher+
 	   		"&studentIds="+students+"&classroomId="+classroom+"&startDate="+startdate+
-	   		"&endDate="+enddate+"&time="+time+"&tuition="+tuition+"&remark="+remark,
+	   		"&endDate="+enddate+"&time="+time+"&timecn="+timecn+"&tuition="+tuition+"&remark="+remark,
 	   	success: function(msg){
 	   		if(msg == 'ok'){
 	   			//提示保存成功
