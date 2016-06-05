@@ -137,6 +137,17 @@ class ClassController extends Controller {
         $this->assign("howMangPages",ceil($total/$pageSize-1)+1);
         $this->assign('num',1);//记录编号
         $this->assign('classList',$classList);
+
+        $student = new \Home\Model\StudentModel();
+        $studentList = $student->showStudents($instId,0,20);
+        for($i=0;$i<count($studentList);$i++){
+            $captial = substr($studentList[$i]['pinyin'],0,1);
+            $studentList[$i]['capital'] = $captial;
+        }
+        $this->assign("studentList",$studentList);
+        $snum=0;
+        $this->assign("snum",$snum);
+
         layout(true);
         $this->display();
     }
@@ -176,19 +187,39 @@ class ClassController extends Controller {
     }
 
     //apply context: when a class detail needs to be added
-    public function addClassDetail(){
-
-    }
-
-    //apply context: when one class detail needs to change classroom, a teacher, date, time.
-    public function updateClassDetail($classId,$classDetailId,$classroomId,$teacherId,$date="2015-01-05",$startTime="10:00",$endTime="12:00",$tuition){
+    public function addClassDetail($classId,$classroomId,$teacherId,$date,$startTime,$endTime,$week){
         //inst_Id
         $tId = session('instId');
+        $dayOfWeek = date('w',strtotime($date));//get the dayOfWeek of this timestamp
+        if($dayOfWeek == 0)
+            $dayOfWeek = 7;
         $ymd = explode('-',$date);
         $year = $ymd[0];
         $month = $ymd[1];
-        $dayOfWeek = date('w',strtotime($date));
-        $result = $class->updateClassDetail($date,$year,$month,$dayOfWeek,$startTime,$endTime,$teacherId,$classroomId,$classId,$tuition,$tId);
+        $startTimeInt = str_replace(':','',$startTime);
+        //save class detail
+        $class = new \Home\Model\ClassModel();
+        $classDetailId = $class->saveClassDetail($date,$year,$month,$dayOfWeek,$startTime,(int)$startTimeInt,$endTime,$teacherId,$classroomId,$classId,$tId);
+
+        $data = 'ok'; 
+        $this->ajaxReturn($data);
+    }
+
+    //apply context: when one class detail needs to change classroom, a teacher, date, time.
+    public function updateClassDetail($classId,$classDetailId,$classroomId,$teacherId,$date,$startTime,$endTime,$week){
+        //inst_Id
+        $tId = session('instId');
+        $dayOfWeek = date('w',strtotime($date));//get the dayOfWeek of this timestamp
+        if($dayOfWeek == 0)
+            $dayOfWeek = 7;
+        $ymd = explode('-',$date);
+        $year = $ymd[0];
+        $month = $ymd[1];
+        $startTimeInt = str_replace(':','',$startTime);
+        //save class detail
+        $class = new \Home\Model\ClassModel();
+        $result = $class->updateClassDetail($date,$year,$month,$dayOfWeek,$startTime,(int)$startTimeInt,$endTime,$teacherId,$classroomId,$classDetailId,$tId);
+
         if($result == 1){
            $data = 'ok'; 
         }else{
@@ -273,7 +304,7 @@ class ClassController extends Controller {
     }
 
 
-    public function updateClassDetailStudentRela($cameRelaIds="",$notCameRelaIds=""){
+    public function updateClassDetailStudentRela($classDetailId,$cameRelaIds="",$notCameRelaIds=""){
          //inst_Id
         $tId = session('instId');
         
@@ -307,6 +338,12 @@ class ClassController extends Controller {
                 }
             }
         }
+
+        //update status
+        $isAbsentCheck = 1;
+        $class = new \Home\Model\ClassModel();
+        $result = $class->updateClassDetailIsAbsentCheck($classDetailId,$tId,$isAbsentCheck);
+
         $return = "true";
     //    if($count > 0){
     //        $return = "false";
@@ -432,8 +469,9 @@ class ClassController extends Controller {
                 $showDate = $class['show_date'];
                 $classId = $class['class_id'];
                 $classDetailId = $class['class_detail_id'];
+                $isAbsentCheck = $class['is_absent_check'];
                 if($className != null){
-                    $perClass = array("month"=>$month,"dayOfMonth"=>$dayOfMonth,"dayOfWeek"=>$dayOfWeek,"startTime"=>$startTime,"endTime"=>$endTime,"className"=>$className,"classroomName"=>$classroomName,"showDate"=>$showDate,"classDetailId"=>$classDetailId,"classId"=>$classId);
+                    $perClass = array("month"=>$month,"dayOfMonth"=>$dayOfMonth,"dayOfWeek"=>$dayOfWeek,"startTime"=>$startTime,"endTime"=>$endTime,"className"=>$className,"classroomName"=>$classroomName,"showDate"=>$showDate,"classDetailId"=>$classDetailId,"classId"=>$classId,"isAbsentCheck"=>$isAbsentCheck);
                 }else{
                     $perClass = array("month"=>$month,"dayOfMonth"=>$dayOfMonth,"dayOfWeek"=>$dayOfWeek,"showDate"=>$showDate);
                 }

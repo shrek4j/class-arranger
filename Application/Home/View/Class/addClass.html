@@ -19,7 +19,10 @@
     <!-- bootstrap datepicker -->
     <link id="bsdp-css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker3.min.css" rel="stylesheet">
     <link href="/Public/css/bootstrap/icheck/square.css" rel="stylesheet">
-    
+    <link rel="stylesheet"
+        href="http://cdn.amazeui.org/amazeui/2.3.0/css/amazeui.min.css">
+    <link rel="stylesheet" href="http://amazeui.github.io/tagsinput/amazeui.tagsinput.css"/>
+
     <style type="text/css">
         .main-view{overflow-y:scroll;position:fixed;width:83.5%;height:98%;margin:0.5% 0.5% 0.5% 16%;padding:0.8% 0.8% 0.8% 1.2%;background:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)}
         .main-view-inner{margin:8% 2% 2% 6%;font-size:15px;width:1000px;}
@@ -72,7 +75,7 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-                <label for="teacher" class="control-label">教师:</label>
+                <label for="teacher" class="control-label">选择教师:</label>
             </div>
             <div class="col-md-10">
                 <foreach name="teacherList" item="vo" >
@@ -82,7 +85,7 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-                <label for="classroom" class="control-label">教室:</label>
+                <label for="classroom" class="control-label">选择教室:</label>
             </div>
             <div class="col-md-10">
                 <foreach name="classroomList" item="vo" >
@@ -92,14 +95,11 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-                <label for="student" class="control-label" onclick="$('#studentModal').modal('show')">学生:</label>
+                <label for="student" class="control-label">添加学生:</label>
             </div>
             <div class="col-md-10">
-                <foreach name="studentList" item="vo" >
-                    <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}</span>
-                    </div>
-                </foreach>
+                <input id="tags-students" type="text" value="" data-role="tagsinput"/>
+                <span id="editClassStudents" style="cursor:pointer" class="glyphicon glyphicon-list-alt" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="添加学生"  onclick="$('#studentModal').modal('show')"></span>
             </div>
         </div>
         <div class="row">
@@ -225,7 +225,7 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-                <label for="remark" class="control-label">描述:</label>
+                <label for="remark" class="control-label">课程描述:</label>
             </div>
             <div class="col-md-10">
                 <textarea class="form-control" id="remark"></textarea>
@@ -290,7 +290,7 @@
                     <if condition="($vo.capital eq a) or ($vo.capital eq A)">
                     <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -306,7 +306,7 @@
                    <if condition="($vo.capital eq b) or ($vo.capital eq B)">
                    <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -322,7 +322,7 @@
                    <if condition="($vo.capital eq c) or ($vo.capital eq C)">
                    <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -338,7 +338,7 @@
                    <if condition="($vo.capital eq d) or ($vo.capital eq D)">
                    <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -354,7 +354,7 @@
                    <if condition="($vo.capital eq e) or ($vo.capital eq E)">
                    <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -370,7 +370,7 @@
                    <if condition="($vo.capital eq f) or ($vo.capital eq F)">
                    <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -386,7 +386,7 @@
                    <if condition="($vo.capital eq g) or ($vo.capital eq G)">
                    <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -402,7 +402,7 @@
                    <if condition="($vo.capital eq h) or ($vo.capital eq H)">
                    <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -418,7 +418,7 @@
                    <if condition="($vo.capital eq i) or ($vo.capital eq I)">
                    <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -434,7 +434,7 @@
                    <if condition="($vo.capital eq j) or ($vo.capital eq J)">
                    <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -450,7 +450,7 @@
                    <if condition="($vo.capital eq k) or ($vo.capital eq K)">
                    <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -466,7 +466,7 @@
                    <if condition="($vo.capital eq l) or ($vo.capital eq L)">
                    <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -482,7 +482,7 @@
                    <if condition="($vo.capital eq m) or ($vo.capital eq M)">
                    <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -498,7 +498,7 @@
                    <if condition="($vo.capital eq n) or ($vo.capital eq N)">
                    <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -514,7 +514,7 @@
                    <if condition="($vo.capital eq o) or ($vo.capital eq O)">
                    <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -530,7 +530,7 @@
                    <if condition="($vo.capital eq p) or ($vo.capital eq P)">
                    <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -546,7 +546,7 @@
                    <if condition="($vo.capital eq q) or ($vo.capital eq Q)">
                    <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -562,7 +562,7 @@
                    <if condition="($vo.capital eq r) or ($vo.capital eq R)">
                    <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -578,7 +578,7 @@
                    <if condition="($vo.capital eq s) or ($vo.capital eq S)">
                    <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -594,7 +594,7 @@
                    <if condition="($vo.capital eq t) or ($vo.capital eq T)">
                    <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -610,7 +610,7 @@
                    <if condition="($vo.capital eq u) or ($vo.capital eq U)">
                    <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -626,7 +626,7 @@
                    <if condition="($vo.capital eq v) or ($vo.capital eq V)">
                    <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -642,7 +642,7 @@
                    <if condition="($vo.capital eq w) or ($vo.capital eq W)">
                    <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -658,7 +658,7 @@
                    <if condition="($vo.capital eq x) or ($vo.capital eq X)">
                    <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -674,7 +674,7 @@
                    <if condition="($vo.capital eq y) or ($vo.capital eq Y)">
                    <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -690,7 +690,7 @@
                    <if condition="($vo.capital eq z) or ($vo.capital eq Z)">
                    <div class="col-md-6">
                     <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </if>
@@ -707,7 +707,7 @@
                     <else/>
                         <div class="col-md-6">
                         <div class="margin">
-                        <input tabindex="{$snum}" id="student_{$snum++}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
                     </div>
                     </div>
                     </in>
@@ -716,7 +716,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary edit-classdetail">保存</button>
+        <button type="button" class="btn btn-primary save-students">保存</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
       </div>
     </div>
@@ -725,14 +725,18 @@
 
 
 	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+	<script src="//cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <!-- bootstrap datepicker -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/locales/bootstrap-datepicker.zh-CN.min.js" charset="UTF-8"></script>
     <script src="http://7xl53o.com1.z0.glb.clouddn.com/dingdingenglish/js/jquery.icheck.min.js"></script>
+
+    <script src="/Public/js/amazeui/amazeui.tagsinput.js"></script>
+
     <script src="/Public/js/class.js"></script>
+
 
     <script type="text/javascript">
         $('.input-daterange').datepicker({
@@ -750,6 +754,14 @@
             radioClass: 'iradio_square',
             increaseArea: '20%' // optional
           });
+        });
+
+        $(function() {
+          $('#tags-students').tagsinput();
+        });
+        
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
         });
     </script>
 </body>

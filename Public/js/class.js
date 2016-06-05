@@ -41,6 +41,15 @@ $(".add-class").click(function(){
 
 });
 
+$(".save-students").click(function(){
+	$('#tags-students').tagsinput('removeAll');
+	var studentInputs = $("input[name='student']:checked");
+	for(var i=0;i<studentInputs.length;i++){
+		$('#tags-students').tagsinput('add', $(studentInputs[i]).attr('studentname'));
+	}
+	$("#studentModal").modal("hide");
+});
+
 function editClass(id){
   window.location.href = "/index.php/Home/Class/showClassDetails?classId="+id+"&nav=44&pnav=40";
 }
@@ -271,6 +280,7 @@ function editVacancy(className,classDetailId){
 	   				html += ' name="student" value="'+s[0]+'"><span class="radio-text">'+s[1]+'</span><span class="radio-text">(电话：'+s[2]+')</span></div>';
 	   			}
 	   			$("#className").text("课程："+className);
+	   			$('#myClassDetailId').val(classDetailId);
 	   			$("#students").append(html);
 				$("#myModal").modal('show');
 	   		}
@@ -279,6 +289,7 @@ function editVacancy(className,classDetailId){
 }
 
 $(".save-vacancy").click(function(){
+	var classDetailId = $("#myClassDetailId").val();
 	var cameStudentInputs = $("input[name='student']:checked");
 	var cameRelaIds = getStudentStr(cameStudentInputs);
 	var notCameStudentInputs = $("input[name='student']:not(:checked)");
@@ -288,7 +299,7 @@ $(".save-vacancy").click(function(){
 	$.ajax({
 	   	type: "POST",
 	   	url: "updateClassDetailStudentRela",
-	   	data: "cameRelaIds="+cameRelaIds+"&notCameRelaIds="+notCameRelaIds,
+	   	data: "classDetailId="+classDetailId+"&cameRelaIds="+cameRelaIds+"&notCameRelaIds="+notCameRelaIds,
 	   	success: function(msg){
 	   		if(msg == 'false'){
 	   			//提示保存失败
@@ -303,6 +314,7 @@ $(".save-vacancy").click(function(){
 
 function clearVacancyInfo(){
 	$("#className").text("");
+	$("#myClassDetailId").val('');
 	$("#students").empty();
 }
 
@@ -327,16 +339,16 @@ function deleteClassDetail(classId,classDetailId){
 
 function editClassDetail(num,classDetailId){
 	$("#classDetailId").val(classDetailId);
-	$("#datepicker").val($("#date_"+num).text());
+	$("#datepicker_u").val($("#date_"+num).text());
 	var dayOfWeek = $("#dayOfWeek_"+num).attr("value");
 	$("#weekShow_u").text($("#dayOfWeek_"+num).text());
-	$("#week_"+dayOfWeek).attr('selected','selected');
+	$("#week_"+dayOfWeek).addClass('selected','selected');
 	$("#startTimeShow_u").text($("#time_"+num).attr("startTime"));
 	$("#endTimeShow_u").text($("#time_"+num).attr("endTime"));
 	var teacherId = $("#teacher_"+num).attr("value");
-	$("input[name='teacher'][value='"+teacherId+"']").iCheck('check');
+	$("input[name='teacher_u'][value='"+teacherId+"']").iCheck('check');
 	var classroomId = $("#classroom_"+num).attr("value");
-	$("input[name='classroom'][value='"+classroomId+"']").iCheck('check');
+	$("input[name='classroom_u'][value='"+classroomId+"']").iCheck('check');
 	$("#updateModal").modal("show");
 }
 
@@ -380,7 +392,65 @@ function addClassDetail(){
 	$("#addModal").modal("show");
 }
 
+$(".update-classdetail").click(function(){
+	var teacher = $("input[name='teacher_u']:checked").val();
+	var classroom = $("input[name='classroom_u']:checked").val();
+	var date = $("#datepicker_u").val();
+	var week = $('.week_u').filter('.selected').attr('week');
+	var startTime = $("#startTimeShow_u").text();
+	var endTime = $("#endTimeShow_u").text();
+	var classId = $("#classId").val();
+	var classDetailId = $("#classDetailId").val();
 
+	$.ajax({
+	   	type: "POST",
+	   	url: "updateClassDetail",
+	   	data: "classId="+classId+"&classDetailId="+classDetailId+"&teacherId="+teacher+"&classroomId="+classroom+"&startTime="+startTime+
+	   		"&endTime="+endTime+"&date="+date+"&week="+week,
+	   	success: function(msg){
+	   		if(msg == 'ok'){
+	   			//提示保存成功
+	   			window.location.reload();
+	   		}else{
+	   			//提示保存失败
+	   		}
+	   	}
+	});
+
+});
+
+$(".add-classdetail").click(function(){
+	var teacher = $("input[name='teacher_a']:checked").val();
+	var classroom = $("input[name='classroom_a']:checked").val();
+	var date = $("#datepicker_a").val();
+	var week = $('.week_a').filter('.selected').attr('week');
+	var startTime = $("#startTimeShow_a").text();
+	var endTime = $("#endTimeShow_a").text();
+	var classId = $("#classId").val();
+
+	$.ajax({
+	   	type: "POST",
+	   	url: "addClassDetail",
+	   	data: "classId="+classId+"&teacherId="+teacher+"&classroomId="+classroom+"&startTime="+startTime+
+	   		"&endTime="+endTime+"&date="+date+"&week="+week,
+	   	success: function(msg){
+	   		if(msg == 'ok'){
+	   			//提示保存成功
+	   			window.location.reload();
+	   		}else{
+	   			//提示保存失败
+	   		}
+	   	}
+	});
+});
+
+function deleteClassDetailStudents(num,classDetailId){
+
+}
+
+function editClassStudents(classId){
+	 $('#studentModal').modal('show');
+}
 ///////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////classtype//////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////

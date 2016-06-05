@@ -43,6 +43,7 @@
     <div class="main-view-inner">
         <div class="main-view-inner-bar">
             <h3 style="display: inline-block;">{$classInfo[0].class_name}</h3><h4 style="margin:0px 0px 0px 20px;display: inline-block;"><span class="label" style="background-color: #333366;">{$classInfo[0].classtype_name}</span></h4>
+            <input type="hidden" id="classId" value="{$classInfo[0].class_id}">
         </div>
         <div class="class-detail-list">
         
@@ -73,9 +74,9 @@
                         <div class="col-md-2" id="time_{$pnum}" startTime="{$vo.start_time}" endTime="{$vo.end_time}">{$vo.start_time}-{$vo.end_time}</div>
                         <div class="col-md-1" id="teacher_{$pnum}" value="{$vo.teacher_id}">{$vo.teacher_name}</div>
                         <div class="col-md-1" id="classroom_{$pnum}" value="{$vo.classroom_id}">{$vo.classroom_name}</div>
-                        <div class="col-md-1">学生</div>
-                        <div class="col-md-2">
-                            <span style="cursor:pointer" class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑" onclick="editClassDetail({$pnum++},{$vo.class_detail_id});"></span>
+                        <div class="col-md-4">
+                            <span style="cursor:pointer" class="glyphicon glyphicon-user" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑学生"></span>
+                            <span style="cursor:pointer" class="glyphicon glyphicon-pencil cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑课程" onclick="editClassDetail({$pnum++},{$vo.class_detail_id});"></span>
                             <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除" onclick="deleteClassDetail({$vo.class_id},{$vo.class_detail_id});"></span>
                         </div>
                     </div>
@@ -112,8 +113,9 @@
                         <div class="col-md-1" id="teacher_{$pnum}" value="{$vo.teacher_id}">{$vo.teacher_name}</div>
                         <div class="col-md-1" id="classroom_{$pnum}" value="{$vo.classroom_id}">{$vo.classroom_name}</div>
                         <!--<div class="col-md-1">学生</div>-->
-                        <div class="col-md-2">
-                            <span style="cursor:pointer" class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑" onclick="editClassDetail({$pnum++},{$vo.class_detail_id});"></span>
+                        <div class="col-md-4">
+                            <span style="cursor:pointer" class="glyphicon glyphicon-user" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑学生"></span>
+                            <span style="cursor:pointer" class="glyphicon glyphicon-pencil cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑" onclick="editClassDetail({$pnum++},{$vo.class_detail_id});"></span>
                             <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除" onclick="deleteClassDetail({$vo.class_id},{$vo.class_detail_id});"></span>
                         </div>
                     </div>
@@ -139,23 +141,23 @@
         <input type="hidden" id="classDetailId"/>
         <div class="row">
             <div class="col-md-2">
-                <label for="classname" class="control-label">课程日期:</label>
+                <label for="date_u" class="control-label">课程日期:</label>
             </div>
             <div class="col-md-6">
-                <input id="datepicker_u" type="text" class="input-sm form-control" name="date" value=""/>
+                <input id="datepicker_u" type="text" class="input-sm form-control" name="date_u" value=""/>
             </div>
         </div>
         
         <div class="row">
             <div class="col-md-2">
-                <label for="weekpicker" class="control-label">上课时间:</label>
+                <label for="weekpicker_u" class="control-label">上课时间:</label>
             </div>
             <div class="col-md-10">
                 <div class="dropdown" style="display: inline-block;">
-                    <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="weekpicker" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="weekpicker_u" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                         <span id="weekShow_u">选择星期</span>
                     </a>
-                    <ul class="dropdown-menu week-picker" aria-labelledby="weekpicker">
+                    <ul class="dropdown-menu week-picker" aria-labelledby="weekpicker_u">
                         <li class="week_u" id="week_1" week="1"><a href="#">星期一</a></li>
                         <li class="week_u" id="week_2" week="2"><a href="#">星期二</a></li>
                         <li class="week_u" id="week_3" week="3"><a href="#">星期三</a></li>
@@ -167,10 +169,10 @@
                 </div>
                   
                 <div class="dropdown" style="display: inline-block;margin-left:10%;">
-                    <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="starttimepicker" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="starttimepicker_u" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                         <span id="startTimeShow_u">开始时间</span>
                     </a>
-                    <ul class="dropdown-menu time-picker" aria-labelledby="starttimepicker">
+                    <ul class="dropdown-menu time-picker" aria-labelledby="starttimepicker_u">
                         <li class="startTime_u"><a href="#">7:00</a></li>
                         <li class="startTime_u"><a href="#">7:30</a></li>
                         <li class="startTime_u"><a href="#">8:00</a></li>
@@ -206,10 +208,10 @@
                 </div>
                 <span style="display: inline-block;">-</span>
                 <div class="dropdown" style="display: inline-block;">
-                    <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="endtimepicker" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="endtimepicker_u" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                         <span id="endTimeShow_u">结束时间</span>
                     </a>
-                    <ul class="dropdown-menu time-picker" aria-labelledby="endtimepicker">
+                    <ul class="dropdown-menu time-picker" aria-labelledby="endtimepicker_u">
                         <li class="endTime_u"><a href="#">7:00</a></li>
                         <li class="endTime_u"><a href="#">7:30</a></li>
                         <li class="endTime_u"><a href="#">8:00</a></li>
@@ -248,29 +250,29 @@
 
         <div class="row">
             <div class="col-md-2">
-                <label for="teacher" class="control-label">教师:</label>
+                <label for="teacher_u" class="control-label">教师:</label>
             </div>
             <div class="col-md-10">
                 <foreach name="teacherList" item="vo" >
-                    <input tabindex="{$tnum}" id="teacher_{$tnum++}" type="radio" name="teacher" value="{$vo.teacher_id}"><span class="radio-text">{$vo.name}</span>
+                    <input tabindex="{$tnum}" id="teacher_{$tnum++}" type="radio" name="teacher_u" value="{$vo.teacher_id}"><span class="radio-text">{$vo.name}</span>
                 </foreach>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-2">
-                <label for="classroom" class="control-label">教室:</label>
+                <label for="classroom_u" class="control-label">教室:</label>
             </div>
             <div class="col-md-10">
                 <foreach name="classroomList" item="vo" >
-                    <input tabindex="{$clnum}" id="classroom_{$clnum++}" type="radio" name="classroom" value="{$vo.classroom_id}"><span class="radio-text">{$vo.name}</span>
+                    <input tabindex="{$clnum}" id="classroom_{$clnum++}" type="radio" name="classroom_u" value="{$vo.classroom_id}"><span class="radio-text">{$vo.name}</span>
                 </foreach>
             </div>
         </div>
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary edit-classdetail">保存</button>
+        <button type="button" class="btn btn-primary update-classdetail">保存</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
       </div>
     </div>
@@ -289,23 +291,23 @@
         <input type="hidden" id="classDetailId"/>
         <div class="row">
             <div class="col-md-2">
-                <label for="classname" class="control-label">课程日期:</label>
+                <label for="date_a" class="control-label">课程日期:</label>
             </div>
             <div class="col-md-6">
-                <input id="datepicker_a" type="text" class="input-sm form-control" name="date" value=""/>
+                <input id="datepicker_a" type="text" class="input-sm form-control" name="date_a" value=""/>
             </div>
         </div>
         
         <div class="row">
             <div class="col-md-2">
-                <label for="weekpicker" class="control-label">上课时间:</label>
+                <label for="weekpicker_a" class="control-label">上课时间:</label>
             </div>
             <div class="col-md-10">
                 <div class="dropdown" style="display: inline-block;">
-                    <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="weekpicker" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="weekpicker_a" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                         <span id="weekShow_a">选择星期</span>
                     </a>
-                    <ul class="dropdown-menu week-picker" aria-labelledby="weekpicker">
+                    <ul class="dropdown-menu week-picker" aria-labelledby="weekpicker_a">
                         <li class="week_a" id="week_1" week="1"><a href="#">星期一</a></li>
                         <li class="week_a" id="week_2" week="2"><a href="#">星期二</a></li>
                         <li class="week_a" id="week_3" week="3"><a href="#">星期三</a></li>
@@ -317,10 +319,10 @@
                 </div>
                   
                 <div class="dropdown" style="display: inline-block;margin-left:10%;">
-                    <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="starttimepicker" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="starttimepicker_a" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                         <span id="startTimeShow_a">开始时间</span>
                     </a>
-                    <ul class="dropdown-menu time-picker" aria-labelledby="starttimepicker">
+                    <ul class="dropdown-menu time-picker" aria-labelledby="starttimepicker_a">
                         <li class="startTime_a"><a href="#">7:00</a></li>
                         <li class="startTime_a"><a href="#">7:30</a></li>
                         <li class="startTime_a"><a href="#">8:00</a></li>
@@ -356,10 +358,10 @@
                 </div>
                 <span style="display: inline-block;">-</span>
                 <div class="dropdown" style="display: inline-block;">
-                    <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="endtimepicker" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="endtimepicker_a" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                         <span id="endTimeShow_a">结束时间</span>
                     </a>
-                    <ul class="dropdown-menu time-picker" aria-labelledby="endtimepicker">
+                    <ul class="dropdown-menu time-picker" aria-labelledby="endtimepicker_a">
                         <li class="endTime_a"><a href="#">7:00</a></li>
                         <li class="endTime_a"><a href="#">7:30</a></li>
                         <li class="endTime_a"><a href="#">8:00</a></li>
@@ -398,29 +400,29 @@
 
         <div class="row">
             <div class="col-md-2">
-                <label for="teacher" class="control-label">教师:</label>
+                <label for="teacher_a" class="control-label">教师:</label>
             </div>
             <div class="col-md-10">
                 <foreach name="teacherList" item="vo" >
-                    <input tabindex="{$tnum}" id="teacher_{$tnum++}" type="radio" name="teacher" value="{$vo.teacher_id}"><span class="radio-text">{$vo.name}</span>
+                    <input tabindex="{$tnum}" id="teacher_{$tnum++}" type="radio" name="teacher_a" value="{$vo.teacher_id}"><span class="radio-text">{$vo.name}</span>
                 </foreach>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-2">
-                <label for="classroom" class="control-label">教室:</label>
+                <label for="classroom_a" class="control-label">教室:</label>
             </div>
             <div class="col-md-10">
                 <foreach name="classroomList" item="vo" >
-                    <input tabindex="{$clnum}" id="classroom_{$clnum++}" type="radio" name="classroom" value="{$vo.classroom_id}"><span class="radio-text">{$vo.name}</span>
+                    <input tabindex="{$clnum}" id="classroom_{$clnum++}" type="radio" name="classroom_a" value="{$vo.classroom_id}"><span class="radio-text">{$vo.name}</span>
                 </foreach>
             </div>
         </div>
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary edit-classdetail">保存</button>
+        <button type="button" class="btn btn-primary add-classdetail">保存</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
       </div>
     </div>

@@ -15,7 +15,7 @@ class ClassModel extends Model {
     }
 
     public function showClassById($classId,$tId){
-        $sql = "select c.class_name class_name,cc.name classtype_name from classoa_class c left join classoa_classtype cc on c.class_type_id=cc.id where c.inst_id=".$tId." and c.class_id=".$classId;
+        $sql = "select c.class_id class_id,c.class_name class_name,cc.name classtype_name from classoa_class c left join classoa_classtype cc on c.class_type_id=cc.id where c.inst_id=".$tId." and c.class_id=".$classId;
         return $this->query($sql);
     }
     
@@ -83,8 +83,13 @@ class ClassModel extends Model {
         return $this->query($sql);
     }
 
-    public function updateClassDetail($date,$year,$month,$dayOfWeek,$startTime,$endTime,$teacherId,$classroomId,$classId,$tuition,$tId){
-        $sql = "update classoa_class_detail set date='".$date."',year='".$year."',month=".$month.",day_of_week=".$dayOfWeek.",start_time='".$startTime."',end_time='".$endTime."',teacher_id=".$teacherId.",tuition_per_class=".$tuition." where class_id=".$classId."and classroom_id=".$classroomId." and inst_id=".$tId;
+    public function updateClassDetail($date,$year,$month,$dayOfWeek,$startTime,$startTimeInt,$endTime,$teacherId,$classroomId,$classDetailId,$tId){
+        $sql = "update classoa_class_detail set date='".$date."',year='".$year."',month=".$month.",day_of_week=".$dayOfWeek.",start_time='".$startTime."',start_time_int=".$startTimeInt.",end_time='".$endTime."',teacher_id=".$teacherId.",classroom_id=".$classroomId." where class_detail_id=".$classDetailId." and inst_id=".$tId;
+        return $this->execute($sql);
+    }
+
+    public function updateClassDetailIsAbsentCheck($classDetailId,$tId,$isAbsentCheck){
+        $sql = "update classoa_class_detail set is_absent_check=".$isAbsentCheck." where class_detail_id=".$classDetailId." and inst_id=".$tId;
         return $this->execute($sql);
     }
 
