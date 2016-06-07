@@ -69,6 +69,11 @@ class ClassController extends Controller {
         $class = new \Home\Model\ClassModel(); 
         $classId = $class->saveClass($className,$classtypeId,$tuition,$startDate,$endDate,$teacherId,$classroomId,$remark,$timecn,$tId);
 
+        //save class students 
+        for($i=0;$i<count($students);$i++){
+        	$class->saveClassAndStudentRela($classId[0]['class_id'],(int)$students[$i],$tuition,$tId);
+        }
+
         while($start <= $end){
             $dayOfWeek = date('w',$start);//get the dayOfWeek of this timestamp
             if($dayOfWeek == 0)
@@ -288,6 +293,26 @@ class ClassController extends Controller {
         $tId = session('instId');
         $class = new \Home\Model\ClassModel();
         $result = $class->showStudentsFromClassDetail((int)$classDetailId,$tId);
+        $return;
+        if(count($result)==0){
+            $return = "false";
+        }else{
+            for($i=0;$i<count($result);$i++){
+                $id = $result[$i]['id'];
+                $studentName = $result[$i]['student_name'];
+                $mobile = $result[$i]['mobile'];
+                $isAbsent = $result[$i]['is_absent'];
+                $return .= $id.":".$studentName.":".$mobile.":".$isAbsent.";";
+            }
+        }
+        $this->ajaxReturn($return);
+    }
+
+    public function showStudentsFromClass($classId){
+        //inst_Id
+        $tId = session('instId');
+        $class = new \Home\Model\ClassModel();
+        $result = $class->showStudentsFromClass((int)$classId,$tId);
         $return;
         if(count($result)==0){
             $return = "false";
