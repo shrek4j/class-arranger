@@ -32,7 +32,7 @@ class ClassModel extends Model {
     }
 
     public function saveClassAndStudentRela($classId,$studentId,$tuition,$tId){
-        $sql = "insert into classoa_class_student_rela(class_id,student_id,tuition_per_class,inst_id) values(".$classId.",".$studentId.",".$tuition.",".$tId.")";
+        $sql = "insert into classoa_class_detail_student_rela(class_id,student_id,tuition_per_class,inst_id) values(".$classId.",".$studentId.",".$tuition.",".$tId.")";
         $this->execute($sql);
     }
 
@@ -56,11 +56,6 @@ class ClassModel extends Model {
         return $this->query($sql);
     }
 
-    public function showStudentsFromClass($classId,$tId){
-        $sql = "select r.*, s.student_name student_name,s.phone mobile from classoa_class_student_rela r left join classoa_student s on r.student_id=s.student_id where r.inst_id=".$tId." and r.class_id=".$classId;
-        return $this->query($sql);
-    }
-
     public function updateClass($classId,$className,$tId){
         $sql = "update classoa_class set class_name='".$classname."' where class_id=".$classId." and inst_id=".$tId;
         return $this->execute($sql);
@@ -73,7 +68,7 @@ class ClassModel extends Model {
     }
 
     public function totalClasses($instId){
-        $sql = "select count(1) total from classoa_class where inst_id=".$instId." and status=0";
+        $sql = "select count(1) total from classoa_classtype where inst_id=".$instId." and status=0";
         return $this->query($sql);
     }
 

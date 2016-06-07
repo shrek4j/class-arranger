@@ -41,26 +41,14 @@ $(".add-class").click(function(){
 
 });
 
-$("input[name='student']").click(function(){
-	$('#tags-students').tagsinput('removeAll');
-	var studentInputs = $("input[name='student']:checked");
-	for(var i=0;i<studentInputs.length;i++){
-		$('#tags-students').tagsinput('add', $(studentInputs[i]).attr('studentname'));
-	}
-});
-
-function fakeSaveStudents(){
+$(".save-students").click(function(){
 	$('#tags-students').tagsinput('removeAll');
 	var studentInputs = $("input[name='student']:checked");
 	for(var i=0;i<studentInputs.length;i++){
 		$('#tags-students').tagsinput('add', $(studentInputs[i]).attr('studentname'));
 	}
 	$("#studentModal").modal("hide");
-}
-
-function saveStudents(){
-
-}
+});
 
 function editClass(id){
   window.location.href = "/index.php/Home/Class/showClassDetails?classId="+id+"&nav=44&pnav=40";
@@ -461,8 +449,7 @@ function deleteClassDetailStudents(num,classDetailId){
 }
 
 function editClassStudents(classId){
-
-	$('#studentModal').modal('show');
+	 $('#studentModal').modal('show');
 }
 ///////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////classtype//////////////////////////////////////
