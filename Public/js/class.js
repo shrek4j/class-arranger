@@ -58,9 +58,6 @@ function fakeSaveStudents(){
 	$("#studentModal").modal("hide");
 }
 
-function saveStudents(){
-
-}
 
 function editClass(id){
   window.location.href = "/index.php/Home/Class/showClassDetails?classId="+id+"&nav=44&pnav=40";
@@ -461,9 +458,54 @@ function deleteClassDetailStudents(num,classDetailId){
 }
 
 function editClassStudents(classId){
-
-	$('#studentModal').modal('show');
+	//clear
+	$('#tags-students').tagsinput('removeAll');
+	$("input[name='student']").iCheck('uncheck');
+	//load
+	$.ajax({
+	   	type: "POST",
+	   	url: "showStudentsFromClass",
+	   	data: "classId="+classId,
+	   	success: function(msg){
+	   		if(msg == 'false'){
+	   			//提示保存失败
+	   		}else{
+	   			var studentArr = msg.split(";");
+	   			var names = "";
+	   			for(var i=0;i<studentArr.length-1;i++){
+	   				var s = studentArr[i].split(":");
+	   				$('#tags-students').tagsinput('add',s[1]);
+	   				$("input[name='student'][value='"+s[0]+"']").iCheck('check');
+	   			}
+	   			$("#classId").val(classId);
+	   			$('#studentModal').modal('show');
+	   		}
+	   	}
+	});
 }
+
+
+function saveStudents(){
+	var classId = $("#classId").val(classId);
+	var studentInputs = $("input[name='student']:checked");
+	var students = getStudentStr(studentInputs);
+	$.ajax({
+	   	type: "POST",
+	   	url: "saveStudentsForClass",
+	   	data: "classId="+classId+"&students="+students,
+	   	success: function(msg){
+	   		if(msg == 'false'){
+	   			//提示保存失败
+	   		}else{
+	   			//提示保存成功
+	   			window.location.reload();
+	   		}
+			
+	   	}
+	});
+
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////classtype//////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////

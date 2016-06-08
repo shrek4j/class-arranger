@@ -57,7 +57,7 @@ class ClassModel extends Model {
     }
 
     public function showStudentsFromClass($classId,$tId){
-        $sql = "select r.*, s.student_name student_name,s.phone mobile from classoa_class_student_rela r left join classoa_student s on r.student_id=s.student_id where r.inst_id=".$tId." and r.class_id=".$classId;
+        $sql = "select r.*, s.student_name student_name from classoa_class_student_rela r left join classoa_student s on r.student_id=s.student_id where r.inst_id=".$tId." and r.class_id=".$classId;
         return $this->query($sql);
     }
 

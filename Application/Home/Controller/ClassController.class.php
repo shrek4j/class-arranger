@@ -313,18 +313,14 @@ class ClassController extends Controller {
         $tId = session('instId');
         $class = new \Home\Model\ClassModel();
         $result = $class->showStudentsFromClass((int)$classId,$tId);
-        $return;
-        if(count($result)==0){
-            $return = "false";
-        }else{
-            for($i=0;$i<count($result);$i++){
-                $id = $result[$i]['id'];
-                $studentName = $result[$i]['student_name'];
-                $mobile = $result[$i]['mobile'];
-                $isAbsent = $result[$i]['is_absent'];
-                $return .= $id.":".$studentName.":".$mobile.":".$isAbsent.";";
-            }
+        $return = "";
+        
+        for($i=0;$i<count($result);$i++){
+            $studentId = $result[$i]['student_id'];
+            $studentName = $result[$i]['student_name'];
+            $return .= $studentId.":".$studentName.";";
         }
+        
         $this->ajaxReturn($return);
     }
 
