@@ -457,7 +457,7 @@ function deleteClassDetailStudents(num,classDetailId){
 
 }
 
-function editClassStudents(classId){
+function editClassStudents(className,classId){
 	//clear
 	$('#tags-students').tagsinput('removeAll');
 	$("input[name='student']").iCheck('uncheck');
@@ -484,9 +484,101 @@ function editClassStudents(classId){
 	});
 }
 
+function editStudentTuitions(className,classId){
+	//clear
+	clearTuitionInfo();
+	//load
+	$.ajax({
+	   	type: "POST",
+	   	url: "showAllStudentsFromClass",
+	   	data: "classId="+classId,
+	   	success: function(msg){
+	   		if(msg == 'false'){
+	   			//提示保存失败
+	   		}else{
+	   			var html = "";
+	   			var studentArr = msg.split(";");
+	   			html='<table class="table table-bordered table-striped table-hover text-center" style="width:300px;">';
+	   			html+='<thead><tr class="title"><td>学生</td><td>学费(每次课每人) 单位:元</td></tr></thead><tbody>';
+	   			for(var i=0;i<studentArr.length-1;i++){
+	   				var s = studentArr[i].split(":");
+	   				html += '<tr><td>'+s[1]+'</td><td><input type="text" class="form-control" style="text-align:right;" placeholder="0" name="stdTuition" student_id="'+s[0]+'" value='+s[2]+'></td></tr>';
+	   			}
+	   			html+='</tbody></table>';
+	   			$("#className").text("课程："+className);
+	   			$('#myClassId').val(classId);
+	   			$("#tuitions").append(html);
+				$("#tuitionModal").modal('show');
+	   		}
+	   	}
+	});
+}
+
+function saveTuitions(){
+	var classId = $("#myClassId").val();
+	var tuitionInputs = $("input[name='stdTuition']");
+	var tuitions = "";
+	for(var i=0;i<tuitionInputs.length;i++){
+		tuitions += $(tuitionInputs[i]).attr('student_id');
+		tuitions += ":";
+		tuitions += tuitionInputs[i].value;
+		if(i<tuitionInputs.length-1){
+			tuitions += "|";
+		}
+	}
+
+	//save
+	$.ajax({
+	   	type: "POST",
+	   	url: "updateStudentTuitions",
+	   	data: "classId="+classId+"&tuitions="+tuitions,
+	   	success: function(msg){
+	   		if(msg == 'false'){
+	   			//提示保存失败
+	   		}else{
+				$("#tuitionModal").modal('hide');
+				//clear
+				clearTuitionInfo();
+	   		}
+	   	}
+	});
+}
+
+function clearTuitionInfo(){
+	$("#className").text("");
+	$("#myClassId").val('');
+	$("#tuitions").empty();
+}
+
+function editClassDetailStudents(classDetailId){
+	//clear
+	$('#tags-students').tagsinput('removeAll');
+	$("input[name='student']").iCheck('uncheck');
+	//load
+	$.ajax({
+	   	type: "POST",
+	   	url: "showStudentsFromClassDetail",
+	   	data: "classDetailId="+classDetailId,
+	   	success: function(msg){
+	   		if(msg == 'false'){
+	   			//提示保存失败
+	   		}else{
+	   			var studentArr = msg.split(";");
+	   			var names = "";
+	   			for(var i=0;i<studentArr.length-1;i++){
+	   				var s = studentArr[i].split(":");
+	   				$('#tags-students').tagsinput('add',s[1]);
+	   				$("input[name='student'][value='"+s[4]+"']").iCheck('check');
+	   			}
+	   			$("#classDetailIdForStudent").val(classDetailId);
+	   			$('#studentModal').modal('show');
+	   		}
+	   	}
+	});
+}
 
 function saveStudents(){
-	var classId = $("#classId").val(classId);
+	var classId = $("#classId").val();
 	var studentInputs = $("input[name='student']:checked");
 	var students = getStudentStr(studentInputs);
 	$.ajax({
@@ -503,8 +595,29 @@ function saveStudents(){
 			
 	   	}
 	});
-
 }
+
+function saveStudentsToOneClass(){
+	var classId = $("#classId").val();
+	var classDetailId = $("#classDetailIdForStudent").val();
+	var studentInputs = $("input[name='student']:checked");
+	var students = getStudentStr(studentInputs);
+	$.ajax({
+	   	type: "POST",
+	   	url: "saveStudentsToOneClass",
+	   	data: "classId="+classId+"&classDetailId="+classDetailId+"&students="+students,
+	   	success: function(msg){
+	   		if(msg == 'false'){
+	   			//提示保存失败
+	   		}else{
+	   			//提示保存成功
+	   			window.location.reload();
+	   		}
+			
+	   	}
+	});
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////classtype//////////////////////////////////////

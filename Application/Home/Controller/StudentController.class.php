@@ -46,6 +46,17 @@ class StudentController extends Controller {
         $this->display();
     }
 
+    public function showStudentDetail($studentId){
+        $instId = session('instId');
+        if(!$instId)
+            return;
+        $model = new \Home\Model\StudentModel();
+        $student = $model->showStudentDetail($instId,$studentId);
+        $this->assign('student',$student[0]);
+        layout(true);
+        $this->display();
+    }
+
     public function deleteStudent($studentId){
         $instId = session('instId');
         if(!$instId)

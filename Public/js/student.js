@@ -25,6 +25,12 @@ $(".add-student").click(function(){
 	});
 });
 
+
+function showStudentDetail(studentId){
+	window.location.href="showStudentDetail.html?studentId="+studentId;
+}
+
+
 function deleteStudent(id,name){
   if(confirm("是否删除教室："+name+"？")){
   	$.ajax({

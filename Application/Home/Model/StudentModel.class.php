@@ -20,6 +20,11 @@ class StudentModel extends Model {
         return $this->query($sql);
     }
 
+    public function showStudentDetail($instId,$studentId){
+        $sql = "select * from classoa_student where student_id=".$studentId." and inst_id=".$instId." and status=0";
+        return $this->query($sql);
+    }
+
     public function deleteStudent($instId,$studentId){
     	$sql = "update classoa_student set status=1 where student_id=".$studentId." and inst_id=".$instId;
     	return $this->execute($sql);
