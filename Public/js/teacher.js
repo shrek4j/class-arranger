@@ -1,6 +1,20 @@
 
 $(".add-teacher").click(function(){
 	var teacher = $("#teacher").val();
+	var constraints = {
+	  teacher: {
+	    presence: true,
+	    length: {
+	      maximum: 10,
+	      message: "最多输入10个字符"
+	    }
+	  }
+	};
+	var msg = validate({teacher: teacher}, constraints);
+	if(msg != null){
+		$("#teacher_msg").text(msg.teacher);
+		return;
+	}
 	$.ajax({
 	   	type: "POST",
 	   	url: "saveTeacher",
