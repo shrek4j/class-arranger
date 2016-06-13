@@ -44,7 +44,7 @@ class ClassController extends Controller {
         $this->display();
     }
 
-    public function saveClass($className="",$classtypeId,$teacherId,$classroomId,$studentIds="",$startDate="",$endDate="",$time="",$timecn="",$tuition,$remark){
+    public function saveClass($className="",$classtypeId,$teacherId,$classroomId,$studentIds="",$startDate="",$endDate="",$time="",$timecn="",$tuition,$wage,$remark){
 
         //inst_Id
         $tId = session('instId');
@@ -71,12 +71,20 @@ class ClassController extends Controller {
 
         //save class
         $class = new \Home\Model\ClassModel(); 
-        $classId = $class->saveClass($className,$classtypeId,$tuition,$startDate,$endDate,$teacherId,$classroomId,$remark,$timecn,$tId);
+        $classId = $class->saveClass($className,$classtypeId,$tuition,(int)$wage,$startDate,$endDate,$teacherId,$classroomId,$remark,$timecn,$tId);
 
         //save class students 
         if(!empty($students)){
             for($i=0;$i<count($students);$i++){
             	$class->saveClassAndStudentRela($classId[0]['class_id'],(int)$students[$i],$tuition,0,$tId);
+            }
+        }
+
+        //update student status
+        if(!empty($students)){
+            $studentModel = new \Home\Model\StudentModel();
+            for($i=0;$i<count($students);$i++){
+                $studentModel->changeStudentStatus((int)$students[$i],$tId,2);
             }
         }
 
@@ -128,6 +136,7 @@ class ClassController extends Controller {
         $result = $class->deleteClass($classId,$tId);
 		$class->deleteClassDetails($classId,$tId);
 		$class->deleteClassDetailAndStudentRelas($classId,$tId);
+        //delete related student infos
         if($result == 1){
            $data = 'ok'; 
         }else{
@@ -312,7 +321,8 @@ class ClassController extends Controller {
                 }
             }
         }
-
+        
+        $studentModel = new \Home\Model\StudentModel();
         $class = new \Home\Model\ClassModel();
         $classInfo = $class->getClassById((int)$classId,$tId);
         $tuition = $classInfo[0]['tuition_per_class'];
@@ -346,6 +356,9 @@ class ClassController extends Controller {
 
         if(!empty($addIds)){
             for($i=0;$i<count($addIds);$i++){
+                //update student status
+                $studentModel->changeStudentStatus((int)$addIds[$i],$tId,2);
+
                 //try update first
                 $result = $class->updateStudentStatusFromClass($tId,(int)$classId,(int)$addIds[$i],0);
                 if($result==0){
@@ -353,7 +366,7 @@ class ClassController extends Controller {
                 }
                 if(!empty($leftClassDetails) && count($leftClassDetails)>0){
                     for($m=0;$m<count($leftClassDetails);$m++){
-                        //是否有必要先尝试删除此课程，以免重复添加
+                        //先尝试删除此课程，以免重复添加
                         $class->updateStudentStatusFromClassDetail($tId,(int)$classId,$leftClassDetails[$m]['class_detail_id'],(int)$addIds[$i],1);
                         $class->saveClassDetailAndStudentRela($leftClassDetails[$m]['class_detail_id'],(int)$classId,(int)$addIds[$i],$tuition,$tId);
                     }

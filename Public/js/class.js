@@ -21,6 +21,7 @@ $(".add-class").click(function(){
 	}
 	
 	var tuition = $("#tuition").val();
+	var wage = $("#wage").val();
 	var remark = $("#remark").val();
 
 	$.ajax({
@@ -28,7 +29,8 @@ $(".add-class").click(function(){
 	   	url: "saveClass",
 	   	data: "className="+classname+"&classtypeId="+classtype+"&teacherId="+teacher+
 	   		"&studentIds="+students+"&classroomId="+classroom+"&startDate="+startdate+
-	   		"&endDate="+enddate+"&time="+time+"&timecn="+timecn+"&tuition="+tuition+"&remark="+remark,
+	   		"&endDate="+enddate+"&time="+time+"&timecn="+timecn+"&tuition="+tuition+
+	   		"&wage="+wage+"&remark="+remark,
 	   	success: function(msg){
 	   		if(msg == 'ok'){
 	   			//提示保存成功

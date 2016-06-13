@@ -7,8 +7,8 @@ class ClassModel extends Model {
     //////////////////////////
     ///////////class//////////
     //////////////////////////
-    public function saveClass($className,$classtypeId,$tuition,$startDate,$endDate,$teacherId,$classroomId,$remark,$timecn,$tId){
-        $sql = "insert into classoa_class(class_name,class_type_id,tuition_per_class,start_date,end_date,teacher_id,classroom_id,remark,timecn,inst_id) values('".$className."',".$classtypeId.",".$tuition.",'".$startDate."','".$endDate."',".$teacherId.",".$classroomId.",'".$remark."','".$timecn."',".$tId.")";
+    public function saveClass($className,$classtypeId,$tuition,$wage,$startDate,$endDate,$teacherId,$classroomId,$remark,$timecn,$tId){
+        $sql = "insert into classoa_class(class_name,class_type_id,tuition_per_class,wage,start_date,end_date,teacher_id,classroom_id,remark,timecn,inst_id) values('".$className."',".$classtypeId.",".$tuition.",".$wage.",'".$startDate."','".$endDate."',".$teacherId.",".$classroomId.",'".$remark."','".$timecn."',".$tId.")";
         $this->execute($sql);
         $queryIdSql = "SELECT @@IDENTITY as class_id";
         return $this->query($queryIdSql);

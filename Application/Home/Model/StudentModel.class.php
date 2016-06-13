@@ -9,6 +9,11 @@ class StudentModel extends Model {
         $sql = "insert into classoa_student(student_name,pinyin,gender,grade,school,parent_name,phone,balance,inst_id) values('".$studentName."','".$studPinyin."',".$gender.",".$grade.",'".$school."','".$parentName."','".$mobile."',".$tuition.",".$instId.")";
         return $this->execute($sql);
     }
+
+    public function changeStudentStatus($studentId,$instId,$status){
+        $sql = "update classoa_student set status=".$status." where inst_id=".$instId." and student_id=".$studentId;
+        return $this->execute($sql);
+    }
     
     public function total($instId){
     	$sql = "select count(1) total from classoa_student where inst_id=".$instId." and status=0";

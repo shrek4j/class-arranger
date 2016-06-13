@@ -22,6 +22,8 @@
     <link rel="stylesheet"
         href="http://cdn.amazeui.org/amazeui/2.3.0/css/amazeui.min.css">
     <link rel="stylesheet" href="http://amazeui.github.io/tagsinput/amazeui.tagsinput.css"/>
+    <!--http://validatejs.org/-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.10.0/validate.min.js"></script>
 
     <style type="text/css">
         .main-view{overflow-y:scroll;position:fixed;width:83.5%;height:98%;margin:0.5% 0.5% 0.5% 16%;padding:0.8% 0.8% 0.8% 1.2%;background:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)}
@@ -81,6 +83,14 @@
                 <foreach name="teacherList" item="vo" >
                     <input tabindex="{$tnum}" id="teacher_{$tnum++}" type="radio" name="teacher" value="{$vo.teacher_id}"><span class="radio-text">{$vo.name}</span>
                 </foreach>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label for="wage" class="control-label">课时费(元):</label>
+            </div>
+            <div class="col-md-6">
+                <input  style="display:inline;width:150px;" type="text" class="form-control" id="wage" name="wage"><span style="font-size:12px;">&nbsp;每次课<span style="color:red;">*</span></span>
             </div>
         </div>
         <div class="row">
