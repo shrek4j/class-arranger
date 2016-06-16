@@ -733,7 +733,8 @@ class ClassController extends Controller {
                             $isLeftPadding = true;
                         }
                     }
-                    array_push($weeklyArray[$wc],&$dailyArray[$dc]);
+                    $dailyArrayAddr = &$dailyArray[$dc];
+                    array_push($weeklyArray[$wc],$dailyArrayAddr); 
                 }
                 
                 array_push($daily,$perClass);//添加月内数据
