@@ -88,7 +88,7 @@ class ClassModel extends Model {
 
     public function updateClass($classId,$className,$tId){
         $sql = "update classoa_class set class_name='%s' where class_id=%d and inst_id=%d";
-        return $this->execute($sql,,$className$classId,$tId);
+        return $this->execute($sql,$className,$classId,$tId);
     }
 
     public function deleteClass($classId,$tId){
