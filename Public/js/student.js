@@ -25,6 +25,11 @@ $(".add-student").click(function(){
 	});
 });
 
+$(".grade").click(function(){
+	$('.grade').removeClass('selected');
+	$(this).addClass('selected');
+	$("#gradeShow").text($(this).children('a').text());
+});
 
 function showStudentDetail(studentId){
 	window.location.href="showStudentDetail.html?studentId="+studentId;

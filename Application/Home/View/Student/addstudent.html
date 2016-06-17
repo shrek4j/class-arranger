@@ -16,8 +16,7 @@
 	<title>console</title>
 	<!-- 新 Bootstrap 核心 CSS 文件 -->
 	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <!-- bootstrap datepicker -->
-    <link id="bsdp-css" href="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet">
+    <link href="/Public/css/bootstrap/icheck/square.css" rel="stylesheet">
     
     <style type="text/css">
         .main-view{position:fixed;width:83.5%;height:98%;margin:0.5% 0.5% 0.5% 16%;padding:0.8% 0.8% 0.8% 1.2%;background:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)}
@@ -43,17 +42,39 @@
             <div class="row">
                 <div class="col-md-4 key row-gutter">学生姓名：</div>
                 <div class="col-md-4 value"><input id="studentName" type="text" class="form-control" value="" aria-describedby="basic-addon1"/></div>
-                <div class="col-md-2 remark"><span>必填</span></div>
             </div>
             <div class="row">
                 <div class="col-md-4 key row-gutter">性别：</div>
-                <div class="col-md-4 value"><input id="gender" type="text" class="form-control" value="" aria-describedby="basic-addon1"/></div>
-                <div class="col-md-2 remark"><span>必填</span></div>
+                <div class="col-md-4 value">
+                    <input tabindex="{$tnum}" id="gender_1" type="radio" name="gender" value="1"><span class="radio-text">男</span>
+                    <input tabindex="{$tnum}" id="gender_0" type="radio" name="gender" value="0"><span class="radio-text">女</span>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-4 key row-gutter">年级：</div>
-                <div class="col-md-4 value"><input id="grade" type="text" class="form-control" value="" aria-describedby="basic-addon1"/></div>
-                <div class="col-md-2 remark"><span>必填</span></div>
+                <div class="col-md-4 value">
+                    <div class="dropdown" style="display: inline-block;">
+                        <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="gradepicker" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span id="gradeShow">选择年级</span>
+                        </a>
+                        <ul class="dropdown-menu grade-picker" aria-labelledby="gradepicker">
+                            <li class="grade" grade="0"><a href="#">学前</a></li>
+                            <li class="grade" grade="1"><a href="#">一年级</a></li>
+                            <li class="grade" grade="2"><a href="#">二年级</a></li>
+                            <li class="grade" grade="3"><a href="#">三年级</a></li>
+                            <li class="grade" grade="4"><a href="#">四年级</a></li>
+                            <li class="grade" grade="5"><a href="#">五年级</a></li>
+                            <li class="grade" grade="6"><a href="#">六年级</a></li>
+                            <li class="grade" grade="7"><a href="#">初一</a></li>
+                            <li class="grade" grade="8"><a href="#">初二</a></li>
+                            <li class="grade" grade="9"><a href="#">初三</a></li>
+                            <li class="grade" grade="10"><a href="#">高一</a></li>
+                            <li class="grade" grade="11"><a href="#">高二</a></li>
+                            <li class="grade" grade="12"><a href="#">高三</a></li>
+                            <li class="grade" grade="13"><a href="#">其他</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-4 key row-gutter">学校：</div>
@@ -62,46 +83,14 @@
             <div class="row">
                 <div class="col-md-4 key row-gutter">家长姓名：</div>
                 <div class="col-md-4 value"><input id="parentName" type="text" class="form-control" value="" aria-describedby="basic-addon1"/></div>
-                <div class="col-md-2 remark"><span>必填</span></div>
             </div>
             <div class="row">
                 <div class="col-md-4 key row-gutter">联系电话：</div>
                 <div class="col-md-4 value"><input id="mobile" type="text" class="form-control" value="" aria-describedby="basic-addon1"/></div>
-                <div class="col-md-2 remark"><span>必填</span></div>
             </div>
-<!--            <div class="row">
-                <div class="col-md-4 key row-gutter">报名课程：</div>
-                <div class="col-md-4 value">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle btn-class-type" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            课程类型 <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">新概念1</a></li>
-                            <li><a href="#">新概念2</a></li>
-                            <li><a href="#">KET</a></li>
-                            <li><a href="#">PET</a></li>
-                            <li><a href="#">1对1</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-4 value">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle btn-class-list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            课程名称 <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">新概念1-20160112-5人班</a></li>
-                            <li><a href="#">新概念1-20160118-5人班</a></li>
-                            <li><a href="#">新概念1-20160112-10人班</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
--->
             <div class="row" style="margin-bottom:30px;">
                 <div class="col-md-4 key row-gutter">缴费(元)：</div>
-                <div class="col-md-4 value"><input id="tuition" type="text" class="form-control" value="" aria-describedby="basic-addon1"/></div>
+                <div class="col-md-4 value"><input type="text" class="form-control" style="text-align:right;" placeholder="0.00" aria-describedby="basic-addon1"/></div>
             </div>
             <div class="row">
                 <div class="col-md-6 key row-gutter"><button type="button" class="btn btn-default btn-submit add-student">保存</button></div>
@@ -116,16 +105,24 @@
 
 
 	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <!-- bootstrap datepicker -->
-    <script src="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-    <script src="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://7xl53o.com1.z0.glb.clouddn.com/dingdingenglish/js/jquery.icheck.min.js"></script>
+    <!--http://validatejs.org/-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.10.0/validate.min.js"></script>
     <script src="/Public/js/student.js"></script>
         
     <script type="text/javascript">
-		$('#navLoader').load("nav.html?"+new Date().getTime());
+		$(document).ready(function(){
+          $('input').iCheck({
+            checkboxClass: 'icheckbox_square',
+            radioClass: 'iradio_square',
+            increaseArea: '20%' // optional
+          });
+        });
+
+        $("#gender_1").iCheck('check');
     </script>
 
     <script type="text/javascript">

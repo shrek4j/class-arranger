@@ -49,6 +49,9 @@ class ClassController extends Controller {
         //inst_Id
         $tId = session('instId');
 
+        $className = iconv("utf-8","gbk//IGNORE",$className);
+        $timecn = iconv("utf-8","gbk//IGNORE",$timecn);
+
         //handle time format
         $classTimeArr = array("","","","","","","");
         $timeArr = explode(';',$time);
@@ -733,8 +736,8 @@ class ClassController extends Controller {
                             $isLeftPadding = true;
                         }
                     }
-                    $dailyArrayAddr = &$dailyArray[$dc];
-                    array_push($weeklyArray[$wc],$dailyArrayAddr); 
+                    $weeklyArray[$wc][] = &$dailyArray[$dc];
+                    //array_push($weeklyArray[$wc], &$dailyArray[$dc]);
                 }
                 
                 array_push($daily,$perClass);//添加月内数据

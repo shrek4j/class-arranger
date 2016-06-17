@@ -1,6 +1,22 @@
 
 $(".add-classroom").click(function(){
 	var classroom = $("#classroom").val();
+	var constraints = {
+	  classroom: {
+	    presence: true,
+	    length: {
+	      maximum: 10,
+	      message: "最多输入10个字符"
+	    }
+	  }
+	};
+	var msg = validate({classroom: classroom}, constraints);
+	if(msg != null){
+		var hint = msg.classroom[0];
+		hint = hint.split(" ")[1];
+		$("#classroom_msg").text(hint);
+		return;
+	}
 	$.ajax({
 	   	type: "POST",
 	   	url: "saveClassroom",

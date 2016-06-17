@@ -12,7 +12,9 @@ $(".add-teacher").click(function(){
 	};
 	var msg = validate({teacher: teacher}, constraints);
 	if(msg != null){
-		$("#teacher_msg").text(msg.teacher);
+		var hint = msg.teacher[0];
+		hint = hint.split(" ")[1];
+		$("#teacher_msg").text(hint);
 		return;
 	}
 	$.ajax({
