@@ -21,7 +21,7 @@ class StudentModel extends Model {
     }
 
     public function showStudents($instId,$start,$pageSize){
-        $sql = "select * from classoa_student where inst_id=%d and status=0 order by student_id desc limit %d,%d";
+        $sql = "select * from classoa_student where inst_id=%d and status<>1 order by student_id desc limit %d,%d";
         return $this->query($sql,$instId,$start,$pageSize);
     }
 

@@ -49,8 +49,8 @@ class ClassController extends Controller {
         //inst_Id
         $tId = session('instId');
 
-        $className = iconv("utf-8","gbk//IGNORE",$className);
-        $timecn = iconv("utf-8","gbk//IGNORE",$timecn);
+        //$className = iconv("utf-8","gbk//IGNORE",$className);
+        //$timecn = iconv("utf-8","gbk//IGNORE",$timecn);
 
         //handle time format
         $classTimeArr = array("","","","","","","");
