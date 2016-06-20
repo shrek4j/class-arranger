@@ -1,8 +1,8 @@
 
 $(".add-student").click(function(){
 	var studentName = $("#studentName").val();
-	var gender = $("#gender").val();
-	var grade = $("#grade").val();
+	var gender = $("input[name='gender']:checked").val();
+	var grade = $('.grade').filter('.selected').attr('grade');
 	var school = $("#school").val();
 	var parentName = $("#parentName").val();
 	var mobile = $("#mobile").val();
