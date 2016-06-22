@@ -42,7 +42,8 @@
         <div class="main-view-inner container-fluid">
             <div class="row">
                 <div class="col-md-4 key row-gutter">学生姓名：</div>
-                <div class="col-md-4 value"><input type="text" class="form-control" value="{$student.student_name}" aria-describedby="basic-addon1"/></div>
+                <div class="col-md-4 value"><input id="studentName" type="text" class="form-control" value="{$student.student_name}" aria-describedby="basic-addon1"/></div>
+                <input type="hidden" id="studentId" value="{$student.student_id}">
             </div>
             <div class="row">
                 <div class="col-md-4 key row-gutter">性别：</div>
@@ -79,25 +80,26 @@
             </div>
             <div class="row">
                 <div class="col-md-4 key row-gutter">学校：</div>
-                <div class="col-md-4 value"><input type="text" class="form-control" value="{$student.school}" aria-describedby="basic-addon1"/></div>
+                <div class="col-md-4 value"><input id="school" type="text" class="form-control" value="{$student.school}" aria-describedby="basic-addon1"/></div>
             </div>
             <div class="row">
                 <div class="col-md-4 key row-gutter">联系电话：</div>
-                <div class="col-md-4 value"><input type="text" class="form-control" value="{$student.phone}" aria-describedby="basic-addon1"/></div>
+                <div class="col-md-4 value"><input id="mobile" type="text" class="form-control" value="{$student.phone}" aria-describedby="basic-addon1"/></div>
             </div>
             <div class="row">
                 <div class="col-md-4 key row-gutter">备注：</div>
                 <div class="col-md-4 value">
-                    <textarea class="form-control" aria-describedby="basic-addon1">{$student.remark}</textarea>
+                    <textarea id="remark" class="form-control" aria-describedby="basic-addon1">{$student.remark}</textarea>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4 key text-gutter">余额(元)：</div>
-                <div class="col-md-4 value text-gutter-value">{$student.balance}元</div>
+                <div class="col-md-4 value text-gutter-value">{$student['balance']/100}</div>
+                <input type="hidden" id="tuition" value="{$student['balance']/100}">
             </div>
             <div class="row" style="margin-bottom:30px;">
                 <div class="col-md-4 key row-gutter">充值(元)：</div>
-                <div class="col-md-4 value"><input type="text" class="form-control" style="text-align:right;" placeholder="0.00" aria-describedby="basic-addon1"/></div>
+                <div class="col-md-4 value"><input id="payment" type="text" class="form-control" style="text-align:right;" placeholder="0.00" aria-describedby="basic-addon1"/></div>
             </div>
             <div class="row">
                 <div class="col-md-6 key row-gutter"><button type="button" class="btn btn-default btn-submit update-student">保存</button></div>

@@ -507,7 +507,7 @@ function editStudentTuitions(className,classId){
 	   			html+='<thead><tr class="title"><td>学生</td><td>学费(每次课每人) 单位:元</td></tr></thead><tbody>';
 	   			for(var i=0;i<studentArr.length-1;i++){
 	   				var s = studentArr[i].split(":");
-	   				html += '<tr><td>'+s[1]+'</td><td><input type="text" class="form-control" style="text-align:right;" placeholder="0" name="stdTuition" student_id="'+s[0]+'" value='+s[2]+'></td></tr>';
+	   				html += '<tr><td>'+s[1]+'</td><td><input type="text" class="form-control" style="text-align:right;" placeholder="0" name="stdTuition" student_id="'+s[0]+'" value='+parseFloat(s[2])/100.00+'></td></tr>';
 	   			}
 	   			html+='</tbody></table>';
 	   			$("#className").text("课程："+className);

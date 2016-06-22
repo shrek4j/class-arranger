@@ -49,6 +49,9 @@ class ClassController extends Controller {
         //inst_Id
         $tId = session('instId');
 
+        $tuition = (int)$tuition*100;
+        $wage = (int)$wage*100;
+
         //$className = iconv("utf-8","gbk//IGNORE",$className);
         //$timecn = iconv("utf-8","gbk//IGNORE",$timecn);
 
@@ -543,7 +546,7 @@ class ClassController extends Controller {
         $class = new \Home\Model\ClassModel();
         for($i=0;$i<count($sts);$i++){
             $st = explode(':',$sts[$i]);
-            $class->updateStudentTuitionForClass($tId,(int)$classId,(int)$st[0],(int)$st[1]);
+            $class->updateStudentTuitionForClass($tId,(int)$classId,(int)$st[0],(int)$st[1]*100);
         }
         $this->ajaxReturn("true");
     }

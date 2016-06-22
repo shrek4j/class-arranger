@@ -64,7 +64,7 @@
                     <td>{$vo.start_date}</td>
                     <td>{$vo.end_date}</td>
                     <td>{$vo.timecn}</td>
-                    <td>{$vo.tuition_per_class}元</td>
+                    <td>{$vo['tuition_per_class']/100}元</td>
                     <td>
                       <span id="editClassStudentTuition" style="cursor:pointer" class="glyphicon glyphicon-user" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="修改学生"  onclick="editClassStudents('{$vo.class_name}',{$vo.class_id})"></span>
                       <span id="editClassStudentTuition" style="cursor:pointer" class="glyphicon glyphicon-yen cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="修改学费" onclick="editStudentTuitions('{$vo.class_name}',{$vo.class_id})"></span>

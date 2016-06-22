@@ -26,22 +26,28 @@ $(".add-student").click(function(){
 });
 
 $(".update-student").click(function(){
+	var studentId = $("#studentId").val();
 	var studentName = $("#studentName").val();
 	var gender = $("input[name='gender']:checked").val();
 	var grade = $('.grade').filter('.selected').attr('grade');
 	var school = $("#school").val();
-	var parentName = $("#parentName").val();
+	var remark = $("#remark").val();
 	var mobile = $("#mobile").val();
 	var tuition = $("#tuition").val();
+	var payment = $("#payment").val();
+	if(payment == null || payment == "undefined" || payment == "")
+		payment = 0;
+	var balance = parseFloat(tuition)+parseFloat(payment);
+	if(balance < 0)
+		balance = 0;
 	$.ajax({
 	   	type: "POST",
-	   	url: "saveStudent",
+	   	url: "updateStudent",
 	   	data: "studentName="+studentName+"&gender="+gender+"&grade="+grade+"&school="+school+
-	   			"&parentName="+parentName+"&mobile="+mobile+"&tuition="+tuition,
+	   			"&remark="+remark+"&mobile="+mobile+"&balance="+balance+"&studentId="+studentId,
 	   	success: function(msg){
 	   		if(msg == 'false'){
 	   			//提示保存失败
-	   			alert(msg);
 	   		}else{
 	   			//提示保存成功
 	   			window.location.reload();

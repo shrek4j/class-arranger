@@ -10,6 +10,11 @@ class StudentModel extends Model {
         return $this->execute($sql,$studentName,$studPinyin,$gender,$grade,$school,$remark,$mobile,$tuition,$instId);
     }
 
+    public function updateStudent($studentName,$studPinyin,$gender,$grade,$school,$remark,$mobile,$balance,$studentId,$instId){
+        $sql = "update classoa_student set student_name='%s',pinyin='%s',gender=%d,grade=%d,school='%s',remark='%s',phone='%s',balance=%d where student_id=%d and inst_id=%d";
+        return $this->execute($sql,$studentName,$studPinyin,$gender,$grade,$school,$remark,$mobile,$balance,$studentId,$instId);
+    }
+
     public function changeStudentStatus($studentId,$instId,$status){
         $sql = "update classoa_student set status=%d where inst_id=%d and student_id=%d";
         return $this->execute($sql,$status,$instId,$studentId);
