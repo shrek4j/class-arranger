@@ -29,6 +29,7 @@
         .row-gutter{margin-top:5px;}
         .text-gutter{margin-top:5px;margin-bottom:5px;}
         .text-gutter-value{margin-top:5px;margin-bottom:5px;margin-left:10px;}
+        .btn-submit{width:265px;height:40px;}
     </style>
     
 </head>
@@ -94,11 +95,15 @@
                 <div class="col-md-4 key text-gutter">余额(元)：</div>
                 <div class="col-md-4 value text-gutter-value">{$student.balance}元</div>
             </div>
-            <div class="row" style="margin-bottom:40px;">
+            <div class="row" style="margin-bottom:30px;">
                 <div class="col-md-4 key row-gutter">充值(元)：</div>
                 <div class="col-md-4 value"><input type="text" class="form-control" style="text-align:right;" placeholder="0.00" aria-describedby="basic-addon1"/></div>
             </div>
+            <div class="row">
+                <div class="col-md-6 key row-gutter"><button type="button" class="btn btn-default btn-submit update-student">保存</button></div>
+            </div>
 
+<!--
             <table class="main-view-inner-table table table-bordered table-striped table-hover text-center">
             <thead class="title"><tr><td>编号</td><td>课程名称</td><td>状态</td><td>课次总计</td><td>课次剩余</td><td>费用剩余</td><td>管理</td></tr></thead>
             <tbody>
@@ -114,7 +119,8 @@
               </foreach>
             </tbody>
         </table>
-    </div>
+-->
+        </div>
 
     
 

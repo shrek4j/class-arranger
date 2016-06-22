@@ -8,7 +8,7 @@ class StudentController extends Controller {
         $this->display();
     }
 
-    public function saveStudent($studentName="",$gender,$grade,$school,$parentName,$mobile,$tuition){
+    public function saveStudent($studentName="",$gender,$grade,$school,$remark,$mobile,$tuition){
         if($studentName == "")
             return;
         $pyUtil = new \Org\Util\Pinyin();
@@ -17,7 +17,7 @@ class StudentController extends Controller {
         if(!$instId)
             return;
         $model = new \Home\Model\StudentModel();
-        $result = $model->saveStudent($studentName,$studPinyin,$gender,$grade,$school,$parentName,$mobile,$tuition,$instId);
+        $result = $model->saveStudent($studentName,$studPinyin,$gender,$grade,$school,$remark,$mobile,$tuition,$instId);
         $data;
         if($result == 1){
            $data = 'ok'; 

@@ -318,6 +318,9 @@ $(".save-vacancy").click(function(){
 				$("#myModal").modal('hide');
 				//clear
 				clearVacancyInfo();
+				//render
+				$("#vacancy_"+classDetailId).removeClass("vacancy-undone");
+				$("#vacancy_"+classDetailId).addClass("vacancy-done");
 	   		}
 	   	}
 	});

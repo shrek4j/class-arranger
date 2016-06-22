@@ -5,9 +5,9 @@ class StudentModel extends Model {
     protected $connection = 'DB_CONFIG1';//调用配置文件中的数据库配置1
     protected $autoCheckFields =false;//模型和数据表无需一一对应
     
-    public function saveStudent($studentName,$studPinyin,$gender,$grade,$school,$parentName,$mobile,$tuition,$instId){
-        $sql = "insert into classoa_student(student_name,pinyin,gender,grade,school,parent_name,phone,balance,inst_id) values('%s','%s',%d,%d,'%s','%s','%s',%d,%d)";
-        return $this->execute($sql,$studentName,$studPinyin,$gender,$grade,$school,$parentName,$mobile,$tuition,$instId);
+    public function saveStudent($studentName,$studPinyin,$gender,$grade,$school,$remark,$mobile,$tuition,$instId){
+        $sql = "insert into classoa_student(student_name,pinyin,gender,grade,school,remark,phone,balance,inst_id) values('%s','%s',%d,%d,'%s','%s','%s',%d,%d)";
+        return $this->execute($sql,$studentName,$studPinyin,$gender,$grade,$school,$remark,$mobile,$tuition,$instId);
     }
 
     public function changeStudentStatus($studentId,$instId,$status){
@@ -16,7 +16,7 @@ class StudentModel extends Model {
     }
     
     public function total($instId){
-    	$sql = "select count(1) total from classoa_student where inst_id=%d and status=0";
+    	$sql = "select count(1) total from classoa_student where inst_id=%d and status<>1";
         return $this->query($sql,$instId);
     }
 
@@ -26,7 +26,7 @@ class StudentModel extends Model {
     }
 
     public function showStudentDetail($instId,$studentId){
-        $sql = "select * from classoa_student where student_id=%d and inst_id=%d and status=0";
+        $sql = "select * from classoa_student where student_id=%d and inst_id=%d and status<>1";
         return $this->query($sql,$studentId,$instId);
     }
 

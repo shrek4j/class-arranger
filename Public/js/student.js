@@ -4,6 +4,32 @@ $(".add-student").click(function(){
 	var gender = $("input[name='gender']:checked").val();
 	var grade = $('.grade').filter('.selected').attr('grade');
 	var school = $("#school").val();
+	var remark = $("#remark").val();
+	var mobile = $("#mobile").val();
+	var tuition = $("#tuition").val();
+	$.ajax({
+	   	type: "POST",
+	   	url: "saveStudent",
+	   	data: "studentName="+studentName+"&gender="+gender+"&grade="+grade+"&school="+school+
+	   			"&remark="+remark+"&mobile="+mobile+"&tuition="+tuition,
+	   	success: function(msg){
+	   		if(msg == 'false'){
+	   			//提示保存失败
+	   			alert(msg);
+	   		}else{
+	   			//提示保存成功
+	   			window.location.reload();
+	   		}
+			
+	   	}
+	});
+});
+
+$(".update-student").click(function(){
+	var studentName = $("#studentName").val();
+	var gender = $("input[name='gender']:checked").val();
+	var grade = $('.grade').filter('.selected').attr('grade');
+	var school = $("#school").val();
 	var parentName = $("#parentName").val();
 	var mobile = $("#mobile").val();
 	var tuition = $("#tuition").val();
