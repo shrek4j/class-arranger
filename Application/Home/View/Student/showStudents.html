@@ -37,8 +37,9 @@
     
 <div class="main-view">
     <div class="main-view-inner">
+    
         <div class="main-view-inner-bar container-fluid">
-            <div class="row">
+    <!--        <div class="row">
                 <div class="col-md-3">
                     <input type="text" class="form-control main-view-inner-bar-input" placeholder="学生姓名" aria-describedby="basic-addon1"/>
                 </div>
@@ -88,7 +89,7 @@
                     <button type="button" class="btn btn-default main-view-inner-bar-input">查询</button>
                 </div>
             </div>
-
+-->
         </div>
 
         <table class="main-view-inner-table table table-bordered table-striped table-hover text-center">
@@ -112,8 +113,8 @@
                         </if>
                   </td>
                     <td>
-                        <span style="cursor:pointer" class="glyphicon glyphicon-folder-open student-detail" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="详情" onclick="showStudentDetail({$vo.student_id});"></span>
-                        <span style="cursor:pointer" class="glyphicon glyphicon-education cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="报名"></span>
+                        <span style="cursor:pointer" class="glyphicon glyphicon-pencil student-detail" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="修改" onclick="showStudentDetail({$vo.student_id});"></span>
+                    <!--    <span style="cursor:pointer" class="glyphicon glyphicon-education cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="报名"></span> -->
                         <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top"  onclick="deleteStudent({$vo.student_id},'{$vo.student_name}')" title="删除">
                     </td>
                 </tr>

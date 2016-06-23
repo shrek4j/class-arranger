@@ -81,6 +81,11 @@ class ClassModel extends Model {
         return $this->execute($sql,$tuition,$classId,$studentId,$tId);
     }
 
+     public function updateStudentTuitionForClassDetailAndStudentRela($tId,$classId,$studentId,$tuition){
+        $sql = "update classoa_class_detail_student_rela set tuition_per_class=%d where class_id=%d and student_id=%d and inst_id=%d and status=0";
+        return $this->execute($sql,$tuition,$classId,$studentId,$tId);
+    }
+
     public function updateStudentStatusFromClass($tId,$classId,$studentId,$status){
         $sql = "update classoa_class_student_rela set status=%d where class_id=%d and student_id=%d and inst_id=%d";
         return $this->execute($sql,$status,$classId,$studentId,$tId);

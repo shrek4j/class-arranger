@@ -547,6 +547,7 @@ class ClassController extends Controller {
         for($i=0;$i<count($sts);$i++){
             $st = explode(':',$sts[$i]);
             $class->updateStudentTuitionForClass($tId,(int)$classId,(int)$st[0],(int)$st[1]*100);
+            $class->updateStudentTuitionForClassDetailAndStudentRela($tId,(int)$classId,(int)$st[0],(int)$st[1]*100);
         }
         $this->ajaxReturn("true");
     }

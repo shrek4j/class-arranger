@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>收支明细</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    
+    <style type="text/css">
+        .main-view{overflow-y:scroll;position:fixed;width:83.5%;height:98%;margin:0.5% 0.5% 0.5% 16%;padding:0.8% 0.8% 0.8% 1.2%;background:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)}
+        .main-view-inner{margin:2% 2% 2% 2%;}
+        .main-view-inner-bar{margin:2% 2% 2% 2%;}
+        .btn-choose{margin-right:50px;}
+        .class-detail-monthly{margin:2% 1% 2% 1%;}
+        .class-detail-monthly .title{font-weight:bold;font-size:16px;background-color:#1ABC9C;color:white;}
+        .class-detail-monthly table tr td{width:150px;}
+        .class-detail-monthly .classinfo{color:#34495e;}
+        .class-detail-monthly .calendar-day{font-size:10px;margin-left:86%;background-color:#777777;color:white;padding-left:2px;}
+        .class-detail-monthly .classinfo-one{font-size:10px;margin: 2px 2px 2px 2px;}
+        .class-detail-monthly .classtime{font-size:10px;font-weight:900;}
+        .class-detail-monthly .classtype{}
+        .class-detail-monthly .classroom{margin-left:5px;}
+        .class-detail-monthly .weekend{background-color:#eaeded;}
+        .teacherList{min-width:100px;}
+        .monthList{min-width:100px;}
+    </style>
+    
+</head>
+ <body class="global">   
+ <!-- 导航 -->
+<include file="Public:nav" />
+
+<div class="main-view">
+    <div class="main-view-inner">
+        <div class="main-view-inner-bar text-center">
+            <div class="btn-group">
+              <button type="button" class="btn btn-success dropdown-toggle btn-choose" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span id="ymShow">
+                    <empty name="ym">月份<else/>{$ym}</empty>
+                </span>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu monthList">
+                <foreach name="ymList" item="date">
+                <li ym="{$date}" class="ym"><a href="#">{$date}</a></li>
+                </foreach>
+              </ul>
+            </div>
+            <button type="button" class="btn btn-default show-classes">查询</button>
+        </div>
+
+
+        
+        <notempty name="monthlyClasses">
+        <div class="class-detail-monthly">
+            <table class="table table-bordered">
+                <tr class="title text-center">
+                    <td>星期一</td>
+                    <td>星期二</td>
+                    <td>星期三</td>
+                    <td>星期四</td>
+                    <td>星期五</td>
+                    <td>星期六</td>
+                    <td>星期日</td>
+                </tr>
+                <foreach name="monthlyClasses" item="weekly" >
+                <tr class="classinfo">
+                    <foreach name="weekly" item="daily">
+                    <td>
+                        <foreach name="daily" item="perClass">
+                        <if condition="$perClass.showDate eq 1 ">
+                            <div class="calendar-day">{$perClass.dayOfMonth}</div>
+                        </if>
+                        <div class="classinfo-one">
+                            <span class="classtime">{$perClass.startTime}
+                            <notempty name="perClass.className">-</notempty>
+                            {$perClass.endTime}</span>
+                            <notempty name="perClass.className"><span style="cursor:pointer" class="glyphicon glyphicon-check 
+                            <if condition='$perClass.isAbsentCheck eq 1'>
+                            vacancy-done
+                            <else/>
+                            vacancy-undone
+                            </if>
+                            " aria-hidden="true" data-toggle="tooltip" data-placement="top" title="登记考勤" onclick="editVacancy('{$perClass.className}',{$perClass.classDetailId});"  id="vacancy_{$perClass.classDetailId}"></span></notempty>
+                            <div>
+                            <span class="classtype">{$perClass.className}</span><span class="classroom">{$perClass.classroomName}</span>
+                            </div>
+                        </div>
+                        </foreach>
+                    </td>
+                    </foreach>
+                </tr>
+                </foreach>
+            </table>
+        </div>
+        </notempty>
+    </div>
+    
+</div>
+
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script src="/Public/js/finance.js"></script>
+    
+    <script type="text/javascript">
+            $(function () {
+              $('[data-toggle="tooltip"]').tooltip()
+            });
+    </script>
+</body>
+</html>
