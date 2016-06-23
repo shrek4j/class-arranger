@@ -11,7 +11,7 @@ class FinanceModel extends Model {
     }
 
     public function getTuitionsByClassDetailId($classDetailId,$classId,$instId){
-        $sql = "SELECT sum(tuition_per_class) FROM classoa_class_detail_student_rela WHERE class_detail_id=%d AND class_id=%d AND inst_id=%d and status=0 and is_absent=0";
+        $sql = "SELECT sum(tuition_per_class) sum FROM classoa_class_detail_student_rela WHERE class_detail_id=%d AND class_id=%d AND inst_id=%d and status=0 and is_absent=0";
         return $this->query($sql,$classDetailId,$classId,$instId);
     }
 }

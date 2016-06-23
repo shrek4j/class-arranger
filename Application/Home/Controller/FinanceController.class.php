@@ -16,27 +16,35 @@ class FinanceController extends Controller {
         $instId = session('instId');
 
         $model = new \Home\Model\FinanceModel();
-        $allClassDetails = $model->getAllClassDetailsByMonth($year,$month,$instId);
-
+        $allClassDetails = $model->getAllClassDetailsByMonth($year,(int)$month,$instId);
 
         for($i=0;$i<count($allClassDetails);$i++){
             $classDetail = $allClassDetails[$i];
             $classId = $classDetail['class_id'];
             $classDetailId = $classDetail['class_detail_id'];
             
-            if($classList[$classId] == null){
+            if(empty($classList[$classId])){
                 $tuitions = $model->getTuitionsByClassDetailId($classDetailId,$classId,$instId);
-                $classInfo = ("className"=>$classDetail["class_name"],"classTimes"=>1,"classTypeId"=>$classDetail["class_type_id"],"tuitions"=>$tuitions);
-                $classList = ();
-
+                $classInfo = array("className"=>$classDetail["class_name"],"classTimes"=>1,"classTypeId"=>$classDetail["class_type_id"],"tuitions"=>$tuitions[0]['sum']);
+                $classList[$classId] = $classInfo;
+            }else{
+                $classInfo = $classList[$classId];
+                $classTimes = $classInfo['classTimes'];
+                $classInfo["classTimes"] = $classTimes+1;
+                $tuitions = $model->getTuitionsByClassDetailId($classDetailId,$classId,$instId);
+                $allTuitions = $classInfo['tuitions'];
+                $classInfo['tuitions'] = $allTuitions + $tuitions[0]['sum'];
+                $classList[$classId] = $classInfo;
             }
-            
         }
+
+
+        $this->assign("classList",$classList);
 
         //年月list  页面显示用
         $ymList = array();
         $currym = date('Y-m');
-        for($i=1;$i<6;$i++){
+        for($i=0;$i<6;$i++){
             $nextmonth=date('Y-m',strtotime("$currym - ".$i." month"));
             array_push($ymList,$nextmonth);
         }

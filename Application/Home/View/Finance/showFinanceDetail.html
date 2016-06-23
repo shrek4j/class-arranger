@@ -60,51 +60,35 @@
             <button type="button" class="btn btn-default show-classes">查询</button>
         </div>
 
-
-        
-        <notempty name="monthlyClasses">
-        <div class="class-detail-monthly">
-            <table class="table table-bordered">
-                <tr class="title text-center">
-                    <td>星期一</td>
-                    <td>星期二</td>
-                    <td>星期三</td>
-                    <td>星期四</td>
-                    <td>星期五</td>
-                    <td>星期六</td>
-                    <td>星期日</td>
-                </tr>
-                <foreach name="monthlyClasses" item="weekly" >
-                <tr class="classinfo">
-                    <foreach name="weekly" item="daily">
-                    <td>
-                        <foreach name="daily" item="perClass">
-                        <if condition="$perClass.showDate eq 1 ">
-                            <div class="calendar-day">{$perClass.dayOfMonth}</div>
-                        </if>
-                        <div class="classinfo-one">
-                            <span class="classtime">{$perClass.startTime}
-                            <notempty name="perClass.className">-</notempty>
-                            {$perClass.endTime}</span>
-                            <notempty name="perClass.className"><span style="cursor:pointer" class="glyphicon glyphicon-check 
-                            <if condition='$perClass.isAbsentCheck eq 1'>
-                            vacancy-done
-                            <else/>
-                            vacancy-undone
-                            </if>
-                            " aria-hidden="true" data-toggle="tooltip" data-placement="top" title="登记考勤" onclick="editVacancy('{$perClass.className}',{$perClass.classDetailId});"  id="vacancy_{$perClass.classDetailId}"></span></notempty>
-                            <div>
-                            <span class="classtype">{$perClass.className}</span><span class="classroom">{$perClass.classroomName}</span>
-                            </div>
-                        </div>
-                        </foreach>
-                    </td>
-                    </foreach>
-                </tr>
+        <div>
+            <div class="container-fluid">
+                <div class="row" style="background:#33aa66;color:white;">
+                    <div class="col-md-4">
+                        课程名称
+                    </div>
+                    <div class="col-md-2">
+                        课次
+                    </div>
+                    <div class="col-md-2">
+                        学费
+                    </div>
+                </div>
+                <foreach name="classList" item="vo">
+                <div class="row">
+                    <div class="col-md-4">
+                        {$vo.className}
+                    </div>
+                    <div class="col-md-2">
+                        {$vo.classTimes}
+                    </div>
+                    <div class="col-md-2">
+                        {$vo['tuitions']/100}元
+                    </div>
+                </div>
                 </foreach>
-            </table>
+            </div>
         </div>
-        </notempty>
+
     </div>
     
 </div>
