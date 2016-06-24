@@ -22,18 +22,15 @@
         .main-view-inner{margin:2% 2% 2% 2%;}
         .main-view-inner-bar{margin:2% 2% 2% 2%;}
         .btn-choose{margin-right:50px;}
-        .class-detail-monthly{margin:2% 1% 2% 1%;}
-        .class-detail-monthly .title{font-weight:bold;font-size:16px;background-color:#1ABC9C;color:white;}
-        .class-detail-monthly table tr td{width:150px;}
-        .class-detail-monthly .classinfo{color:#34495e;}
-        .class-detail-monthly .calendar-day{font-size:10px;margin-left:86%;background-color:#777777;color:white;padding-left:2px;}
-        .class-detail-monthly .classinfo-one{font-size:10px;margin: 2px 2px 2px 2px;}
-        .class-detail-monthly .classtime{font-size:10px;font-weight:900;}
-        .class-detail-monthly .classtype{}
-        .class-detail-monthly .classroom{margin-left:5px;}
-        .class-detail-monthly .weekend{background-color:#eaeded;}
-        .teacherList{min-width:100px;}
         .monthList{min-width:100px;}
+
+        .finance-view{margin:50px 150px 0px 100px;}
+        .income{border:1px solid #e7e7eb;width:900px;}
+        .income-row{background-color:#EAECF5;height:30px;width:900px;}
+        .income-name{line-height:30px;margin-left:15px;font-size:14px;font-weight:bold;}
+        .income-title{font-size:14px;}
+        .income-main{width:900px;margin:5px;padding:5px;text-align:center;}
+        .income-main div{margin:2px 0px 2px 0px;}
     </style>
     
 </head>
@@ -60,32 +57,43 @@
             <button type="button" class="btn btn-default show-classes">查询</button>
         </div>
 
-        <div>
-            <div class="container-fluid">
-                <div class="row" style="background:#33aa66;color:white;">
-                    <div class="col-md-4">
-                        课程名称
-                    </div>
-                    <div class="col-md-2">
-                        课次
-                    </div>
-                    <div class="col-md-2">
-                        学费
-                    </div>
+        <div class="finance-view">
+            <div class="income">
+                <div class="income-row">
+                    <span class="income-name">收入</span>
                 </div>
-                <foreach name="classList" item="vo">
-                <div class="row">
-                    <div class="col-md-4">
-                        {$vo.className}
+                <div class="container income-main">
+                    <div class="row income-title">
+                        <div class="col-md-3">
+                            课程类型
+                        </div>
+                        <div class="col-md-3">
+                            课程名称
+                        </div>
+                        <div class="col-md-3">
+                            课次
+                        </div>
+                        <div class="col-md-3">
+                            学费
+                        </div>
                     </div>
-                    <div class="col-md-2">
-                        {$vo.classTimes}
+                    <foreach name="classList" item="vo">
+                    <div class="row">
+                        <div class="col-md-3">
+                            {$vo.classType}
+                        </div>
+                        <div class="col-md-3">
+                            {$vo.className}
+                        </div>
+                        <div class="col-md-3">
+                            {$vo.classTimes}
+                        </div>
+                        <div class="col-md-3">
+                            {$vo['tuitions']/100}元
+                        </div>
                     </div>
-                    <div class="col-md-2">
-                        {$vo['tuitions']/100}元
-                    </div>
+                    </foreach>
                 </div>
-                </foreach>
             </div>
         </div>
 

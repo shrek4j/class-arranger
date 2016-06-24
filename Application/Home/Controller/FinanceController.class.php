@@ -5,8 +5,7 @@ class FinanceController extends Controller {
 
     public function showFinanceDetail($ym){
         if($ym == null || $ym == ""){
-            $thisym = date('Y-m');
-            $ym = date('Y-m',strtotime("$thisym - 1 month"));
+            $ym = date('Y-m');
         }
 
         $ymArr = explode('-',$ym);
@@ -25,7 +24,7 @@ class FinanceController extends Controller {
             
             if(empty($classList[$classId])){
                 $tuitions = $model->getTuitionsByClassDetailId($classDetailId,$classId,$instId);
-                $classInfo = array("className"=>$classDetail["class_name"],"classTimes"=>1,"classTypeId"=>$classDetail["class_type_id"],"tuitions"=>$tuitions[0]['sum']);
+                $classInfo = array("className"=>$classDetail["class_name"],"classType"=>$classDetail["class_type_name"],"classTimes"=>1,"classTypeId"=>$classDetail["class_type_id"],"tuitions"=>$tuitions[0]['sum']);
                 $classList[$classId] = $classInfo;
             }else{
                 $classInfo = $classList[$classId];

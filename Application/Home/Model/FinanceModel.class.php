@@ -6,7 +6,7 @@ class FinanceModel extends Model {
     protected $autoCheckFields = false;//模型和数据表无需一一对应
     
     public function getAllClassDetailsByMonth($year,$month,$instId){
-        $sql = "SELECT ccd.class_detail_id,ccd.class_id,ccd.teacher_id,cc.class_name,cc.class_type_id,cc.wage FROM classoa_class_detail ccd LEFT JOIN classoa_class cc on ccd.class_id=cc.class_id WHERE ccd.inst_id=%d AND ccd.STATUS=0 AND ccd.year='%s' AND ccd.month='%s'";
+        $sql = "SELECT ccd.class_detail_id,ccd.class_id,ccd.teacher_id,cc.class_name,cc.class_type_id,cc.wage,c.name class_type_name FROM classoa_class_detail ccd LEFT JOIN classoa_class cc ON ccd.class_id=cc.class_id LEFT JOIN classoa_classtype c ON cc.class_type_id=c.id WHERE ccd.inst_id=%d AND ccd.STATUS=0 AND ccd.year='%s' AND ccd.month='%s' order by cc.class_type_id asc";
         return $this->query($sql,$instId,$year,$month);
     }
 
