@@ -88,4 +88,5 @@ class StudentController extends Controller {
         $this->ajaxReturn($data);
     }
 
+
 }

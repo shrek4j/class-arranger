@@ -1,0 +1,7 @@
+1.去掉 classoa_class_detail_student_rela 表的is_absent DEFAULT '0'的设置
+数据移行：讲生产上=0的设置为Null
+UPDATE classoa_class_detail_student_rela SET is_absent = null
+
+2.classoa_class添加`deduct_flag` int(1) DEFAULT NULL COMMENT '缺勤是否扣减学费 0：不扣减 1：扣减'
+数据移行：酱生产上=null的设置为1
+UPDATE classoa_class SET deduct_flag = 1

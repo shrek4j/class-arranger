@@ -7,9 +7,9 @@ class ClassModel extends Model {
     //////////////////////////
     ///////////class//////////
     //////////////////////////
-    public function saveClass($className,$classtypeId,$tuition,$wage,$startDate,$endDate,$teacherId,$classroomId,$remark,$timecn,$tId){
-        $sql = "insert into classoa_class(class_name,class_type_id,tuition_per_class,wage,start_date,end_date,teacher_id,classroom_id,remark,timecn,inst_id) values('%s',%d,%d,%d,'%s','%s',%d,%d,'%s','%s',%d)";
-        $this->execute($sql,$className,$classtypeId,$tuition,$wage,$startDate,$endDate,$teacherId,$classroomId,$remark,$timecn,$tId);
+    public function saveClass($className,$classtypeId,$tuition,$wage,$startDate,$endDate,$teacherId,$classroomId,$remark,$deductFlag,$timecn,$tId){
+        $sql = "insert into classoa_class(class_name,class_type_id,tuition_per_class,wage,start_date,end_date,teacher_id,classroom_id,remark,timecn,inst_id,deduct_flag) values('%s',%d,%d,%d,'%s','%s',%d,%d,'%s','%s',%d,%d)";
+        $this->execute($sql,$className,$classtypeId,$tuition,$wage,$startDate,$endDate,$teacherId,$classroomId,$remark,$timecn,$tId,$deductFlag);
         $queryIdSql = "SELECT @@IDENTITY as class_id";
         return $this->query($queryIdSql);
     }
@@ -66,6 +66,11 @@ class ClassModel extends Model {
         return $this->query($sql,$classDetailId,$tId);
     }
 
+    public function getClassDeductFlag($classId,$tId){
+        $sql = "select deduct_flag from classoa_class where class_id=%d and inst_id=%d";
+        return $this->query($sql,$classId,$tId); 
+    }
+
     public function showStudentsFromClass($classId,$tId){
         $sql = "select r.*, s.student_name student_name from classoa_class_student_rela r left join classoa_student s on r.student_id=s.student_id where r.class_id=%d and r.inst_id=%d and r.status=0";
         return $this->query($sql,$classId,$tId);
@@ -74,6 +79,11 @@ class ClassModel extends Model {
     public function showAllStudentsFromClass($classId,$tId){
         $sql = "select r.*, s.student_name student_name from classoa_class_student_rela r left join classoa_student s on r.student_id=s.student_id where r.class_id=%d and r.inst_id=%d";
         return $this->query($sql,$classId,$tId);
+    }
+
+    public function showAllStudentsFromClassDetail($classDetailId,$tId){
+        $sql = "select id,tuition_per_class from classoa_class_detail_student_rela where class_detail_id=%d and inst_id=%d and status=0";
+        return $this->query($sql,$classDetailId,$tId);
     }
 
     public function updateStudentTuitionForClass($tId,$classId,$studentId,$tuition){

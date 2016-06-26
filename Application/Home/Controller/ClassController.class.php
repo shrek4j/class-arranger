@@ -44,7 +44,7 @@ class ClassController extends Controller {
         $this->display();
     }
 
-    public function saveClass($className="",$classtypeId,$teacherId,$classroomId,$studentIds="",$startDate="",$endDate="",$time="",$timecn="",$tuition,$wage,$remark){
+    public function saveClass($className="",$classtypeId,$teacherId,$classroomId,$studentIds="",$startDate="",$endDate="",$time="",$timecn="",$tuition,$wage,$remark,$deductFlag){
 
         //inst_Id
         $tId = session('instId');
@@ -77,7 +77,7 @@ class ClassController extends Controller {
 
         //save class
         $class = new \Home\Model\ClassModel(); 
-        $classId = $class->saveClass($className,$classtypeId,$tuition,(int)$wage,$startDate,$endDate,$teacherId,$classroomId,$remark,$timecn,$tId);
+        $classId = $class->saveClass($className,$classtypeId,$tuition,(int)$wage,$startDate,$endDate,$teacherId,$classroomId,$remark,$deductFlag,$timecn,$tId);
 
         //save class students 
         if(!empty($students)){
@@ -552,7 +552,7 @@ class ClassController extends Controller {
         $this->ajaxReturn("true");
     }
 
-    public function updateClassDetailStudentRela($classDetailId,$cameRelaIds="",$notCameRelaIds=""){
+    public function updateClassDetailStudentRela($classId,$classDetailId,$cameRelaIds="",$notCameRelaIds=""){
          //inst_Id
         $tId = session('instId');
         
@@ -566,12 +566,27 @@ class ClassController extends Controller {
             $notCameRelaIdsArr = explode('|',$notCameRelaIds);
         }
         
-
+        $student = new \Home\Model\StudentModel();
         $class = new \Home\Model\ClassModel();
+        
+        //get tuition deduct mode
+        $deductFlag = $class->getClassDeductFlag($classId,$tId);
+        $deductFlag = $deductFlag[0]['deduct_flag'];
+
+        //get all students tuition_per_class
+        $studentTuitions = $class->showAllStudentsFromClassDetail($classDetailId,$tId);
+        for($i=0;$i<count($studentTuitions);$i++){
+            $st = $studentTuitions[$i];
+            $studentTuitionMap[$st['id']] = $st['tuition_per_class'];
+        }
+
         $count = 0;
         if(count($cameRelaIdsArr) > 0){
             for($i=0;$i<count($cameRelaIdsArr);$i++){
                 $result = $class->updateClassDetailStudentRela($cameRelaIdsArr[$i],0,$tId);
+
+                $student->updateStudentBalance((int)$studentTuitionMap[$cameRelaIdsArr[$i]],$cameRelaIdsArr[$i],$tId);
+
                 if($result != 1){
                     $count++;
                 }
@@ -581,6 +596,9 @@ class ClassController extends Controller {
         if(count($notCameRelaIdsArr) > 0){
             for($i=0;$i<count($notCameRelaIdsArr);$i++){
                 $result = $class->updateClassDetailStudentRela($notCameRelaIdsArr[$i],1,$tId);
+                if($deductFlag == 1){
+                    $student->updateStudentBalance((int)$studentTuitionMap[$notCameRelaIdsArr[$i]],$notCameRelaIdsArr[$i],$tId);
+                }
                 if($result != 1){
                     $count++;
                 }
@@ -618,6 +636,8 @@ class ClassController extends Controller {
         //年月list
         $ymList = array();
         $currym = date('Y-m');
+        $lastmonth=date('Y-m',strtotime("$currym - 1 month"));
+        array_push($ymList,$lastmonth);
         for($i=0;$i<6;$i++){
             $nextmonth=date('Y-m',strtotime("$currym + ".$i." month"));
             array_push($ymList,$nextmonth);

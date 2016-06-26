@@ -10,6 +10,11 @@ class OperatorModel extends Model {
         $userList = $this->query($sql,$loginname,md5($password));
         return $userList;
     }
+
+    public function addLoginLog($operatorId,$loginTime,$ip){
+    	$sql = "insert into classoa_operator_login_log (operator_id,login_time,ip) values(%d,'%s','%s')";
+    	$this->execute($sql,$operatorId,$loginTime,$ip);
+    }
     
 }
 

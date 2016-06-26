@@ -5,9 +5,9 @@ class ClassroomModel extends Model {
     protected $connection = 'DB_CONFIG1';//调用配置文件中的数据库配置1
     protected $autoCheckFields =false;//模型和数据表无需一一对应
     
-    public function saveClassroom($classroom,$instId){
-        $sql = "insert into classoa_classroom(name,inst_id) values('%s',%d)";
-        return $this->execute($sql,$classroom,$instId);
+    public function saveClassroom($classroom,$rent,$instId){
+        $sql = "insert into classoa_classroom(name,rent_per_month,inst_id) values('%s',%d,%d)";
+        return $this->execute($sql,$classroom,$rent,$instId);
     }
     
     public function total($instId){

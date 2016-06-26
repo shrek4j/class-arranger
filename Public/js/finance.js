@@ -5,3 +5,7 @@ $('.ym').click(function(){
 	var ym = $('.ym').filter('.selected').attr('ym');
 	$("#ym").val(ym);
 });
+
+$('.show-financedetail').click(function(){
+	$("#showFinanceDetailForm").submit();
+});

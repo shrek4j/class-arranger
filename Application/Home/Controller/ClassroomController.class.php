@@ -8,14 +8,14 @@ class ClassroomController extends Controller {
         $this->display();
     }
 
-    public function saveClassroom($classroom){
+    public function saveClassroom($classroom,$rent){
         if($classroom == "")
             return;
         $instId = session('instId');
         if(!$instId)
             return;
         $model = new \Home\Model\ClassroomModel();
-        $result = $model->saveClassroom($classroom,$instId);
+        $result = $model->saveClassroom($classroom,(int)$rent*100,$instId);
         if($result == 1){
            $data = 'ok'; 
         }else{

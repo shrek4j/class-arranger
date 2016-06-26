@@ -8,6 +8,7 @@ $(".add-class").click(function(){
 	var students = getStudentStr(studentInputs);
 	var startdate = $("input[name='startDate']").val();
 	var enddate = $("input[name='endDate']").val();
+	var deductFlag = $("input[name='deductFlag']:checked").val();
 
 	var time = "";
 	var timecn = "";
@@ -30,7 +31,7 @@ $(".add-class").click(function(){
 	   	data: "className="+classname+"&classtypeId="+classtype+"&teacherId="+teacher+
 	   		"&studentIds="+students+"&classroomId="+classroom+"&startDate="+startdate+
 	   		"&endDate="+enddate+"&time="+time+"&timecn="+timecn+"&tuition="+tuition+
-	   		"&wage="+wage+"&remark="+remark,
+	   		"&wage="+wage+"&remark="+remark+"+&deductFlag="+deductFlag,
 	   	success: function(msg){
 	   		if(msg == 'ok'){
 	   			//提示保存成功
@@ -268,7 +269,7 @@ $(".list-group-item").mousedown(function(){
 	$(this).addClass("cactive");
 });
 
-function editVacancy(className,classDetailId){
+function editVacancy(className,classDetailId,classId){
 	//clear
 	clearVacancyInfo();
 	//load
@@ -292,6 +293,7 @@ function editVacancy(className,classDetailId){
 	   			}
 	   			$("#className").text("课程："+className);
 	   			$('#myClassDetailId').val(classDetailId);
+	   			$('#myClassId').val(classId);
 	   			$("#students").append(html);
 				$("#myModal").modal('show');
 	   		}
@@ -300,6 +302,7 @@ function editVacancy(className,classDetailId){
 }
 
 $(".save-vacancy").click(function(){
+	var classId = $("#myClassId").val();
 	var classDetailId = $("#myClassDetailId").val();
 	var cameStudentInputs = $("input[name='student']:checked");
 	var cameRelaIds = getStudentStr(cameStudentInputs);
@@ -310,7 +313,7 @@ $(".save-vacancy").click(function(){
 	$.ajax({
 	   	type: "POST",
 	   	url: "updateClassDetailStudentRela",
-	   	data: "classDetailId="+classDetailId+"&cameRelaIds="+cameRelaIds+"&notCameRelaIds="+notCameRelaIds,
+	   	data: "classId="+classId+"&classDetailId="+classDetailId+"&cameRelaIds="+cameRelaIds+"&notCameRelaIds="+notCameRelaIds,
 	   	success: function(msg){
 	   		if(msg == 'false'){
 	   			//提示保存失败
@@ -329,6 +332,7 @@ $(".save-vacancy").click(function(){
 function clearVacancyInfo(){
 	$("#className").text("");
 	$("#myClassDetailId").val('');
+	$("#myClassId").val('');
 	$("#students").empty();
 }
 
@@ -662,7 +666,7 @@ $(".add-classtype").click(function(){
 });
 
 function deleteClassType(id,name){
-  if(confirm("是否删除课程分类："+name+"？")){
+  if(confirm("是否删除课程类型："+name+"？")){
   	$.ajax({
 	   	type: "POST",
 	   	url: "deleteClassType",

@@ -1,6 +1,8 @@
 
 $(".add-classroom").click(function(){
 	var classroom = $("#classroom").val();
+	var rent = $("#rent").val();
+/**
 	var constraints = {
 	  classroom: {
 	    presence: true,
@@ -17,10 +19,11 @@ $(".add-classroom").click(function(){
 		$("#classroom_msg").text(hint);
 		return;
 	}
+*/
 	$.ajax({
 	   	type: "POST",
 	   	url: "saveClassroom",
-	   	data: "classroom="+classroom,
+	   	data: "classroom="+classroom+"&rent="+rent,
 	   	success: function(msg){
 	   		if(msg == 'false'){
 	   			//提示保存失败

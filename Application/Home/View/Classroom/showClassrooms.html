@@ -21,7 +21,7 @@
         .main-view{position:fixed;width:83.5%;height:98%;margin:0.5% 0.5% 0.5% 16%;padding:0.8% 0.8% 0.8% 1.2%;background:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)}
         .main-view-inner{margin:2% 6% 2% 2%;}
         .main-view-inner-bar{margin:10% 2% 2% 2%;}
-        .main-view-inner-table{margin:4% 2% 2% 2%;}
+        .main-view-inner-table{margin:6% 2% 2% 2%;}
         .main-view-inner-table .title{font-weight:bold;font-size:16px;background-color:#1ABC9C;color:white;}
         .cell-operation-gutter{margin-left:10%}
         .modal-body .container-fluid .row{margin-top:2%}
@@ -40,18 +40,16 @@
 
     <div class="main-view-inner">
         <div class="main-view-inner-bar">
-            <span style="cursor:pointer" data-toggle="modal" data-target="#addClassroomModal">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;新建教室
-            </span>
         </div>
                 
         <table class="main-view-inner-table table table-bordered table-striped table-hover text-center">
-            <thead><tr class="title"><td>编号</td><td>教室名称</td><td>操作</td></tr></thead>
+            <thead><tr class="title"><td>编号</td><td>教室名称</td><td>月租金（元）</td><td>操作</td></tr></thead>
             <tbody>
               <foreach name="classroomList" item="vo" >
                 <tr>
                   <td>{$num++}</td>
                   <td>{$vo.name}</td>
+                  <td>{$vo['rent_per_month']/100}</td>
                     <td>
                         <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除" onclick="deleteClassroom({$vo.classroom_id},'{$vo.name}')"></span>
                     </td>
@@ -79,35 +77,6 @@
         </nav>
     </div>
 </div>
-
-<!-- Modal -->
-<div class="modal fade" id="addClassroomModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">添加教室</h4>
-      </div>
-      <div class="modal-body">
-          <div class="container-fluid">
-              <div class="row">
-                  <div class="col-md-2">
-                    <label for="classroom" class="control-label">教室名称:</label>
-                  </div>
-                  <div class="col-md-6">
-                    <input type="text" class="form-control" id="classroom"/>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="modal-footer">
-          <button type="button" class="btn btn-primary add-classroom">保存</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 
   	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
   	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>

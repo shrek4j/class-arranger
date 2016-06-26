@@ -67,6 +67,15 @@
         </div>
         <div class="row">
             <div class="col-md-2">
+                <label for="classroom" class="control-label">缺勤是否<br/>扣减学费:</label>
+            </div>
+            <div class="col-md-10">
+                <input tabindex="1" id="deduct_vacancy_tuition_1" type="radio" name="deductFlag" value="1"><span class="radio-text">扣减</span>
+                <input tabindex="0" id="deduct_vacancy_tuition_0" type="radio" name="deductFlag" value="0"><span class="radio-text">不扣减</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
                 <label for="classtype" class="control-label">课程分类:</label>
             </div>
             <div class="col-md-10">
@@ -765,6 +774,8 @@
             increaseArea: '20%' // optional
           });
         });
+
+        $("#deduct_vacancy_tuition_1").iCheck("check");
 
         $(function() {
           $('#tags-students').tagsinput();
