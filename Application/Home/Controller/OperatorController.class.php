@@ -39,7 +39,7 @@ class OperatorController extends Controller {
             $ip = reset(explode(',', $ip));  
 
             //add login log
-            $operator->addLoginLog($result[0]['operator_id'],date('Y-m-d h:i:s',time()),$ip);
+            $operator->addLoginLog($result[0]['operator_id'],date('Y-m-d H:i:s',time()),$ip);
 
             $this->success('登陆成功', '/index.php/Home/Class/showClassList?nav=44&pnav=40',2);
         }else{
