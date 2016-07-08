@@ -18,3 +18,5 @@ CREATE TABLE `classoa_operator_role_rela` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 
 5.CLASSOA_ROLA表 教师 ROLE_TEACHER
+code varchar 20
+`status` int(1) NOT NULL DEFAULT '0' COMMENT '0 使用  1 废弃',
