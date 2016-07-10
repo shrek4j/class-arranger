@@ -18,6 +18,11 @@ class TeacherModel extends Model {
     }
 
     public function showTeachers($instId,$start,$pageSize){
+        $sql = "select * from classoa_teacher where inst_id=%d and status=0 order by teacher_id desc limit %d,%d";
+        return $this->query($sql,$instId,$start,$pageSize);
+    }
+
+    public function showTeachersForRole($instId,$start,$pageSize){
         $sql = "select * from classoa_teacher where inst_id=%d and status=0 and teacher_id not in  (select co.teacher_id from classoa_operator co where co.inst_id=%d) order by teacher_id desc limit %d,%d";
         return $this->query($sql,$instId,$instId,$start,$pageSize);
     }

@@ -10,7 +10,7 @@ class RoleController extends Controller {
         $instId = session('instId');
         
         $teacher = new \Home\Model\TeacherModel();
-        $teacherList = $teacher->showTeachers($instId,0,50);   
+        $teacherList = $teacher->showTeachersForRole($instId,0,50);   
         $this->assign("teacherList",$teacherList);
         $tnum=0;
         $this->assign("tnum",$tnum);
