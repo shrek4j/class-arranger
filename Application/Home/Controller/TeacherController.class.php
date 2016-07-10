@@ -18,7 +18,7 @@ class TeacherController extends Controller {
         $result = $model->saveTeacher($teacher,$instId);
         $operator = new \Home\Model\OperatorModel();
         //TODO 稍后改成用户自定义密码
-        $operatorId = $operator->addOperator($instId,$teacher,md5('123456'),0,$teacher,$result[0]['teacher_id']);
+        $operatorId = $operator->addOperator($instId,$teacher,'123456',0,$teacher,$result[0]['teacher_id']);
         //TODO 稍后改成查数据库code=ROLE_TEACHER的
         $operator->addOperatorAndRoleRela($operatorId[0]['operator_id'],1);
         $this->ajaxReturn($data);

@@ -24,7 +24,7 @@ class OperatorModel extends Model {
     
     public function addOperator($instId,$userName,$userPwd,$isSuperAdmin,$realName,$teacher){
         $sql = "insert into classoa_operator(inst_id,user_name,user_pwd,is_super_admin,real_name,teacher_id) values(%d,'%s','%s',%d,'%s',%d)";
-        $this->execute($sql,$instId,$userName,$userPwd,$isSuperAdmin,$realName,$teacher);
+        $this->execute($sql,$instId,$userName,md5($userPwd),$isSuperAdmin,$realName,$teacher);
         $queryIdSql = "SELECT @@IDENTITY as operator_id";
         return $this->query($queryIdSql);
     }
