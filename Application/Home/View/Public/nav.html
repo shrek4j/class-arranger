@@ -1,4 +1,7 @@
-    
+    <link rel="stylesheet" href="/Public/css/bootstrap/fontawesome/css/font-awesome.min.css">
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css">
+    <![endif]-->
     <style type="text/css">
         .favico{margin-top:8%;margin-bottom:15%;padding-left:23%;}
         .top-nav{position:fixed;overflow-y:auto;width:15%;height:100%;margin-right:0.5%;padding:0.8% 0.8% 0.8% 1.2%;background:#111111;box-shadow:0 2px 2px 0 rgba(0,0,0,0.1)}
@@ -108,7 +111,7 @@
 <div class="info-bar">
     <div class="operator-info">
         <span class="role">{$_SESSION['role']}:{$_SESSION['operatorName']}</span>
-    <!--    <span class="settings"><i class="icon-cog">设置</i></span> -->
+        <span class="settings" onclick="location.href='../Operator/profile'"><i class="icon-cog" style="font-size:14px;font-weight:bold;">设置</i></span>
         <span class="control-area"><a style="text-decoration:none;color:#506470;" href="/index.php/Home/Operator/logout">退出</a></span>
     </div>
 </div>

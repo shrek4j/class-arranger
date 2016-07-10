@@ -129,5 +129,39 @@ $(".edit-superadmin").click(function(){
 	   		}
 	   	}
 	});
+});
+
+$(".edit-profile").click(function(){
+	var userPwd0 = $("#userPwd0").val();
+	var userPwd1 = $("#userPwd1").val();
+	var userPwd2 = $("#userPwd2").val();
+	if(isEmpty(userPwd0)){
+		$.scojs_message('原密码不可为空！', $.scojs_message.TYPE_ERROR);
+		return;
+	}
+	if(isEmpty(userPwd1)){
+		$.scojs_message('修改密码不可为空！', $.scojs_message.TYPE_ERROR);
+		return;
+	}
+	if(isEmpty(userPwd2)){
+		$.scojs_message('确认密码不可为空！', $.scojs_message.TYPE_ERROR);
+		return;
+	}
+	if(userPwd1 != userPwd2){
+		$.scojs_message('两次输入的密码不一致！', $.scojs_message.TYPE_ERROR);
+		return;
+	}
+	$.ajax({
+	   	type: "POST",
+	   	url: "editProfile",
+	   	data: "userPwd0="+userPwd0+"&userPwd1="+userPwd1,
+	   	success: function(msg){
+	   		if(msg == 'ok'){
+	   			window.location.reload();
+	   		}else if(msg == 'originPwd wrong'){
+	   			$.scojs_message('原密码输入错误！', $.scojs_message.TYPE_ERROR);
+	   		}
+	   	}
+	});
 
 });

@@ -78,5 +78,23 @@ class OperatorController extends Controller {
     public function showDashboard(){
         $this->display();
     }
+
+    public function profile(){
+        $this->display();
+    }
     
+    public function editProfile($userPwd0,$userPwd1){
+        $instId = session('instId');
+        $operatorId = session('operatorId');
+        $operatorName = session('operatorName');
+        $operator = new \Home\Model\OperatorModel();
+        $result = $operator->queryOperator($operatorName,$userPwd0);
+        if(!empty($result) && count($result) == 1){
+            $operatorId = $operator->saveOperatorPwd($instId,$operatorId,$userPwd1);
+            $this->ajaxReturn("ok");
+        }else{
+            $this->ajaxReturn("originPwd wrong");
+        }
+        
+    }
 }

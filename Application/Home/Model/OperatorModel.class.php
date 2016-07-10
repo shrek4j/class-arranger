@@ -69,6 +69,11 @@ class OperatorModel extends Model {
         $sql = "update classoa_operator set teacher_id=%d where is_super_admin=1 and inst_id=%d";
         return $this->execute($sql,$teacher,$instId);
     }
+
+    public function saveOperatorPwd($instId,$operatorId,$userPwd){
+        $sql = "update classoa_operator set user_pwd='%s' where operator_id=%d and inst_id=%d";
+        return $this->execute($sql,md5($userPwd),$operatorId,$instId);
+    }
     
 }
 
