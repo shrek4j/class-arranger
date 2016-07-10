@@ -7,7 +7,9 @@ class TeacherModel extends Model {
     
     public function saveTeacher($teacher,$instId){
         $sql = "insert into classoa_teacher(name,inst_id) values('%s',%d)";
-        return $this->execute($sql,$teacher,$instId);
+        $this->execute($sql,$teacher,$instId);
+        $queryIdSql = "SELECT @@IDENTITY as teacher_id";
+        return $this->query($queryIdSql);
     }
     
     public function total($instId){
@@ -16,8 +18,8 @@ class TeacherModel extends Model {
     }
 
     public function showTeachers($instId,$start,$pageSize){
-        $sql = "select * from classoa_teacher where inst_id=%d and status=0 order by teacher_id desc limit %d,%d";
-        return $this->query($sql,$instId,$start,$pageSize);
+        $sql = "select * from classoa_teacher where inst_id=%d and status=0 and teacher_id not in  (select co.teacher_id from classoa_operator co where co.inst_id=%d) order by teacher_id desc limit %d,%d";
+        return $this->query($sql,$instId,$instId,$start,$pageSize);
     }
 
     public function deleteTeacher($instId,$teacherId){

@@ -16,11 +16,11 @@ class TeacherController extends Controller {
             return;
         $model = new \Home\Model\TeacherModel();
         $result = $model->saveTeacher($teacher,$instId);
-        if($result == 1){
-           $data = 'ok'; 
-        }else{
-            $data = "false";
-        }
+        $operator = new \Home\Model\OperatorModel();
+        //TODO 稍后改成用户自定义密码
+        $operatorId = $operator->addOperator($instId,$teacher,md5('123456'),0,$teacher,$result[0]['teacher_id']);
+        //TODO 稍后改成查数据库code=ROLE_TEACHER的
+        $operator->addOperatorAndRoleRela($operatorId[0]['operator_id'],1);
         $this->ajaxReturn($data);
     }
 
@@ -49,6 +49,8 @@ class TeacherController extends Controller {
             return;
         $model = new \Home\Model\TeacherModel();
         $result = $model->deleteTeacher($instId,$teacherId);
+        $operator = new \Home\Model\OperatorModel();
+        $operator->deleteOperatorByTeacherId($instId,$teacherId);
         if($result == 1){
            $data = 'ok'; 
         }else{

@@ -621,6 +621,12 @@ class ClassController extends Controller {
 
     //showcase of the classes of a teacher or a classroom in a month
     public function showClasses($teacherId=0,$teacherName,$classroomId=0,$ym){
+        if($teacherId==0){
+            $teacherId = session('teacherId');
+        }
+        if($ym == null){
+            $ym = date('Y-m');
+        }
 
          //inst_id
         $tId = session('instId');
@@ -628,7 +634,16 @@ class ClassController extends Controller {
         $teacher = new \Home\Model\TeacherModel();
         $teacherList = $teacher->showTeachers($tId,0,50);   
         $this->assign("teacherList",$teacherList);
-
+        
+        if($teacherName == null || $teacherName == ''){
+            for($i=0;$i<count($teacherList);$i++){
+                if($teacherList[$i]['teacher_id']==$teacherId){
+                    $teacherName = $teacherList[$i]['name'];
+                    break;
+                }
+            }
+        }
+        
         $classroom = new \Home\Model\ClassroomModel();
         $classroomList = $classroom->showClassrooms($tId,0,20);   
         $this->assign("classroomList",$classroomList);
@@ -777,6 +792,7 @@ class ClassController extends Controller {
             $this->assign('monthlyClasses',$monthly);//记录编号
         }
 
+        $this->assign('isSuperAdmin',session('isSuperAdmin'));
         $this->assign('teacherId',$teacherId);
         $this->assign('teacherName',$teacherName);
         $this->assign('ym',$ym);

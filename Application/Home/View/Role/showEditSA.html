@@ -14,7 +14,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link ref="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
 
-	<title>添加人员</title>
+	<title>编辑超级管理员</title>
 	<!-- 新 Bootstrap 核心 CSS 文件 -->
 	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link href="/Public/css/bootstrap/icheck/square.css" rel="stylesheet">
@@ -37,59 +37,18 @@
     <div class="main-view-inner container-fluid">
         <div class="row">
             <div class="col-md-3">
-                <label for="realName" class="control-label">姓名:</label>
-            </div>
-            <div class="col-md-3">
-                <input type="text" class="form-control" id="realName" name="realName">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3">
-                <label for="userName" class="control-label">用户名:</label>
-            </div>
-            <div class="col-md-3">
-                <input type="text" class="form-control" id="userName" name="userName">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3">
-                <label for="userPwd" class="control-label">密码:</label>
-            </div>
-            <div class="col-md-3">
-                <input type="password" class="form-control" id="userPwd" name="userPwd">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3">
-                <label for="userPwd2" class="control-label">确认密码:</label>
-            </div>
-            <div class="col-md-3">
-                <input type="password" class="form-control" id="userPwd2" name="userPwd2">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3">
-                <label for="rolr" class="control-label">角色:</label>
+                <label for="teacher" class="control-label">选择您需要绑定的教师:</label>
             </div>
             <div class="col-md-8">
-              <foreach name="roles" item="vo" >
-                <input tabindex="{$snum}" id="role_{$snum++}" type="checkbox" name="role" value="{$vo.role_id}"><span class="radio-text">{$vo.name}</span>
-              </foreach>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3">
-                <label for="teacher" class="control-label">教师:</label>
-            </div>
-            <div class="col-md-8">
+            <input tabindex="-1" id="teacher_0" type="radio" name="teacher" value="0"><span class="radio-text">解绑</span>
               <foreach name="teacherList" item="vo" >
-                <input tabindex="{$tnum}" id="teacher_{$tnum++}" type="radio" name="teacher" value="{$vo.teacher_id}"><span class="radio-text">{$vo.name}</span>
+                <input tabindex="{$tnum}" id="teacher_{$vo.teacher_id}" type="radio" name="teacher" value="{$vo.teacher_id}"><span class="radio-text">{$vo.name}</span>
               </foreach>
             </div>
         </div>
         <div class="row">
             <div class="col-md-3"></div>
-            <div class="col-md-8"><button type="button" class="btn btn-default btn-submit add-operator">保存</button></div>
+            <div class="col-md-8"><button type="button" class="btn btn-default btn-submit edit-superadmin">保存</button></div>
         </div>
     </div>
 </div>
@@ -116,6 +75,7 @@
           });
         });
 
+        $("#teacher_{$superAdmin.teacher_id}").iCheck('check');
     </script>
 </body>
 </html>

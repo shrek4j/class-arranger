@@ -22,9 +22,8 @@
     <link rel="stylesheet"
         href="http://cdn.amazeui.org/amazeui/2.3.0/css/amazeui.min.css">
     <link rel="stylesheet" href="http://amazeui.github.io/tagsinput/amazeui.tagsinput.css"/>
-    
+    <link href="/Public/css/base.css" rel="stylesheet">
     <style type="text/css">
-        .main-view{overflow-y:scroll;position:fixed;width:83.5%;height:98%;margin:0.5% 0.5% 0.5% 16%;padding:0.8% 0.8% 0.8% 1.2%;background:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.1)}
         .main-view-inner{margin:2% 6% 2% 2%;}
         .main-view-inner-bar{margin:2% 2% 2% 2%;}
         .class-detail-list{margin:2% 2% 2% 2%;}
@@ -125,9 +124,14 @@
                   </li>
                   </if>
                 </foreach>
+                    <li class="list-group-item">
+                        <div class="row text-center" onclick="addClassDetail();" style="cursor:pointer;">
+                            添加一节课
+                        </div>
+                    </li>
                 </ul>
             </div>
-            <div><span style="cursor:pointer;margin-top:20px;" class="glyphicon glyphicon-plus" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="添加一节课" onclick="addClassDetail();">添加一节课</span></div>
+            <div>
         </div>
     </div>
 </div>
@@ -441,7 +445,7 @@
         <h4 class="modal-title" id="studentModalLabel">选择学生</h4>
       </div>
       <div class="modal-body">
-        <div style="display:inline-block;margin:5px 0px 5px 10px;font-size:16px;" class="container-fluid">
+        <div style="display:inline-block;margin:5px 0px 5px 10px;font-size:14px;" class="container-fluid">
             <div class="row">
                 <input id="classDetailIdForStudent" type="hidden"/>
                 <input id="tags-students" type="text" value="" data-role="tagsinput"/>

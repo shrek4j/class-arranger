@@ -1,6 +1,7 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
+define("TO_HACKERS","stop fucking around");
 class OperatorController extends Controller {
     // entrance:   http://localhost/index.php/Home/Operator/login
     public function login(){
@@ -13,12 +14,15 @@ class OperatorController extends Controller {
     public function logout(){
         session('operatorId', null);
         session('instId', null);
+        session('operatorName',null);
+        session('isSuperAdmin',null);
+        session('role',null);
         $this->redirect('Operator/login', null,0, '页面跳转中...');
     }
     
     public function doLogin($loginname,$password){
         if(session('can_doLogin') != true){
-            echo "fuck off!";
+            echo TO_HACKERS;
             return;
         }
         session('can_doLogin',false);
@@ -28,7 +32,21 @@ class OperatorController extends Controller {
             session('operatorId',$result[0]['operator_id']);
             session('instId',$result[0]['inst_id']);
             session('operatorName',$result[0]['user_name']);
-            session('role',"管理员");
+            session('isSuperAdmin',$result[0]['is_super_admin']);
+            session('teacherId',$result[0]['teacher_id']);
+            if($result[0]['is_super_admin'] == 1){
+                session('role',"超级管理员");
+            }else{
+                session('role',"管理员");
+            }
+
+            $roleList = $operator->findRolesByOperator($result[0]['inst_id'],$result[0]['operator_id']);
+            for($i=0;$i<count($roleList);$i++){
+                if($roleList[$i]['code']=='ROLE_TEACHER'){
+                    session('ROLE_TEACHER',1);
+                }
+                //TODO 添加角色权限
+            }
 
             $unknown = 'unknown';  
             if ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARDED_FOR'] 
@@ -50,11 +68,15 @@ class OperatorController extends Controller {
             //add login log
             $operator->addLoginLog($result[0]['operator_id'],date('Y-m-d H:i:s',time()),$ip);
             session("loginErr",0);
-            $this->redirect('Class/showClassList?nav=44&pnav=40', null,0, '页面跳转中...');
+            $this->redirect('Operator/showDashboard', null,0, '页面跳转中...');
         }else{
             session("loginErr",1);
             $this->redirect('Operator/login', null,0, '页面跳转中...');
         }    
     }
 
+    public function showDashboard(){
+        $this->display();
+    }
+    
 }
