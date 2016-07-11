@@ -1,11 +1,11 @@
 
 $(".add-teacher").click(function(){
 	var teacher = $("#teacher").val();
-
+	var loginname = $("#loginname").val();
 	$.ajax({
 	   	type: "POST",
 	   	url: "saveTeacher",
-	   	data: "teacher="+teacher,
+	   	data: "teacher="+teacher+"&loginname="+loginname,
 	   	success: function(msg){
 	   		if(msg == 'false'){
 	   			//提示保存失败

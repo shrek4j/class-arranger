@@ -12,11 +12,12 @@ class OperatorController extends Controller {
     }
     
     public function logout(){
-        session('operatorId', null);
-        session('instId', null);
-        session('operatorName',null);
-        session('isSuperAdmin',null);
-        session('role',null);
+//        session('operatorId', null);
+//        session('instId', null);
+//        session('operatorName',null);
+//        session('isSuperAdmin',null);
+//        session('role',null);
+        session('[destroy]');
         $this->redirect('Operator/login', null,0, '页面跳转中...');
     }
     
@@ -47,7 +48,7 @@ class OperatorController extends Controller {
                 }
                 //TODO 添加角色权限
             }
-
+            /*
             $unknown = 'unknown';  
             if ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARDED_FOR'] 
                 && strcasecmp($_SERVER['HTTP_X_FORWARDED_FOR'], $unknown)) {  
@@ -56,15 +57,13 @@ class OperatorController extends Controller {
                 && strcasecmp($_SERVER['REMOTE_ADDR'], $unknown)) {  
                 $ip = $_SERVER['REMOTE_ADDR'];  
             }  
-            /*  
-            处理多层代理的情况  
-            或者使用正则方式：$ip = preg_match("/[d.]
-            {7,15}/", $ip, $matches) ? $matches[0] : $unknown;  
-            */  
             if (false !== strpos($ip, ',')){
                 $ip = reset(explode(',', $ip)); 
             }
+            */
 
+            $ip = get_client_ip();
+            
             //add login log
             $operator->addLoginLog($result[0]['operator_id'],date('Y-m-d H:i:s',time()),$ip);
             session("loginErr",0);
