@@ -12,13 +12,12 @@ class ClassroomController extends Controller {
         if($classroom == "")
             return;
         $instId = session('instId');
-        if(!$instId)
-            return;
-        $model = new \Home\Model\ClassroomModel();
-        $result = $model->saveClassroom($classroom,(int)$rent*100,$instId);
-        if($result == 1){
-           $data = 'ok'; 
-        }else{
+
+        try{
+            $model = new \Home\Model\ClassroomModel();
+            $result = $model->saveClassroom($classroom,(int)$rent*100,$instId);
+            $data = "true";
+        }catch(Exception $e){
             $data = "false";
         }
         $this->ajaxReturn($data);
@@ -45,13 +44,11 @@ class ClassroomController extends Controller {
 
     public function deleteClassroom($classroomId){
         $instId = session('instId');
-        if(!$instId)
-            return;
-        $model = new \Home\Model\ClassroomModel();
-        $result = $model->deleteClassroom($instId,$classroomId);
-        if($result == 1){
-           $data = 'ok'; 
-        }else{
+        try{
+            $model = new \Home\Model\ClassroomModel();
+            $result = $model->deleteClassroom($instId,$classroomId);
+            $data = "true";
+        }catch(Exception $e){
             $data = "false";
         }
         $this->ajaxReturn($data);

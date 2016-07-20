@@ -2,34 +2,16 @@
 $(".add-classroom").click(function(){
 	var classroom = $("#classroom").val();
 	var rent = $("#rent").val();
-/**
-	var constraints = {
-	  classroom: {
-	    presence: true,
-	    length: {
-	      maximum: 10,
-	      message: "最多输入10个字符"
-	    }
-	  }
-	};
-	var msg = validate({classroom: classroom}, constraints);
-	if(msg != null){
-		var hint = msg.classroom[0];
-		hint = hint.split(" ")[1];
-		$("#classroom_msg").text(hint);
-		return;
-	}
-*/
 	$.ajax({
 	   	type: "POST",
 	   	url: "saveClassroom",
 	   	data: "classroom="+classroom+"&rent="+rent,
 	   	success: function(msg){
-	   		if(msg == 'false'){
-	   			//提示保存失败
+	   		if(msg == 'true'){
+	   			$.scojs_message('添加成功！', $.scojs_message.TYPE_OK);
+	   			setInterval('reloadPage()',1500);
 	   		}else{
-	   			//提示保存成功
-	   			window.location.reload();
+	   			$.scojs_message('添加失败！', $.scojs_message.TYPE_ERROR);
 	   		}
 			
 	   	}
@@ -43,11 +25,11 @@ function deleteClassroom(id,name){
 	   	url: "deleteClassroom",
 	   	data: "classroomId="+id,
 	   	success: function(msg){
-	   		if(msg == 'false'){
-	   			//提示保存失败
+	   		if(msg == 'true'){
+	   			$.scojs_message('删除成功！', $.scojs_message.TYPE_OK);
+	   			setInterval('reloadPage()',1500);
 	   		}else{
-	   			//提示保存成功
-	   			window.location.reload();
+	   			$.scojs_message('删除失败！', $.scojs_message.TYPE_ERROR);
 	   		}
 			
 	   	}

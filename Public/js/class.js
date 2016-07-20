@@ -33,11 +33,11 @@ $(".add-class").click(function(){
 	   		"&endDate="+enddate+"&time="+time+"&timecn="+timecn+"&tuition="+tuition+
 	   		"&wage="+wage+"&remark="+remark+"+&deductFlag="+deductFlag,
 	   	success: function(msg){
-	   		if(msg == 'ok'){
-	   			//提示保存成功
-	   			window.location.reload();
+	   		if(msg == 'true'){
+	   			$.scojs_message('添加成功！', $.scojs_message.TYPE_OK);
+	   			setInterval('reloadPage()',1500);
 	   		}else{
-	   			//提示保存失败
+	   			$.scojs_message('添加失败！', $.scojs_message.TYPE_ERROR);
 	   		}
 	   	}
 	});
@@ -73,11 +73,11 @@ function deleteClass(id,name){
 	   	url: "deleteClass",
 	   	data: "classId="+id,
 	   	success: function(msg){
-	   		if(msg == 'false'){
-	   			//提示保存失败
+	   		if(msg == 'true'){
+	   			$.scojs_message('删除成功！', $.scojs_message.TYPE_OK);
+	   			setInterval('reloadPage()',1500);
 	   		}else{
-	   			//提示保存成功
-	   			window.location.reload();
+	   			$.scojs_message('删除失败！', $.scojs_message.TYPE_ERROR);
 	   		}
 	   	}
 	});
@@ -278,9 +278,7 @@ function editVacancy(className,classDetailId,classId){
 	   	url: "showStudentsFromClassDetail",
 	   	data: "classDetailId="+classDetailId,
 	   	success: function(msg){
-	   		if(msg == 'false'){
-	   			//提示保存失败
-	   		}else{
+	   		if(msg == 'true'){
 	   			var html = "";
 	   			var studentArr = msg.split(";");
 	   			for(var i=0;i<studentArr.length-1;i++){
@@ -296,6 +294,8 @@ function editVacancy(className,classDetailId,classId){
 	   			$('#myClassId').val(classId);
 	   			$("#students").append(html);
 				$("#myModal").modal('show');
+	   		}else{
+	   			$.scojs_message('操作失败！', $.scojs_message.TYPE_ERROR);
 	   		}
 	   	}
 	});
@@ -315,15 +315,16 @@ $(".save-vacancy").click(function(){
 	   	url: "updateClassDetailStudentRela",
 	   	data: "classId="+classId+"&classDetailId="+classDetailId+"&cameRelaIds="+cameRelaIds+"&notCameRelaIds="+notCameRelaIds,
 	   	success: function(msg){
-	   		if(msg == 'false'){
-	   			//提示保存失败
-	   		}else{
+	   		if(msg == 'true'){
+	   			$.scojs_message('保存成功！', $.scojs_message.TYPE_OK);
 				$("#myModal").modal('hide');
 				//clear
 				clearVacancyInfo();
 				//render
 				$("#vacancy_"+classDetailId).removeClass("vacancy-undone");
 				$("#vacancy_"+classDetailId).addClass("vacancy-done");
+	   		}else{
+	   			$.scojs_message('保存失败！', $.scojs_message.TYPE_ERROR);
 	   		}
 	   	}
 	});
@@ -344,11 +345,11 @@ function deleteClassDetail(classId,classDetailId){
 	   	url: "deleteClassDetail",
 	   	data: "classId="+classId+"&classDetailId="+classDetailId,
 	   	success: function(msg){
-	   		if(msg == 'false'){
-	   			//提示保存失败
+	   		if(msg == 'true'){
+	   			$.scojs_message('删除成功！', $.scojs_message.TYPE_OK);
+	   			setInterval('reloadPage()',1500);
 	   		}else{
-	   			//提示保存成功
-	   			window.location.reload();
+	   			$.scojs_message('删除失败！', $.scojs_message.TYPE_ERROR);
 	   		}
 	   	}
 	});
@@ -426,11 +427,11 @@ $(".update-classdetail").click(function(){
 	   	data: "classId="+classId+"&classDetailId="+classDetailId+"&teacherId="+teacher+"&classroomId="+classroom+"&startTime="+startTime+
 	   		"&endTime="+endTime+"&date="+date+"&week="+week,
 	   	success: function(msg){
-	   		if(msg == 'ok'){
-	   			//提示保存成功
-	   			window.location.reload();
+	   		if(msg == 'true'){
+	   			$.scojs_message('更新成功！', $.scojs_message.TYPE_OK);
+	   			setInterval('reloadPage()',1500);
 	   		}else{
-	   			//提示保存失败
+	   			$.scojs_message('更新失败！', $.scojs_message.TYPE_ERROR);
 	   		}
 	   	}
 	});
@@ -452,11 +453,11 @@ $(".add-classdetail").click(function(){
 	   	data: "classId="+classId+"&teacherId="+teacher+"&classroomId="+classroom+"&startTime="+startTime+
 	   		"&endTime="+endTime+"&date="+date+"&week="+week,
 	   	success: function(msg){
-	   		if(msg == 'ok'){
-	   			//提示保存成功
-	   			window.location.reload();
+	   		if(msg == 'true'){
+	   			$.scojs_message('添加成功！', $.scojs_message.TYPE_OK);
+	   			setInterval('reloadPage()',1500);
 	   		}else{
-	   			//提示保存失败
+	   			$.scojs_message('添加失败！', $.scojs_message.TYPE_ERROR);
 	   		}
 	   	}
 	});
@@ -476,9 +477,7 @@ function editClassStudents(className,classId){
 	   	url: "showStudentsFromClass",
 	   	data: "classId="+classId,
 	   	success: function(msg){
-	   		if(msg == 'false'){
-	   			//提示保存失败
-	   		}else{
+	   		if(msg == 'true'){
 	   			var studentArr = msg.split(";");
 	   			var names = "";
 	   			for(var i=0;i<studentArr.length-1;i++){
@@ -488,6 +487,8 @@ function editClassStudents(className,classId){
 	   			}
 	   			$("#classId").val(classId);
 	   			$('#studentModal').modal('show');
+	   		}else{
+	   			$.scojs_message('服务器开小差了。。', $.scojs_message.TYPE_ERROR);
 	   		}
 	   	}
 	});
@@ -502,9 +503,7 @@ function editStudentTuitions(className,classId){
 	   	url: "showAllStudentsFromClass",
 	   	data: "classId="+classId,
 	   	success: function(msg){
-	   		if(msg == 'false'){
-	   			//提示保存失败
-	   		}else{
+	   		if(msg == 'true'){
 	   			var html = "";
 	   			var studentArr = msg.split(";");
 	   			html='<table class="table table-bordered table-striped table-hover text-center" style="width:300px;">';
@@ -518,6 +517,8 @@ function editStudentTuitions(className,classId){
 	   			$('#myClassId').val(classId);
 	   			$("#tuitions").append(html);
 				$("#tuitionModal").modal('show');
+	   		}else{
+	   			$.scojs_message('服务器开小差了。。', $.scojs_message.TYPE_ERROR);
 	   		}
 	   	}
 	});
@@ -542,12 +543,13 @@ function saveTuitions(){
 	   	url: "updateStudentTuitions",
 	   	data: "classId="+classId+"&tuitions="+tuitions,
 	   	success: function(msg){
-	   		if(msg == 'false'){
-	   			//提示保存失败
-	   		}else{
+	   		if(msg == 'true'){
+	   			$.scojs_message('修改成功！', $.scojs_message.TYPE_OK);
 				$("#tuitionModal").modal('hide');
 				//clear
 				clearTuitionInfo();
+	   		}else{
+	   			$.scojs_message('修改失败！', $.scojs_message.TYPE_ERROR);
 	   		}
 	   	}
 	});
@@ -569,9 +571,7 @@ function editClassDetailStudents(classDetailId){
 	   	url: "showStudentsFromClassDetail",
 	   	data: "classDetailId="+classDetailId,
 	   	success: function(msg){
-	   		if(msg == 'false'){
-	   			//提示保存失败
-	   		}else{
+	   		if(msg == 'true'){
 	   			var studentArr = msg.split(";");
 	   			var names = "";
 	   			for(var i=0;i<studentArr.length-1;i++){
@@ -581,6 +581,8 @@ function editClassDetailStudents(classDetailId){
 	   			}
 	   			$("#classDetailIdForStudent").val(classDetailId);
 	   			$('#studentModal').modal('show');
+	   		}else{
+	   			$.scojs_message('服务器开小差了。。', $.scojs_message.TYPE_ERROR);
 	   		}
 	   	}
 	});
@@ -595,11 +597,11 @@ function saveStudents(){
 	   	url: "saveStudentsForClass",
 	   	data: "classId="+classId+"&students="+students,
 	   	success: function(msg){
-	   		if(msg == 'false'){
-	   			//提示保存失败
+	   		if(msg == 'true'){
+	   			$.scojs_message('删除成功！', $.scojs_message.TYPE_OK);
+	   			$("#studentModal").modal('hide');
 	   		}else{
-	   			//提示保存成功
-	   			window.location.reload();
+	   			$.scojs_message('修改失败！', $.scojs_message.TYPE_ERROR);
 	   		}
 			
 	   	}
@@ -616,11 +618,11 @@ function saveStudentsToOneClass(){
 	   	url: "saveStudentsToOneClass",
 	   	data: "classId="+classId+"&classDetailId="+classDetailId+"&students="+students,
 	   	success: function(msg){
-	   		if(msg == 'false'){
-	   			//提示保存失败
+	   		if(msg == 'true'){
+	   			$.scojs_message('删除成功！', $.scojs_message.TYPE_OK);
+	   			setInterval('reloadPage()',1000);
 	   		}else{
-	   			//提示保存成功
-	   			window.location.reload();
+	   			$.scojs_message('修改失败！', $.scojs_message.TYPE_ERROR);
 	   		}
 			
 	   	}
@@ -633,34 +635,17 @@ function saveStudentsToOneClass(){
 ///////////////////////////////////////////////////////////////////////////////
 $(".add-classtype").click(function(){
 	var classtype = $("#classtype").val();
-	var classtypeconstraints = {
-	  classtype: {
-	    presence: true,
-	    length: {
-	      maximum: 10,
-	      message: "最多输入10个字符"
-	    }
-	  }
-	};
-	var msg = validate({classtype: classtype}, classtypeconstraints);
-	if(msg != null){
-		var hint = msg.classtype[0];
-		hint = hint.split(" ")[1];
-		$("#classtype_msg").text(hint);
-		return;
-	}
 	$.ajax({
 	   	type: "POST",
 	   	url: "saveClassType",
 	   	data: "classtype="+classtype,
 	   	success: function(msg){
-	   		if(msg == 'false'){
-	   			//提示保存失败
+	   		if(msg == 'true'){
+	   			$.scojs_message('添加成功！', $.scojs_message.TYPE_OK);
+	   			setInterval('reloadPage()',1500);
 	   		}else{
-	   			//提示保存成功
-	   			window.location.reload();
-	   		}
-			
+	   			$.scojs_message('添加失败！', $.scojs_message.TYPE_ERROR);
+			}
 	   	}
 	});
 });
@@ -672,11 +657,11 @@ function deleteClassType(id,name){
 	   	url: "deleteClassType",
 	   	data: "classTypeId="+id,
 	   	success: function(msg){
-	   		if(msg == 'false'){
-	   			//提示保存失败
+	   		if(msg == 'true'){
+	   			$.scojs_message('删除成功！', $.scojs_message.TYPE_OK);
+	   			setInterval('reloadPage()',1500);
 	   		}else{
-	   			//提示保存成功
-	   			window.location.reload();
+	   			$.scojs_message('删除失败！', $.scojs_message.TYPE_ERROR);
 	   		}
 			
 	   	}

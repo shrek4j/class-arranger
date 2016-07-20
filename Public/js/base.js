@@ -5,3 +5,9 @@ function isEmpty(field){
 		return false;
 	}
 }
+
+
+
+function reloadPage(){
+	window.location.reload();
+}

@@ -31,13 +31,21 @@ class RoleController extends Controller {
     //`status` int(1) DEFAULT 0 NOT NULL,
     public function saveOperator($realName,$userName,$userPwd,$roles,$teacher){
         $instId = session('instId');
-        $operator = new \Home\Model\OperatorModel();
-        $operatorId = $operator->addOperator($instId,$userName,$userPwd,0,$realName,$teacher);
-        $roleIds = explode('|',$roles);
-        for($i=0;$i<count($roleIds);$i++){
-            $operator->addOperatorAndRoleRela($operatorId[0]['operator_id'],(int)$roleIds[$i]);
+        try{
+            $operator = new \Home\Model\OperatorModel();
+            $operator->startTrans();
+            $operatorId = $operator->addOperator($instId,$userName,$userPwd,0,$realName,$teacher);
+            $roleIds = explode('|',$roles);
+            for($i=0;$i<count($roleIds);$i++){
+                $operator->addOperatorAndRoleRela($operatorId[0]['operator_id'],(int)$roleIds[$i]);
+            }
+            $operator->commit();
+            $data = "true";
+        }catch(Exception $e){
+            $operator->rollback();
+            $data = "false";
         }
-        $this->ajaxReturn("ok");
+        $this->ajaxReturn($data);
     }
 
     public function showOperatorList($pageNo=1,$pageSize=10){
@@ -59,11 +67,11 @@ class RoleController extends Controller {
 
     public function deleteOperator($operatorId){
         $instId = session('instId');
-        $operator = new \Home\Model\OperatorModel();
-        $result = $operator->deleteOperator($instId,$operatorId);
-        if($result == 1){
-           $data = 'ok'; 
-        }else{
+        try{
+            $operator = new \Home\Model\OperatorModel();
+            $result = $operator->deleteOperator($instId,$operatorId);
+            $data = "true";
+        }catch(Exception $e){
             $data = "false";
         }
         $this->ajaxReturn($data);
@@ -71,11 +79,11 @@ class RoleController extends Controller {
 
     public function toggleDisabled($operatorId,$disabled){
         $instId = session('instId');
-        $operator = new \Home\Model\OperatorModel();
-        $result = $operator->toggleDisabled($instId,$operatorId,$disabled);
-        if($result == 1){
-           $data = 'ok'; 
-        }else{
+        try{
+            $operator = new \Home\Model\OperatorModel();
+            $result = $operator->toggleDisabled($instId,$operatorId,$disabled);
+            $data = "true";
+        }catch(Exception $e){
             $data = "false";
         }
         $this->ajaxReturn($data);
@@ -103,9 +111,14 @@ class RoleController extends Controller {
 
     public function editSuperAdmin($teacher){
         $instId = session('instId');
-        $operator = new \Home\Model\OperatorModel();
-        $operatorId = $operator->updateSuperAdmin($instId,$teacher);
-        session('teacherId',$teacher);
-        $this->ajaxReturn("ok");
+        try{
+            $operator = new \Home\Model\OperatorModel();
+            $operatorId = $operator->updateSuperAdmin($instId,$teacher);
+            session('teacherId',$teacher);
+            $data = "true";
+        }catch(Exception $e){
+            $data = "false";
+        }
+        $this->ajaxReturn($data);
     }
 }

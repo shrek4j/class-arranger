@@ -65,7 +65,11 @@ class OperatorController extends Controller {
             $ip = get_client_ip();
             
             //add login log
-            $operator->addLoginLog($result[0]['operator_id'],date('Y-m-d H:i:s',time()),$ip);
+            try{
+                $operator->addLoginLog($result[0]['operator_id'],date('Y-m-d H:i:s',time()),$ip);
+            }catch(Exception $e){
+                //do nothing
+            }
             session("loginErr",0);
             $this->redirect('Operator/showDashboard', null,0, '页面跳转中...');
         }else{
@@ -86,14 +90,18 @@ class OperatorController extends Controller {
         $instId = session('instId');
         $operatorId = session('operatorId');
         $operatorName = session('operatorName');
-        $operator = new \Home\Model\OperatorModel();
-        $result = $operator->queryOperator($operatorName,$userPwd0);
-        if(!empty($result) && count($result) == 1){
-            $operatorId = $operator->saveOperatorPwd($instId,$operatorId,$userPwd1);
-            $this->ajaxReturn("ok");
-        }else{
-            $this->ajaxReturn("originPwd wrong");
+        try{
+            $operator = new \Home\Model\OperatorModel();
+            $result = $operator->queryOperator($operatorName,$userPwd0);
+            if(!empty($result) && count($result) == 1){
+                $operatorId = $operator->saveOperatorPwd($instId,$operatorId,$userPwd1);
+                $data = "true";
+            }else{
+                $data = "originPwd wrong";
+            }
+        }catch(Exception $e){
+            $data = "false";
         }
-        
+        $this->ajaxReturn($data);
     }
 }

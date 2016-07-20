@@ -13,12 +13,11 @@ $(".add-student").click(function(){
 	   	data: "studentName="+studentName+"&gender="+gender+"&grade="+grade+"&school="+school+
 	   			"&remark="+remark+"&mobile="+mobile+"&tuition="+tuition,
 	   	success: function(msg){
-	   		if(msg == 'false'){
-	   			//提示保存失败
-	   			alert(msg);
+	   		if(msg == 'true'){
+	   			$.scojs_message('添加成功！', $.scojs_message.TYPE_OK);
+	   			setInterval('reloadPage()',1500);
 	   		}else{
-	   			//提示保存成功
-	   			window.location.reload();
+	   			$.scojs_message('添加失败！', $.scojs_message.TYPE_ERROR);
 	   		}
 			
 	   	}
@@ -46,11 +45,11 @@ $(".update-student").click(function(){
 	   	data: "studentName="+studentName+"&gender="+gender+"&grade="+grade+"&school="+school+
 	   			"&remark="+remark+"&mobile="+mobile+"&balance="+balance+"&studentId="+studentId,
 	   	success: function(msg){
-	   		if(msg == 'false'){
-	   			//提示保存失败
+	   		if(msg == 'true'){
+	   			$.scojs_message('更新成功！', $.scojs_message.TYPE_OK);
+	   			setInterval('reloadPage()',1500);
 	   		}else{
-	   			//提示保存成功
-	   			window.location.reload();
+	   			$.scojs_message('更新失败！', $.scojs_message.TYPE_ERROR);
 	   		}
 			
 	   	}
@@ -75,11 +74,11 @@ function deleteStudent(id,name){
 	   	url: "deleteStudent",
 	   	data: "studentId="+id,
 	   	success: function(msg){
-	   		if(msg == 'false'){
-	   			//提示保存失败
+	   		if(msg == 'true'){
+	   			$.scojs_message('删除成功！', $.scojs_message.TYPE_OK);
+	   			setInterval('reloadPage()',1500);
 	   		}else{
-	   			//提示保存成功
-	   			window.location.reload();
+	   			$.scojs_message('删除失败！', $.scojs_message.TYPE_ERROR);
 	   		}
 			
 	   	}

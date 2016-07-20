@@ -9,36 +9,34 @@ class StudentController extends Controller {
     }
 
     public function saveStudent($studentName="",$gender,$grade,$school,$remark,$mobile,$tuition){
-        if($studentName == "")
-            return;
-        $pyUtil = new \Org\Util\Pinyin();
-        $studPinyin = $pyUtil->getPinyin($studentName);
-        $instId = session('instId');
-        if(!$instId)
-            return;
-        $model = new \Home\Model\StudentModel();
-        $result = $model->saveStudent($studentName,$studPinyin,$gender,$grade,$school,$remark,$mobile,$tuition*100,$instId);
-        if($result == 1){
-           $data = 'ok'; 
-        }else{
+        try{
+            if($studentName == "")
+                return;
+            $pyUtil = new \Org\Util\Pinyin();
+            $studPinyin = $pyUtil->getPinyin($studentName);
+            $instId = session('instId');
+        
+            $model = new \Home\Model\StudentModel();
+            $result = $model->saveStudent($studentName,$studPinyin,$gender,$grade,$school,$remark,$mobile,$tuition*100,$instId);
+            $data = "true";
+        }catch(Exception $e){
             $data = "false";
         }
         $this->ajaxReturn($data);
     }
 
     public function updateStudent($studentName="",$gender,$grade,$school,$remark,$mobile,$balance,$studentId){
-        if($studentName == "")
-            return;
-        $pyUtil = new \Org\Util\Pinyin();
-        $studPinyin = $pyUtil->getPinyin($studentName);
-        $instId = session('instId');
-        if(!$instId)
-            return;
-        $model = new \Home\Model\StudentModel();
-        $result = $model->updateStudent($studentName,$studPinyin,$gender,$grade,$school,$remark,$mobile,$balance*100,$studentId,$instId);
-        if($result == 1){
-           $data = 'ok'; 
-        }else{
+        try{
+            if($studentName == "")
+                return;
+            $pyUtil = new \Org\Util\Pinyin();
+            $studPinyin = $pyUtil->getPinyin($studentName);
+            $instId = session('instId');
+        
+            $model = new \Home\Model\StudentModel();
+            $result = $model->updateStudent($studentName,$studPinyin,$gender,$grade,$school,$remark,$mobile,$balance*100,$studentId,$instId);
+            $data = "true";
+        }catch(Exception $e){
             $data = "false";
         }
         $this->ajaxReturn($data);
@@ -76,13 +74,12 @@ class StudentController extends Controller {
 
     public function deleteStudent($studentId){
         $instId = session('instId');
-        if(!$instId)
-            return;
-        $model = new \Home\Model\StudentModel();
-        $result = $model->deleteStudent($instId,$studentId);
-        if($result == 1){
-           $data = 'ok'; 
-        }else{
+        
+        try{
+            $model = new \Home\Model\StudentModel();
+            $result = $model->deleteStudent($instId,$studentId);
+            $data = "true";
+        }catch(Exception $e){
             $data = "false";
         }
         $this->ajaxReturn($data);

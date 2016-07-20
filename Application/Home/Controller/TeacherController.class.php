@@ -12,15 +12,22 @@ class TeacherController extends Controller {
         if($teacher == "")
             return;
         $instId = session('instId');
-        if(!$instId)
-            return;
+
         $model = new \Home\Model\TeacherModel();
-        $result = $model->saveTeacher($teacher,$instId);
         $operator = new \Home\Model\OperatorModel();
-        //TODO 稍后改成用户自定义密码
-        $operatorId = $operator->addOperator($instId,$loginname,'123456',0,$teacher,$result[0]['teacher_id']);
-        //TODO 稍后改成查数据库code=ROLE_TEACHER的
-        $operator->addOperatorAndRoleRela($operatorId[0]['operator_id'],1);
+        try {
+            $model->startTrans();
+            $result = $model->saveTeacher($teacher,$instId);
+            //TODO 稍后改成用户自定义密码
+            $operatorId = $operator->addOperator($instId,$loginname,'123456',0,$teacher,$result[0]['teacher_id']);
+            //TODO 稍后改成查数据库code=ROLE_TEACHER的
+            $operator->addOperatorAndRoleRela($operatorId[0]['operator_id'],1);
+            $model->commit();
+            $data = "true";
+        } catch (Exception $e) {
+            $model->rollback();
+            $data = "false";
+        } 
         $this->ajaxReturn($data);
     }
 
@@ -48,12 +55,15 @@ class TeacherController extends Controller {
         if(!$instId)
             return;
         $model = new \Home\Model\TeacherModel();
-        $result = $model->deleteTeacher($instId,$teacherId);
         $operator = new \Home\Model\OperatorModel();
-        $operator->deleteOperatorByTeacherId($instId,$teacherId);
-        if($result == 1){
-           $data = 'ok'; 
-        }else{
+        try {
+            $model->startTrans();
+            $result = $model->deleteTeacher($instId,$teacherId);
+            $operator->deleteOperatorByTeacherId($instId,$teacherId);
+            $model->commit();
+            $data = "true";
+        }catch(Exception $e){
+            $model->rollback();
             $data = "false";
         }
         $this->ajaxReturn($data);

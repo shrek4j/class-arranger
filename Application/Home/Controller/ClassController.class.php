@@ -45,107 +45,114 @@ class ClassController extends Controller {
     }
 
     public function saveClass($className="",$classtypeId,$teacherId,$classroomId,$studentIds="",$startDate="",$endDate="",$time="",$timecn="",$tuition,$wage,$remark,$deductFlag){
+        try{
+            //inst_Id
+            $tId = session('instId');
 
-        //inst_Id
-        $tId = session('instId');
+            $tuition = (int)$tuition*100;
+            $wage = (int)$wage*100;
 
-        $tuition = (int)$tuition*100;
-        $wage = (int)$wage*100;
+            //$className = iconv("utf-8","gbk//IGNORE",$className);
+            //$timecn = iconv("utf-8","gbk//IGNORE",$timecn);
 
-        //$className = iconv("utf-8","gbk//IGNORE",$className);
-        //$timecn = iconv("utf-8","gbk//IGNORE",$timecn);
-
-        //handle time format
-        $classTimeArr = array("","","","","","","");
-        $timeArr = explode(';',$time);
-        for($x=0;$x<count($timeArr)-1;$x++) {
-            $tuple = explode('|',$timeArr[$x]);
-            $classTimeArr[$tuple[0]-1] = $tuple[1];
-        }
-
-        //translate
-        $start = strtotime($startDate);
-        $end = strtotime($endDate);
-        $oneDay = 24*3600;
-
-        //students
-        if($studentIds == null || $studentIds == ""){
-            
-        }else{
-            $students = explode('|',$studentIds);
-        }
-
-        //save class
-        $class = new \Home\Model\ClassModel(); 
-        $classId = $class->saveClass($className,$classtypeId,$tuition,(int)$wage,$startDate,$endDate,$teacherId,$classroomId,$remark,$deductFlag,$timecn,$tId);
-
-        //save class students 
-        if(!empty($students)){
-            for($i=0;$i<count($students);$i++){
-            	$class->saveClassAndStudentRela($classId[0]['class_id'],(int)$students[$i],$tuition,0,$tId);
+            //handle time format
+            $classTimeArr = array("","","","","","","");
+            $timeArr = explode(';',$time);
+            for($x=0;$x<count($timeArr)-1;$x++) {
+                $tuple = explode('|',$timeArr[$x]);
+                $classTimeArr[$tuple[0]-1] = $tuple[1];
             }
-        }
 
-        //update student status
-        if(!empty($students)){
-            $studentModel = new \Home\Model\StudentModel();
-            for($i=0;$i<count($students);$i++){
-                $studentModel->changeStudentStatus((int)$students[$i],$tId,2);
+            //translate
+            $start = strtotime($startDate);
+            $end = strtotime($endDate);
+            $oneDay = 24*3600;
+
+            //students
+            if($studentIds == null || $studentIds == ""){
+                
+            }else{
+                $students = explode('|',$studentIds);
             }
-        }
 
-        while($start <= $end){
-            $dayOfWeek = date('w',$start);//get the dayOfWeek of this timestamp
-            if($dayOfWeek == 0)
-                $dayOfWeek = 7;
-            if($classTimeArr[$dayOfWeek-1] != ""){//has class on that day
-                $date = date("Y-m-d", $start) ;
-                $ymd = explode('-',$date);
-                $year = $ymd[0];
-                $month = $ymd[1];
-                $times = explode('-',$classTimeArr[$dayOfWeek-1]);
-                $startTime = $times[0];
-                $endTime = $times[1];
-                $startTimeInt = str_replace(':','',$startTime);
-                //save class detail
-                $classDetailId = $class->saveClassDetail($date,$year,$month,$dayOfWeek,$startTime,(int)$startTimeInt,$endTime,$teacherId,$classroomId,$classId[0]['class_id'],$tId);
+            //save class
+            $class = new \Home\Model\ClassModel(); 
+            $class->startTrans();
+            $classId = $class->saveClass($className,$classtypeId,$tuition,(int)$wage,$startDate,$endDate,$teacherId,$classroomId,$remark,$deductFlag,$timecn,$tId);
 
-                //save students that join this class
-                if(!empty($students)){
-                    for($i=0;$i<count($students);$i++){
-                        $class->saveClassDetailAndStudentRela($classDetailId[0]['class_detail_id'],$classId[0]['class_id'],(int)$students[$i],(int)$tuition,$tId);
-                    }
+            //save class students 
+            if(!empty($students)){
+                for($i=0;$i<count($students);$i++){
+                	$class->saveClassAndStudentRela($classId[0]['class_id'],(int)$students[$i],$tuition,0,$tId);
                 }
             }
-            $start += $oneDay;//check next day
+
+            //update student status
+            if(!empty($students)){
+                $studentModel = new \Home\Model\StudentModel();
+                for($i=0;$i<count($students);$i++){
+                    $studentModel->changeStudentStatus((int)$students[$i],$tId,2);
+                }
+            }
+
+            while($start <= $end){
+                $dayOfWeek = date('w',$start);//get the dayOfWeek of this timestamp
+                if($dayOfWeek == 0)
+                    $dayOfWeek = 7;
+                if($classTimeArr[$dayOfWeek-1] != ""){//has class on that day
+                    $date = date("Y-m-d", $start) ;
+                    $ymd = explode('-',$date);
+                    $year = $ymd[0];
+                    $month = $ymd[1];
+                    $times = explode('-',$classTimeArr[$dayOfWeek-1]);
+                    $startTime = $times[0];
+                    $endTime = $times[1];
+                    $startTimeInt = str_replace(':','',$startTime);
+                    //save class detail
+                    $classDetailId = $class->saveClassDetail($date,$year,$month,$dayOfWeek,$startTime,(int)$startTimeInt,$endTime,$teacherId,$classroomId,$classId[0]['class_id'],$tId);
+
+                    //save students that join this class
+                    if(!empty($students)){
+                        for($i=0;$i<count($students);$i++){
+                            $class->saveClassDetailAndStudentRela($classDetailId[0]['class_detail_id'],$classId[0]['class_id'],(int)$students[$i],(int)$tuition,$tId);
+                        }
+                    }
+                }
+                $start += $oneDay;//check next day
+            }
+            $class->commit();
+            $data = "true";
+        } catch(Exception $e){
+            $model->rollback();
+            $data = "false";
         }
-        $this->ajaxReturn("ok");
+        $this->ajaxReturn($data);
     }
 
     public function updateClass($classId,$className){
-        //inst_Id
-        $tId = session('instId');
-        $class = new \Home\Model\ClassModel(); 
-        $result = $class->updateClass($classId,$className,$tId);
-        if($result == 1){
-           $data = 'ok'; 
-        }else{
+        try{
+            $tId = session('instId');
+            $class = new \Home\Model\ClassModel(); 
+            $result = $class->updateClass($classId,$className,$tId);
+            $data = "true";
+        }catch(Exception $e){
             $data = "false";
         }
         $this->ajaxReturn($data);
     }
 
     public function deleteClass($classId){
-        //inst_Id
-        $tId = session('instId');
-        $class = new \Home\Model\ClassModel();
-        $result = $class->deleteClass($classId,$tId);
-		$class->deleteClassDetails($classId,$tId);
-		$class->deleteClassDetailAndStudentRelas($classId,$tId);
-        //delete related student infos
-        if($result == 1){
-           $data = 'ok'; 
-        }else{
+        try{
+            $tId = session('instId');
+            $class = new \Home\Model\ClassModel();
+            $class->startTrans();
+            $result = $class->deleteClass($classId,$tId);
+    		$class->deleteClassDetails($classId,$tId);
+    		$class->deleteClassDetailAndStudentRelas($classId,$tId);
+            $class->commit();
+            $data = "true";
+        }catch(Exception $e){
+            $class->rollback();
             $data = "false";
         }
         $this->ajaxReturn($data);
@@ -220,41 +227,41 @@ class ClassController extends Controller {
 
     //apply context: when a class detail needs to be added
     public function addClassDetail($classId,$classroomId,$teacherId,$date,$startTime,$endTime,$week){
-        //inst_Id
-        $tId = session('instId');
-        $dayOfWeek = date('w',strtotime($date));//get the dayOfWeek of this timestamp
-        if($dayOfWeek == 0)
-            $dayOfWeek = 7;
-        $ymd = explode('-',$date);
-        $year = $ymd[0];
-        $month = $ymd[1];
-        $startTimeInt = str_replace(':','',$startTime);
-        //save class detail
-        $class = new \Home\Model\ClassModel();
-        $classDetailId = $class->saveClassDetail($date,$year,$month,$dayOfWeek,$startTime,(int)$startTimeInt,$endTime,$teacherId,$classroomId,$classId,$tId);
-
-        $data = 'ok'; 
+        try{
+            $tId = session('instId');
+            $dayOfWeek = date('w',strtotime($date));//get the dayOfWeek of this timestamp
+            if($dayOfWeek == 0)
+                $dayOfWeek = 7;
+            $ymd = explode('-',$date);
+            $year = $ymd[0];
+            $month = $ymd[1];
+            $startTimeInt = str_replace(':','',$startTime);
+            //save class detail
+            $class = new \Home\Model\ClassModel();
+            $classDetailId = $class->saveClassDetail($date,$year,$month,$dayOfWeek,$startTime,(int)$startTimeInt,$endTime,$teacherId,$classroomId,$classId,$tId);
+            $data = "true";
+        }catch(Exception $e){
+            $data = "false";
+        }
         $this->ajaxReturn($data);
     }
 
     //apply context: when one class detail needs to change classroom, a teacher, date, time.
     public function updateClassDetail($classId,$classDetailId,$classroomId,$teacherId,$date,$startTime,$endTime,$week){
-        //inst_Id
-        $tId = session('instId');
-        $dayOfWeek = date('w',strtotime($date));//get the dayOfWeek of this timestamp
-        if($dayOfWeek == 0)
-            $dayOfWeek = 7;
-        $ymd = explode('-',$date);
-        $year = $ymd[0];
-        $month = $ymd[1];
-        $startTimeInt = str_replace(':','',$startTime);
-        //save class detail
-        $class = new \Home\Model\ClassModel();
-        $result = $class->updateClassDetail($date,$year,$month,$dayOfWeek,$startTime,(int)$startTimeInt,$endTime,$teacherId,$classroomId,$classDetailId,$tId);
-
-        if($result == 1){
-           $data = 'ok';
-        }else{
+        try{
+            $tId = session('instId');
+            $dayOfWeek = date('w',strtotime($date));//get the dayOfWeek of this timestamp
+            if($dayOfWeek == 0)
+                $dayOfWeek = 7;
+            $ymd = explode('-',$date);
+            $year = $ymd[0];
+            $month = $ymd[1];
+            $startTimeInt = str_replace(':','',$startTime);
+            //save class detail
+            $class = new \Home\Model\ClassModel();
+            $result = $class->updateClassDetail($date,$year,$month,$dayOfWeek,$startTime,(int)$startTimeInt,$endTime,$teacherId,$classroomId,$classDetailId,$tId);
+            $data = "true";
+        }catch(Exception $e){
             $data = "false";
         }
         $this->ajaxReturn($data);
@@ -262,228 +269,246 @@ class ClassController extends Controller {
 
     //apply context: when you want to delete one class detail.
     public function deleteClassDetail($classId,$classDetailId){
-        //inst_Id
-        $tId = session('instId');
-        $class = new \Home\Model\ClassModel(); 
-        $result = $class->deleteClassDetail($classId,$classDetailId,$tId);
-        if($result == 1){
-           $data = 'ok'; 
-        }else{
+        try{
+            $tId = session('instId');
+            $class = new \Home\Model\ClassModel(); 
+            $result = $class->deleteClassDetail($classId,$classDetailId,$tId);
+            $data = "true";
+        }catch(Exception $e){
             $data = "false";
         }
         $this->ajaxReturn($data);
     }
 
     public function saveStudentsForClass($classId,$students){
-        //inst_Id
-        $tId = session('instId');
-        $class = new \Home\Model\ClassModel();
-        $result = $class->showStudentsFromClass((int)$classId,$tId);
-        for($i=0;$i<count($result);$i++){
-            $oldStudentIds[] = $result[$i]['student_id'];
-        }
+        try{
+            $tId = session('instId');
+            $class = new \Home\Model\ClassModel();
+            $class->startTrans();
+            $result = $class->showStudentsFromClass((int)$classId,$tId);
+            for($i=0;$i<count($result);$i++){
+                $oldStudentIds[] = $result[$i]['student_id'];
+            }
 
-        //students
-        if($students==null || $students == ""){
-            $newStudentIds = array();
-        }else{
-            $newStudentIds = explode('|',$students);
-        }
-        
-
-        //find $deleteIds[] and $addIds[]
-        if(!empty($oldStudentIds)){
-            if(empty($newStudentIds)){
-                $deleteIds = $oldStudentIds;
+            //students
+            if($students==null || $students == ""){
+                $newStudentIds = array();
             }else{
-                for($i=0;$i<count($oldStudentIds);$i++){
-                    $shouldDelete = true;
-                    for($j=0;$j<count($newStudentIds);$j++){
-                        if((int)$oldStudentIds[$i] == (int)$newStudentIds[$j]){
-                            $shouldDelete = false;
+                $newStudentIds = explode('|',$students);
+            }
+            
+
+            //find $deleteIds[] and $addIds[]
+            if(!empty($oldStudentIds)){
+                if(empty($newStudentIds)){
+                    $deleteIds = $oldStudentIds;
+                }else{
+                    for($i=0;$i<count($oldStudentIds);$i++){
+                        $shouldDelete = true;
+                        for($j=0;$j<count($newStudentIds);$j++){
+                            if((int)$oldStudentIds[$i] == (int)$newStudentIds[$j]){
+                                $shouldDelete = false;
+                            }
+                        }
+                        if($shouldDelete){
+                            $deleteIds[] = $oldStudentIds[$i];
                         }
                     }
-                    if($shouldDelete){
-                        $deleteIds[] = $oldStudentIds[$i];
-                    }
                 }
             }
-        }
 
-        if(!empty($newStudentIds)){
-            if(empty($oldStudentIds)){
-                $addIds = $newStudentIds;
-            }else{
-                for($i=0;$i<count($newStudentIds);$i++){
-                    $shouldAdd = true;
-                    for($j=0;$j<count($oldStudentIds);$j++){
-                        if((int)$newStudentIds[$i] == (int)$oldStudentIds[$j]){
-                            $shouldAdd = false;
+            if(!empty($newStudentIds)){
+                if(empty($oldStudentIds)){
+                    $addIds = $newStudentIds;
+                }else{
+                    for($i=0;$i<count($newStudentIds);$i++){
+                        $shouldAdd = true;
+                        for($j=0;$j<count($oldStudentIds);$j++){
+                            if((int)$newStudentIds[$i] == (int)$oldStudentIds[$j]){
+                                $shouldAdd = false;
+                            }
+                        }
+                        if($shouldAdd){
+                            $addIds[] = $newStudentIds[$i];
                         }
                     }
-                    if($shouldAdd){
-                        $addIds[] = $newStudentIds[$i];
+                }
+            }
+            
+            $studentModel = new \Home\Model\StudentModel();
+            $class = new \Home\Model\ClassModel();
+            $classInfo = $class->getClassById((int)$classId,$tId);
+            $tuition = $classInfo[0]['tuition_per_class'];
+
+            $classDetails = $class->showClassDetailsById((int)$classId,$tId);
+
+            $ndate = date("Y-m-d");
+            $nstarttimeint = (int)(str_replace(':','',date('H:i')));
+            for($i=0;$i<count($classDetails);$i++){
+                $cdate = $classDetails[$i]['date'];
+                $cstarttimeint = $classDetails[$i]['start_time_int'];
+                if((($cdate == $ndate) && ($cstarttimeint>$nstarttimeint)) || ($cdate > $ndate)){
+                    $leftClassDetails = array_slice($classDetails, $i);
+                    break;
+                }
+            }
+
+            if(!empty($deleteIds)){
+                for($i=0;$i<count($deleteIds);$i++){
+                    //logic delete
+                    $class->updateStudentStatusFromClass($tId,(int)$classId,(int)$deleteIds[$i],1);
+
+                    if(!empty($leftClassDetails) && count($leftClassDetails)>0){
+                        for($m=0;$m<count($leftClassDetails);$m++){
+                            //logic delete
+                            $class->updateStudentStatusFromClassDetail($tId,(int)$classId,$leftClassDetails[$m]['class_detail_id'],(int)$deleteIds[$i],1);
+                        }
                     }
                 }
             }
-        }
-        
-        $studentModel = new \Home\Model\StudentModel();
-        $class = new \Home\Model\ClassModel();
-        $classInfo = $class->getClassById((int)$classId,$tId);
-        $tuition = $classInfo[0]['tuition_per_class'];
 
-        $classDetails = $class->showClassDetailsById((int)$classId,$tId);
+            if(!empty($addIds)){
+                for($i=0;$i<count($addIds);$i++){
+                    //update student status
+                    $studentModel->changeStudentStatus((int)$addIds[$i],$tId,2);
 
-        $ndate = date("Y-m-d");
-        $nstarttimeint = (int)(str_replace(':','',date('H:i')));
-        for($i=0;$i<count($classDetails);$i++){
-            $cdate = $classDetails[$i]['date'];
-            $cstarttimeint = $classDetails[$i]['start_time_int'];
-            if((($cdate == $ndate) && ($cstarttimeint>$nstarttimeint)) || ($cdate > $ndate)){
-                $leftClassDetails = array_slice($classDetails, $i);
-                break;
-            }
-        }
-
-        if(!empty($deleteIds)){
-            for($i=0;$i<count($deleteIds);$i++){
-                //logic delete
-                $class->updateStudentStatusFromClass($tId,(int)$classId,(int)$deleteIds[$i],1);
-
-                if(!empty($leftClassDetails) && count($leftClassDetails)>0){
-                    for($m=0;$m<count($leftClassDetails);$m++){
-                        //logic delete
-                        $class->updateStudentStatusFromClassDetail($tId,(int)$classId,$leftClassDetails[$m]['class_detail_id'],(int)$deleteIds[$i],1);
+                    //try update first
+                    $result = $class->updateStudentStatusFromClass($tId,(int)$classId,(int)$addIds[$i],0);
+                    if($result==0){
+                        $class->saveClassAndStudentRela((int)$classId,(int)$addIds[$i],$tuition,0,$tId);
+                    }
+                    if(!empty($leftClassDetails) && count($leftClassDetails)>0){
+                        for($m=0;$m<count($leftClassDetails);$m++){
+                            //先尝试删除此课程，以免重复添加
+                            $class->updateStudentStatusFromClassDetail($tId,(int)$classId,$leftClassDetails[$m]['class_detail_id'],(int)$addIds[$i],1);
+                            $class->saveClassDetailAndStudentRela($leftClassDetails[$m]['class_detail_id'],(int)$classId,(int)$addIds[$i],$tuition,$tId);
+                        }
                     }
                 }
             }
-        }
-
-        if(!empty($addIds)){
-            for($i=0;$i<count($addIds);$i++){
-                //update student status
-                $studentModel->changeStudentStatus((int)$addIds[$i],$tId,2);
-
-                //try update first
-                $result = $class->updateStudentStatusFromClass($tId,(int)$classId,(int)$addIds[$i],0);
-                if($result==0){
-                    $class->saveClassAndStudentRela((int)$classId,(int)$addIds[$i],$tuition,0,$tId);
-                }
-                if(!empty($leftClassDetails) && count($leftClassDetails)>0){
-                    for($m=0;$m<count($leftClassDetails);$m++){
-                        //先尝试删除此课程，以免重复添加
-                        $class->updateStudentStatusFromClassDetail($tId,(int)$classId,$leftClassDetails[$m]['class_detail_id'],(int)$addIds[$i],1);
-                        $class->saveClassDetailAndStudentRela($leftClassDetails[$m]['class_detail_id'],(int)$classId,(int)$addIds[$i],$tuition,$tId);
-                    }
-                }
-            }
+            $class->commit();
+        }catch(Exception $e){
+            $class->rollback();
         }
 
     }
 
     public function saveStudentsToOneClass($classId,$classDetailId,$students){
-        //inst_Id
-        $tId = session('instId');
-        $class = new \Home\Model\ClassModel();
-        $result = $class->showStudentsFromClassDetail((int)$classDetailId,$tId);
-        for($i=0;$i<count($result);$i++){
-            $oldStudentIds[] = $result[$i]['student_id'];
-        }
+        try{
+            $tId = session('instId');
+            $class = new \Home\Model\ClassModel();
+            $class->startTrans();
+            $result = $class->showStudentsFromClassDetail((int)$classDetailId,$tId);
+            for($i=0;$i<count($result);$i++){
+                $oldStudentIds[] = $result[$i]['student_id'];
+            }
 
-        //students
-        if($students==null || $students == ""){
-            $newStudentIds = array();
-        }else{
-            $newStudentIds = explode('|',$students);
-        }
-        
-
-        //find $deleteIds[] and $addIds[]
-        if(!empty($oldStudentIds)){
-            if(empty($newStudentIds)){
-                $deleteIds = $oldStudentIds;
+            //students
+            if($students==null || $students == ""){
+                $newStudentIds = array();
             }else{
-                for($i=0;$i<count($oldStudentIds);$i++){
-                    $shouldDelete = true;
-                    for($j=0;$j<count($newStudentIds);$j++){
-                        if((int)$oldStudentIds[$i] == (int)$newStudentIds[$j]){
-                            $shouldDelete = false;
+                $newStudentIds = explode('|',$students);
+            }
+            
+            //find $deleteIds[] and $addIds[]
+            if(!empty($oldStudentIds)){
+                if(empty($newStudentIds)){
+                    $deleteIds = $oldStudentIds;
+                }else{
+                    for($i=0;$i<count($oldStudentIds);$i++){
+                        $shouldDelete = true;
+                        for($j=0;$j<count($newStudentIds);$j++){
+                            if((int)$oldStudentIds[$i] == (int)$newStudentIds[$j]){
+                                $shouldDelete = false;
+                            }
+                        }
+                        if($shouldDelete){
+                            $deleteIds[] = $oldStudentIds[$i];
                         }
                     }
-                    if($shouldDelete){
-                        $deleteIds[] = $oldStudentIds[$i];
-                    }
                 }
             }
-        }
 
-        if(!empty($newStudentIds)){
-            if(empty($oldStudentIds)){
-                $addIds = $newStudentIds;
-            }else{
-                for($i=0;$i<count($newStudentIds);$i++){
-                    $shouldAdd = true;
-                    for($j=0;$j<count($oldStudentIds);$j++){
-                        if((int)$newStudentIds[$i] == (int)$oldStudentIds[$j]){
-                            $shouldAdd = false;
+            if(!empty($newStudentIds)){
+                if(empty($oldStudentIds)){
+                    $addIds = $newStudentIds;
+                }else{
+                    for($i=0;$i<count($newStudentIds);$i++){
+                        $shouldAdd = true;
+                        for($j=0;$j<count($oldStudentIds);$j++){
+                            if((int)$newStudentIds[$i] == (int)$oldStudentIds[$j]){
+                                $shouldAdd = false;
+                            }
+                        }
+                        if($shouldAdd){
+                            $addIds[] = $newStudentIds[$i];
                         }
                     }
-                    if($shouldAdd){
-                        $addIds[] = $newStudentIds[$i];
+                }
+            }
+
+            $class = new \Home\Model\ClassModel();
+            $classInfo = $class->getClassById((int)$classId,$tId);
+            $tuition = $classInfo[0]['tuition_per_class'];
+
+            if(!empty($deleteIds)){
+                for($i=0;$i<count($deleteIds);$i++){
+                    $class->updateStudentStatusFromClassDetail($tId,(int)$classId,$classDetailId,(int)$deleteIds[$i],1);
+                }
+            }
+
+            if(!empty($addIds)){
+                for($i=0;$i<count($addIds);$i++){
+                    //try update first
+                    $result = $class->selectStudentFromClass($tId,(int)$classId,(int)$addIds[$i]);
+                    if($result[0]['count']==0){
+                        $class->saveClassAndStudentRela((int)$classId,(int)$addIds[$i],$tuition,1,$tId);
                     }
+
+                    $class->saveClassDetailAndStudentRela($classDetailId,(int)$classId,(int)$addIds[$i],$tuition,$tId);
                 }
             }
-        }
-
-        $class = new \Home\Model\ClassModel();
-        $classInfo = $class->getClassById((int)$classId,$tId);
-        $tuition = $classInfo[0]['tuition_per_class'];
-
-        if(!empty($deleteIds)){
-            for($i=0;$i<count($deleteIds);$i++){
-                $class->updateStudentStatusFromClassDetail($tId,(int)$classId,$classDetailId,(int)$deleteIds[$i],1);
-            }
-        }
-
-        if(!empty($addIds)){
-            for($i=0;$i<count($addIds);$i++){
-                //try update first
-                $result = $class->selectStudentFromClass($tId,(int)$classId,(int)$addIds[$i]);
-                if($result[0]['count']==0){
-                    $class->saveClassAndStudentRela((int)$classId,(int)$addIds[$i],$tuition,1,$tId);
-                }
-
-                $class->saveClassDetailAndStudentRela($classDetailId,(int)$classId,(int)$addIds[$i],$tuition,$tId);
-            }
+            $class->commit();
+        }catch(Exception $e){
+            $class->rollback();
         }
     }
 
     //add students to one classdetail
     //apply context: record not absent
     public function addStudentsIntoClassDetail($classId,$classDetailId,$studentIds){
-        //inst_Id
-        $tId = session('instId');
-        //students
-        $students = explode('|',$studentIds);
-        $class = new \Home\Model\ClassModel();
-        //save students that join this class
-        for($i;$i<count($students);$i++){
-            $class->saveClassDetailAndStudentRela($classDetailId,$classId,$students[$i],null,$tId);
+        try{
+            $tId = session('instId');
+            //students
+            $students = explode('|',$studentIds);
+            $class = new \Home\Model\ClassModel();
+            $class->startTrans();
+            //save students that join this class
+            for($i;$i<count($students);$i++){
+                $class->saveClassDetailAndStudentRela($classDetailId,$classId,$students[$i],null,$tId);
+            }
+            $class->commit();
+        }catch(Exception $e){
+            $class->rollback();
         }
     }
 
     //del students from on classdetail
     //apply context: record  absent
     public function delStudentsFromClassDetail($classId,$classDetailId,$studentIds){
-        //inst_Id
-        $tId = session('instId');
-        //students
-        $students = explode('|',$studentIds);
-        $class = new \Home\Model\ClassModel();
-        //save students that join this class
-        for($i;$i<count($students);$i++){
-            $class->delClassDetailAndStudentRela($classDetailId,$students[$i],$tId);
+        try{
+            $tId = session('instId');
+            //students
+            $students = explode('|',$studentIds);
+            $class = new \Home\Model\ClassModel();
+            $class->startTrans();
+            //save students that join this class
+            for($i;$i<count($students);$i++){
+                $class->delClassDetailAndStudentRela($classDetailId,$students[$i],$tId);
+            }
+            $class->commit();
+        }catch(Exception $e){
+            $class->rollback();
         }
     }
 
@@ -540,82 +565,91 @@ class ClassController extends Controller {
     }
 
     public function updateStudentTuitions($classId,$tuitions){
-        //inst_Id
-        $tId = session('instId');
-        $sts = explode('|',$tuitions);
-        $class = new \Home\Model\ClassModel();
-        for($i=0;$i<count($sts);$i++){
-            $st = explode(':',$sts[$i]);
-            $class->updateStudentTuitionForClass($tId,(int)$classId,(int)$st[0],(int)$st[1]*100);
-            $class->updateStudentTuitionForClassDetailAndStudentRela($tId,(int)$classId,(int)$st[0],(int)$st[1]*100);
+        try{
+            $tId = session('instId');
+            $sts = explode('|',$tuitions);
+            $class = new \Home\Model\ClassModel();
+            $class->startTrans();
+            for($i=0;$i<count($sts);$i++){
+                $st = explode(':',$sts[$i]);
+                $class->updateStudentTuitionForClass($tId,(int)$classId,(int)$st[0],(int)$st[1]*100);
+                $class->updateStudentTuitionForClassDetailAndStudentRela($tId,(int)$classId,(int)$st[0],(int)$st[1]*100);
+            }
+            $class->commit();
+            $data = "true";
+        }catch(Exception $e){
+            $class->rollback();
+            $data = "false";
         }
-        $this->ajaxReturn("true");
+        $this->ajaxReturn($data);
     }
 
     public function updateClassDetailStudentRela($classId,$classDetailId,$cameRelaIds="",$notCameRelaIds=""){
-         //inst_Id
-        $tId = session('instId');
-        
-        $cameRelaIdsArr = array();
-        if($cameRelaIds != "" && $cameRelaIds != null){
-            $cameRelaIdsArr = explode('|',$cameRelaIds);
-        }
-        
-        $notCameRelaIdsArr = array();
-        if($notCameRelaIds != "" && $notCameRelaIds != null){
-            $notCameRelaIdsArr = explode('|',$notCameRelaIds);
-        }
-        
-        $student = new \Home\Model\StudentModel();
-        $class = new \Home\Model\ClassModel();
-        
-        //get tuition deduct mode
-        $deductFlag = $class->getClassDeductFlag($classId,$tId);
-        $deductFlag = $deductFlag[0]['deduct_flag'];
+        try{
+            $tId = session('instId');
+            
+            $cameRelaIdsArr = array();
+            if($cameRelaIds != "" && $cameRelaIds != null){
+                $cameRelaIdsArr = explode('|',$cameRelaIds);
+            }
+            
+            $notCameRelaIdsArr = array();
+            if($notCameRelaIds != "" && $notCameRelaIds != null){
+                $notCameRelaIdsArr = explode('|',$notCameRelaIds);
+            }
+            
+            $class = new \Home\Model\ClassModel();
+            $student = new \Home\Model\StudentModel();
+            $class->startTrans();
+            
+            //get tuition deduct mode
+            $deductFlag = $class->getClassDeductFlag($classId,$tId);
+            $deductFlag = $deductFlag[0]['deduct_flag'];
 
-        //get all students tuition_per_class
-        $studentTuitions = $class->showAllStudentsFromClassDetail($classDetailId,$tId);
-        for($i=0;$i<count($studentTuitions);$i++){
-            $st = $studentTuitions[$i];
-            $studentTuitionMap[$st['id']] = $st['tuition_per_class'];
-        }
+            //get all students tuition_per_class
+            $studentTuitions = $class->showAllStudentsFromClassDetail($classDetailId,$tId);
+            for($i=0;$i<count($studentTuitions);$i++){
+                $st = $studentTuitions[$i];
+                $studentTuitionMap[$st['id']] = $st['tuition_per_class'];
+            }
 
-        $count = 0;
-        if(count($cameRelaIdsArr) > 0){
-            for($i=0;$i<count($cameRelaIdsArr);$i++){
-                $result = $class->updateClassDetailStudentRela($cameRelaIdsArr[$i],0,$tId);
+            $count = 0;
+            if(count($cameRelaIdsArr) > 0){
+                for($i=0;$i<count($cameRelaIdsArr);$i++){
+                    $result = $class->updateClassDetailStudentRela($cameRelaIdsArr[$i],0,$tId);
 
-                $student->updateStudentBalance((int)$studentTuitionMap[$cameRelaIdsArr[$i]],$cameRelaIdsArr[$i],$tId);
+                    $student->updateStudentBalance((int)$studentTuitionMap[$cameRelaIdsArr[$i]],$cameRelaIdsArr[$i],$tId);
 
-                if($result != 1){
-                    $count++;
+                    if($result != 1){
+                        $count++;
+                    }
                 }
             }
-        }
 
-        if(count($notCameRelaIdsArr) > 0){
-            for($i=0;$i<count($notCameRelaIdsArr);$i++){
-                $result = $class->updateClassDetailStudentRela($notCameRelaIdsArr[$i],1,$tId);
-                if($deductFlag == 1){
-                    $student->updateStudentBalance((int)$studentTuitionMap[$notCameRelaIdsArr[$i]],$notCameRelaIdsArr[$i],$tId);
-                }
-                if($result != 1){
-                    $count++;
+            if(count($notCameRelaIdsArr) > 0){
+                for($i=0;$i<count($notCameRelaIdsArr);$i++){
+                    $result = $class->updateClassDetailStudentRela($notCameRelaIdsArr[$i],1,$tId);
+                    if($deductFlag == 1){
+                        $student->updateStudentBalance((int)$studentTuitionMap[$notCameRelaIdsArr[$i]],$notCameRelaIdsArr[$i],$tId);
+                    }
+                    if($result != 1){
+                        $count++;
+                    }
                 }
             }
+
+            //update status
+            $isAbsentCheck = 1;
+            $class = new \Home\Model\ClassModel();
+            $result = $class->updateClassDetailIsAbsentCheck($classDetailId,$tId,$isAbsentCheck);
+
+            $class->commit();
+            $data = "true";
+        }catch(Exception $e){
+            $class->rollback();
+            $data = "false";
         }
-
-        //update status
-        $isAbsentCheck = 1;
-        $class = new \Home\Model\ClassModel();
-        $result = $class->updateClassDetailIsAbsentCheck($classDetailId,$tId,$isAbsentCheck);
-
-        $return = "true";
-    //    if($count > 0){
-    //        $return = "false";
-    //    }
-
-        $this->ajaxReturn($return);
+        $this->ajaxReturn($data);
     }
 
 
@@ -815,16 +849,15 @@ class ClassController extends Controller {
     }
 
     public function saveClassType($classtype){
-        if($classtype == "")
-            return;
-        $instId = session('instId');
-        if(!$instId)
-            return;
-        $model = new \Home\Model\ClassModel();
-        $result = $model->saveClasstype($classtype,$instId);
-        if($result == 1){
-           $data = 'ok'; 
-        }else{
+        try{
+            if($classtype == "")
+                return;
+            $instId = session('instId');
+        
+            $model = new \Home\Model\ClassModel();
+            $result = $model->saveClasstype($classtype,$instId);
+            $data = "true";
+        }catch(Exception $e){
             $data = "false";
         }
         $this->ajaxReturn($data);
@@ -850,14 +883,12 @@ class ClassController extends Controller {
     }
 
     public function deleteClassType($classTypeId){
-        $instId = session('instId');
-        if(!$instId)
-            return;
-        $model = new \Home\Model\ClassModel();
-        $result = $model->deleteClassType($instId,$classTypeId);
-        if($result == 1){
-           $data = 'ok'; 
-        }else{
+        try{
+            $instId = session('instId');
+            $model = new \Home\Model\ClassModel();
+            $result = $model->deleteClassType($instId,$classTypeId);
+            $data = "true";
+        }catch(Exception $e){
             $data = "false";
         }
         $this->ajaxReturn($data);

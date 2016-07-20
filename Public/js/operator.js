@@ -41,11 +41,11 @@ $(".add-operator").click(function(){
 	   	data: "realName="+realName+"&userName="+userName+"&userPwd="+userPwd+
 	   		"&userPwd2="+userPwd2+"&roles="+roles+"&teacher="+teacher,
 	   	success: function(msg){
-	   		if(msg == 'ok'){
-	   			//提示保存成功
-	   			window.location.reload();
+	   		if(msg == 'true'){
+	   			$.scojs_message('添加成功！', $.scojs_message.TYPE_OK);
+	   			setInterval('reloadPage()',1500);
 	   		}else{
-	   			//提示保存失败
+	   			$.scojs_message('添加失败！', $.scojs_message.TYPE_ERROR);
 	   		}
 	   	}
 	});
@@ -70,11 +70,11 @@ function deleteOperator(id,name){
 	   	url: "deleteOperator",
 	   	data: "operatorId="+id,
 	   	success: function(msg){
-	   		if(msg == 'false'){
-	   			//提示保存失败
+	   		if(msg == 'true'){
+	   			$.scojs_message('删除成功！', $.scojs_message.TYPE_OK);
+	   			setInterval('reloadPage()',1500);
 	   		}else{
-	   			//提示保存成功
-	   			window.location.reload();
+	   			$.scojs_message('删除失败！', $.scojs_message.TYPE_ERROR);
 	   		}
 			
 	   	}
@@ -93,11 +93,11 @@ function toggleDisabled(id,name,disabled){
 	   	url: "toggleDisabled",
 	   	data: "operatorId="+id+"&disabled="+disabled,
 	   	success: function(msg){
-	   		if(msg == 'false'){
-	   			//提示保存失败
+	   		if(msg == 'true'){
+	   			$.scojs_message('操作成功！', $.scojs_message.TYPE_OK);
+	   			setInterval('reloadPage()',1500);
 	   		}else{
-	   			//提示保存成功
-	   			window.location.reload();
+	   			$.scojs_message('操作失败！', $.scojs_message.TYPE_ERROR);
 	   		}
 			
 	   	}
@@ -121,11 +121,11 @@ $(".edit-superadmin").click(function(){
 	   	url: "editSuperadmin",
 	   	data: "teacher="+teacher,
 	   	success: function(msg){
-	   		if(msg == 'ok'){
-	   			//提示保存成功
-	   			window.location.reload();
+	   		if(msg == 'true'){
+	   			$.scojs_message('编辑成功！', $.scojs_message.TYPE_OK);
+	   			setInterval('reloadPage()',1500);
 	   		}else{
-	   			//提示保存失败
+	   			$.scojs_message('编辑失败！', $.scojs_message.TYPE_ERROR);
 	   		}
 	   	}
 	});
@@ -156,10 +156,13 @@ $(".edit-profile").click(function(){
 	   	url: "editProfile",
 	   	data: "userPwd0="+userPwd0+"&userPwd1="+userPwd1,
 	   	success: function(msg){
-	   		if(msg == 'ok'){
-	   			window.location.reload();
+	   		if(msg == 'true'){
+	   			$.scojs_message('修改密码成功！', $.scojs_message.TYPE_OK);
+	   			setInterval('reloadPage()',1500);
 	   		}else if(msg == 'originPwd wrong'){
 	   			$.scojs_message('原密码输入错误！', $.scojs_message.TYPE_ERROR);
+	   		}else{
+	   			$.scojs_message('操作失败！', $.scojs_message.TYPE_ERROR);
 	   		}
 	   	}
 	});
