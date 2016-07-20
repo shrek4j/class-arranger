@@ -387,9 +387,12 @@ class ClassController extends Controller {
                 }
             }
             $class->commit();
+            $data = "true";
         }catch(Exception $e){
             $class->rollback();
+            $data = "false";
         }
+        $this->ajaxReturn($data);
 
     }
 
@@ -469,9 +472,12 @@ class ClassController extends Controller {
                 }
             }
             $class->commit();
+            $data = "true";
         }catch(Exception $e){
             $class->rollback();
+            $data = "false";
         }
+        $this->ajaxReturn($data);
     }
 
     //add students to one classdetail

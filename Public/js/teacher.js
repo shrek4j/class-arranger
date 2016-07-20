@@ -7,7 +7,6 @@ $(".add-teacher").click(function(){
 	   	url: "saveTeacher",
 	   	data: "teacher="+teacher+"&loginname="+loginname,
 	   	success: function(msg){
-	   		alert(msg);
 	   		if(msg == 'true'){
 	   			$.scojs_message('添加成功！', $.scojs_message.TYPE_OK);
 	   			setInterval('reloadPage()',1000);
