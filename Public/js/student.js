@@ -7,6 +7,14 @@ $(".add-student").click(function(){
 	var remark = $("#remark").val();
 	var mobile = $("#mobile").val();
 	var tuition = $("#tuition").val();
+	if(isEmpty(studentName)){
+		$.scojs_message('姓名不可为空！', $.scojs_message.TYPE_ERROR);
+		return;
+	}
+	if(studentName.length > 20){
+		$.scojs_message('姓名长度应小于20！', $.scojs_message.TYPE_ERROR);
+		return;
+	}
 	$.ajax({
 	   	type: "POST",
 	   	url: "saveStudent",
@@ -39,6 +47,16 @@ $(".update-student").click(function(){
 	var balance = parseFloat(tuition)+parseFloat(payment);
 	if(balance < 0)
 		balance = 0;
+
+	if(isEmpty(studentName)){
+		$.scojs_message('姓名不可为空！', $.scojs_message.TYPE_ERROR);
+		return;
+	}
+	if(studentName.length > 20){
+		$.scojs_message('姓名长度应小于20！', $.scojs_message.TYPE_ERROR);
+		return;
+	}
+	
 	$.ajax({
 	   	type: "POST",
 	   	url: "updateStudent",

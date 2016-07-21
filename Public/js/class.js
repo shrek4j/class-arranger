@@ -25,6 +25,15 @@ $(".add-class").click(function(){
 	var wage = $("#wage").val();
 	var remark = $("#remark").val();
 
+	if(isEmpty(classname)){
+		$.scojs_message('课程名称不可为空！', $.scojs_message.TYPE_ERROR);
+		return;
+	}
+	if(classname.length > 20){
+		$.scojs_message('课程名称长度应小于20！', $.scojs_message.TYPE_ERROR);
+		return;
+	}
+
 	$.ajax({
 	   	type: "POST",
 	   	url: "saveClass",
@@ -529,7 +538,6 @@ function saveTuitions(){
 		}
 	}
 
-	//save
 	$.ajax({
 	   	type: "POST",
 	   	url: "updateStudentTuitions",
@@ -623,6 +631,14 @@ function saveStudentsToOneClass(){
 ///////////////////////////////////////////////////////////////////////////////
 $(".add-classtype").click(function(){
 	var classtype = $("#classtype").val();
+	if(isEmpty(classtype)){
+		$.scojs_message('课程类型名称不可为空！', $.scojs_message.TYPE_ERROR);
+		return;
+	}
+	if(classtype.length > 20){
+		$.scojs_message('课程类型名称长度应小于20！', $.scojs_message.TYPE_ERROR);
+		return;
+	}
 	$.ajax({
 	   	type: "POST",
 	   	url: "saveClassType",

@@ -10,16 +10,32 @@ $(".add-operator").click(function(){
 		$.scojs_message('姓名不可为空！', $.scojs_message.TYPE_ERROR);
 		return;
 	}
+	if(realName.length > 20){
+		$.scojs_message('姓名长度应小于20！', $.scojs_message.TYPE_ERROR);
+		return;
+	}
 	if(isEmpty(userName)){
 		$.scojs_message('用户名不可为空！', $.scojs_message.TYPE_ERROR);
+		return;
+	}
+	if(userName.length > 20){
+		$.scojs_message('用户名长度应小于20！', $.scojs_message.TYPE_ERROR);
 		return;
 	}
 	if(isEmpty(userPwd)){
 		$.scojs_message('密码不可为空！', $.scojs_message.TYPE_ERROR);
 		return;
 	}
+	if(userPwd.length > 20){
+		$.scojs_message('密码长度应小于20！', $.scojs_message.TYPE_ERROR);
+		return;
+	}
 	if(isEmpty(userPwd2)){
 		$.scojs_message('确认密码不可为空！', $.scojs_message.TYPE_ERROR);
+		return;
+	}
+	if(userPwd2.length > 20){
+		$.scojs_message('确认长度应小于20！', $.scojs_message.TYPE_ERROR);
 		return;
 	}
 	if(userPwd != userPwd2){
@@ -139,12 +155,24 @@ $(".edit-profile").click(function(){
 		$.scojs_message('原密码不可为空！', $.scojs_message.TYPE_ERROR);
 		return;
 	}
+	if(userPwd0.length > 20){
+		$.scojs_message('原密码长度应小于20！', $.scojs_message.TYPE_ERROR);
+		return;
+	}
 	if(isEmpty(userPwd1)){
-		$.scojs_message('修改密码不可为空！', $.scojs_message.TYPE_ERROR);
+		$.scojs_message('新密码不可为空！', $.scojs_message.TYPE_ERROR);
+		return;
+	}
+	if(userPwd1.length > 20){
+		$.scojs_message('新密码长度应小于20！', $.scojs_message.TYPE_ERROR);
 		return;
 	}
 	if(isEmpty(userPwd2)){
 		$.scojs_message('确认密码不可为空！', $.scojs_message.TYPE_ERROR);
+		return;
+	}
+	if(userPwd2.length > 20){
+		$.scojs_message('确认密码长度应小于20！', $.scojs_message.TYPE_ERROR);
 		return;
 	}
 	if(userPwd1 != userPwd2){

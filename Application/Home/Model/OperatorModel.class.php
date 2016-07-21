@@ -17,9 +17,9 @@ class OperatorModel extends Model {
         return $roleList;
     }
 
-    public function addLoginLog($operatorId,$loginTime,$ip){
-    	$sql = "insert into classoa_operator_login_log (operator_id,login_time,ip) values(%d,'%s','%s')";
-    	$this->execute($sql,$operatorId,$loginTime,$ip);
+    public function addLoginLog($operatorId,$loginTime,$ip,$location){
+    	$sql = "insert into classoa_operator_login_log (operator_id,login_time,ip,location) values(%d,'%s','%s','%s')";
+    	$this->execute($sql,$operatorId,$loginTime,$ip,$location);
     }
     
     public function addOperator($instId,$userName,$userPwd,$isSuperAdmin,$realName,$teacher){

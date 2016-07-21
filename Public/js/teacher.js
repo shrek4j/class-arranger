@@ -2,6 +2,23 @@
 $(".add-teacher").click(function(){
 	var teacher = $("#teacher").val();
 	var loginname = $("#loginname").val();
+	if(isEmpty(teacher)){
+		$.scojs_message('姓名不可为空！', $.scojs_message.TYPE_ERROR);
+		return;
+	}
+	if(teacher.length > 20){
+		$.scojs_message('姓名长度应小于20！', $.scojs_message.TYPE_ERROR);
+		return;
+	}
+	if(isEmpty(loginname)){
+		$.scojs_message('系统用户名不可为空！', $.scojs_message.TYPE_ERROR);
+		return;
+	}
+	if(loginname.length > 20){
+		$.scojs_message('系统用户名长度应小于20！', $.scojs_message.TYPE_ERROR);
+		return;
+	}
+
 	$.ajax({
 	   	type: "POST",
 	   	url: "saveTeacher",

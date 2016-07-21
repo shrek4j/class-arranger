@@ -2,6 +2,14 @@
 $(".add-classroom").click(function(){
 	var classroom = $("#classroom").val();
 	var rent = $("#rent").val();
+	if(isEmpty(classroom)){
+		$.scojs_message('教室名称不可为空！', $.scojs_message.TYPE_ERROR);
+		return;
+	}
+	if(classroom.length > 20){
+		$.scojs_message('教室名称长度应小于20！', $.scojs_message.TYPE_ERROR);
+		return;
+	}
 	$.ajax({
 	   	type: "POST",
 	   	url: "saveClassroom",

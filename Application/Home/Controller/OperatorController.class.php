@@ -48,25 +48,13 @@ class OperatorController extends Controller {
                 }
                 //TODO 添加角色权限
             }
-            /*
-            $unknown = 'unknown';  
-            if ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARDED_FOR'] 
-                && strcasecmp($_SERVER['HTTP_X_FORWARDED_FOR'], $unknown)) {  
-                $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];  
-            } elseif ( isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] 
-                && strcasecmp($_SERVER['REMOTE_ADDR'], $unknown)) {  
-                $ip = $_SERVER['REMOTE_ADDR'];  
-            }  
-            if (false !== strpos($ip, ',')){
-                $ip = reset(explode(',', $ip)); 
-            }
-            */
-
-            $ip = get_client_ip();
             
             //add login log
             try{
-                $operator->addLoginLog($result[0]['operator_id'],date('Y-m-d H:i:s',time()),$ip);
+                $ip = get_client_ip();
+                $loc = new \Org\Net\IpLocation('UTFWry.dat'); // 实例化类 参数表示IP地址库文件
+                $location = $loc->getlocation($ip);
+                $operator->addLoginLog($result[0]['operator_id'],date('Y-m-d H:i:s',time()),$ip,$location);
             }catch(Exception $e){
                 //do nothing
             }
@@ -75,7 +63,7 @@ class OperatorController extends Controller {
         }else{
             session("loginErr",1);
             $this->redirect('Operator/login', null,0, '页面跳转中...');
-        }    
+        }
     }
 
     public function showDashboard(){
@@ -105,3 +93,19 @@ class OperatorController extends Controller {
         $this->ajaxReturn($data);
     }
 }
+
+
+//backup:获取IP
+/*
+$unknown = 'unknown';  
+if ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARDED_FOR'] 
+    && strcasecmp($_SERVER['HTTP_X_FORWARDED_FOR'], $unknown)) {  
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];  
+} elseif ( isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] 
+    && strcasecmp($_SERVER['REMOTE_ADDR'], $unknown)) {  
+    $ip = $_SERVER['REMOTE_ADDR'];  
+}  
+if (false !== strpos($ip, ',')){
+    $ip = reset(explode(',', $ip)); 
+}
+*/

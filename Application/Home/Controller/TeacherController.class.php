@@ -27,7 +27,7 @@ class TeacherController extends Controller {
         } catch (Exception $e) {
             $model->rollback();
             $data = "false";
-        } 
+        }
         $this->ajaxReturn($data);
     }
 
