@@ -34,12 +34,12 @@
         </a>
         </if>
         <if condition="($Think.session.isSuperAdmin eq 1) OR ($Think.session.ROLE_TEACHER eq 1)">
-        <a href="../Class/showClasses?nav=40&pnav=0&teacherName=&teacherId=0&classroomId=0&ym=" nav="40" class="weui_tabbar_item" style="color:#33CC99;">
+        <a href="../Class/showClassesDaily?nav=40&pnav=0&teacherName=&teacherId=0&ymd=" nav="40" class="weui_tabbar_item" style="color:#33CC99;">
             <div class="weui_tabbar_icon">
                 <!--<img src="/Public/css/weui/dist/example/images/icon_nav_article.png" alt="">-->
                 <i class="icon-calendar icon-2x"></i>
             </div>
-            <p class="weui_tabbar_label">课表&考勤</p>
+            <p class="weui_tabbar_label">课表&amp;考勤</p>
         </a>
         </if>
         <a href="/index.php/Home/Operator/logout" class="weui_tabbar_item" style="color:#33CC99;">

@@ -593,7 +593,7 @@ function saveStudents(){
 	   	data: "classId="+classId+"&students="+students,
 	   	success: function(msg){
 	   		if(msg == 'true'){
-	   			$.scojs_message('删除成功！', $.scojs_message.TYPE_OK);
+	   			$.scojs_message('修改成功！', $.scojs_message.TYPE_OK);
 	   			$("#studentModal").modal('hide');
 	   		}else{
 	   			$.scojs_message('修改失败！', $.scojs_message.TYPE_ERROR);
@@ -614,7 +614,7 @@ function saveStudentsToOneClass(){
 	   	data: "classId="+classId+"&classDetailId="+classDetailId+"&students="+students,
 	   	success: function(msg){
 	   		if(msg == 'true'){
-	   			$.scojs_message('删除成功！', $.scojs_message.TYPE_OK);
+	   			$.scojs_message('修改成功！', $.scojs_message.TYPE_OK);
 	   			setInterval('reloadPage()',1000);
 	   		}else{
 	   			$.scojs_message('修改失败！', $.scojs_message.TYPE_ERROR);
