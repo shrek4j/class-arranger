@@ -1,7 +1,7 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-define("TO_HACKERS","stop fucking around");
+define("TO_HACKERS","请登录");
 class OperatorController extends Controller {
     // entrance:   http://localhost/index.php/Home/Operator/login
     public function login(){
@@ -53,7 +53,8 @@ class OperatorController extends Controller {
             try{
                 $ip = get_client_ip();
                 $loc = new \Org\Net\IpLocation('UTFWry.dat'); // 实例化类 参数表示IP地址库文件
-                $location = $loc->getlocation($ip);
+                $locationArr = $loc->getlocation($ip);
+                $location = $locationArr['country'].$locationArr['area'];
                 $operator->addLoginLog($result[0]['operator_id'],date('Y-m-d H:i:s',time()),$ip,$location);
             }catch(Exception $e){
                 //do nothing

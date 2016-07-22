@@ -13,7 +13,7 @@ class AuthCheckBehavior extends \Think\Behavior{
                 $return = true;
             }else{
                  header('Content-Type: text/html; charset=utf-8');
-                 redirect(U('Operator/login', array('url' => $_SERVER['HTTP_REFERER'])), 2, '需要登录，2秒后跳转。。。');
+                 redirect('../Operator/login', 2, '需要登录，2秒后跳转。。。');
             }
         }
     }

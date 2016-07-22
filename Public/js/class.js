@@ -27,10 +27,12 @@ $(".add-class").click(function(){
 
 	if(isEmpty(classname)){
 		$.scojs_message('课程名称不可为空！', $.scojs_message.TYPE_ERROR);
+		$(this).attr("disabled",false);
 		return;
 	}
 	if(classname.length > 20){
 		$.scojs_message('课程名称长度应小于20！', $.scojs_message.TYPE_ERROR);
+		$(this).attr("disabled",false);
 		return;
 	}
 
@@ -47,6 +49,7 @@ $(".add-class").click(function(){
 	   			setInterval('reloadPage()',1500);
 	   		}else{
 	   			$.scojs_message('添加失败！', $.scojs_message.TYPE_ERROR);
+	   			$(this).attr("disabled",false);
 	   		}
 	   	}
 	});
@@ -287,25 +290,21 @@ function editVacancy(className,classDetailId,classId){
 	   	url: "showStudentsFromClassDetail",
 	   	data: "classDetailId="+classDetailId,
 	   	success: function(msg){
-	   		if(msg == 'true'){
-	   			var html = "";
-	   			var studentArr = msg.split(";");
-	   			for(var i=0;i<studentArr.length-1;i++){
-	   				var s = studentArr[i].split(":");
-	   				html += '<div><input tabindex="'+i+'" id="student_'+i+'" type="checkbox" '; 
-	   				if(s[3] == 0){
-	   					html += 'checked="checked"';
-	   				} 
-	   				html += ' name="student" value="'+s[0]+'"><span class="radio-text">'+s[1]+'</span><span class="radio-text">(电话：'+s[2]+')</span></div>';
-	   			}
-	   			$("#className").text("课程："+className);
-	   			$('#myClassDetailId').val(classDetailId);
-	   			$('#myClassId').val(classId);
-	   			$("#students").append(html);
-				$("#myModal").modal('show');
-	   		}else{
-	   			$.scojs_message('操作失败！', $.scojs_message.TYPE_ERROR);
-	   		}
+   			var html = "";
+   			var studentArr = msg.split(";");
+   			for(var i=0;i<studentArr.length-1;i++){
+   				var s = studentArr[i].split(":");
+   				html += '<div><input tabindex="'+i+'" id="student_'+i+'" type="checkbox" '; 
+   				if(s[3] == 0){
+   					html += 'checked="checked"';
+   				} 
+   				html += ' name="student" value="'+s[0]+'"><span class="radio-text">'+s[1]+'</span><span class="radio-text">(电话：'+s[2]+')</span></div>';
+   			}
+   			$("#className").text("课程："+className);
+   			$('#myClassDetailId').val(classDetailId);
+   			$('#myClassId').val(classId);
+   			$("#students").append(html);
+			$("#myModal").modal('show');
 	   	}
 	});
 }

@@ -2,7 +2,7 @@
 namespace Home\Controller;
 use Think\Controller;
 
-define("TO_HACKERS","stop fucking around");
+define("TO_HACKERS","请登录");
 
 class RoleController extends Controller {
 

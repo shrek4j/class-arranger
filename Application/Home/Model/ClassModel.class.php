@@ -156,6 +156,11 @@ class ClassModel extends Model {
         return $this->query($sql,$tId,$year,$month,$teacherId);
     }
 
+    public function showDailyClassesByTeacher($tId,$ymd,$teacherId){
+        $sql = "select d.*,c.class_name class_name,r.name classroom_name from classoa_class_detail d left join classoa_class c on d.class_id=c.class_id left join classoa_classroom r on d.classroom_id=r.classroom_id where d.inst_id=%d and d.date='%s' and d.teacher_id=%d and d.status=0 order by d.date asc,d.start_time_int asc";
+        return $this->query($sql,$tId,$ymd,$teacherId);
+    }
+
     public function showClassesByClassroom($tId,$year,$month,$classroomId){
         $sql = "select * from classoa_class_detail where inst_id=%d and year='%s' and month='%s' and classroom_id=%d and status=0 order by date asc,start_time asc";
         return $this->query($sql,$tId,$year,$month,$classroomId);

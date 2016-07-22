@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link ref="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+
+    <title>收支明细</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="/Public/css/bootstrap/sco/sco.message.css" rel="stylesheet">
+    <link href="/Public/css/base.css" rel="stylesheet">
+    <style type="text/css">
+        .main-view-inner{margin:0% 2% 2% 2%;}
+        .main-view-inner-bar{margin:2% 2% 2% 2%;}
+        .btn-choose{margin-right:50px;}
+        .monthList{min-width:100px;}
+
+        .finance-view{margin:30px 150px 0px 70px;}
+        .finance{border:1px solid #e7e7eb;width:900px;-webkit-border-radius:5px;background-color:white;}
+        .outcome{margin-top:20px;}
+        .income-color{color:#990033;}
+        .outcome-color{color:#66CC00;}
+        .finance-row{background-color:#7396CA;height:30px;width:898px;}
+        .finance-name{color:white;line-height:30px;margin-left:15px;font-size:14px;font-weight:bold;}
+        .finance-title{font-size:14px;font-weight:bold;}
+        .finance-main{width:800px;margin:20px 50px 20px 50px;text-align:center;}
+        .finance-table-row{height:45px;}
+        .finance-snapshot{margin:0px 0px 30px 90px;display: inline-block;border:1px solid #7396CA;text-align:center;-webkit-border-radius:5px;background-color:#7396CA;color:white;}
+        .total-title{margin:20px 0px 20px 0px;font-weight: bold;width:160px;}
+        .total-money{margin:20px 0px 20px 0px;font-size:18px;width:160px;}
+        .outcome-subtitle{margin:30px 0px 10px 50px;font-weight: bold;}
+        .cutting-line{margin:10px 50px 10x 50px;border-top:1px solid #e7e7eb;}
+    </style>
+    
+</head>
+ <body class="global">   
+ <!-- 导航 -->
+<include file="Public:nav" />
+
+<div class="main-view">
+    <div class="main-view-inner">
+        <div class="main-view-inner-bar text-center">
+            <form action="showFinanceDetail" method="post" id="showFinanceDetailForm">
+                <input type="hidden" name="ym" id="ym" value="{$ym}"/>
+            </form>
+            <div class="btn-group">
+              <button type="button" class="btn btn-success dropdown-toggle btn-choose" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span id="ymShow">
+                    <empty name="ym">月份<else/>{$ym}</empty>
+                </span>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu monthList">
+                <foreach name="ymList" item="date">
+                <li ym="{$date}" class="ym"><a href="#">{$date}</a></li>
+                </foreach>
+              </ul>
+            </div>
+            <button type="button" class="btn btn-default show-financedetail">查询</button>
+        </div>
+
+        <div class="finance-view">
+            <div >
+                <div class="finance-snapshot">
+                    <div class="total-title">总收入</div>
+                    <div class="total-money">{$totalIncome/100}元</div>
+                </div>
+                <div class="finance-snapshot">
+                    <div class="total-title">总支出</div>
+                    <div class="total-money">{$totalOutcome/100}元</div>
+                </div>
+                <div class="finance-snapshot">
+                    <div class="total-title">总剩余</div>
+                    <div class="total-money">{$revenue/100}元</div>
+                </div>
+            </div>
+            <div class="finance income">
+                <div class="finance-row">
+                    <span class="finance-name">收入</span>
+                </div>
+                <table class="table finance-main">
+                    <thead>
+                        <tr class="finance-title finance-table-row">
+                            <td style="vertical-align: middle;">
+                                课程类型
+                            </td>
+                            <td style="vertical-align: middle;">
+                                课程名称
+                            </td>
+                            <td style="vertical-align: middle;">
+                                课次
+                            </td>
+                            <td style="vertical-align: middle;">
+                                学费
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <foreach name="classList" item="vo">
+                    <tr class="finance-table-row">
+                        <td style="vertical-align: middle;">
+                            {$vo.classType}
+                        </td>
+                        <td style="vertical-align: middle;">
+                            {$vo.className}
+                        </td>
+                        <td style="vertical-align: middle;">
+                            {$vo.classTimes}
+                        </td>
+                        <td style="vertical-align: middle;">
+                            {$vo['tuitions']/100}元
+                        </td>
+                    </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+            </div>
+            <div class="finance outcome">
+                <div class="finance-row">
+                    <span class="finance-name">支出</span>
+                </div>
+                <div class="outcome-subtitle">教师支出</div>
+                <table class="table finance-main">
+                    <thead>
+                        <tr class="finance-title finance-table-row">
+                            <td style="vertical-align: middle;">
+                                教师
+                            </td>
+                            <td style="vertical-align: middle;">
+                                课次
+                            </td>
+                            <td style="vertical-align: middle;">
+                                工资
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <foreach name="teacherList" item="vo">
+                    <tr class="finance-table-row">
+                        <td style="vertical-align: middle;">
+                            {$vo.teacherName}
+                        </td>
+                        <td style="vertical-align: middle;">
+                            {$vo.teachTimes}
+                        </td>
+                        <td style="vertical-align: middle;">
+                            {$vo['wage']/100}元
+                        </td>
+                    </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+                <div class="cutting-line"></div>
+                <div class="outcome-subtitle">教室支出</div>
+                <table class="table finance-main" style="width:550px;">
+                    <thead>
+                        <tr class="finance-title finance-table-row">
+                            <td style="vertical-align: middle;">
+                                教室
+                            </td>
+                            <td style="vertical-align: middle;">
+                                月租金
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <foreach name="classroomList" item="vo">
+                    <tr class="finance-table-row">
+                        <td style="vertical-align: middle;">
+                            {$vo.name}
+                        </td>
+                        <td style="vertical-align: middle;">
+                            {$vo['rent_per_month']/100}元
+                        </td>
+                    </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    
+</div>
+
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="/Public/js/bootstrap/sco/sco.message.js"></script>
+    <script src="/Public/js/base.js"></script>
+    <script src="/Public/js/finance.js"></script>
+    
+    <script type="text/javascript">
+            $(function () {
+              $('[data-toggle="tooltip"]').tooltip()
+            });
+    </script>
+</body>
+</html>

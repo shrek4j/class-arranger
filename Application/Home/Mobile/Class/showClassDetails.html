@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+	<title>课程明细</title>
+    <link ref="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+	<!-- 新 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- bootstrap datepicker -->
+    <link id="bsdp-css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker3.min.css" rel="stylesheet">
+    <link href="/Public/css/bootstrap/icheck/square.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.3.0/css/amazeui.min.css">
+    <link rel="stylesheet" href="http://amazeui.github.io/tagsinput/amazeui.tagsinput.css"/>
+    <link href="/Public/css/bootstrap/sco/sco.message.css" rel="stylesheet">
+    <link href="/Public/css/base.css" rel="stylesheet">
+    <style type="text/css">
+        .main-view-inner{margin:2% 6% 2% 2%;}
+        .main-view-inner-bar{margin:2% 2% 2% 2%;}
+        .class-detail-list{margin:2% 2% 2% 2%;}
+        .class-detail-list .list-group{margin-bottom:0px}
+        .class-detail-list .finished .list-group li{padding:10px;margin-top:5px;background-color:#1ABC9C;color:white;box-shadow:0 1px 2px 0 rgba(0,0,0,0.2)}
+        .class-detail-list .finished .list-group li.cactive{background-color:#1ABC9C;color:white;}
+        .class-detail-list .unfinished .list-group li{padding:10px;margin-top:5px;background-color:white;color:#1ABC9C;box-shadow:0 1px 2px 0 rgba(0,0,0,0.2)}
+        .class-detail-list .unfinished .list-group li.cactive{background-color:#FF9933;color:white;}
+        .cell-operation-gutter{margin-left:10%}
+        .modal-body .row{margin-top:2%;}
+    </style>
+    
+</head>
+ <body class="global">   
+ <!-- 导航 -->
+<include file="Public:nav" />
+
+<div class="main-view">
+    <div class="main-view-inner">
+        <div class="main-view-inner-bar">
+            <h3 style="display: inline-block;">{$classInfo[0].class_name}</h3><h4 style="margin:0px 0px 0px 20px;display: inline-block;"><span class="label" style="background-color: #333366;">{$classInfo[0].classtype_name}</span></h4>
+            <input type="hidden" id="classId" value="{$classInfo[0].class_id}">
+        </div>
+        <div class="class-detail-list">
+        
+            <div id="unplay" class="finished">
+                <ul id="list1" class="list-group">
+                <foreach name="classDetails" item="vo">
+                  <if condition="strtotime($vo['date']) lt time()">
+                  <li class="list-group-item container-fluid finished">
+                    <div class="row text-center">
+                        <div class="col-md-2" id="date_{$pnum}">{$vo.date}</div>
+                        <div class="col-md-1" id="dayOfWeek_{$pnum}" value="{$vo.day_of_week}">
+                            <if condition="$vo.day_of_week eq 1">
+                                星期一
+                            <elseif condition="$vo.day_of_week eq 2"/>
+                                星期二
+                            <elseif condition="$vo.day_of_week eq 3"/>
+                                星期三
+                            <elseif condition="$vo.day_of_week eq 4"/>
+                                星期四
+                            <elseif condition="$vo.day_of_week eq 5"/>
+                                星期五
+                            <elseif condition="$vo.day_of_week eq 6"/>
+                                星期六
+                            <else /> 
+                                星期日
+                            </if>
+                        </div>
+                        <div class="col-md-2" id="time_{$pnum}" startTime="{$vo.start_time}" endTime="{$vo.end_time}">{$vo.start_time}-{$vo.end_time}</div>
+                        <div class="col-md-1" id="teacher_{$pnum}" value="{$vo.teacher_id}">{$vo.teacher_name}</div>
+                        <div class="col-md-1" id="classroom_{$pnum}" value="{$vo.classroom_id}">{$vo.classroom_name}</div>
+                        <div class="col-md-4">
+                            <span style="cursor:pointer" class="glyphicon glyphicon-user" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑学生" onclick="editClassDetailStudents({$vo.class_detail_id})"></span>
+                            <span style="cursor:pointer" class="glyphicon glyphicon-pencil cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑课程" onclick="editClassDetail({$pnum++},{$vo.class_detail_id});"></span>
+                            <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除" onclick="deleteClassDetail({$vo.class_id},{$vo.class_detail_id});"></span>
+                        </div>
+                    </div>
+                  </li>
+                  </if>
+                </foreach>
+                </ul>
+            </div>
+            <div id="play" class="unfinished">
+                <ul id="list1" class="list-group">
+                <foreach name="classDetails" item="vo">
+                  <if condition="strtotime($vo['date']) gt time()">
+                  <li class="list-group-item">
+                    <div class="row text-center">
+                        <div class="col-md-2" id="date_{$pnum}">{$vo.date}</div>
+                        <div class="col-md-1" id="dayOfWeek_{$pnum}" value="{$vo.day_of_week}">
+                            <if condition="$vo.day_of_week eq 1">
+                                星期一
+                            <elseif condition="$vo.day_of_week eq 2"/>
+                                星期二
+                            <elseif condition="$vo.day_of_week eq 3"/>
+                                星期三
+                            <elseif condition="$vo.day_of_week eq 4"/>
+                                星期四
+                            <elseif condition="$vo.day_of_week eq 5"/>
+                                星期五
+                            <elseif condition="$vo.day_of_week eq 6"/>
+                                星期六
+                            <else /> 
+                                星期日
+                            </if>
+                        </div>
+                        <div class="col-md-2" id="time_{$pnum}" startTime="{$vo.start_time}" endTime="{$vo.end_time}">{$vo.start_time}-{$vo.end_time}</div>
+                        <div class="col-md-1" id="teacher_{$pnum}" value="{$vo.teacher_id}">{$vo.teacher_name}</div>
+                        <div class="col-md-1" id="classroom_{$pnum}" value="{$vo.classroom_id}">{$vo.classroom_name}</div>
+                        <!--<div class="col-md-1">学生</div>-->
+                        <div class="col-md-4">
+                            <span style="cursor:pointer" class="glyphicon glyphicon-user" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑学生" onclick="editClassDetailStudents({$vo.class_detail_id})"></span>
+                            <span style="cursor:pointer" class="glyphicon glyphicon-pencil cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="编辑" onclick="editClassDetail({$pnum++},{$vo.class_detail_id});"></span>
+                            <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除" onclick="deleteClassDetail({$vo.class_id},{$vo.class_detail_id});"></span>
+                        </div>
+                    </div>
+                  </li>
+                  </if>
+                </foreach>
+                    <li class="list-group-item">
+                        <div class="row text-center" onclick="addClassDetail();" style="cursor:pointer;">
+                            添加一节课
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div>
+        </div>
+    </div>
+</div>
+
+ <!-- Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="updateModalLabel">修改课程信息</h4>
+      </div>
+      <div class="modal-body container-fluid">
+        <input type="hidden" id="classDetailId"/>
+        <div class="row">
+            <div class="col-md-2">
+                <label for="date_u" class="control-label">课程日期:</label>
+            </div>
+            <div class="col-md-6">
+                <input id="datepicker_u" type="text" class="input-sm form-control" name="date_u" value=""/>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-2">
+                <label for="weekpicker_u" class="control-label">上课时间:</label>
+            </div>
+            <div class="col-md-10">
+                <div class="dropdown" style="display: inline-block;">
+                    <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="weekpicker_u" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span id="weekShow_u">选择星期</span>
+                    </a>
+                    <ul class="dropdown-menu week-picker" aria-labelledby="weekpicker_u">
+                        <li class="week_u" id="week_1" week="1"><a href="#">星期一</a></li>
+                        <li class="week_u" id="week_2" week="2"><a href="#">星期二</a></li>
+                        <li class="week_u" id="week_3" week="3"><a href="#">星期三</a></li>
+                        <li class="week_u" id="week_4" week="4"><a href="#">星期四</a></li>
+                        <li class="week_u" id="week_5" week="5"><a href="#">星期五</a></li>
+                        <li class="week_u" id="week_6" week="6"><a href="#">星期六</a></li>
+                        <li class="week_u" id="week_7" week="7"><a href="#">星期日</a></li>
+                    </ul>
+                </div>
+                  
+                <div class="dropdown" style="display: inline-block;margin-left:10%;">
+                    <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="starttimepicker_u" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span id="startTimeShow_u">开始时间</span>
+                    </a>
+                    <ul class="dropdown-menu time-picker" aria-labelledby="starttimepicker_u">
+                        <li class="startTime_u"><a href="#">7:00</a></li>
+                        <li class="startTime_u"><a href="#">7:30</a></li>
+                        <li class="startTime_u"><a href="#">8:00</a></li>
+                        <li class="startTime_u"><a href="#">8:30</a></li>
+                        <li class="startTime_u"><a href="#">9:00</a></li>
+                        <li class="startTime_u"><a href="#">9:30</a></li>
+                        <li class="startTime_u"><a href="#">10:00</a></li>
+                        <li class="startTime_u"><a href="#">10:30</a></li>
+                        <li class="startTime_u"><a href="#">11:00</a></li>
+                        <li class="startTime_u"><a href="#">11:30</a></li>
+                        <li class="startTime_u"><a href="#">12:00</a></li>
+                        <li class="startTime_u"><a href="#">12:30</a></li>
+                        <li class="startTime_u"><a href="#">13:00</a></li>
+                        <li class="startTime_u"><a href="#">13:30</a></li>
+                        <li class="startTime_u"><a href="#">14:00</a></li>
+                        <li class="startTime_u"><a href="#">14:30</a></li>
+                        <li class="startTime_u"><a href="#">15:00</a></li>
+                        <li class="startTime_u"><a href="#">15:30</a></li>
+                        <li class="startTime_u"><a href="#">16:00</a></li>
+                        <li class="startTime_u"><a href="#">16:30</a></li>
+                        <li class="startTime_u"><a href="#">17:00</a></li>
+                        <li class="startTime_u"><a href="#">17:30</a></li>
+                        <li class="startTime_u"><a href="#">18:00</a></li>
+                        <li class="startTime_u"><a href="#">18:30</a></li>
+                        <li class="startTime_u"><a href="#">19:00</a></li>
+                        <li class="startTime_u"><a href="#">19:30</a></li>
+                        <li class="startTime_u"><a href="#">20:00</a></li>
+                        <li class="startTime_u"><a href="#">20:30</a></li>
+                        <li class="startTime_u"><a href="#">21:00</a></li>
+                        <li class="startTime_u"><a href="#">21:30</a></li>
+                        <li class="startTime_u"><a href="#">22:00</a></li>
+                    </ul>
+                </div>
+                <span style="display: inline-block;">-</span>
+                <div class="dropdown" style="display: inline-block;">
+                    <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="endtimepicker_u" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span id="endTimeShow_u">结束时间</span>
+                    </a>
+                    <ul class="dropdown-menu time-picker" aria-labelledby="endtimepicker_u">
+                        <li class="endTime_u"><a href="#">7:00</a></li>
+                        <li class="endTime_u"><a href="#">7:30</a></li>
+                        <li class="endTime_u"><a href="#">8:00</a></li>
+                        <li class="endTime_u"><a href="#">8:30</a></li>
+                        <li class="endTime_u"><a href="#">9:00</a></li>
+                        <li class="endTime_u"><a href="#">9:30</a></li>
+                        <li class="endTime_u"><a href="#">10:00</a></li>
+                        <li class="endTime_u"><a href="#">10:30</a></li>
+                        <li class="endTime_u"><a href="#">11:00</a></li>
+                        <li class="endTime_u"><a href="#">11:30</a></li>
+                        <li class="endTime_u"><a href="#">12:00</a></li>
+                        <li class="endTime_u"><a href="#">12:30</a></li>
+                        <li class="endTime_u"><a href="#">13:00</a></li>
+                        <li class="endTime_u"><a href="#">13:30</a></li>
+                        <li class="endTime_u"><a href="#">14:00</a></li>
+                        <li class="endTime_u"><a href="#">14:30</a></li>
+                        <li class="endTime_u"><a href="#">15:00</a></li>
+                        <li class="endTime_u"><a href="#">15:30</a></li>
+                        <li class="endTime_u"><a href="#">16:00</a></li>
+                        <li class="endTime_u"><a href="#">16:30</a></li>
+                        <li class="endTime_u"><a href="#">17:00</a></li>
+                        <li class="endTime_u"><a href="#">17:30</a></li>
+                        <li class="endTime_u"><a href="#">18:00</a></li>
+                        <li class="endTime_u"><a href="#">18:30</a></li>
+                        <li class="endTime_u"><a href="#">19:00</a></li>
+                        <li class="endTime_u"><a href="#">19:30</a></li>
+                        <li class="endTime_u"><a href="#">20:00</a></li>
+                        <li class="endTime_u"><a href="#">20:30</a></li>
+                        <li class="endTime_u"><a href="#">21:00</a></li>
+                        <li class="endTime_u"><a href="#">21:30</a></li>
+                        <li class="endTime_u"><a href="#">22:00</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <label for="teacher_u" class="control-label">教师:</label>
+            </div>
+            <div class="col-md-10">
+                <foreach name="teacherList" item="vo" >
+                    <input tabindex="{$tnum}" id="teacher_{$tnum++}" type="radio" name="teacher_u" value="{$vo.teacher_id}"><span class="radio-text">{$vo.name}</span>
+                </foreach>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <label for="classroom_u" class="control-label">教室:</label>
+            </div>
+            <div class="col-md-10">
+                <foreach name="classroomList" item="vo" >
+                    <input tabindex="{$clnum}" id="classroom_{$clnum++}" type="radio" name="classroom_u" value="{$vo.classroom_id}"><span class="radio-text">{$vo.name}</span>
+                </foreach>
+            </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary update-classdetail">保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+ <!-- Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="addModalLabel">修改课程信息</h4>
+      </div>
+      <div class="modal-body container-fluid">
+        <input type="hidden" id="classDetailId"/>
+        <div class="row">
+            <div class="col-md-2">
+                <label for="date_a" class="control-label">课程日期:</label>
+            </div>
+            <div class="col-md-6">
+                <input id="datepicker_a" type="text" class="input-sm form-control" name="date_a" value=""/>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-2">
+                <label for="weekpicker_a" class="control-label">上课时间:</label>
+            </div>
+            <div class="col-md-10">
+                <div class="dropdown" style="display: inline-block;">
+                    <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="weekpicker_a" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span id="weekShow_a">选择星期</span>
+                    </a>
+                    <ul class="dropdown-menu week-picker" aria-labelledby="weekpicker_a">
+                        <li class="week_a" id="week_1" week="1"><a href="#">星期一</a></li>
+                        <li class="week_a" id="week_2" week="2"><a href="#">星期二</a></li>
+                        <li class="week_a" id="week_3" week="3"><a href="#">星期三</a></li>
+                        <li class="week_a" id="week_4" week="4"><a href="#">星期四</a></li>
+                        <li class="week_a" id="week_5" week="5"><a href="#">星期五</a></li>
+                        <li class="week_a" id="week_6" week="6"><a href="#">星期六</a></li>
+                        <li class="week_a" id="week_7" week="7"><a href="#">星期日</a></li>
+                    </ul>
+                </div>
+                  
+                <div class="dropdown" style="display: inline-block;margin-left:10%;">
+                    <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="starttimepicker_a" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span id="startTimeShow_a">开始时间</span>
+                    </a>
+                    <ul class="dropdown-menu time-picker" aria-labelledby="starttimepicker_a">
+                        <li class="startTime_a"><a href="#">7:00</a></li>
+                        <li class="startTime_a"><a href="#">7:30</a></li>
+                        <li class="startTime_a"><a href="#">8:00</a></li>
+                        <li class="startTime_a"><a href="#">8:30</a></li>
+                        <li class="startTime_a"><a href="#">9:00</a></li>
+                        <li class="startTime_a"><a href="#">9:30</a></li>
+                        <li class="startTime_a"><a href="#">10:00</a></li>
+                        <li class="startTime_a"><a href="#">10:30</a></li>
+                        <li class="startTime_a"><a href="#">11:00</a></li>
+                        <li class="startTime_a"><a href="#">11:30</a></li>
+                        <li class="startTime_a"><a href="#">12:00</a></li>
+                        <li class="startTime_a"><a href="#">12:30</a></li>
+                        <li class="startTime_a"><a href="#">13:00</a></li>
+                        <li class="startTime_a"><a href="#">13:30</a></li>
+                        <li class="startTime_a"><a href="#">14:00</a></li>
+                        <li class="startTime_a"><a href="#">14:30</a></li>
+                        <li class="startTime_a"><a href="#">15:00</a></li>
+                        <li class="startTime_a"><a href="#">15:30</a></li>
+                        <li class="startTime_a"><a href="#">16:00</a></li>
+                        <li class="startTime_a"><a href="#">16:30</a></li>
+                        <li class="startTime_a"><a href="#">17:00</a></li>
+                        <li class="startTime_a"><a href="#">17:30</a></li>
+                        <li class="startTime_a"><a href="#">18:00</a></li>
+                        <li class="startTime_a"><a href="#">18:30</a></li>
+                        <li class="startTime_a"><a href="#">19:00</a></li>
+                        <li class="startTime_a"><a href="#">19:30</a></li>
+                        <li class="startTime_a"><a href="#">20:00</a></li>
+                        <li class="startTime_a"><a href="#">20:30</a></li>
+                        <li class="startTime_a"><a href="#">21:00</a></li>
+                        <li class="startTime_a"><a href="#">21:30</a></li>
+                        <li class="startTime_a"><a href="#">22:00</a></li>
+                    </ul>
+                </div>
+                <span style="display: inline-block;">-</span>
+                <div class="dropdown" style="display: inline-block;">
+                    <a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="endtimepicker_a" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span id="endTimeShow_a">结束时间</span>
+                    </a>
+                    <ul class="dropdown-menu time-picker" aria-labelledby="endtimepicker_a">
+                        <li class="endTime_a"><a href="#">7:00</a></li>
+                        <li class="endTime_a"><a href="#">7:30</a></li>
+                        <li class="endTime_a"><a href="#">8:00</a></li>
+                        <li class="endTime_a"><a href="#">8:30</a></li>
+                        <li class="endTime_a"><a href="#">9:00</a></li>
+                        <li class="endTime_a"><a href="#">9:30</a></li>
+                        <li class="endTime_a"><a href="#">10:00</a></li>
+                        <li class="endTime_a"><a href="#">10:30</a></li>
+                        <li class="endTime_a"><a href="#">11:00</a></li>
+                        <li class="endTime_a"><a href="#">11:30</a></li>
+                        <li class="endTime_a"><a href="#">12:00</a></li>
+                        <li class="endTime_a"><a href="#">12:30</a></li>
+                        <li class="endTime_a"><a href="#">13:00</a></li>
+                        <li class="endTime_a"><a href="#">13:30</a></li>
+                        <li class="endTime_a"><a href="#">14:00</a></li>
+                        <li class="endTime_a"><a href="#">14:30</a></li>
+                        <li class="endTime_a"><a href="#">15:00</a></li>
+                        <li class="endTime_a"><a href="#">15:30</a></li>
+                        <li class="endTime_a"><a href="#">16:00</a></li>
+                        <li class="endTime_a"><a href="#">16:30</a></li>
+                        <li class="endTime_a"><a href="#">17:00</a></li>
+                        <li class="endTime_a"><a href="#">17:30</a></li>
+                        <li class="endTime_a"><a href="#">18:00</a></li>
+                        <li class="endTime_a"><a href="#">18:30</a></li>
+                        <li class="endTime_a"><a href="#">19:00</a></li>
+                        <li class="endTime_a"><a href="#">19:30</a></li>
+                        <li class="endTime_a"><a href="#">20:00</a></li>
+                        <li class="endTime_a"><a href="#">20:30</a></li>
+                        <li class="endTime_a"><a href="#">21:00</a></li>
+                        <li class="endTime_a"><a href="#">21:30</a></li>
+                        <li class="endTime_a"><a href="#">22:00</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <label for="teacher_a" class="control-label">教师:</label>
+            </div>
+            <div class="col-md-10">
+                <foreach name="teacherList" item="vo" >
+                    <input tabindex="{$tnum}" id="teacher_{$tnum++}" type="radio" name="teacher_a" value="{$vo.teacher_id}"><span class="radio-text">{$vo.name}</span>
+                </foreach>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <label for="classroom_a" class="control-label">教室:</label>
+            </div>
+            <div class="col-md-10">
+                <foreach name="classroomList" item="vo" >
+                    <input tabindex="{$clnum}" id="classroom_{$clnum++}" type="radio" name="classroom_a" value="{$vo.classroom_id}"><span class="radio-text">{$vo.name}</span>
+                </foreach>
+            </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary add-classdetail">保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- studentModal -->
+<div class="modal fade" id="studentModal" tabindex="-1" role="dialog" aria-labelledby="studentModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="studentModalLabel">选择学生</h4>
+      </div>
+      <div class="modal-body">
+        <div style="display:inline-block;margin:5px 0px 5px 10px;font-size:14px;" class="container-fluid">
+            <div class="row">
+                <input id="classDetailIdForStudent" type="hidden"/>
+                <input id="tags-students" type="text" value="" data-role="tagsinput"/>
+            </div>
+            <div class="row">
+                <a href="#letter_a" style="margin-right:5px;">A</a>
+                <a href="#letter_b" style="margin-right:5px;">B</a>
+                <a href="#letter_c" style="margin-right:5px;">C</a>
+                <a href="#letter_d" style="margin-right:5px;">D</a>
+                <a href="#letter_e" style="margin-right:5px;">E</a>
+                <a href="#letter_f" style="margin-right:5px;">F</a>
+                <a href="#letter_g" style="margin-right:5px;">G</a>
+                <a href="#letter_h" style="margin-right:5px;">H</a>
+                <a href="#letter_i" style="margin-right:5px;">I</a>
+                <a href="#letter_j" style="margin-right:5px;">J</a>
+                <a href="#letter_k" style="margin-right:5px;">K</a>
+                <a href="#letter_l" style="margin-right:5px;">L</a>
+                <a href="#letter_m" style="margin-right:5px;">M</a>
+                <a href="#letter_n" style="margin-right:5px;">N</a>
+                <a href="#letter_o" style="margin-right:5px;">O</a>
+                <a href="#letter_p" style="margin-right:5px;">P</a>
+                <a href="#letter_q" style="margin-right:5px;">Q</a>
+                <a href="#letter_r" style="margin-right:5px;">R</a>
+                <a href="#letter_s" style="margin-right:5px;">S</a>
+                <a href="#letter_t" style="margin-right:5px;">T</a>
+                <a href="#letter_u" style="margin-right:5px;">U</a>
+                <a href="#letter_v" style="margin-right:5px;">V</a>
+                <a href="#letter_w" style="margin-right:5px;">W</a>
+                <a href="#letter_x" style="margin-right:5px;">X</a>
+                <a href="#letter_y" style="margin-right:5px;">Y</a>
+                <a href="#letter_z" style="margin-right:5px;">Z</a>
+                <a href="#letter_#" style="margin-right:5px;">#</a>
+            </div>
+        </div>
+        <div style="display:inline-block;overflow-y:scroll;height:350px;width:570px;" class="container-fluid">
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_a" class="control-label" id="letter_a">A</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                    <if condition="($vo.capital eq a) or ($vo.capital eq A)">
+                    <div class="col-md-6">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_b" class="control-label" id="letter_b">B</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq b) or ($vo.capital eq B)">
+                   <div class="col-md-6">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_c" class="control-label" id="letter_c">C</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq c) or ($vo.capital eq C)">
+                   <div class="col-md-6">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_d" class="control-label" id="letter_d">D</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq d) or ($vo.capital eq D)">
+                   <div class="col-md-6">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_e" class="control-label" id="letter_e">E</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq e) or ($vo.capital eq E)">
+                   <div class="col-md-6">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_f" class="control-label" id="letter_f">F</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq f) or ($vo.capital eq F)">
+                   <div class="col-md-6">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_g" class="control-label" id="letter_g">G</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq g) or ($vo.capital eq G)">
+                   <div class="col-md-6">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_h" class="control-label" id="letter_h">H</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                    <if condition="($vo.capital eq h) or ($vo.capital eq H)">
+                    <div class="col-md-6">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_i" class="control-label" id="letter_i">I</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq i) or ($vo.capital eq I)">
+                   <div class="col-md-6">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_j" class="control-label" id="letter_j">J</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq j) or ($vo.capital eq J)">
+                   <div class="col-md-6">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_k" class="control-label" id="letter_k">K</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq k) or ($vo.capital eq K)">
+                   <div class="col-md-6">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_l" class="control-label" id="letter_l">L</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq l) or ($vo.capital eq L)">
+                   <div class="col-md-6">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_m" class="control-label" id="letter_m">M</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq m) or ($vo.capital eq M)">
+                   <div class="col-md-6">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_n" class="control-label" id="letter_n">N</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq n) or ($vo.capital eq N)">
+                   <div class="col-md-6">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_o" class="control-label" id="letter_o">O</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq o) or ($vo.capital eq O)">
+                   <div class="col-md-6">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_p" class="control-label" id="letter_p">P</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq p) or ($vo.capital eq P)">
+                   <div class="col-md-6">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_q" class="control-label" id="letter_q">Q</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq q) or ($vo.capital eq Q)">
+                   <div class="col-md-6">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_r" class="control-label" id="letter_r">R</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq r) or ($vo.capital eq R)">
+                   <div class="col-md-6">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_s" class="control-label" id="letter_s">S</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq s) or ($vo.capital eq S)">
+                   <div class="col-md-6">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_t" class="control-label" id="letter_t">T</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq t) or ($vo.capital eq T)">
+                   <div class="col-md-6">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_u" class="control-label" id="letter_u">U</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq u) or ($vo.capital eq U)">
+                   <div class="col-md-6">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_v" class="control-label" id="letter_v">V</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq v) or ($vo.capital eq V)">
+                   <div class="col-md-6">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_w" class="control-label" id="letter_w">W</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq w) or ($vo.capital eq W)">
+                   <div class="col-md-6">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_x" class="control-label" id="letter_x">X</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq x) or ($vo.capital eq X)">
+                   <div class="col-md-6">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_y" class="control-label" id="letter_y">Y</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq y) or ($vo.capital eq Y)">
+                   <div class="col-md-6">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_z" class="control-label" id="letter_z">Z</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <if condition="($vo.capital eq z) or ($vo.capital eq Z)">
+                   <div class="col-md-6">
+                    <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </if>
+                </foreach>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
+                    <label for="letter_#" class="control-label" id="letter_#">#</label>
+                </div>
+            </div> 
+            <div class="row">
+                <foreach name="studentList" item="vo" >
+                   <in name="vo.capital" value="a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z">
+                    <else/>
+                        <div class="col-md-6">
+                        <div class="margin">
+                        <input tabindex="{$snum}" id="student_{$snum++}" studentname="{$vo.student_name}" type="checkbox" name="student" value="{$vo.student_id}"><span class="radio-text">{$vo.student_name}(手机号：{$vo.phone})</span>
+                    </div>
+                    </div>
+                    </in>
+                </foreach>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary save-students" onclick="saveStudentsToOneClass();">保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- YUI -->
+    <script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
+    <!-- bootstrap datepicker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/locales/bootstrap-datepicker.zh-CN.min.js" charset="UTF-8"></script>
+    <script src="http://7xl53o.com1.z0.glb.clouddn.com/dingdingenglish/js/jquery.icheck.min.js"></script>
+    <script src="/Public/js/amazeui/amazeui.tagsinput.js"></script>
+    <script src="/Public/js/bootstrap/sco/sco.message.js"></script>
+    <script src="/Public/js/base.js"></script>
+    <script src="/Public/js/class.js"></script>
+    
+    <script type="text/javascript">
+        $(function () {
+		  $('[data-toggle="tooltip"]').tooltip()
+		});
+
+        $('#datepicker_a').datepicker({
+            format: "yyyy-mm-dd",
+            weekStart: 1,
+            language: "zh-CN",
+            autoclose: true
+        });
+
+        $('#datepicker_u').datepicker({
+            format: "yyyy-mm-dd",
+            weekStart: 1,
+            language: "zh-CN",
+            autoclose: true
+        });
+
+        $(document).ready(function(){
+            $('input').iCheck({
+            checkboxClass: 'icheckbox_square',
+            radioClass: 'iradio_square',
+            increaseArea: '20%' // optional
+            });
+        });
+
+        $(function() {
+            $('#tags-students').tagsinput();
+        });
+
+        YUI().use('dd-constrain', 'dd-proxy', 'dd-drop', function(Y) {
+            //Listen for all drop:over events
+            Y.DD.DDM.on('drop:over', function(e) {
+                //Get a reference to our drag and drop nodes
+                var drag = e.drag.get('node'),
+                    drop = e.drop.get('node');
+        
+                //Are we dropping on a li node?
+                if (drop.get('tagName').toLowerCase() === 'li') {
+                    //Are we not going up?
+                    if (!goingUp) {
+                        drop = drop.get('nextSibling');
+                    }
+                    //Add the node to this list
+                    e.drop.get('node').get('parentNode').insertBefore(drag, drop);
+                    //Resize this nodes shim, so we can drop on it later.
+                    e.drop.sizeShim();
+                }
+            });
+            //Listen for all drag:drag events
+            Y.DD.DDM.on('drag:drag', function(e) {
+                //Get the last y point
+                var y = e.target.lastXY[1];
+                //is it greater than the lastY var?
+                if (y < lastY) {
+                    //We are going up
+                    goingUp = true;
+                } else {
+                    //We are going down.
+                    goingUp = false;
+                }
+                //Cache for next check
+                lastY = y;
+            });
+            //Listen for all drag:start events
+            Y.DD.DDM.on('drag:start', function(e) {
+                //Get our drag object
+                var drag = e.target;
+                //Set some styles here
+                drag.get('node').setStyle('opacity', '.25');
+                drag.get('dragNode').set('innerHTML', drag.get('node').get('innerHTML'));
+                drag.get('dragNode').setStyles({
+                    opacity: '.5',
+                    borderColor: drag.get('node').getStyle('borderColor'),
+                    backgroundColor: drag.get('node').getStyle('backgroundColor')
+                });
+            });
+            //Listen for a drag:end events
+            Y.DD.DDM.on('drag:end', function(e) {
+                var drag = e.target;
+                //Put our styles back
+                drag.get('node').setStyles({
+                    visibility: '',
+                    opacity: '1'
+                });
+            });
+            //Listen for all drag:drophit events
+            Y.DD.DDM.on('drag:drophit', function(e) {
+                var drop = e.drop.get('node'),
+                    drag = e.drag.get('node');
+        
+                //if we are not on an li, we must have been dropped on a ul
+                if (drop.get('tagName').toLowerCase() !== 'li') {
+                    if (!drop.contains(drag)) {
+                        drop.appendChild(drag);
+                    }
+                }
+            });
+        
+            //Static Vars
+            var goingUp = false, lastY = 0;
+        
+            //Get the list of li's in the lists and make them draggable
+            var lis = Y.Node.all('#play ul li');
+            lis.each(function(v, k) {
+                var dd = new Y.DD.Drag({
+                    node: v,
+                    target: {
+                        padding: '0 0 0 20'
+                    }
+                }).plug(Y.Plugin.DDProxy, {
+                    moveOnEnd: false
+                }).plug(Y.Plugin.DDConstrained, {
+                    constrain2node: '#play'
+                });
+            });
+        
+            //Create simple targets for the 2 lists.
+            var uls = Y.Node.all('#play ul');
+            uls.each(function(v, k) {
+                var tar = new Y.DD.Drop({
+                    node: v
+                });
+            });
+        
+        });
+        
+    </script>
+</body>
+</html>
