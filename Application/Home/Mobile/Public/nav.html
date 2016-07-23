@@ -34,7 +34,7 @@
         </a>
         </if>
         <if condition="($Think.session.isSuperAdmin eq 1) OR ($Think.session.ROLE_TEACHER eq 1)">
-        <a href="../Class/showClassesDaily?nav=40&pnav=0&teacherName=&teacherId=0&ymd=" nav="40" class="weui_tabbar_item" style="color:#33CC99;">
+        <a href="../Class/showClassesDaily?nav=40&pnav=0&teacherName=&teacherId=0&ymd=&nextday=" nav="40" class="weui_tabbar_item" style="color:#33CC99;">
             <div class="weui_tabbar_icon">
                 <!--<img src="/Public/css/weui/dist/example/images/icon_nav_article.png" alt="">-->
                 <i class="icon-calendar icon-2x"></i>
@@ -54,7 +54,7 @@
 
 <div class="info-bar">
     <div class="operator-info">
-        <span class="favico"><img width="20%" height="20%" src="/Public/img/logo.png"/></span>
+        <span class="favico"><img width="75px" height="40px" src="/Public/img/logo.png"/></span>
         <span class="role">{$_SESSION['role']}:{$_SESSION['operatorName']}</span>
     </div>
 </div>

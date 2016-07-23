@@ -842,12 +842,20 @@ class ClassController extends Controller {
     }
 
     //showcase of the classes of a teacher or a classroom in a DAY!!!
-    public function showClassesDaily($teacherId=0,$teacherName,$ymd){
+    public function showClassesDaily($teacherId=0,$teacherName,$ymd,$nextday){
         if($teacherId==0){
             $teacherId = session('teacherId');
         }
         if($ymd == null){
             $ymd = date('Y-m-d');
+        }
+        if($nextday != null && $nextday != ''){
+            if($nextday == 'bw'){
+                $ymd=date('Y-m-d',strtotime("$ymd - 1 day"));
+            }
+            if($nextday == 'fw'){
+                $ymd=date('Y-m-d',strtotime("$ymd + 1 day"));
+            }
         }
         $tId = session('instId');
         
@@ -864,18 +872,14 @@ class ClassController extends Controller {
             }
         }
 
-        $lastday=date('Y-m-d',strtotime("$ymd - 1 day"));
-        $nextday=date('Y-m-d',strtotime("$ymd + 1 day"));
-        $this->assign("lastday",$lastday);
-        $this->assign("ymd",$ymd);
-        $this->assign("nextday",$nextday);
-
         $class = new \Home\Model\ClassModel();
         $result = $class->showDailyClassesByTeacher($tId,$ymd,$teacherId);
         $this->assign("dailyClasses",$result);
         $this->assign('isSuperAdmin',session('isSuperAdmin'));
         $this->assign('teacherId',$teacherId);
         $this->assign('teacherName',$teacherName);
+        $this->assign("ymd",$ymd);
+        $this->assign('week',date('w',strtotime($ymd)));
         layout(true);
         $this->display();
     }

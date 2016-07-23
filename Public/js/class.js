@@ -259,6 +259,21 @@ $('.show-classes').click(function(){
 	$("#showClassesForm").submit();
 });
 
+$('.backward').click(function(){
+	$("#nextday").val("bw");
+	$("#showClassesForm").submit();
+});
+
+$('.foreward').click(function(){
+	$("#nextday").val("fw");
+	$("#showClassesForm").submit();
+});
+
+$('.teacherId-mobile').click(function(){
+	$("#teacherName").val($(this).attr("teacherName"));
+	$("#teacherId").val($(this).attr("teacherId"));
+});
+
 $('.teacherId').click(function(){
 	$('.teacherId').removeClass('selected');
 	$(this).addClass('selected');

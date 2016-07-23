@@ -21,22 +21,17 @@
     <link ref="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
 	<!-- 新 Bootstrap 核心 CSS 文件 -->
 	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Public/css/bootstrap/fontawesome/css/font-awesome.min.css">
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css">
+    <![endif]-->
     <link href="/Public/css/bootstrap/sco/sco.message.css" rel="stylesheet">
     <link href="/Public/css/base_mobile.css" rel="stylesheet">
     <style type="text/css">
-        .main-view-inner{margin:0% 2% 2% 2%;overflow-y: auto;}
+        .main-view-inner{margin:0% 2% 2% 2%;}
         .main-view-inner-bar{margin:0% 2% 2% 2%;}
-        .btn-choose{margin-right:50px;}
-        .class-detail-monthly{margin:2% 1% 2% 1%;}
-        .class-detail-monthly .title{font-weight:bold;font-size:14px;background-color:#1ABC9C;color:white;}
-        .class-detail-monthly table tr td{width:150px;}
-        .class-detail-monthly .classinfo{color:#34495e;}
-        .class-detail-monthly .calendar-day{font-size:10px;margin-left:86%;background-color:#777777;color:white;padding-left:2px;}
-        .class-detail-monthly .classinfo-one{font-size:10px;margin: 2px 2px 2px 2px;}
-        .class-detail-monthly .classtime{font-size:10px;font-weight:900;}
-        .class-detail-monthly .classtype{}
-        .class-detail-monthly .classroom{margin-left:5px;}
-        .class-detail-monthly .weekend{background-color:#eaeded;}
+        .timeline{margin-top:2%;}
+        .class-detail-daily{margin-top:8%;}
         .teacherList{min-width:100px;}
         .monthList{min-width:100px;}
         .vacancy-undone{margin-left:3px;font-weight:bold;cursor:pointer;color:#FF6633;}
@@ -51,77 +46,87 @@
 <div class="main-view">
     <div class="main-view-inner">
         <div class="main-view-inner-bar text-center">
-
-            <!-- Single button -->
+                <!-- Single button -->
             <form action="showClassesDaily" method="post" id="showClassesForm">
                 <input type="hidden" name="teacherId" id="teacherId" value="{$teacherId}"/>
                 <input type="hidden" name="teacherName" id="teacherName" value="{$teacherName}"/>
                 <input type="hidden" name="ymd" id="ymd" value="{$ymd}"/>
+                <input type="hidden" name="nextday" id="nextday"/>
             </form>
-            <div class="btn-group">
-              <button type="button" class="btn btn-success dropdown-toggle btn-choose" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span id="teacherShow">
-                    <empty name="teacherName">教师<else/>{$teacherName}</empty>
-                </span>
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu teacherList">
-                <foreach name="teacherList" item="teacher">
-                <li teacherId="{$teacher.teacher_id}" teacherName="{$teacher.name}" class="teacherId"><a href="#">{$teacher.name}</a></li>
-                </foreach>
-              </ul>
+            <div class="weui_cells">
+                <div class="weui_cell weui_cell_select weui_select_after">
+                    <div class="weui_cell_hd">
+                        <label for="" class="weui_label">教师</label>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <select class="weui_select " name="select2">
+                            <foreach name="teacherList" item="teacher">
+                                <option teacherId="{$teacher.teacher_id}" teacherName="{$teacher.name}" class="teacherId-mobile" value="{$teacher.teacher_id}" <if condition='$teacher.teacher_id eq $teacherId'>selected="selected"</if>>{$teacher.name}</option>
+                            </foreach>    
+                        </select>
+                    </div>
+                </div>
             </div>
 
-            <button type="button" class="btn btn-default show-classes">查询</button>
+            <div class="timeline bd" >
+                <div class="weui_tab">
+                    <div class="weui_navbar">
+                        <div class="weui_navbar_item backward">
+                            <i class="icon-angle-left icon-2x"></i>
+                        </div>
+                        <div class="weui_navbar_item">
+                            <if condition='$week eq 1'>星期一</br></if>
+                            <if condition='$week eq 2'>星期二</br></if>
+                            <if condition='$week eq 3'>星期三</br></if>
+                            <if condition='$week eq 4'>星期四</br></if>
+                            <if condition='$week eq 5'>星期五</br></if>
+                            <if condition='$week eq 6'>星期六</br></if>
+                            <if condition='$week eq 0'>星期日</br></if>
+                            {$ymd}
+                        </div>
+                        <div class="weui_navbar_item foreward">
+                            <i class="icon-angle-right icon-2x"></i>
+                        </div>
+                    </div>
+                    <div class="weui_tab_bd">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="class-detail-daily">
+                <notempty name="dailyClasses">
+                    <foreach name="dailyClasses" item="perClass" >
+                    <div class="weui_panel">
+                        <div class="weui_panel_hd">
+                            {$perClass.start_time}
+                            <notempty name="perClass.class_name">-</notempty>
+                            {$perClass.end_time}
+                        </div>
+                        <div class="weui_panel_bd">
+                            <div class="weui_media_box weui_media_text">
+                                <h4 class="weui_media_title">{$perClass.class_name}</h4>
+                                <ul class="weui_media_info">
+                                    <li class="weui_media_info_meta">教室</li>
+                                    <li class="weui_media_info_meta">{$perClass.classroom_name}</li>
+                                    <li class="weui_media_info_meta weui_media_info_meta_extra" onclick="editVacancy('{$perClass.class_name}',{$perClass.class_detail_id},{$perClass.class_id});" ><span 
+                                    id="vacancy_{$perClass.class_detail_id}" 
+                                     class="glyphicon glyphicon-check 
+                                    <if condition='$perClass.is_absent_check eq 1'>
+                                    vacancy-done
+                                    <else/>
+                                    vacancy-undone
+                                    </if>" 
+                                    >签到</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    </foreach>
+                <else />
+                   <div style="font-size:16px;margin-top:200px;">今天没课呦~</div>
+                </notempty>
+            </div>
         </div>
-        <div class="bd" style="height: 100%;">
-            <div class="weui_tab">
-                <div class="weui_navbar">
-                    <div class="weui_navbar_item weui_bar_item_on show-classes">
-                        {$lastday}
-                    </div>
-                    <div class="weui_navbar_item">
-                        今天
-                    </div>
-                    <div class="weui_navbar_item">
-                        {$nextday}
-                    </div>
-                </div>
-                <div class="weui_tab_bd">
-
-                </div>
-            </div>
-        </div>
-
-        <notempty name="dailyClasses">
-            <foreach name="dailyClasses" item="perClass" >
-            <div class="weui_panel">
-                <div class="weui_panel_hd">
-                    {$perClass.start_time}
-                    <notempty name="perClass.class_name">-</notempty>
-                    {$perClass.end_time}
-                </div>
-                <div class="weui_panel_bd">
-                    <div class="weui_media_box weui_media_text">
-                        <h4 class="weui_media_title">{$perClass.class_name}</h4>
-                        <ul class="weui_media_info">
-                            <li class="weui_media_info_meta">教室</li>
-                            <li class="weui_media_info_meta">{$perClass.classroom_name}</li>
-                            <li class="weui_media_info_meta weui_media_info_meta_extra" onclick="editVacancy('{$perClass.class_name}',{$perClass.class_detail_id},{$perClass.class_id});" ><span 
-                            id="vacancy_{$perClass.class_detail_id}" 
-                             class="glyphicon glyphicon-check 
-                            <if condition='$perClass.is_absent_check eq 1'>
-                            vacancy-done
-                            <else/>
-                            vacancy-undone
-                            </if>" 
-                            >签到</span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            </foreach>
-        </notempty>
     </div>
 </div>
 
