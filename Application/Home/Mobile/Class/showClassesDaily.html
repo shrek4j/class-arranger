@@ -30,8 +30,8 @@
     <style type="text/css">
         .main-view-inner{margin:0% 2% 2% 2%;}
         .main-view-inner-bar{margin:0% 2% 2% 2%;}
-        .timeline{margin-top:2%;}
-        .class-detail-daily{margin-top:8%;}
+        .timeline{margin-top:2%;z-index:1;}
+        .class-detail-daily{margin-top:8%;margin-bottom: 20%;}
         .teacherList{min-width:100px;}
         .monthList{min-width:100px;}
         .vacancy-undone{margin-left:3px;font-weight:bold;cursor:pointer;color:#FF6633;}
@@ -45,7 +45,7 @@
 
 <div class="main-view">
     <div class="main-view-inner">
-        <div class="main-view-inner-bar text-center">
+        <div class="main-view-inner-bar">
                 <!-- Single button -->
             <form action="showClassesDaily" method="post" id="showClassesForm">
                 <input type="hidden" name="teacherId" id="teacherId" value="{$teacherId}"/>
@@ -53,7 +53,7 @@
                 <input type="hidden" name="ymd" id="ymd" value="{$ymd}"/>
                 <input type="hidden" name="nextday" id="nextday"/>
             </form>
-            <div class="weui_cells">
+            <div class="weui_cells text-center" style="margin-top:0px;">
                 <div class="weui_cell weui_cell_select weui_select_after">
                     <div class="weui_cell_hd">
                         <label for="" class="weui_label">教师</label>
@@ -110,7 +110,7 @@
                                     <li class="weui_media_info_meta">{$perClass.classroom_name}</li>
                                     <li class="weui_media_info_meta weui_media_info_meta_extra" onclick="editVacancy('{$perClass.class_name}',{$perClass.class_detail_id},{$perClass.class_id});" ><span 
                                     id="vacancy_{$perClass.class_detail_id}" 
-                                     class="glyphicon glyphicon-check 
+                                     class="
                                     <if condition='$perClass.is_absent_check eq 1'>
                                     vacancy-done
                                     <else/>

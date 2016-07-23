@@ -272,6 +272,7 @@ $('.foreward').click(function(){
 $('.teacherId-mobile').click(function(){
 	$("#teacherName").val($(this).attr("teacherName"));
 	$("#teacherId").val($(this).attr("teacherId"));
+	$("#showClassesForm").submit();
 });
 
 $('.teacherId').click(function(){
