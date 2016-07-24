@@ -537,6 +537,22 @@ class ClassController extends Controller {
         $this->ajaxReturn($return);
     }
 
+    //showStudentsFromClassDetailMobile
+    public function editVacancy($classDetailId){
+        if($classDetailId == null){
+            return;
+        }
+        //inst_Id
+        $tId = session('instId');
+        $class = new \Home\Model\ClassModel();
+        $students = $class->showStudentsFromClassDetail((int)$classDetailId,$tId);
+        $classInfo = $class->showClassDetail((int)$classDetailId,$tId);
+        $this->assign("stduents",$students);
+        $this->assign("classInfo",$classInfo);
+        layout(true);
+        $this->display();
+    }
+
     public function showStudentsFromClass($classId){
         //inst_Id
         $tId = session('instId');
@@ -593,7 +609,6 @@ class ClassController extends Controller {
     public function updateClassDetailStudentRela($classId,$classDetailId,$cameRelaIds="",$notCameRelaIds=""){
         try{
             $tId = session('instId');
-            
             $cameRelaIdsArr = array();
             if($cameRelaIds != "" && $cameRelaIds != null){
                 $cameRelaIdsArr = explode('|',$cameRelaIds);

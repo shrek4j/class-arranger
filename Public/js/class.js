@@ -314,7 +314,7 @@ function editVacancy(className,classDetailId,classId){
    				if(s[3] == 0){
    					html += 'checked="checked"';
    				} 
-   				html += ' name="student" value="'+s[0]+'"><span class="radio-text">'+s[1]+'</span><span class="radio-text">(电话：'+s[2]+')</span></div>';
+   				html += ' name="student" value="'+s[0]+'"><span class="radio-text">'+s[1]+'</span></div>';
    			}
    			$("#className").text("课程："+className);
    			$('#myClassDetailId').val(classDetailId);

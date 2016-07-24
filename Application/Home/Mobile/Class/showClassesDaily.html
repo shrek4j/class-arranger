@@ -12,10 +12,6 @@
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <meta name="description" content="">
     <meta name="author" content="">
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 	<title>课表&amp;考勤</title>
     <link ref="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
@@ -25,13 +21,12 @@
     <!--[if IE 7]>
     <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css">
     <![endif]-->
-    <link href="/Public/css/bootstrap/sco/sco.message.css" rel="stylesheet">
     <link href="/Public/css/base_mobile.css" rel="stylesheet">
     <style type="text/css">
         .main-view-inner{margin:0% 2% 2% 2%;}
         .main-view-inner-bar{margin:0% 2% 2% 2%;}
         .timeline{margin-top:2%;z-index:1;}
-        .class-detail-daily{margin-top:8%;margin-bottom: 20%;}
+        .class-detail-daily{margin-top:8%;}
         .teacherList{min-width:100px;}
         .monthList{min-width:100px;}
         .vacancy-undone{margin-left:3px;font-weight:bold;cursor:pointer;color:#FF6633;}
@@ -53,15 +48,18 @@
                 <input type="hidden" name="ymd" id="ymd" value="{$ymd}"/>
                 <input type="hidden" name="nextday" id="nextday"/>
             </form>
+            <form action="editVacancy" method="post" id="editVacancyForm">
+                <input type="hidden" name="classDetailId" id="classDetailId"/>
+            </form>
             <div class="weui_cells text-center" style="margin-top:0px;">
                 <div class="weui_cell weui_cell_select weui_select_after">
                     <div class="weui_cell_hd">
                         <label for="" class="weui_label">教师</label>
                     </div>
                     <div class="weui_cell_bd weui_cell_primary">
-                        <select class="weui_select " name="select2">
+                        <select class="weui_select select-teacher" name="select2" id="selectTeacher">
                             <foreach name="teacherList" item="teacher">
-                                <option teacherId="{$teacher.teacher_id}" teacherName="{$teacher.name}" class="teacherId-mobile" value="{$teacher.teacher_id}" <if condition='$teacher.teacher_id eq $teacherId'>selected="selected"</if>>{$teacher.name}</option>
+                                <option teacherId="{$teacher.teacher_id}" teacherName="{$teacher.name}" value="{$teacher.teacher_id}" <if condition='$teacher.teacher_id eq $teacherId'>selected="selected"</if>>{$teacher.name}</option>
                             </foreach>    
                         </select>
                     </div>
@@ -108,7 +106,7 @@
                                 <ul class="weui_media_info">
                                     <li class="weui_media_info_meta">教室</li>
                                     <li class="weui_media_info_meta">{$perClass.classroom_name}</li>
-                                    <li class="weui_media_info_meta weui_media_info_meta_extra" onclick="editVacancy('{$perClass.class_name}',{$perClass.class_detail_id},{$perClass.class_id});" ><span 
+                                    <li class="weui_media_info_meta weui_media_info_meta_extra" onclick="editVacancy({$perClass.class_detail_id});" ><span 
                                     id="vacancy_{$perClass.class_detail_id}" 
                                      class="
                                     <if condition='$perClass.is_absent_check eq 1'>
@@ -160,14 +158,7 @@
 	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="/Public/js/bootstrap/sco/sco.message.js"></script>
     <script src="/Public/js/base.js"></script>
-    <script src="/Public/js/class.js"></script>
-    
-    <script type="text/javascript">
-	        $(function () {
-			  $('[data-toggle="tooltip"]').tooltip()
-			});
-    </script>
+    <script src="/Public/js/class_mobile.js"></script>
 </body>
 </html>

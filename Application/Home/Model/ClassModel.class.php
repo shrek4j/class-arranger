@@ -126,6 +126,11 @@ class ClassModel extends Model {
         return $this->query($sql,$classId,$tId);
     }
 
+    public function showClassDetail($classDetailId,$tId){
+        $sql = "select cd.*,cc.class_name class_name from classoa_class_detail cd left join classoa_class cc on cd.class_id=cc.class_id where cd.class_detail_id=%d and cd.inst_id=%d";
+        return $this->query($sql,$classDetailId,$tId);
+    }
+
     public function showClassDetailsById($classId,$tId){
         $sql = "select * from classoa_class_detail where class_id=%d and inst_id=%d and status=0 order by date asc,start_time_int asc";
         return $this->query($sql,$classId,$tId);
