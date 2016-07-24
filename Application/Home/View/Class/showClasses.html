@@ -60,11 +60,13 @@
                 </span>
                 <span class="caret"></span>
               </button>
+              <if condition="$Think.session.isSuperAdmin eq 1">
               <ul class="dropdown-menu teacherList">
                 <foreach name="teacherList" item="teacher">
                 <li teacherId="{$teacher.teacher_id}" teacherName="{$teacher.name}" class="teacherId"><a href="#">{$teacher.name}</a></li>
                 </foreach>
               </ul>
+              </if>
             </div>
     <!--        <div class="btn-group">
               <button type="button" class="btn btn-success dropdown-toggle btn-choose" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

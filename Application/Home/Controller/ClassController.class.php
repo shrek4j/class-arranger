@@ -687,9 +687,10 @@ class ClassController extends Controller {
         $tId = session('instId');
         
         $teacher = new \Home\Model\TeacherModel();
-        $teacherList = $teacher->showTeachers($tId,0,50);   
-        $this->assign("teacherList",$teacherList);
-        
+        $teacherList = $teacher->showTeachers($tId,0,50);
+        if(session('isSuperAdmin') == 1){ 
+            $this->assign("teacherList",$teacherList);
+        }
         if($teacherName == null || $teacherName == ''){
             for($i=0;$i<count($teacherList);$i++){
                 if($teacherList[$i]['teacher_id']==$teacherId){
@@ -875,9 +876,10 @@ class ClassController extends Controller {
         $tId = session('instId');
         
         $teacher = new \Home\Model\TeacherModel();
-        $teacherList = $teacher->showTeachers($tId,0,50);   
-        $this->assign("teacherList",$teacherList);
-        
+        $teacherList = $teacher->showTeachers($tId,0,50);
+        if(session('isSuperAdmin') == 1){    
+            $this->assign("teacherList",$teacherList);
+        }
         if($teacherName == null || $teacherName == ''){
             for($i=0;$i<count($teacherList);$i++){
                 if($teacherList[$i]['teacher_id']==$teacherId){

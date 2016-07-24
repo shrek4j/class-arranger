@@ -58,9 +58,15 @@
                     </div>
                     <div class="weui_cell_bd weui_cell_primary">
                         <select class="weui_select select-teacher" name="select2" id="selectTeacher">
-                            <foreach name="teacherList" item="teacher">
-                                <option teacherId="{$teacher.teacher_id}" teacherName="{$teacher.name}" value="{$teacher.teacher_id}" <if condition='$teacher.teacher_id eq $teacherId'>selected="selected"</if>>{$teacher.name}</option>
-                            </foreach>    
+                            <if condition="$Think.session.isSuperAdmin eq 1">
+                                <foreach name="teacherList" item="teacher">
+                                    <option teacherId="{$teacher.teacher_id}" teacherName="{$teacher.name}" value="{$teacher.teacher_id}" <if condition='$teacher.teacher_id eq $teacherId'>selected="selected"</if>>{$teacher.name}</option>
+                                </foreach>
+                            <else/>
+                                <option teacherId="{$teacher_id}" teacherName="{$teacherName}" value="{$teacher_id}" selected="selected">{$teacherName}</option>
+                            </if>
+
+                                
                         </select>
                     </div>
                 </div>
