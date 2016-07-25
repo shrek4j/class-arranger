@@ -122,7 +122,7 @@ class ClassModel extends Model {
     }
     
     public function showClassDetails($classId,$tId){
-        $sql = "select cd.*,ct.name teacher_name,cc.name classroom_name from classoa_class_detail cd left join classoa_teacher ct on cd.teacher_id=ct.teacher_id left join classoa_classroom cc on cd.classroom_id=cc.classroom_id where cd.class_id=%d and cd.inst_id=%d and cd.status=0 order by cd.class_detail_id asc";
+        $sql = "select cd.*,ct.name teacher_name,cc.name classroom_name from classoa_class_detail cd left join classoa_teacher ct on cd.teacher_id=ct.teacher_id left join classoa_classroom cc on cd.classroom_id=cc.classroom_id where cd.class_id=%d and cd.inst_id=%d and cd.status=0 order by cd.date asc,cd.start_time_int asc";
         return $this->query($sql,$classId,$tId);
     }
 

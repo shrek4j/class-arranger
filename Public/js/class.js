@@ -474,7 +474,6 @@ $(".add-classdetail").click(function(){
 	var teacher = $("input[name='teacher_a']:checked").val();
 	var classroom = $("input[name='classroom_a']:checked").val();
 	var date = $("#datepicker_a").val();
-	var week = $('.week_a').filter('.selected').attr('week');
 	var startTime = $("#startTimeShow_a").text();
 	var endTime = $("#endTimeShow_a").text();
 	var classId = $("#classId").val();
@@ -483,7 +482,7 @@ $(".add-classdetail").click(function(){
 	   	type: "POST",
 	   	url: "addClassDetail",
 	   	data: "classId="+classId+"&teacherId="+teacher+"&classroomId="+classroom+"&startTime="+startTime+
-	   		"&endTime="+endTime+"&date="+date+"&week="+week,
+	   		"&endTime="+endTime+"&date="+date,
 	   	success: function(msg){
 	   		if(msg == 'true'){
 	   			$.scojs_message('添加成功！', $.scojs_message.TYPE_OK);

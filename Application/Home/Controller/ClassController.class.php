@@ -226,7 +226,7 @@ class ClassController extends Controller {
     }
 
     //apply context: when a class detail needs to be added
-    public function addClassDetail($classId,$classroomId,$teacherId,$date,$startTime,$endTime,$week){
+    public function addClassDetail($classId,$classroomId,$teacherId,$date,$startTime,$endTime){
         try{
             $tId = session('instId');
             $dayOfWeek = date('w',strtotime($date));//get the dayOfWeek of this timestamp
