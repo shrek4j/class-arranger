@@ -13,7 +13,7 @@ class ClassController extends Controller {
         $tId = session('instId');
 
         $classtype = new \Home\Model\ClassModel();
-        $classtypeList = $classtype->showClassTypes($tId,0,500);
+        $classtypeList = $classtype->showClassTypes($tId,0,50);
         $this->assign("classtypeList",$classtypeList);
         $cnum=0;
         $this->assign("cnum",$cnum);

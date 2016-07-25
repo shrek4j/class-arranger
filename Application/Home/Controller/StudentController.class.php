@@ -4,6 +4,15 @@ use Think\Controller;
 class StudentController extends Controller {
     
     public function addStudent(){
+        $instId = session('instId');
+        $classtype = new \Home\Model\ClassModel();
+        $classtypeList = $classtype->showClassTypes($instId,0,500);
+        $this->assign("classtypeList",$classtypeList);
+
+        $class = new \Home\Model\ClassModel();
+        $classList = $class->showClassList($instId,0,100);
+        $this->assign('classList',$classList);
+
         layout(true);
         $this->display();
     }
