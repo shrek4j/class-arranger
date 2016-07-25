@@ -754,26 +754,22 @@
     <script src="/Public/js/base.js"></script>
     <script src="/Public/js/class.js"></script>
 
-
-    <script type="text/javascript">
+    <script>
         $('.input-daterange').datepicker({
             format: "yyyy-mm-dd",
             weekStart: 1,
             language: "zh-CN",
             autoclose: true
         });
-    </script>
 
-    <script>
         $(document).ready(function(){
           $('input').iCheck({
             checkboxClass: 'icheckbox_square',
             radioClass: 'iradio_square',
             increaseArea: '20%' // optional
           });
+          $("#deduct_vacancy_tuition_1").iCheck("check");
         });
-
-        $("#deduct_vacancy_tuition_1").iCheck("check");
 
         $(function() {
           $('#tags-students').tagsinput();

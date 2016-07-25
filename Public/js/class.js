@@ -17,8 +17,13 @@ $(".add-class").click(function(){
 		var weekcn = $('.week_'+i).filter('.selected').find('a').text();
 		var startTime = $('.startTime_'+i).filter('.selected').children('a').text();
 		var endTime = $('.endTime_'+i).filter('.selected').children('a').text();
-		time += week + "|" + startTime + "-" + endTime + ";";
-		timecn += weekcn + "  " + startTime + "-" + endTime + "</br>";
+		if(week == undefined || startTime == '' || endTime == ''){
+			//dont't save
+		}else{
+			time += week + "|" + startTime + "-" + endTime + ";";
+			timecn += weekcn + "  " + startTime + "-" + endTime + "</br>";
+		}
+		
 	}
 	
 	var tuition = $("#tuition").val();
@@ -27,12 +32,12 @@ $(".add-class").click(function(){
 
 	if(isEmpty(classname)){
 		$.scojs_message('课程名称不可为空！', $.scojs_message.TYPE_ERROR);
-		$(this).attr("disabled",false);
+		$(".add-class").attr("disabled",false);
 		return;
 	}
 	if(classname.length > 20){
 		$.scojs_message('课程名称长度应小于20！', $.scojs_message.TYPE_ERROR);
-		$(this).attr("disabled",false);
+		$(".add-class").attr("disabled",false);
 		return;
 	}
 
@@ -49,8 +54,13 @@ $(".add-class").click(function(){
 	   			setInterval('reloadPage()',1500);
 	   		}else{
 	   			$.scojs_message('添加失败！', $.scojs_message.TYPE_ERROR);
-	   			$(this).attr("disabled",false);
+	   			$(".add-class").attr("disabled",false);
 	   		}
+	   	},
+	   	error: function(rqst,msg){
+	   		$.scojs_message('添加失败！', $.scojs_message.TYPE_ERROR);
+	   		$(".add-class").attr("disabled",false);
+	   		console.log(rqst.responseText);
 	   	}
 	});
 
@@ -231,8 +241,6 @@ function bindClicks(rowCount){
 			return;
 		}
 		$(this).parent().parent().remove();
-		if(rowCount>0)
-			rowCount--;
 	});
 
 	$('.week_'+rowCount).click(function(){
