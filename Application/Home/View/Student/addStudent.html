@@ -22,7 +22,7 @@
     
     <style type="text/css">
         .container-fluid .row{margin-top:2%;}
-        .main-view-inner{margin:4% 2% 2% 6%;font-size:14px;width:600px;}
+        .main-view-inner{margin:4% 2% 2% 6%;font-size:14px;width:95%;}
         .main-view-inner .key{width:80px;padding:0px;text-align:right;}
         .main-view-inner .value{width:200px;padding-left:0px;}
         .main-view-inner .remark{padding-left:2px;margin-top:8px;color:red;}
@@ -86,15 +86,30 @@
                 <div class="col-md-4 value"><input id="mobile" type="text" class="form-control" value="" aria-describedby="basic-addon1"/></div>
             </div>
             <div class="row">
+                <div class="col-md-4 key row-gutter">意向课程：</div>
+                <div class="col-md-8 value" style="width:90%;">
+                    <foreach name="classtypeList" item="classtype">
+                    <input tabindex="{$tnum}" id="classtype_{$classtype.id}" type="radio" name="classtype" value="{$classtype.id}"><span class="radio-text">{$classtype.name}</span>
+                    </foreach>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 key row-gutter">报名课程：</div>
+                <div class="col-md-8 value" style="width:90%;">
+                  <foreach name="classList" item="class" >
+                    <input tabindex="{$tnum}" id="class_{$class.class_id}" type="radio" name="class" value="{$class.class_id}"><span class="radio-text">{$class.class_name}</span>
+                  </foreach>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 key row-gutter">缴费(元)：</div>
+                <div class="col-md-4 value"><input id="tuition" type="text" class="form-control" style="text-align:right;" placeholder="0.00" aria-describedby="basic-addon1"/></div>
+            </div>
+            <div class="row" style="margin-bottom:30px;">
                 <div class="col-md-4 key row-gutter">备注：</div>
                 <div class="col-md-4 value">
                     <textarea id="remark" class="form-control" aria-describedby="basic-addon1"></textarea>
                 </div>
-
-            </div>
-            <div class="row" style="margin-bottom:30px;">
-                <div class="col-md-4 key row-gutter">缴费(元)：</div>
-                <div class="col-md-4 value"><input id="tuition" type="text" class="form-control" style="text-align:right;" placeholder="0.00" aria-describedby="basic-addon1"/></div>
             </div>
             <div class="row">
                 <div class="col-md-6 key row-gutter"><button type="button" class="btn btn-default btn-submit add-student">保存</button></div>
@@ -127,13 +142,10 @@
         });
 
         $("#gender_1").iCheck('check');
-    </script>
 
-    <script type="text/javascript">
         $(function () {
           $('[data-toggle="tooltip"]').tooltip()
         });
-
     </script>
 </body>
 </html>

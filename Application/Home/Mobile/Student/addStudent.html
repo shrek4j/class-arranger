@@ -34,7 +34,7 @@
         <div class="weui_cell">
             <div class="weui_cell_hd"><label class="weui_label">学生姓名</label></div>
             <div class="weui_cell_bd weui_cell_primary">
-                <input class="weui_input" type="number" pattern="*{1,20}" placeholder="请输入学生姓名"/>
+                <input class="weui_input" type="string" pattern="*{1,20}" placeholder="请输入学生姓名"/>
             </div>
         </div>
         <div class="weui_cell weui_cell_select weui_select_after">
@@ -74,7 +74,7 @@
         <div class="weui_cell">
             <div class="weui_cell_hd"><label class="weui_label">学校</label></div>
             <div class="weui_cell_bd weui_cell_primary">
-                <input class="weui_input" type="number" pattern="*{1,10}" placeholder="请输入学校"/>
+                <input class="weui_input" type="string" pattern="*{1,10}" placeholder="请输入学校"/>
             </div>
         </div>
         <div class="weui_cells">
@@ -85,7 +85,7 @@
                     </select>
                 </div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" type="number" pattern="[0-9]*" placeholder="请输入联系电话"/>
+                    <input class="weui_input" type="tel" pattern="[0-9]*" placeholder="请输入联系电话"/>
                 </div>
             </div>
         </div>
@@ -101,19 +101,17 @@
                 </select>
             </div>
         </div>
-        <div class="weui_cells_title bold-font">报名课程</div>
-        <div class="weui_cells weui_cells_checkbox">
-            <foreach name="classList" item="class">
-                <label class="weui_cell weui_check_label" for="{$class.class_id}">
-                    <div class="weui_cell_hd">
-                        <input type="checkbox" class="weui_check" name="student" id="{$class.class_id}" value="{$class.class_id}">
-                        <i class="weui_icon_checked"></i>
-                    </div>
-                    <div class="weui_cell_bd weui_cell_primary global-font">
-                        <p>{$class.class_name}</p>
-                    </div>
-                </label>
-            </foreach>
+        <div class="weui_cell weui_cell_select weui_select_after">
+            <div class="weui_cell_hd">
+                <label for="" class="weui_label">报名课程</label>
+            </div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <select class="weui_select" name="class">
+                    <foreach name="classList" item="class">
+                    <option value="{$class.class_id}">{$class.class_name}</option>
+                    </foreach>
+                </select>
+            </div>
         </div>
         <div class="weui_cell">
             <div class="weui_cell_hd"><label class="weui_label">缴费（元）</label></div>

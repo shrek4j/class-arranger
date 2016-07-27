@@ -129,6 +129,11 @@ class ClassController extends Controller {
         $this->ajaxReturn($data);
     }
 
+    public function getTuitionsByClassId($classId){
+        $tId = session('instId');
+        
+    }
+
     public function updateClass($classId,$className){
         try{
             $tId = session('instId');

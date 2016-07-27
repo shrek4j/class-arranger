@@ -7,9 +7,6 @@ $(".add-student").click(function(){
 	var remark = $("#remark").val();
 	var mobile = $("#mobile").val();
 	var tuition = $("#tuition").val();
-	var interest = $("input[name='classtype']:checked").val();
-	var attended = $("input[name='class']:checked").val();
-	
 	if(isEmpty(studentName)){
 		$.scojs_message('姓名不可为空！', $.scojs_message.TYPE_ERROR);
 		return;
@@ -22,7 +19,7 @@ $(".add-student").click(function(){
 	   	type: "POST",
 	   	url: "saveStudent",
 	   	data: "studentName="+studentName+"&gender="+gender+"&grade="+grade+"&school="+school+
-	   			"&remark="+remark+"&mobile="+mobile+"&tuition="+tuition+"&interest="+interest+"&attended="+attended,
+	   			"&remark="+remark+"&mobile="+mobile+"&tuition="+tuition,
 	   	success: function(msg){
 	   		if(msg == 'true'){
 	   			$.scojs_message('添加成功！', $.scojs_message.TYPE_OK);
@@ -34,17 +31,6 @@ $(".add-student").click(function(){
 	   	}
 	});
 });
-
-function getClassStr(classInputs){
-	var classes = "";
-	for(var i=0;i<classInputs.length;i++){
-		classes += classInputs[i].value;
-		if(i<classInputs.length-1){
-			classes += "|";
-		}
-	}
-	return classes;
-}
 
 $(".update-student").click(function(){
 	var studentId = $("#studentId").val();

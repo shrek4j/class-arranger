@@ -5,9 +5,11 @@ class StudentModel extends Model {
     protected $connection = 'DB_CONFIG1';//调用配置文件中的数据库配置1
     protected $autoCheckFields =false;//模型和数据表无需一一对应
     
-    public function saveStudent($studentName,$studPinyin,$gender,$grade,$school,$remark,$mobile,$tuition,$instId){
-        $sql = "insert into classoa_student(student_name,pinyin,gender,grade,school,remark,phone,balance,inst_id) values('%s','%s',%d,%d,'%s','%s','%s',%d,%d)";
-        return $this->execute($sql,$studentName,$studPinyin,$gender,$grade,$school,$remark,$mobile,$tuition,$instId);
+    public function saveStudent($studentName,$studPinyin,$gender,$grade,$school,$remark,$mobile,$tuition,$instId,$interest){
+        $sql = "insert into classoa_student(student_name,pinyin,gender,grade,school,remark,phone,balance,inst_id,interested_class) values('%s','%s',%d,%d,'%s','%s','%s',%d,%d,%d)";
+        $this->execute($sql,$studentName,$studPinyin,$gender,$grade,$school,$remark,$mobile,$tuition,$instId,$interest);
+        $queryIdSql = "SELECT @@IDENTITY as student_id";
+        return $this->query($queryIdSql);
     }
 
     public function updateStudent($studentName,$studPinyin,$gender,$grade,$school,$remark,$mobile,$balance,$studentId,$instId){
