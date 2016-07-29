@@ -22,7 +22,7 @@ class StudentController extends Controller {
 
     //still need tuition per class
     //classoa_student:  interested_class int(10) classtype_id
-    public function saveStudent($studentName="",$gender,$grade,$school,$remark,$mobile,$tuition,$interest,$attended){
+    public function saveStudent($studentName="",$gender,$grade,$school,$remark,$mobile,$tuition,$tuitionPerClass,$interest,$attended){
         try{
             if($studentName == "")
                 return;
@@ -42,7 +42,7 @@ class StudentController extends Controller {
             if(!empty($attended)){
                 $classId = $attended;
                 //$classInfo = $classModel->getClassById((int)$classId,$instId);
-                //$tuition = $classInfo[0]['tuition_per_class'];
+                //$tuitionPerClass = $classInfo[0]['tuition_per_class'];
 
                 $classDetails = $classModel->showClassDetailsById((int)$classId,$instId);
                 $ndate = date("Y-m-d");
@@ -59,11 +59,11 @@ class StudentController extends Controller {
                 //update student status
                 $studentModel->changeStudentStatus($studentId,$instId,2);
                 //save student fee info
-                $class->saveClassAndStudentRela((int)$classId,$studentId,$tuition,0,$instId);
+                $class->saveClassAndStudentRela((int)$classId,$studentId,$tuitionPerClass,0,$instId);
                 if(!empty($leftClassDetails) && count($leftClassDetails)>0){
                     for($m=0;$m<count($leftClassDetails);$m++){
                         //add student and classDetail rela
-                        $class->saveClassDetailAndStudentRela($leftClassDetails[$m]['class_detail_id'],(int)$classId,$studentId,$tuition,$instId);
+                        $class->saveClassDetailAndStudentRela($leftClassDetails[$m]['class_detail_id'],(int)$classId,$studentId,$tuitionPerClass,$instId);
                     }
                 }
             }
