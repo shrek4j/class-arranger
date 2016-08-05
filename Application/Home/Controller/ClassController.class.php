@@ -348,7 +348,8 @@ class ClassController extends Controller {
             $classDetails = $class->showClassDetailsById((int)$classId,$tId);
 
             $ndate = date("Y-m-d");
-            $nstarttimeint = (int)(str_replace(':','',date('H:i')));
+            //(int)(str_replace(':','',date('H:i')));
+            $nstarttimeint = (int)date('Gi',time()+8*3600);
             for($i=0;$i<count($classDetails);$i++){
                 $cdate = $classDetails[$i]['date'];
                 $cstarttimeint = $classDetails[$i]['start_time_int'];
@@ -906,7 +907,21 @@ class ClassController extends Controller {
         $this->display();
     }
 
+    public function getClassTuitionInfo($classId){
+        if(empty($classId)){
+            return;
+        }
+        $tId = session('instId');
+        $class = new \Home\Model\ClassModel();
+        $tuition = $class->getTuitionFromClass($classId,$tId);
 
+        $today = date('Y-m-d');
+        $startTimeInt = (int)date('Gi',time()+8*3600);
+        $unfinishedClassTimes = $class->countUnfinishedClasses($today,$startTimeInt,$classId,$tId);
+
+        $data = $tuition[0]['tuition_per_class']."&".$unfinishedClassTimes[0]['count'];
+        $this->ajaxReturn($data);
+    }
 
 
 

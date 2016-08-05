@@ -108,9 +108,21 @@
             <div class="weui_cell_bd weui_cell_primary">
                 <select class="weui_select" name="class">
                     <foreach name="classList" item="class">
-                    <option value="{$class.class_id}">{$class.class_name}</option>
+                    <option class="attended" value="{$class.class_id}">{$class.class_name}</option>
                     </foreach>
                 </select>
+            </div>
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cell_hd"><label class="weui_label">每次课费用(元)</label></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <input style="text-align:right;" id="tuitionPerClass" class="weui_input" type="number" pattern="*{1,20}" placeholder="0.00"/>
+            </div>
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cell_hd"><label class="weui_label">剩余课次</label></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <input style="text-align:right;" id="unfinishedClassTimes" class="weui_input" type="number" pattern="*{1,20}" placeholder="0"/>
             </div>
         </div>
         <div class="weui_cell">
@@ -139,7 +151,7 @@
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="/Public/js/base.js"></script>
-    <script src="/Public/js/student.js"></script>
+    <script src="/Public/js/student_mobile.js"></script>
 
 </body>
 </html>

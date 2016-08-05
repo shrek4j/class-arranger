@@ -1,3 +1,59 @@
+$('.attended').click(function(){
+	//render change
+	$('.attended').removeClass('selected');
+	$(this).addClass('selected');
+	$("#attendedShow").text($(this).children('a').text());
+
+	var classId = $(this).attr("attended");
+	if(classId==0){
+		$("#tuitionPerClass").val(null);
+		$("#unfinishedClassTimes").val(null);
+		$("#tuition").val(null);
+		return;
+	}
+	//fetch class tuition_per_class and left_class_times
+	$.ajax({
+	   	type: "POST",
+	   	url: "../Class/getClassTuitionInfo",
+	   	data: "classId="+classId,
+	   	success: function(msg){
+	   		if(msg != null){
+	   			var arr = msg.split("&");
+	   			$("#tuitionPerClass").val(arr[0]/100);
+	   			$("#unfinishedClassTimes").val(arr[1]);
+	   			$("#tuition").val((arr[0]/100)*arr[1]);
+	   		}
+	   	}
+	});
+});
+
+$("#tuitionPerClass").keyup(function(){
+	calculateTuition();
+});
+
+$("#unfinishedClassTimes").keyup(function(){
+	calculateTuition();
+});
+
+function calculateTuition(){
+	var tuitionPerClass = $("#tuitionPerClass").val();
+	var unfinishedClassTimes = $("#unfinishedClassTimes").val();
+	if(isEmpty(tuitionPerClass)){
+		tuitionPerClass = 0;
+	}
+	if(isEmpty(tuitionPerClass)){
+		unfinishedClassTimes = 0;
+	}
+
+	var tuition = tuitionPerClass*unfinishedClassTimes;
+	$("#tuition").val(tuition);
+}
+
+$('.interest').click(function(){
+	$('.interest').removeClass('selected');
+	$(this).addClass('selected');
+	$("#interestShow").text($(this).children('a').text());
+});
 
 $(".add-student").click(function(){
 	var studentName = $("#studentName").val();
@@ -6,9 +62,11 @@ $(".add-student").click(function(){
 	var school = $("#school").val();
 	var remark = $("#remark").val();
 	var mobile = $("#mobile").val();
+
+	var interest = $('.interest').filter('.selected').attr('interest');
+	var attended = $('.attended').filter('.selected').attr('attended');
+	var tuitionPerClass = $("#tuitionPerClass").val();
 	var tuition = $("#tuition").val();
-	var interest = $("input[name='classtype']:checked").val();
-	var attended = $("input[name='class']:checked").val();
 	
 	if(isEmpty(studentName)){
 		$.scojs_message('姓名不可为空！', $.scojs_message.TYPE_ERROR);
@@ -18,11 +76,40 @@ $(".add-student").click(function(){
 		$.scojs_message('姓名长度应小于20！', $.scojs_message.TYPE_ERROR);
 		return;
 	}
+
 	$.ajax({
 	   	type: "POST",
 	   	url: "saveStudent",
 	   	data: "studentName="+studentName+"&gender="+gender+"&grade="+grade+"&school="+school+
-	   			"&remark="+remark+"&mobile="+mobile+"&tuition="+tuition+"&interest="+interest+"&attended="+attended,
+	   			"&remark="+remark+"&mobile="+mobile+"&tuition="+tuition+
+	   			"&tuitionPerClass="+tuitionPerClass+"&interest="+interest+"&attended="+attended,
+	   	success: function(msg){
+	   		if(msg == 'true'){
+	   			$.scojs_message('添加成功！', $.scojs_message.TYPE_OK);
+	   			setInterval('reloadPage()',1500);
+	   		}else{
+	   			$.scojs_message('添加失败！', $.scojs_message.TYPE_ERROR);
+	   		}
+			
+	   	}
+	});
+});
+
+
+$(".attend-new-class").click(function(){
+	var studentId = $("#studentId").val();
+	var attended = $('.attended').filter('.selected').attr('attended');
+	var tuitionPerClass = $("#tuitionPerClass").val();
+	var tuition = $("#tuition").val();
+	if(isEmpty(attended)){
+		$.scojs_message('暂无课程，无需保存！', $.scojs_message.TYPE_OK);
+		return;
+	}
+	$.ajax({
+	   	type: "POST",
+	   	url: "attendNewClass",
+	   	data: "studentId="+studentId+"&tuition="+tuition+
+	   			"&tuitionPerClass="+tuitionPerClass+"&attended="+attended,
 	   	success: function(msg){
 	   		if(msg == 'true'){
 	   			$.scojs_message('添加成功！', $.scojs_message.TYPE_OK);
@@ -94,10 +181,13 @@ $(".grade").click(function(){
 	$("#gradeShow").text($(this).children('a').text());
 });
 
-function showStudentDetail(studentId){
-	window.location.href="showStudentDetail.html?studentId="+studentId;
+function showAttendNewClass(studentId){
+	window.location.href="showAttendNewClass?studentId="+studentId;
 }
 
+function showStudentDetail(studentId){
+	window.location.href="showStudentDetail?studentId="+studentId;
+}
 
 function deleteStudent(id,name){
   if(confirm("是否删除教室："+name+"？")){

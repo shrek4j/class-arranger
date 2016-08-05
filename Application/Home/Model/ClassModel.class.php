@@ -23,6 +23,16 @@ class ClassModel extends Model {
         $sql = "select * from classoa_class where class_id=%d and inst_id=%d";
         return $this->query($sql,$classId,$tId);
     }
+
+    public function getTuitionFromClass($classId,$tId){
+        $sql = "select tuition_per_class from classoa_class where class_id=%d and inst_id=%d";
+        return $this->query($sql,$classId,$tId);
+    }
+
+    public function countUnfinishedClasses($today,$startTimeInt,$classId,$tId){
+        $sql = "SELECT COUNT(1) count FROM classoa_class_detail WHERE class_id=%d AND inst_id=%d AND ((`date`='%s' AND start_time_int>%d) OR (`date`>'%s'))";
+        return $this->query($sql,$classId,$tId,$today,$startTimeInt,$today);
+    }
     
     public function saveClassDetail($date,$year,$month,$dayOfWeek,$startTime,$startTimeInt,$endTime,$teacherId,$classroomId,$classId,$tId){
         $sql = "insert into classoa_class_detail(date,year,month,day_of_week,start_time,start_time_int,end_time,teacher_id,classroom_id,class_id,inst_id) values('%s','%s',%d,%d,'%s',%d,'%s',%d,%d,%d,%d)";
@@ -117,7 +127,7 @@ class ClassModel extends Model {
     }
 
     public function showClassList($instId,$start,$pageSize){
-        $sql = "select cc.*,ct.name classtype_name,t.name teacher_name,cr.name classroom_name from classoa_class cc left join classoa_classtype ct on cc.class_type_id=ct.id left join classoa_teacher t on cc.teacher_id=t.teacher_id left join classoa_classroom cr on cc.classroom_id=cr.classroom_id where cc.inst_id=%d and cc.status=0 order by cc.class_id asc limit %d,%d";
+        $sql = "select cc.*,ct.name classtype_name,t.name teacher_name,cr.name classroom_name from classoa_class cc left join classoa_classtype ct on cc.class_type_id=ct.id left join classoa_teacher t on cc.teacher_id=t.teacher_id left join classoa_classroom cr on cc.classroom_id=cr.classroom_id where cc.inst_id=%d and cc.status=0 order by cc.class_id desc limit %d,%d";
         return $this->query($sql,$instId,$start,$pageSize);
     }
     

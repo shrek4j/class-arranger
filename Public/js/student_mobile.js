@@ -1,3 +1,48 @@
+$('.attended').click(function(){
+	var classId = $(this).val();
+	if(classId==0){
+		$("#tuitionPerClass").val(null);
+		$("#unfinishedClassTimes").val(null);
+		$("#tuition").val(null);
+		return;
+	}
+	//fetch class tuition_per_class and left_class_times
+	$.ajax({
+	   	type: "POST",
+	   	url: "../Class/getClassTuitionInfo",
+	   	data: "classId="+classId,
+	   	success: function(msg){
+	   		if(msg != null){
+	   			var arr = msg.split("&");
+	   			$("#tuitionPerClass").val(arr[0]/100);
+	   			$("#unfinishedClassTimes").val(arr[1]);
+	   			$("#tuition").val((arr[0]/100)*arr[1]);
+	   		}
+	   	}
+	});
+});
+
+$("#tuitionPerClass").keyup(function(){
+	calculateTuition();
+});
+
+$("#unfinishedClassTimes").keyup(function(){
+	calculateTuition();
+});
+
+function calculateTuition(){
+	var tuitionPerClass = $("#tuitionPerClass").val();
+	var unfinishedClassTimes = $("#unfinishedClassTimes").val();
+	if(isEmpty(tuitionPerClass)){
+		tuitionPerClass = 0;
+	}
+	if(isEmpty(tuitionPerClass)){
+		unfinishedClassTimes = 0;
+	}
+
+	var tuition = tuitionPerClass*unfinishedClassTimes;
+	$("#tuition").val(tuition);
+}
 
 $(".add-student").click(function(){
 	var studentName = $("#studentName").val();
@@ -79,27 +124,3 @@ $(".grade").click(function(){
 	$(this).addClass('selected');
 	$("#gradeShow").text($(this).children('a').text());
 });
-
-function showStudentDetail(studentId){
-	window.location.href="showStudentDetail.html?studentId="+studentId;
-}
-
-
-function deleteStudent(id,name){
-  if(confirm("是否删除教室："+name+"？")){
-  	$.ajax({
-	   	type: "POST",
-	   	url: "deleteStudent",
-	   	data: "studentId="+id,
-	   	success: function(msg){
-	   		if(msg == 'true'){
-	   			$.scojs_message('删除成功！', $.scojs_message.TYPE_OK);
-	   			setInterval('reloadPage()',1500);
-	   		}else{
-	   			$.scojs_message('删除失败！', $.scojs_message.TYPE_ERROR);
-	   		}
-			
-	   	}
-	});
-  }
-}

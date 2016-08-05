@@ -20,7 +20,6 @@ class StudentController extends Controller {
         $this->display();
     }
 
-    //still need tuition per class
     //classoa_student:  interested_class int(10) classtype_id
     public function saveStudent($studentName="",$gender,$grade,$school,$remark,$mobile,$tuition,$tuitionPerClass,$interest,$attended){
         try{
@@ -36,17 +35,15 @@ class StudentController extends Controller {
 
             //save student
             $studentIdArr = $studentModel->saveStudent($studentName,$studPinyin,$gender,$grade,$school,$remark,$mobile,$tuition*100,$instId,$interest);
-            $studentId = (int)$studentId[0]['student_id'];
+            $studentId = (int)$studentIdArr[0]['student_id'];
             
-            //保存报名课程信息
+            //save student attends class info (classId and tuitionPerClass and totalTuition)
             if(!empty($attended)){
                 $classId = $attended;
-                //$classInfo = $classModel->getClassById((int)$classId,$instId);
-                //$tuitionPerClass = $classInfo[0]['tuition_per_class'];
 
                 $classDetails = $classModel->showClassDetailsById((int)$classId,$instId);
                 $ndate = date("Y-m-d");
-                $nstarttimeint = (int)(str_replace(':','',date('H:i')));
+                $nstarttimeint = (int)date('Gi',time()+8*3600);
                 for($i=0;$i<count($classDetails);$i++){
                     $cdate = $classDetails[$i]['date'];
                     $cstarttimeint = $classDetails[$i]['start_time_int'];
@@ -59,11 +56,11 @@ class StudentController extends Controller {
                 //update student status
                 $studentModel->changeStudentStatus($studentId,$instId,2);
                 //save student fee info
-                $class->saveClassAndStudentRela((int)$classId,$studentId,$tuitionPerClass,0,$instId);
+                $classModel->saveClassAndStudentRela((int)$classId,$studentId,$tuitionPerClass*100,0,$instId);
                 if(!empty($leftClassDetails) && count($leftClassDetails)>0){
                     for($m=0;$m<count($leftClassDetails);$m++){
                         //add student and classDetail rela
-                        $class->saveClassDetailAndStudentRela($leftClassDetails[$m]['class_detail_id'],(int)$classId,$studentId,$tuitionPerClass,$instId);
+                        $classModel->saveClassDetailAndStudentRela($leftClassDetails[$m]['class_detail_id'],(int)$classId,$studentId,$tuitionPerClass*100,$instId);
                     }
                 }
             }
@@ -74,6 +71,66 @@ class StudentController extends Controller {
             $studentModel->rollback();
         }
         $this->ajaxReturn($data);
+    }
+
+    public function attendNewClass($studentId,$tuition,$tuitionPerClass,$attended){
+        try{
+            $instId = session('instId');
+
+            $studentModel = new \Home\Model\StudentModel();
+            $classModel = new \Home\Model\ClassModel();
+
+            //add tuition to student total tuition
+            $studentModel->addStudentBalance($tuition*100,$studentId,$instId);
+
+            //save student attends class info (classId and tuitionPerClass and totalTuition)
+            $classId = $attended;
+            $classDetails = $classModel->showClassDetailsById((int)$classId,$instId);
+            $ndate = date("Y-m-d");
+            $nstarttimeint = (int)date('Gi',time()+8*3600);
+            for($i=0;$i<count($classDetails);$i++){
+                $cdate = $classDetails[$i]['date'];
+                $cstarttimeint = $classDetails[$i]['start_time_int'];
+                if((($cdate == $ndate) && ($cstarttimeint>$nstarttimeint)) || ($cdate > $ndate)){
+                    $leftClassDetails = array_slice($classDetails, $i);
+                    break;
+                }
+            }
+
+            //update student status
+            $studentModel->changeStudentStatus($studentId,$instId,2);
+            //save student fee info
+            $classModel->saveClassAndStudentRela((int)$classId,$studentId,$tuitionPerClass*100,0,$instId);
+            if(!empty($leftClassDetails) && count($leftClassDetails)>0){
+                for($m=0;$m<count($leftClassDetails);$m++){
+                    //add student and classDetail rela
+                    $classModel->saveClassDetailAndStudentRela($leftClassDetails[$m]['class_detail_id'],(int)$classId,$studentId,$tuitionPerClass*100,$instId);
+                }
+            }
+            $data = "true";
+            $studentModel->commit();
+        }catch(Exception $e){
+            $data = "false";
+            $studentModel->rollback();
+        }
+        $this->ajaxReturn($data);
+    }
+
+    public function showAttendNewClass($studentId){
+        $instId = session('instId');
+        $studentModel = new \Home\Model\StudentModel();
+        $student = $studentModel->showStudentDetail($instId,$studentId);
+        $this->assign('student',$student[0]);
+
+        $classModel = new \Home\Model\ClassModel();
+        $classList = $classModel->showClassList($instId,0,100);
+        $this->assign('classList',$classList);
+
+        $tnum=0;
+        $this->assign('tnum',$tnum);
+        
+        layout(true);
+        $this->display();
     }
 
     public function updateStudent($studentName="",$gender,$grade,$school,$remark,$mobile,$balance,$studentId){

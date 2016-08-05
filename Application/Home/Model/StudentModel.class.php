@@ -42,6 +42,11 @@ class StudentModel extends Model {
     	return $this->execute($sql,$studentId,$instId);
     }
 
+    public function addStudentBalance($newTuition,$studentId,$instId){
+        $sql = "update classoa_student set balance=balance+%d where student_id=%d and inst_id=%d";
+        return $this->execute($sql,$newTuition,$studentId,$instId);
+    }
+
     public function updateStudentBalance($deduction,$studentId,$instId){
         $sql = "update classoa_student set balance=balance-%d where student_id=(SELECT student_id FROM classoa_class_detail_student_rela WHERE id =  %d) and inst_id=%d";
         return $this->execute($sql,$deduction,$studentId,$instId);
