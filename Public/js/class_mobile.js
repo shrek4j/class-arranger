@@ -59,8 +59,3 @@ function getStudentStr(studentInputs){
 	}
 	return students;
 }
-
-function hideToast(){
-	$("#toast").hide();
-	history.back();
-}

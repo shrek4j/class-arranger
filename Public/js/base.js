@@ -6,7 +6,10 @@ function isEmpty(field){
 	}
 }
 
-
+function hideToast(){
+	$("#toast").hide();
+	history.back();
+}
 
 function reloadPage(){
 	window.location.reload();
