@@ -39,12 +39,6 @@
 <div class="main-view">
 
     <div class="main-view-inner">
-        <div class="main-view-inner-bar">
-            <span style="cursor:pointer" data-toggle="modal" data-target="#addTeacherModal">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;添加教师
-            </span>
-        </div>
-                
         <table class="main-view-inner-table table table-bordered table-striped table-hover text-center">
             <thead><tr class="title"><td>编号</td><td>教师姓名</td><td>操作</td></tr></thead>
             <tbody>
@@ -79,35 +73,6 @@
         </nav>
     </div>
 </div>
-
-<!-- Modal -->
-<div class="modal fade" id="addTeacherModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">添加教室</h4>
-      </div>
-      <div class="modal-body">
-          <div class="container-fluid">
-              <div class="row">
-                  <div class="col-md-2">
-                    <label for="teacher" class="control-label">教室名称:</label>
-                  </div>
-                  <div class="col-md-6">
-                    <input type="text" class="form-control" id="teacher"/>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="modal-footer">
-          <button type="button" class="btn btn-primary add-teacher">保存</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 
   	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
   	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>

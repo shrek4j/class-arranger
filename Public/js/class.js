@@ -127,95 +127,95 @@ $('.add-classtimerow').click(function(){
         '</div>'+
         '<div class="col-md-10">'+
             '<div class="dropdown" style="display: inline-block;">'+
-                '<a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="weekpicker" href="#" role="button" aria-haspopup="true" aria-expanded="false">'+
+                '<a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="weekpicker" href="javascript:;" role="button" aria-haspopup="true" aria-expanded="false">'+
                     '<span id="weekShow_'+rowCount+'">选择星期</span>'+
                 '</a>'+
                 '<ul class="dropdown-menu week-picker" aria-labelledby="weekpicker">'+
-                    '<li class="week_'+rowCount+'" week="1"><a href="#">星期一</a></li>'+
-                    '<li class="week_'+rowCount+'" week="2"><a href="#">星期二</a></li>'+
-                    '<li class="week_'+rowCount+'" week="3"><a href="#">星期三</a></li>'+
-                    '<li class="week_'+rowCount+'" week="4"><a href="#">星期四</a></li>'+
-                    '<li class="week_'+rowCount+'" week="5"><a href="#">星期五</a></li>'+
-                    '<li class="week_'+rowCount+'" week="6"><a href="#">星期六</a></li>'+
-                    '<li class="week_'+rowCount+'" week="7"><a href="#">星期日</a></li>'+
+                    '<li class="week_'+rowCount+'" week="1"><a href="javascript:;">星期一</a></li>'+
+                    '<li class="week_'+rowCount+'" week="2"><a href="javascript:;">星期二</a></li>'+
+                    '<li class="week_'+rowCount+'" week="3"><a href="javascript:;">星期三</a></li>'+
+                    '<li class="week_'+rowCount+'" week="4"><a href="javascript:;">星期四</a></li>'+
+                    '<li class="week_'+rowCount+'" week="5"><a href="javascript:;">星期五</a></li>'+
+                    '<li class="week_'+rowCount+'" week="6"><a href="javascript:;">星期六</a></li>'+
+                    '<li class="week_'+rowCount+'" week="7"><a href="javascript:;">星期日</a></li>'+
                 '</ul>'+
             '</div>'+
               
             '<div class="dropdown" style="display: inline-block;margin-left:10%;">'+
-                '<a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="starttimepicker" href="#" role="button" aria-haspopup="true" aria-expanded="false">'+
+                '<a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="starttimepicker" href="javascript:;" role="button" aria-haspopup="true" aria-expanded="false">'+
                     '<span id="startTimeShow_'+rowCount+'">开始时间</span>'+
                 '</a>'+
                 '<ul class="dropdown-menu time-picker" aria-labelledby="starttimepicker">'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">7:00</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">7:30</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">8:00</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">8:30</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">9:00</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">9:30</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">10:00</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">10:30</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">11:00</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">11:30</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">12:00</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">12:30</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">13:00</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">13:30</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">14:00</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">14:30</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">15:00</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">15:30</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">16:00</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">16:30</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">17:00</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">17:30</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">18:00</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">18:30</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">19:00</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">19:30</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">20:00</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">20:30</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">21:00</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">21:30</a></li>'+
-                    '<li class="startTime_'+rowCount+'"><a href="#">22:00</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">7:00</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">7:30</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">8:00</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">8:30</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">9:00</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">9:30</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">10:00</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">10:30</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">11:00</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">11:30</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">12:00</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">12:30</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">13:00</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">13:30</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">14:00</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">14:30</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">15:00</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">15:30</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">16:00</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">16:30</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">17:00</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">17:30</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">18:00</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">18:30</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">19:00</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">19:30</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">20:00</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">20:30</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">21:00</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">21:30</a></li>'+
+                    '<li class="startTime_'+rowCount+'"><a href="javascript:;">22:00</a></li>'+
                 '</ul>'+
             '</div>'+
             '<span style="display: inline-block;">&nbsp;-&nbsp;</span>'+
             '<div class="dropdown" style="display: inline-block;">'+
-                '<a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="endtimepicker" href="#" role="button" aria-haspopup="true" aria-expanded="false">'+
+                '<a style="text-decoration:none;" class="dropdown-toggle" data-toggle="dropdown" id="endtimepicker" href="javascript:;" role="button" aria-haspopup="true" aria-expanded="false">'+
                     '<span id="endTimeShow_'+rowCount+'">结束时间</span>'+
                 '</a>'+
                 '<ul class="dropdown-menu time-picker" aria-labelledby="endtimepicker">'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">7:00</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">7:30</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">8:00</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">8:30</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">9:00</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">9:30</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">10:00</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">10:30</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">11:00</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">11:30</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">12:00</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">12:30</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">13:00</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">13:30</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">14:00</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">14:30</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">15:00</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">15:30</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">16:00</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">16:30</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">17:00</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">17:30</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">18:00</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">18:30</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">19:00</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">19:30</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">20:00</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">20:30</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">21:00</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">21:30</a></li>'+
-                    '<li class="endTime_'+rowCount+'"><a href="#">22:00</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">7:00</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">7:30</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">8:00</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">8:30</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">9:00</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">9:30</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">10:00</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">10:30</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">11:00</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">11:30</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">12:00</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">12:30</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">13:00</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">13:30</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">14:00</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">14:30</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">15:00</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">15:30</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">16:00</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">16:30</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">17:00</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">17:30</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">18:00</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">18:30</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">19:00</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">19:30</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">20:00</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">20:30</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">21:00</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">21:30</a></li>'+
+                    '<li class="endTime_'+rowCount+'"><a href="javascript:;">22:00</a></li>'+
                 '</ul>'+
             '</div>'+
             '<span id="tooltip_del_'+rowCount+'" style="margin-left:5%;" class="glyphicon glyphicon-trash remove-classtime" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="删除"></span>'+
