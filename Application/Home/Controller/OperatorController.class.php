@@ -93,8 +93,21 @@ class OperatorController extends Controller {
         }
         $this->ajaxReturn($data);
     }
-}
 
+    public function showRegisterInstruction(){
+        $this->display();
+    }
+
+    //移动端注册专用
+    public function showRegister(){
+        $this->display();
+    }
+
+    public function adminRegisterPage(){
+        
+    }
+
+}
 
 //backup:获取IP
 /*
