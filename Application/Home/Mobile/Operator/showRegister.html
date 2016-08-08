@@ -18,6 +18,7 @@
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="/Public/css/weui/dist/style/weui.min.css"/>
+    <link rel="stylesheet" href="/Public/css/bootstrap/sco/sco.message.css">
     <style type="text/css">
 
     </style>
@@ -75,18 +76,18 @@
         <div class="weui_cell">
             <div class="weui_cell_hd"><label class="weui_label">生成用户名：</label></div>
             <div class="weui_cell_bd weui_cell_primary">
-                <input class="weui_input" id="username" type="string" pattern="*{1,20}" placeholder=""/>
+                <input class="weui_input" id="loginname" type="string" pattern="*{1,20}" placeholder=""/>
             </div>
         </div>
         <div class="weui_cell">
             <div class="weui_cell_hd"><label class="weui_label">生成密码：</label></div>
             <div class="weui_cell_bd weui_cell_primary">
-                <input class="weui_input" id="username" type="string" pattern="*{1,20}" placeholder=""/>
+                <input class="weui_input" id="password" type="string" pattern="*{1,20}" placeholder=""/>
             </div>
         </div>
     </div>
     <div class="weui_btn_area">
-        <a class="weui_btn weui_btn_primary add-student" href="javascript:;">确定</a>
+        <a class="weui_btn weui_btn_primary add-institution" href="javascript:;">确定</a>
     </div>
 </div>
 <!--BEGIN toast-->
@@ -103,7 +104,54 @@
     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="/Public/js/bootstrap/sco/sco.message.js"></script>
     <script src="/Public/js/base.js"></script>
 
+    <script type="text/javascript">
+        function checkLoginname(){
+            var loginname = $("#loginname").val();
+            $.ajax({
+                type: "POST",
+                url: "checkLoginname",
+                data: "loginname="+loginname,
+                success: function(msg){
+                    if(msg == 'true'){
+                        $.scojs_message('该用户名可用！', $.scojs_message.TYPE_INFO);
+                    }else{
+                        $.scojs_message('该用户名已被使用！', $.scojs_message.TYPE_ERROR);
+                    }
+                }
+            });
+        }
+
+        $(".add-institution").click(function(){
+            var instName = $("#instName").val();
+            var applicant = $("#applicant").val();
+            var classType = $("#classType").val();
+            var studentAges = $("#studentAges").val();
+            var email = $("#email").val();
+            var wechat = $("#wechat").val();
+            var remark = $("#remark").val();
+            var loginname = $("#loginname").val();
+            var password = $("#password").val();
+            
+            $.ajax({
+                type: "POST",
+                url: "saveOperator",
+                data: "instName="+instName+"&applicant="+applicant+"&classType="+classType+
+                    "&studentAges="+studentAges+"&email="+email+"&wechat="+wechat+
+                    "&remark="+remark+"&loginname="+loginname+"&password="+password,
+                success: function(msg){
+                    if(msg == 'true'){
+                        $(".weui_toast_content").val("保存成功");
+                    }else{
+                        $(".weui_toast_content").val("保存失败");
+                    }
+                    $("#toast").show();
+                    setInterval('reloadPage()',2000);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

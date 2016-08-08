@@ -103,8 +103,19 @@ class OperatorController extends Controller {
         $this->display();
     }
 
-    public function adminRegisterPage(){
+    public function doRegister(){
         
+    }
+
+    public function checkLoginname($loginname){
+        $operator = new \Home\Model\OperatorModel();
+        $result = $operator->checkLoginname($loginname);
+        if(!empty($result) && count($result) >= 1){
+            $data = "false";
+        }else{
+            $data = "true";
+        }
+        $this->ajaxReturn($data);
     }
 
 }

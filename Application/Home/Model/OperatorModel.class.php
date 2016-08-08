@@ -74,6 +74,12 @@ class OperatorModel extends Model {
         $sql = "update classoa_operator set user_pwd='%s' where operator_id=%d and inst_id=%d";
         return $this->execute($sql,md5($userPwd),$operatorId,$instId);
     }
+
+    public function checkLoginname($loginname){
+        $sql = "select * from classoa_operator where user_name='%s' and status=0 and disabled=0";
+        $userList = $this->query($sql,$loginname);
+        return $userList;
+    }
     
 }
 
