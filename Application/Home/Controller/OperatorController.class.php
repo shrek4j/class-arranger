@@ -103,7 +103,32 @@ class OperatorController extends Controller {
         $this->display();
     }
 
-    public function doRegister(){
+    public function doRegister($instName,$applicant,$classType,$studentAges,$email,$wechat,$remark,$loginname,$password,$confirmCode){
+        if($confirmCode != "thankyouforusing893!"){
+            $this->ajaxReturn("false");
+            return;
+        }
+
+        try{
+            //save inst
+            $instModel = new \Home\Model\InstitutionModel();
+            $instModel->startTrans();
+            $instArr = $instModel->saveInstitution($instName);
+            $instId = (int)$instArr[0]['inst_id'];
+            //save operator
+            $isSuperAdmin = 1;
+            $operatorModel = new \Home\Model\OperatorModel();
+            $operatorModel->addOperator($instId,$loginname,$password,$isSuperAdmin,$applicant,0);
+            //save register info
+            $registerModel = new \Home\Model\RegisterModel();
+            $registerModel->saveRegister($instName,$applicant,$classType,$studentAges,$email,$wechat,$remark,$instId);
+            $instModel->commit();
+            $data = "true";
+        }catch(Exception $e){
+            $instModel->rollback();
+            $data = "false";
+        }
+        $this->ajaxReturn($data);
         
     }
 
@@ -116,6 +141,12 @@ class OperatorController extends Controller {
             $data = "true";
         }
         $this->ajaxReturn($data);
+    }
+
+    public function registerDone($loginname,$password){
+        $this->assign("loginname",$loginname);
+        $this->assign("password",$password);
+        $this->display();
     }
 
 }

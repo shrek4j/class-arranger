@@ -6,6 +6,10 @@ function isEmpty(field){
 	}
 }
 
+function justHideToast(){
+	$("#toast").hide();
+}
+
 function hideToast(){
 	$("#toast").hide();
 	history.back();
