@@ -100,10 +100,13 @@ class OperatorController extends Controller {
 
     //移动端注册专用
     public function showRegister(){
+        $regionModel = new \Home\Model\RegionModel();
+        $provinces = $regionModel->showProvinces();
+        $this->assign("provinces",$provinces);
         $this->display();
     }
 
-    public function doRegister($instName,$applicant,$classType,$studentAges,$email,$wechat,$remark,$loginname,$password,$confirmCode){
+    public function doRegister($instName,$applicant,$classType,$studentAges,$email,$wechat,$remark,$loginname,$password,$confirmCode,$isOnline,$province,$city,$district){
         if($confirmCode != "thankyouforusing893!"){
             $this->ajaxReturn("false");
             return;
@@ -121,7 +124,7 @@ class OperatorController extends Controller {
             $operatorModel->addOperator($instId,$loginname,$password,$isSuperAdmin,$applicant,0);
             //save register info
             $registerModel = new \Home\Model\RegisterModel();
-            $registerModel->saveRegister($instName,$applicant,$classType,$studentAges,$email,$wechat,$remark,$instId);
+            $registerModel->saveRegister($instName,$applicant,$classType,$studentAges,$email,$wechat,$remark,$instId,$isOnline,$province,$city,$district);
             $instModel->commit();
             $data = "true";
         }catch(Exception $e){
