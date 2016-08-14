@@ -124,7 +124,7 @@ class OperatorController extends Controller {
             $operatorModel->addOperator($instId,$loginname,$password,$isSuperAdmin,$applicant,0);
             //save register info
             $registerModel = new \Home\Model\RegisterModel();
-            $registerModel->saveRegister($instName,$applicant,$classType,$studentAges,$email,$wechat,$remark,$instId,$isOnline,$province,$city,$district);
+            $registerModel->saveRegister($instName,$applicant,$classType,$studentAges,$email,$wechat,$remark,$instId,(int)$isOnline,(int)$province,(int)$city,(int)$district);
             $instModel->commit();
             $data = "true";
         }catch(Exception $e){

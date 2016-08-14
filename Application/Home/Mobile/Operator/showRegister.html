@@ -32,10 +32,23 @@
         <div class="weui_cells">
             <div class="weui_cell weui_cell_select weui_select_after">
                 <div class="weui_cell_hd">
+                    <label for="" class="weui_label">线上线下</label>
+                </div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <select class="weui_select" name="selectProvince" id="isOnline">
+                        <option value="0" selected="selected">线下</option>
+                        <option value="1">线上</option>
+                        <option value="2">同时线上线下</option>
+                    </select>
+                </div>
+            </div>
+            <div class="weui_cell weui_cell_select weui_select_after">
+                <div class="weui_cell_hd">
                     <label for="" class="weui_label">省</label>
                 </div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <select class="weui_select" name="selectProvince">
+                    <select class="weui_select" name="selectProvince" id="selectProvince">
+                        <option value="0" selected="selected">待选择</option>
                         <foreach name="provinces" item="p">
                             <option value="{$p.region_id}">{$p.show_name}</option>
                         </foreach>
@@ -47,10 +60,8 @@
                     <label for="" class="weui_label">市</label>
                 </div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <select class="weui_select" name="selectCity">
-                        <option value="1">中国</option>
-                        <option value="2">美国</option>
-                        <option value="3">英国</option>
+                    <select class="weui_select" name="selectCity" id="selectCity">
+                        <option value="0" selected="selected">待选择</option>
                     </select>
                 </div>
             </div>
@@ -59,10 +70,8 @@
                     <label for="" class="weui_label">区</label>
                 </div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <select class="weui_select" name="selectDistrict">
-                        <option value="1">中国</option>
-                        <option value="2">美国</option>
-                        <option value="3">英国</option>
+                    <select class="weui_select" name="selectDistrict" id="selectDistrict">
+                        <option value="0" selected="selected">待选择</option>
                     </select>
                 </div>
             </div>
@@ -147,16 +156,48 @@
         $('#selectProvince').change(function(){
             var provinceId = $("#selectProvince").find("option:selected").val();
 
+            //update cities
             $.ajax({
                 type: "POST",
-                url: "../Class/getClassTuitionInfo",
-                data: "classId="+classId,
+                url: "../Region/showCities",
+                data: "provinceId="+provinceId,
                 success: function(msg){
                     if(msg != null){
-                        var arr = msg.split("&");
-                        $("#tuitionPerClass").val(arr[0]/100);
-                        $("#unfinishedClassTimes").val(arr[1]);
-                        $("#tuition").val((arr[0]/100)*arr[1]);
+                        var html = '<option value="0" selected="selected">待选择</option>';
+                        var regionArr = msg.split(";");
+                        for(var i=0;i<regionArr.length-1;i++){
+                            var s = regionArr[i].split(":");
+                            html += '<option value="'+s[0]+'">'+s[1]+'</option>'; 
+                        }
+                        $("#selectCity").empty();
+                        $("#selectCity").append(html);
+
+                        //clear districts
+                        $("#selectDistrict").empty();
+                        $("#selectDistrict").append('<option value="0" selected="selected">待选择</option>');
+                    }
+                }
+            });
+        });
+
+        $('#selectCity').change(function(){
+            var cityId = $("#selectCity").find("option:selected").val();
+
+            //update cities
+            $.ajax({
+                type: "POST",
+                url: "../Region/showDistricts",
+                data: "cityId="+cityId,
+                success: function(msg){
+                    if(msg != null){
+                        var html = '<option value="0" selected="selected">待选择</option>';
+                        var regionArr = msg.split(";");
+                        for(var i=0;i<regionArr.length-1;i++){
+                            var s = regionArr[i].split(":");
+                            html += '<option value="'+s[0]+'">'+s[1]+'</option>'; 
+                        }
+                        $("#selectDistrict").empty();
+                        $("#selectDistrict").append(html);
                     }
                 }
             });
@@ -181,6 +222,10 @@
         });
 
         $(".add-institution").click(function(){
+            var isOnline = $("#isOnline").find("option:selected").val();
+            var provinceId = $("#selectProvince").find("option:selected").val();
+            var cityId = $("#selectCity").find("option:selected").val();
+            var districtId = $("#selectDistrict").find("option:selected").val();
             var instName = $("#instName").val();
             var applicant = $("#applicant").val();
             var classType = $("#classType").val();
@@ -205,7 +250,7 @@
                             url: "doRegister",
                             data: "instName="+instName+"&applicant="+applicant+"&classType="+classType+
                                 "&studentAges="+studentAges+"&email="+email+"&wechat="+wechat+
-                                "&remark="+remark+"&loginname="+loginname+"&password="+password+"&confirmCode="+confirmCode,
+                                "&remark="+remark+"&loginname="+loginname+"&password="+password+"&confirmCode="+confirmCode+"&isOnline="+isOnline+"&province="+provinceId+"&city="+cityId+"&district="+districtId,
                             success: function(msg2){
                                 if(msg2 == 'true'){
                                     window.location.href="registerDone?loginname="+loginname+"&password="+password;
