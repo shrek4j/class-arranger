@@ -12,5 +12,10 @@ class InstitutionModel extends Model {
         return $this->query($queryIdSql);
     }
 
+    public function updateInstitutionBalance($balance,$tId){
+        $sql = "update classoa_institution set balance=balance+%d where inst_id=%d";
+        $this->execute($sql,$balance,$tId);
+    }
+
 }
 

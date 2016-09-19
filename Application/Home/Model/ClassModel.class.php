@@ -51,9 +51,9 @@ class ClassModel extends Model {
         return $this->query($sql,$classId,$studentId,$tId);
     }
 
-    public function saveClassAndStudentRela($classId,$studentId,$tuition,$status,$tId){
-        $sql = "insert into classoa_class_student_rela(class_id,student_id,tuition_per_class,status,inst_id) values(%d,%d,%d,%d,%d)";
-        $this->execute($sql,$classId,$studentId,$tuition,$status,$tId);
+    public function saveClassAndStudentRela($classId,$studentId,$tuition,$status,$tId,$receivableTuition,$receviedTuition){
+        $sql = "insert into classoa_class_student_rela(class_id,student_id,tuition_per_class,status,inst_id,receivable_tuition,received_tuituion) values(%d,%d,%d,%d,%d,%d,%d)";
+        $this->execute($sql,$classId,$studentId,$tuition,$status,$tId,$receivableTuition,$receviedTuition);
     }
 
     public function delClassDetailAndStudentRela($classDetailId,$studentId,$tId){

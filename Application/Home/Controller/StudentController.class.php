@@ -21,7 +21,7 @@ class StudentController extends Controller {
     }
 
     //classoa_student:  interested_class int(10) classtype_id
-    public function saveStudent($studentName="",$gender,$grade,$school,$remark,$mobile,$tuition,$tuitionPerClass,$interest,$attended){
+    public function saveStudent($studentName="",$gender,$grade,$school,$remark,$mobile,$receivableTuition,$tuition,$tuitionPerClass,$interest,$attended){
         try{
             if($studentName == "")
                 return;
@@ -31,15 +31,27 @@ class StudentController extends Controller {
         
             $studentModel = new \Home\Model\StudentModel();
             $classModel = new \Home\Model\ClassModel();
+            $institutionModel = new \Home\Model\InstitutionModel();
+            //logModel
+            $instBalanceChangeLogModel = new \Home\Model\InstBalanceChangeLogModel();
+            $studentBalanceChangeLogModel = new \Home\Model\StudentBalanceChangeLogModel();
             $studentModel->startTrans();
 
             //save student
             $studentIdArr = $studentModel->saveStudent($studentName,$studPinyin,$gender,$grade,$school,$remark,$mobile,$tuition*100,$instId,$interest);
             $studentId = (int)$studentIdArr[0]['student_id'];
-            
+            $reason = 1;//充值
+            $studentBalanceChangeLogModel->savelog($studentId,$reason,$classId,$tuition*100);
+
             //save student attends class info (classId and tuitionPerClass and totalTuition)
             if(!empty($attended)){
                 $classId = $attended;
+
+                $actuallyPaid = $receivableTuition > $tuition ? $tuition : $receivableTuition;//实际能付的或需要付的对应此课程的学费
+                $studentModel->addStudentBalance(-$actuallyPaid*100,$studentId,$instId);
+
+                $reason = 3;//3:学费划转给机构
+                $studentBalanceChangeLogModel->savelog($studentId,$reason,$classId,-$actuallyPaid*100);
 
                 $classDetails = $classModel->showClassDetailsById((int)$classId,$instId);
                 $ndate = date("Y-m-d");
@@ -56,13 +68,18 @@ class StudentController extends Controller {
                 //update student status
                 $studentModel->changeStudentStatus($studentId,$instId,2);
                 //save student fee info
-                $classModel->saveClassAndStudentRela((int)$classId,$studentId,$tuitionPerClass*100,0,$instId);
+                $classModel->saveClassAndStudentRela((int)$classId,$studentId,$tuitionPerClass*100,0,$instId,$receivableTuition*100,$actuallyPaid*100);
                 if(!empty($leftClassDetails) && count($leftClassDetails)>0){
                     for($m=0;$m<count($leftClassDetails);$m++){
                         //add student and classDetail rela
                         $classModel->saveClassDetailAndStudentRela($leftClassDetails[$m]['class_detail_id'],(int)$classId,$studentId,$tuitionPerClass*100,$instId);
                     }
                 }
+
+                //change inst balance
+                $institutionModel->updateInstitutionBalance($tuition*100,$instId);
+                $reason = 1;//1：学费转入
+                $instBalanceChangeLogModel->saveLog($instId,$reason,$studentId,$tuition*100);
             }
             $data = "true";
             $studentModel->commit();

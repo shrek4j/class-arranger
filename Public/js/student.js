@@ -47,6 +47,7 @@ function calculateTuition(){
 
 	var tuition = tuitionPerClass*unfinishedClassTimes;
 	$("#tuition").val(tuition);
+	$("#receivableTuition").val(tuition);
 }
 
 $('.interest').click(function(){
@@ -67,6 +68,7 @@ $(".add-student").click(function(){
 	var attended = $('.attended').filter('.selected').attr('attended');
 	var tuitionPerClass = $("#tuitionPerClass").val();
 	var tuition = $("#tuition").val();
+	var receivableTuition = $("#receivableTuition").val();
 	
 	if(isEmpty(studentName)){
 		$.scojs_message('姓名不可为空！', $.scojs_message.TYPE_ERROR);
@@ -81,7 +83,8 @@ $(".add-student").click(function(){
 	   	type: "POST",
 	   	url: "saveStudent",
 	   	data: "studentName="+studentName+"&gender="+gender+"&grade="+grade+"&school="+school+
-	   			"&remark="+remark+"&mobile="+mobile+"&tuition="+tuition+
+	   			"&remark="+remark+"&mobile="+mobile+
+	   			"&receivableTuition="+receivableTuition+"&tuition="+tuition+
 	   			"&tuitionPerClass="+tuitionPerClass+"&interest="+interest+"&attended="+attended,
 	   	success: function(msg){
 	   		if(msg == 'true'){
