@@ -21,7 +21,13 @@ $('.attended').click(function(){
 	   			var arr = msg.split("&");
 	   			$("#tuitionPerClass").val(arr[0]/100);
 	   			$("#unfinishedClassTimes").val(arr[1]);
-	   			$("#tuition").val((arr[0]/100)*arr[1]);
+	   			var balance = $("#balance").val();
+	   			if(isEmpty(balance)){
+					balance = 0;
+				}
+	   			var tuition = (arr[0]/100)*arr[1];
+	   			$("#tuition").val(balance > tuition ? 0 : tuition-balance);
+	   			$("#receivableTuition").val(tuition);
 	   		}
 	   	}
 	});
@@ -38,16 +44,20 @@ $("#unfinishedClassTimes").keyup(function(){
 function calculateTuition(){
 	var tuitionPerClass = $("#tuitionPerClass").val();
 	var unfinishedClassTimes = $("#unfinishedClassTimes").val();
+	var balance = $("#balance").val();
 	if(isEmpty(tuitionPerClass)){
 		tuitionPerClass = 0;
 	}
 	if(isEmpty(tuitionPerClass)){
 		unfinishedClassTimes = 0;
 	}
+	if(isEmpty(balance)){
+		balance = 0;
+	}
 
 	var tuition = tuitionPerClass*unfinishedClassTimes;
-	$("#tuition").val(tuition);
 	$("#receivableTuition").val(tuition);
+	$("#tuition").val(balance > tuition ? 0 : tuition-balance);
 }
 
 $('.interest').click(function(){
@@ -104,6 +114,7 @@ $(".attend-new-class").click(function(){
 	var attended = $('.attended').filter('.selected').attr('attended');
 	var tuitionPerClass = $("#tuitionPerClass").val();
 	var tuition = $("#tuition").val();
+	var receivableTuition = $("#receivableTuition").val();
 	if(isEmpty(attended)){
 		$.scojs_message('暂无课程，无需保存！', $.scojs_message.TYPE_OK);
 		return;
@@ -111,7 +122,7 @@ $(".attend-new-class").click(function(){
 	$.ajax({
 	   	type: "POST",
 	   	url: "attendNewClass",
-	   	data: "studentId="+studentId+"&tuition="+tuition+
+	   	data: "studentId="+studentId+"&receivableTuition="+receivableTuition+"&tuition="+tuition+
 	   			"&tuitionPerClass="+tuitionPerClass+"&attended="+attended,
 	   	success: function(msg){
 	   		if(msg == 'true'){

@@ -6,7 +6,7 @@ class StudentBalanceChangeLogModel extends Model {
     protected $autoCheckFields =false;//模型和数据表无需一一对应
     
     public function saveLog($studentId,$reason,$classId,$payment){
-        $sql = "insert into student_balance_change_log($studentId,$reason,$classId,$payment) values(%d,%d,%d,%d)";
+        $sql = "insert into student_balance_change_log(student_id,reason,class_id,payment) values(%d,%d,%d,%d)";
         return $this->execute($sql,$studentId,$reason,$classId,$payment);
     }
 

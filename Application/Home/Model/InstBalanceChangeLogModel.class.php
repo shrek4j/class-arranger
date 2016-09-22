@@ -6,8 +6,8 @@ class InstBalanceChangeLogModel extends Model {
     protected $autoCheckFields =false;//模型和数据表无需一一对应
     
     public function saveLog($instId,$reason,$studentId,$payment){
-        $sql = "insert into inst_balance_change_log($instId,$reason,$studentId,$payment) values(%d,%d,%d,%d)";
-        return $this->execute($sql,$studentId,$reason,$classId,$payment);
+        $sql = "insert into inst_balance_change_log(inst_id,reason,student_id,payment) values(%d,%d,%d,%d)";
+        return $this->execute($sql,$instId,$reason,$studentId,$payment);
     }
 
 }

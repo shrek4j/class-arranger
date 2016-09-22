@@ -69,8 +69,16 @@
                 <div class="col-md-4 value"><input id="unfinishedClassTimes" type="text" class="form-control" style="text-align:right;display:inline;" placeholder="0" aria-describedby="basic-addon1"/></div>
             </div>
             <div class="row">
-                <div class="col-md-4 key row-gutter">缴费(元)：</div>
-                <div class="col-md-4 value"><input id="tuition" type="text" class="form-control" style="text-align:right;" placeholder="0.00" aria-describedby="basic-addon1"/></div>
+                <div class="col-md-4 key row-gutter">总学费(元)：</div>
+                <div class="col-md-4 value"><input id="receivableTuition" type="text" class="form-control" style="text-align:right;" placeholder="0.00" aria-describedby="basic-addon1" disabled="disabled" /></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 key row-gutter">余额(元)：</div>
+                <div class="col-md-4 value"><input id="balance" type="text" class="form-control" style="text-align:right;color:#339933;font-weight:bold;" value="{$student['balance']/100}" aria-describedby="basic-addon1" disabled="disabled" /></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 key row-gutter">实缴费(元)：</div>
+                <div class="col-md-4 value"><input id="tuition" type="text" class="form-control" style="text-align:right;color:#FF3300;font-weight:bold;" placeholder="0.00" aria-describedby="basic-addon1"/></div>
             </div>
             <div class="row">
                 <div class="col-md-8 key row-gutter"><button type="button" class="btn btn-default btn-submit attend-new-class">保存</button></div>

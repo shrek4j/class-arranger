@@ -122,10 +122,15 @@
                 <div class="col-md-4 value"><input id="unfinishedClassTimes" type="text" class="form-control" style="text-align:right;display:inline;" placeholder="0" aria-describedby="basic-addon1"/></div>
             </div>
             <div class="row">
-                <div class="col-md-4 key row-gutter">缴费(元)：</div>
+                <div class="col-md-4 key row-gutter">总学费(元)：</div>
                 <div class="col-md-4 value">
-                    <input id="tuition" type="text" class="form-control" style="text-align:right;" placeholder="0.00" aria-describedby="basic-addon1"/>
-                    <input id="receivableTuition" type="hidden"/>
+                    <input id="receivableTuition" type="text" class="form-control" style="text-align:right;" placeholder="0.00" aria-describedby="basic-addon1" disabled="disabled" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 key row-gutter">实缴费(元)：</div>
+                <div class="col-md-4 value">
+                    <input id="tuition" type="text" class="form-control" style="text-align:right;color:#FF3300;font-weight:bold;" placeholder="0.00" aria-describedby="basic-addon1"/>
                 </div>
             </div>
             <div class="row" style="margin-bottom:30px;">

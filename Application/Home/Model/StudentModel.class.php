@@ -42,6 +42,11 @@ class StudentModel extends Model {
     	return $this->execute($sql,$studentId,$instId);
     }
 
+    public function showStudentBalance($instId,$studentId){
+        $sql = "select balance from classoa_student where student_id=%d and inst_id=%d and status<>1";
+        return $this->query($sql,$studentId,$instId);
+    }
+
     public function addStudentBalance($newTuition,$studentId,$instId){
         $sql = "update classoa_student set balance=balance+%d where student_id=%d and inst_id=%d";
         return $this->execute($sql,$newTuition,$studentId,$instId);
