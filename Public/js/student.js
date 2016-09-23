@@ -199,25 +199,49 @@ function showAttendNewClass(studentId){
 	window.location.href="showAttendNewClass?studentId="+studentId;
 }
 
+function showAttendedClasses(studentId){
+	window.location.href="showAttendedClasses?studentId="+studentId;
+}
+
 function showStudentDetail(studentId){
 	window.location.href="showStudentDetail?studentId="+studentId;
 }
 
 function deleteStudent(id,name){
-  if(confirm("是否删除教室："+name+"？")){
-  	$.ajax({
-	   	type: "POST",
-	   	url: "deleteStudent",
-	   	data: "studentId="+id,
-	   	success: function(msg){
-	   		if(msg == 'true'){
-	   			$.scojs_message('删除成功！', $.scojs_message.TYPE_OK);
-	   			setInterval('reloadPage()',1500);
-	   		}else{
-	   			$.scojs_message('删除失败！', $.scojs_message.TYPE_ERROR);
-	   		}
-			
-	   	}
-	});
-  }
+	if(confirm("是否删除教室："+name+"？")){
+		$.ajax({
+		   	type: "POST",
+		   	url: "deleteStudent",
+		   	data: "studentId="+id,
+		   	success: function(msg){
+		   		if(msg == 'true'){
+		   			$.scojs_message('删除成功！', $.scojs_message.TYPE_OK);
+		   			setInterval('reloadPage()',1500);
+		   		}else{
+		   			$.scojs_message('删除失败！', $.scojs_message.TYPE_ERROR);
+		   		}
+				
+		   	}
+		});
+	}
+}
+
+function chargeRemainingTuition(id,studentId,classId,num){
+	if(confirm("是否缴费？")){
+		var chargeTuition = $("tuition_to_charge_"+num).val();
+	  	$.ajax({
+		   	type: "POST",
+		   	url: "chargeRemainingTuition",
+		   	data: "id="+id+"&studentId="+studentId+"&classId="+classId+"&chargeTuition="+chargeTuition,
+		   	success: function(msg){
+		   		if(msg == 'true'){
+		   			$.scojs_message('缴费成功！', $.scojs_message.TYPE_OK);
+		   			setInterval('reloadPage()',1500);
+		   		}else{
+		   			$.scojs_message('缴费失败！', $.scojs_message.TYPE_ERROR);
+		   		}
+				
+		   	}
+		});
+  	}
 }

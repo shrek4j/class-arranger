@@ -52,7 +52,7 @@ class ClassModel extends Model {
     }
 
     public function saveClassAndStudentRela($classId,$studentId,$tuition,$status,$tId,$receivableTuition,$receviedTuition){
-        $sql = "insert into classoa_class_student_rela(class_id,student_id,tuition_per_class,status,inst_id,receivable_tuition,received_tuituion) values(%d,%d,%d,%d,%d,%d,%d)";
+        $sql = "insert into classoa_class_student_rela(class_id,student_id,tuition_per_class,status,inst_id,receivable_tuition,received_tuition) values(%d,%d,%d,%d,%d,%d,%d)";
         $this->execute($sql,$classId,$studentId,$tuition,$status,$tId,$receivableTuition,$receviedTuition);
     }
 
@@ -91,6 +91,11 @@ class ClassModel extends Model {
         return $this->query($sql,$classId,$tId);
     }
 
+    public function showClassesByStudent($studentId,$tId){
+        $sql = "select r.*, s.student_name student_name,c.class_name,class_name,c.start_date start_date,c.end_date end_date from classoa_class_student_rela r left join classoa_student s on r.student_id=s.student_id left join classoa_class c on r.class_id=c.class_id where r.student_id=%d and r.inst_id=%d and r.status=0";
+        return $this->query($sql,$studentId,$tId);
+    }
+
     public function showAllStudentsFromClassDetail($classDetailId,$tId){
         $sql = "select id,tuition_per_class from classoa_class_detail_student_rela where class_detail_id=%d and inst_id=%d and status=0";
         return $this->query($sql,$classDetailId,$tId);
@@ -99,6 +104,11 @@ class ClassModel extends Model {
     public function updateStudentTuitionForClass($tId,$classId,$studentId,$tuition){
         $sql = "update classoa_class_student_rela set tuition_per_class=%d where class_id=%d and student_id=%d and inst_id=%d";
         return $this->execute($sql,$tuition,$classId,$studentId,$tId);
+    }
+
+    public function updateStudentTuitionById($chargeTuition,$id,$instId){
+        $sql = "update classoa_class_student_rela set received_tuition=%d+received_tuition where id=%d and inst_id=%d";
+        return $this->execute($sql,$chargeTuition,$id,$instId);
     }
 
      public function updateStudentTuitionForClassDetailAndStudentRela($tId,$classId,$studentId,$tuition){

@@ -115,7 +115,7 @@
                     <td>
                         <span style="cursor:pointer" class="glyphicon glyphicon-shopping-cart student-detail" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="课程报名" onclick="showAttendNewClass({$vo.student_id});"></span>
                         <span style="cursor:pointer" class="glyphicon glyphicon-pencil student-detail cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="修改基本信息&充值" onclick="showStudentDetail({$vo.student_id});"></span>
-                    <!--    <span style="cursor:pointer" class="glyphicon glyphicon-education cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="报名"></span> -->
+                        <span style="cursor:pointer" class="glyphicon glyphicon-list-alt cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="已报名课程" onclick="showAttendedClasses({$vo.student_id});"></span>
                         <span style="cursor:pointer" class="glyphicon glyphicon-trash cell-operation-gutter" aria-hidden="true" data-toggle="tooltip" data-placement="top"  onclick="deleteStudent({$vo.student_id},'{$vo.student_name}')" title="删除">
                     </td>
                 </tr>

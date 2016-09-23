@@ -213,6 +213,18 @@ class StudentController extends Controller {
         $this->display();
     }
 
+    public function showAttendedClasses($studentId){
+        $instId = session('instId');
+        if(!$instId)
+            return;
+        $classModel = new \Home\Model\ClassModel();
+        $classList = $classModel->showClassesByStudent($studentId,$instId);
+        $this->assign('classList',$classList);
+        $this->assign('num',1);//记录编号
+        layout(true);
+        $this->display();
+    }
+
     public function showStudentDetail($studentId){
         $instId = session('instId');
         if(!$instId)
@@ -233,6 +245,41 @@ class StudentController extends Controller {
             $data = "true";
         }catch(Exception $e){
             $data = "false";
+        }
+        $this->ajaxReturn($data);
+    }
+
+    public function chargeRemainingTuition($id,$studentId,$classId,$chargeTuition){
+        $instId = session('instId');
+        try{
+            $classModel = new \Home\Model\ClassModel();
+            $institutionModel = new \Home\Model\InstitutionModel();
+            //logModel
+            $instBalanceChangeLogModel = new \Home\Model\InstBalanceChangeLogModel();
+            $studentBalanceChangeLogModel = new \Home\Model\StudentBalanceChangeLogModel();
+
+            $classModel->startTrans();
+
+            //finance transaction part1 start
+            $reason = 1;//充值
+            $studentBalanceChangeLogModel->savelog($studentId,$reason,0,$chargeTuition*100);
+            $reason = 4;//学费补缴给机构
+            $studentBalanceChangeLogModel->savelog($studentId,$reason,$classId,-$chargeTuition*100);
+            $classModel->updateStudentTuitionById($chargeTuition*100,(int)$id,$instId);
+            //finance transaction part1 end
+
+            //finance transaction part2 start
+            //change inst balance
+            $institutionModel->updateInstitutionBalance($chargeTuition*100,$instId);
+            $reason = 2;//学费补缴
+            $instBalanceChangeLogModel->saveLog($instId,$reason,$studentId,$chargeTuition*100);
+            //finance transaction part2 end
+
+            $data = "true";
+            $classModel->commit();
+        }catch(Exception $e){
+            $data = "false";
+            $classModel->rollback();
         }
         $this->ajaxReturn($data);
     }
