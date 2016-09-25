@@ -51,6 +51,11 @@ class ClassModel extends Model {
         return $this->query($sql,$classId,$studentId,$tId);
     }
 
+    public function selectStudentInfoFromClass($tId,$classId,$studentId){
+        $sql = "select * from classoa_class_student_rela where class_id=%d and student_id=%d and inst_id=%d";
+        return $this->query($sql,$classId,$studentId,$tId);
+    }
+
     public function saveClassAndStudentRela($classId,$studentId,$tuition,$status,$tId,$receivableTuition,$receviedTuition){
         $sql = "insert into classoa_class_student_rela(class_id,student_id,tuition_per_class,status,inst_id,receivable_tuition,received_tuition) values(%d,%d,%d,%d,%d,%d,%d)";
         $this->execute($sql,$classId,$studentId,$tuition,$status,$tId,$receivableTuition,$receviedTuition);
@@ -116,9 +121,9 @@ class ClassModel extends Model {
         return $this->execute($sql,$tuition,$classId,$studentId,$tId);
     }
 
-    public function updateStudentStatusFromClass($tId,$classId,$studentId,$status){
-        $sql = "update classoa_class_student_rela set status=%d where class_id=%d and student_id=%d and inst_id=%d";
-        return $this->execute($sql,$status,$classId,$studentId,$tId);
+    public function updateStudentStatusFromClass($tId,$classId,$studentId,$status,$receivableTuition){
+        $sql = "update classoa_class_student_rela set status=%d,receivable_tuition=receivable_tuition+%d where class_id=%d and student_id=%d and inst_id=%d";
+        return $this->execute($sql,$status,$receivableTuition,$classId,$studentId,$tId);
     }
 
     public function updateClass($classId,$className,$tId){

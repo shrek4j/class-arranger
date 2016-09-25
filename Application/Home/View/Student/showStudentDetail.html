@@ -95,12 +95,14 @@
             </div>
             <div class="row">
                 <div class="col-md-4 key text-gutter">余额(元)：</div>
-                <div class="col-md-4 value text-gutter-value">{$student['balance']/100}</div>
-                <input type="hidden" id="tuition" value="{$student['balance']/100}">
+                <div class="col-md-4 value">
+                    <input type="text" id="tuition" class="form-control" value="{$student['balance']/100}" disabled="disabled" style="text-align:right;color:#339933;font-weight:bold;"/>
+                </div>
+                
             </div>
             <div class="row" style="margin-bottom:30px;">
                 <div class="col-md-4 key row-gutter">充值(元)：</div>
-                <div class="col-md-4 value"><input id="payment" type="text" class="form-control" style="text-align:right;" placeholder="0.00" aria-describedby="basic-addon1"/></div>
+                <div class="col-md-4 value"><input id="payment" type="text" class="form-control" style="text-align:right;color:#FF3300;font-weight:bold;" placeholder="0.00" aria-describedby="basic-addon1"/></div>
             </div>
             <div class="row">
                 <div class="col-md-6 key row-gutter"><button type="button" class="btn btn-default btn-submit update-student">保存</button></div>

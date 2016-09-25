@@ -284,5 +284,39 @@ class StudentController extends Controller {
         $this->ajaxReturn($data);
     }
 
+    public function refundTuition($id,$studentId,$classId,$refundTuition){
+        $instId = session('instId');
+        try{
+            $classModel = new \Home\Model\ClassModel();
+            $studentModel = new \Home\Model\StudentModel();
+            $institutionModel = new \Home\Model\InstitutionModel();
+            //logModel
+            $instBalanceChangeLogModel = new \Home\Model\InstBalanceChangeLogModel();
+            $studentBalanceChangeLogModel = new \Home\Model\StudentBalanceChangeLogModel();
+
+            $classModel->startTrans();
+
+            //finance transaction part1 start
+            $studentModel->addStudentBalance($refundTuition*100,$studentId,$instId);
+            $reason = 5;//学费返还给学生
+            $studentBalanceChangeLogModel->savelog($studentId,$reason,$classId,$refundTuition*100);
+            $classModel->updateStudentTuitionById(-$refundTuition*100,(int)$id,$instId);
+            //finance transaction part1 end
+
+            //finance transaction part2 start
+            //change inst balance
+            $institutionModel->updateInstitutionBalance(-$refundTuition*100,$instId);
+            $reason = 3;//退还学费给学生
+            $instBalanceChangeLogModel->saveLog($instId,$reason,$studentId,-$refundTuition*100);
+            //finance transaction part2 end
+
+            $data = "true";
+            $classModel->commit();
+        }catch(Exception $e){
+            $data = "false";
+            $classModel->rollback();
+        }
+        $this->ajaxReturn($data);
+    }
 
 }

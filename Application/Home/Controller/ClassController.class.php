@@ -80,13 +80,6 @@ class ClassController extends Controller {
             $class->startTrans();
             $classId = $class->saveClass($className,$classtypeId,$tuition,(int)$wage,$startDate,$endDate,$teacherId,$classroomId,$remark,$deductFlag,$timecn,$tId);
 
-            //save class students 
-            if(!empty($students)){
-                for($i=0;$i<count($students);$i++){
-                	$class->saveClassAndStudentRela($classId[0]['class_id'],(int)$students[$i],$tuition,0,$tId);
-                }
-            }
-
             //update student status
             if(!empty($students)){
                 $studentModel = new \Home\Model\StudentModel();
@@ -95,12 +88,14 @@ class ClassController extends Controller {
                 }
             }
 
+            $classCount = 0;
             while($start <= $end){
                 $dayOfWeek = date('w',$start);//get the dayOfWeek of this timestamp
                 if($dayOfWeek == 0)
                     $dayOfWeek = 7;
                 if($classTimeArr[$dayOfWeek-1] != ""){//has class on that day
-                    $date = date("Y-m-d", $start) ;
+                    $classCount++;
+                    $date = date("Y-m-d", $start);
                     $ymd = explode('-',$date);
                     $year = $ymd[0];
                     $month = $ymd[1];
@@ -120,6 +115,15 @@ class ClassController extends Controller {
                 }
                 $start += $oneDay;//check next day
             }
+
+            $receivableTuition = $classCount*$tuition;
+            //save class students 
+            if(!empty($students)){
+                for($i=0;$i<count($students);$i++){
+                    $class->saveClassAndStudentRela($classId[0]['class_id'],(int)$students[$i],$tuition,0,$tId,$receivableTuition,0);
+                }
+            }
+
             $class->commit();
             $data = "true";
         } catch(Exception $e){
@@ -359,10 +363,13 @@ class ClassController extends Controller {
                 }
             }
 
+            $changedTuition = count($leftClassDetails)*$tuition;//发生改变的学费
+
             if(!empty($deleteIds)){
                 for($i=0;$i<count($deleteIds);$i++){
+                    
                     //logic delete
-                    $class->updateStudentStatusFromClass($tId,(int)$classId,(int)$deleteIds[$i],1);
+                    $class->updateStudentStatusFromClass($tId,(int)$classId,(int)$deleteIds[$i],1,-$changedTuition);
 
                     if(!empty($leftClassDetails) && count($leftClassDetails)>0){
                         for($m=0;$m<count($leftClassDetails);$m++){
@@ -379,9 +386,9 @@ class ClassController extends Controller {
                     $studentModel->changeStudentStatus((int)$addIds[$i],$tId,2);
 
                     //try update first
-                    $result = $class->updateStudentStatusFromClass($tId,(int)$classId,(int)$addIds[$i],0);
+                    $result = $class->updateStudentStatusFromClass($tId,(int)$classId,(int)$addIds[$i],0,$changedTuition);
                     if($result==0){
-                        $class->saveClassAndStudentRela((int)$classId,(int)$addIds[$i],$tuition,0,$tId);
+                        $class->saveClassAndStudentRela((int)$classId,(int)$addIds[$i],$tuition,0,$tId,$changedTuition,0);
                     }
                     if(!empty($leftClassDetails) && count($leftClassDetails)>0){
                         for($m=0;$m<count($leftClassDetails);$m++){
@@ -463,15 +470,20 @@ class ClassController extends Controller {
             if(!empty($deleteIds)){
                 for($i=0;$i<count($deleteIds);$i++){
                     $class->updateStudentStatusFromClassDetail($tId,(int)$classId,$classDetailId,(int)$deleteIds[$i],1);
+                    $result = $class->selectStudentInfoFromClass($tId,(int)$classId,(int)$deleteIds[$i]);
+                    $class->updateStudentStatusFromClass($tId,(int)$classId,(int)$deleteIds[$i],1,-$result[0]['tuition_per_class']);
                 }
             }
 
             if(!empty($addIds)){
                 for($i=0;$i<count($addIds);$i++){
                     //try update first
-                    $result = $class->selectStudentFromClass($tId,(int)$classId,(int)$addIds[$i]);
-                    if($result[0]['count']==0){
-                        $class->saveClassAndStudentRela((int)$classId,(int)$addIds[$i],$tuition,1,$tId);
+                    $result = $class->selectStudentInfoFromClass($tId,(int)$classId,(int)$addIds[$i]);
+                    if($result == null || count($result)==0){
+                        $class->saveClassAndStudentRela((int)$classId,(int)$addIds[$i],$tuition,1,$tId,$tuition,0);
+                    }else{
+                        $class->updateStudentStatusFromClass($tId,(int)$classId,(int)$addIds[$i],1,$result[0]['tuition_per_class']);
+                        $tuition = $result[0]['tuition_per_class'];
                     }
 
                     $class->saveClassDetailAndStudentRela($classDetailId,(int)$classId,(int)$addIds[$i],$tuition,$tId);

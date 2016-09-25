@@ -42,7 +42,7 @@
 		</div>
 
 		<table class="main-view-inner-table table table-bordered table-striped table-hover text-center">
-			<thead class="title"><tr><td>编号</td><td>学生</td><td>课程</td><td>课程开始日期</td><td>课程结束日期</td><td>应收学费</td><td>已收学费</td><td>缴费</td></tr></thead>
+			<thead class="title"><tr><td>编号</td><td>学生</td><td>课程</td><td>课程开始日期</td><td>课程结束日期</td><td>应收学费</td><td>已收学费</td><td>缴费</td><td>退费</td></tr></thead>
 			<tbody>
 			  <foreach name="classList" item="vo" >
 				<tr>
@@ -53,13 +53,21 @@
 				  <td>{$vo.end_date}</td>
 				  <td>{$vo['receivable_tuition']/100}</td>
 				  <td>{$vo['received_tuition']/100}</td>
-				  <td>
-				   	<if condition="$vo.receivable_tuition eq $vo.received_tuition">
-                      	
-                    <else /> 
-                        <input id="tuition_to_charge_{$num}" type="text" style="width:80px;">
-                        <button type="button" class="btn btn-default" onclick="chargeRemainingTuition({$vo.id},{$vo.student_id},{$vo.class_id},{$num});">缴费</button>
-                    </if>
+				  <td> 
+				    <div class="input-group" style="width:150px;">
+				      <input id="tuition_to_charge_{$num}" type="text" class="form-control">
+				      <span class="input-group-btn">
+				        <button class="btn btn-default" type="button" onclick="chargeRemainingTuition({$vo.id},{$vo.student_id},{$vo.class_id},{$num});">缴费</button>
+				      </span>
+				    </div>
+                  </td>
+                  <td>
+                  	<div class="input-group" style="width:150px;">
+				      <input id="tuition_to_refund_{$num}" type="text" class="form-control">
+				      <span class="input-group-btn">
+				        <button class="btn btn-default" type="button"  onclick="refundTuition({$vo.id},{$vo.student_id},{$vo.class_id},{$num});">退费</button>
+				      </span>
+				    </div>
                   </td>
 				</tr>
 			  </foreach>

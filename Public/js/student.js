@@ -228,7 +228,15 @@ function deleteStudent(id,name){
 
 function chargeRemainingTuition(id,studentId,classId,num){
 	if(confirm("是否缴费？")){
-		var chargeTuition = $("tuition_to_charge_"+num).val();
+		var chargeTuition = $("#tuition_to_charge_"+num).val();
+		if(chargeTuition == null || chargeTuition == ""){
+			$.scojs_message('请输入缴费金额！', $.scojs_message.TYPE_ERROR);
+			return;
+		}
+		if(chargeTuition <= 0){
+			$.scojs_message('缴费金额必须大于0！', $.scojs_message.TYPE_ERROR);
+			return;
+		}
 	  	$.ajax({
 		   	type: "POST",
 		   	url: "chargeRemainingTuition",
@@ -239,6 +247,34 @@ function chargeRemainingTuition(id,studentId,classId,num){
 		   			setInterval('reloadPage()',1500);
 		   		}else{
 		   			$.scojs_message('缴费失败！', $.scojs_message.TYPE_ERROR);
+		   		}
+				
+		   	}
+		});
+  	}
+}
+
+function refundTuition(id,studentId,classId,num){
+	if(confirm("是否退费？")){
+		var refundTuition = $("#tuition_to_refund_"+num).val();
+		if(refundTuition == null || refundTuition == ""){
+			$.scojs_message('请输入退费金额！', $.scojs_message.TYPE_ERROR);
+			return;
+		}
+		if(refundTuition <= 0){
+			$.scojs_message('退费金额必须大于0！', $.scojs_message.TYPE_ERROR);
+			return;
+		}
+	  	$.ajax({
+		   	type: "POST",
+		   	url: "refundTuition",
+		   	data: "id="+id+"&studentId="+studentId+"&classId="+classId+"&refundTuition="+refundTuition,
+		   	success: function(msg){
+		   		if(msg == 'true'){
+		   			$.scojs_message('退费成功！', $.scojs_message.TYPE_OK);
+		   			setInterval('reloadPage()',1500);
+		   		}else{
+		   			$.scojs_message('退费失败！', $.scojs_message.TYPE_ERROR);
 		   		}
 				
 		   	}
