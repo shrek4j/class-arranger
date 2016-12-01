@@ -21,8 +21,14 @@
     <link href="/Public/css/bootstrap/sco/sco.message.css" rel="stylesheet">
     <link href="/Public/css/base.css" rel="stylesheet">
     <style type="text/css">
+        .main-view-lexi{top:0px;
+                        position:relative;
+                        float:right;
+                        width:83.5%;
+                        margin:0.5%;
+                        padding:0.8% 0.8% 0.8% 1.2%;}
         .container-fluid .row{margin-top:2%;}
-        .main-view-inner{margin:4% 2% 2% 6%;font-size:14px;width:1000px;}
+        .main-view-inner{margin:2% 2% 2% 6%;font-size:14px;width:1000px;}
         .main-view-inner .key{width:80px;padding:0px;font-weight:bold;}
         .main-view-inner .value{width:800px;padding-left:0px;}
         .row-gutter{margin-top:5px;}
@@ -34,52 +40,60 @@
 </head>
 <body class="global">
 
-<div class="main-view">
+<div class="main-view-lexi">
+        <label for="top" class="control-label" id="top"></label>
         <div class="main-view-inner container-fluid">
+            <a href="addWordRoot">添加词根</a>
+            <div class="row"  style="margin-bottom:30px;">
+                <div class="col-md-4 key row-gutter"></div>
+                <div class="col-md-6 value row-gutter"><button type="button" class="btn btn-default btn-submit add-word">保存</button></div>
+            </div>
             <div class="row">
-                <div class="row"  style="margin-bottom:30px;">
-                    <div class="col-md-6 key row-gutter"><button type="button" class="btn btn-default btn-submit add-word">保存</button></div>
-                </div>
                 <div class="col-md-4 key row-gutter">单词：</div>
                 <div class="col-md-4 value"><input id="word" type="text" style="width:200px;" class="form-control" value="" aria-describedby="basic-addon1"/></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 key row-gutter">解释：</div>
+                <div class="col-md-4 value"><textarea id="meaning" style="width:600px;height:80px;"></textarea></div>
             </div>
             <div class="row" style="margin-bottom:30px;">
                 <div class="col-md-4 key row-gutter">词根：</div>
                 <div class="col-md-12 value">
                     <!-- Modal -->
                     <div class="">
-                        <div style="display:inline-block;margin:5px 0px 5px 10px;font-size:16px;" class="container-fluid">
+                        <div style="margin:1% 0% 0% 0%;font-size:13px;position:fixed;" class="container-fluid">
                             <div class="row">
-                                    <a href="#letter_a" style="margin-right:5px;">A</a>
-                                    <a href="#letter_b" style="margin-right:5px;">B</a>
-                                    <a href="#letter_c" style="margin-right:5px;">C</a>
-                                    <a href="#letter_d" style="margin-right:5px;">D</a>
-                                    <a href="#letter_e" style="margin-right:5px;">E</a>
-                                    <a href="#letter_f" style="margin-right:5px;">F</a>
-                                    <a href="#letter_g" style="margin-right:5px;">G</a>
-                                    <a href="#letter_h" style="margin-right:5px;">H</a>
-                                    <a href="#letter_i" style="margin-right:5px;">I</a>
-                                    <a href="#letter_j" style="margin-right:5px;">J</a>
-                                    <a href="#letter_k" style="margin-right:5px;">K</a>
-                                    <a href="#letter_l" style="margin-right:5px;">L</a>
-                                    <a href="#letter_m" style="margin-right:5px;">M</a>
-                                    <a href="#letter_n" style="margin-right:5px;">N</a>
-                                    <a href="#letter_o" style="margin-right:5px;">O</a>
-                                    <a href="#letter_p" style="margin-right:5px;">P</a>
-                                    <a href="#letter_q" style="margin-right:5px;">Q</a>
-                                    <a href="#letter_r" style="margin-right:5px;">R</a>
-                                    <a href="#letter_s" style="margin-right:5px;">S</a>
-                                    <a href="#letter_t" style="margin-right:5px;">T</a>
-                                    <a href="#letter_u" style="margin-right:5px;">U</a>
-                                    <a href="#letter_v" style="margin-right:5px;">V</a>
-                                    <a href="#letter_w" style="margin-right:5px;">W</a>
-                                    <a href="#letter_x" style="margin-right:5px;">X</a>
-                                    <a href="#letter_y" style="margin-right:5px;">Y</a>
-                                    <a href="#letter_z" style="margin-right:5px;">Z</a>
-                                    <a href="#letter_#" style="margin-right:5px;">#</a>
+                                    <div><a href="#top" style="margin-right:5px;">TOP</a></div>
+                                    <div><a href="#letter_a" style="margin-right:5px;">A</a></div>
+                                    <div><a href="#letter_b" style="margin-right:5px;">B</a></div>
+                                    <div><a href="#letter_c" style="margin-right:5px;">C</a></div>
+                                    <div><a href="#letter_d" style="margin-right:5px;">D</a></div>
+                                    <div><a href="#letter_e" style="margin-right:5px;">E</a></div>
+                                    <div><a href="#letter_f" style="margin-right:5px;">F</a></div>
+                                    <div><a href="#letter_g" style="margin-right:5px;">G</a></div>
+                                    <div><a href="#letter_h" style="margin-right:5px;">H</a></div>
+                                    <div><a href="#letter_i" style="margin-right:5px;">I</a></div>
+                                    <div><a href="#letter_j" style="margin-right:5px;">J</a></div>
+                                    <div><a href="#letter_k" style="margin-right:5px;">K</a></div>
+                                    <div><a href="#letter_l" style="margin-right:5px;">L</a></div>
+                                    <div><a href="#letter_m" style="margin-right:5px;">M</a></div>
+                                    <div><a href="#letter_n" style="margin-right:5px;">N</a></div>
+                                    <div><a href="#letter_o" style="margin-right:5px;">O</a></div>
+                                    <div><a href="#letter_p" style="margin-right:5px;">P</a></div>
+                                    <div><a href="#letter_q" style="margin-right:5px;">Q</a></div>
+                                    <div><a href="#letter_r" style="margin-right:5px;">R</a></div>
+                                    <div><a href="#letter_s" style="margin-right:5px;">S</a></div>
+                                    <div><a href="#letter_t" style="margin-right:5px;">T</a></div>
+                                    <div><a href="#letter_u" style="margin-right:5px;">U</a></div>
+                                    <div><a href="#letter_v" style="margin-right:5px;">V</a></div>
+                                    <div><a href="#letter_w" style="margin-right:5px;">W</a></div>
+                                    <div><a href="#letter_x" style="margin-right:5px;">X</a></div>
+                                    <div><a href="#letter_y" style="margin-right:5px;">Y</a></div>
+                                    <div><a href="#letter_z" style="margin-right:5px;">Z</a></div>
+                                    <div><a href="#letter_#" style="margin-right:5px;">#</a></div>
                             </div>
                         </div>
-                        <div style="display:inline-block;height:400px;width:800px;" class="container-fluid">
+                        <div style="display:inline-block;height:400px;width:800px;margin:0px 0px 0px 30px;" class="container-fluid">
                             <div class="row">
                                 <div class="col-md-12" style="background-color:#1ABC9C;color:white;margin:5px 0px 5px 0px;">
                                     <label for="letter_a" class="control-label" id="letter_a">A</label>
@@ -90,7 +104,7 @@
                                     <if condition="($vo.capital eq a) or ($vo.capital eq A)">
                                     <div class="col-md-6">
                                     <div class="margin">
-                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text">{$vo.word_root}</span>
+                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text"><a href="showWordsByRoot?wordRootId={$vo.id}">{$vo.word_root}</a></span>
                                     </div>
                                     </div>
                                     </if>
@@ -106,7 +120,7 @@
                                    <if condition="($vo.capital eq b) or ($vo.capital eq B)">
                                    <div class="col-md-6">
                                     <div class="margin">
-                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text">{$vo.word_root}</span>
+                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text"><a href="showWordsByRoot?wordRootId={$vo.id}">{$vo.word_root}</a></span>
                                     </div>
                                     </div>
                                     </if>
@@ -122,7 +136,7 @@
                                    <if condition="($vo.capital eq c) or ($vo.capital eq C)">
                                    <div class="col-md-6">
                                     <div class="margin">
-                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text">{$vo.word_root}</span>
+                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text"><a href="showWordsByRoot?wordRootId={$vo.id}">{$vo.word_root}</a></span>
                                     </div>
                                     </div>
                                     </if>
@@ -138,7 +152,7 @@
                                    <if condition="($vo.capital eq d) or ($vo.capital eq D)">
                                    <div class="col-md-6">
                                     <div class="margin">
-                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text">{$vo.word_root}</span>
+                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text"><a href="showWordsByRoot?wordRootId={$vo.id}">{$vo.word_root}</a></span>
                                     </div>
                                     </div>
                                     </if>
@@ -154,7 +168,7 @@
                                    <if condition="($vo.capital eq e) or ($vo.capital eq E)">
                                    <div class="col-md-6">
                                     <div class="margin">
-                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text">{$vo.word_root}</span>
+                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text"><a href="showWordsByRoot?wordRootId={$vo.id}">{$vo.word_root}</a></span>
                                     </div>
                                     </div>
                                     </if>
@@ -170,7 +184,7 @@
                                    <if condition="($vo.capital eq f) or ($vo.capital eq F)">
                                    <div class="col-md-6">
                                     <div class="margin">
-                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text">{$vo.word_root}</span>
+                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text"><a href="showWordsByRoot?wordRootId={$vo.id}">{$vo.word_root}</a></span>
                                     </div>
                                     </div>
                                     </if>
@@ -186,7 +200,7 @@
                                    <if condition="($vo.capital eq g) or ($vo.capital eq G)">
                                    <div class="col-md-6">
                                     <div class="margin">
-                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text">{$vo.word_root}</span>
+                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text"><a href="showWordsByRoot?wordRootId={$vo.id}">{$vo.word_root}</a></span>
                                     </div>
                                     </div>
                                     </if>
@@ -202,7 +216,7 @@
                                    <if condition="($vo.capital eq h) or ($vo.capital eq H)">
                                    <div class="col-md-6">
                                     <div class="margin">
-                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text">{$vo.word_root}</span>
+                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text"><a href="showWordsByRoot?wordRootId={$vo.id}">{$vo.word_root}</a></span>
                                     </div>
                                     </div>
                                     </if>
@@ -218,7 +232,7 @@
                                    <if condition="($vo.capital eq i) or ($vo.capital eq I)">
                                    <div class="col-md-6">
                                     <div class="margin">
-                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text">{$vo.word_root}</span>
+                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text"><a href="showWordsByRoot?wordRootId={$vo.id}">{$vo.word_root}</a></span>
                                     </div>
                                     </div>
                                     </if>
@@ -234,7 +248,7 @@
                                    <if condition="($vo.capital eq j) or ($vo.capital eq J)">
                                    <div class="col-md-6">
                                     <div class="margin">
-                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text">{$vo.word_root}</span>
+                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text"><a href="showWordsByRoot?wordRootId={$vo.id}">{$vo.word_root}</a></span>
                                     </div>
                                     </div>
                                     </if>
@@ -250,7 +264,7 @@
                                    <if condition="($vo.capital eq k) or ($vo.capital eq K)">
                                    <div class="col-md-6">
                                     <div class="margin">
-                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text">{$vo.word_root}</span>
+                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text"><a href="showWordsByRoot?wordRootId={$vo.id}">{$vo.word_root}</a></span>
                                     </div>
                                     </div>
                                     </if>
@@ -266,7 +280,7 @@
                                    <if condition="($vo.capital eq l) or ($vo.capital eq L)">
                                    <div class="col-md-6">
                                     <div class="margin">
-                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text">{$vo.word_root}</span>
+                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text"><a href="showWordsByRoot?wordRootId={$vo.id}">{$vo.word_root}</a></span>
                                     </div>
                                     </div>
                                     </if>
@@ -282,7 +296,7 @@
                                    <if condition="($vo.capital eq m) or ($vo.capital eq M)">
                                    <div class="col-md-6">
                                     <div class="margin">
-                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text">{$vo.word_root}</span>
+                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text"><a href="showWordsByRoot?wordRootId={$vo.id}">{$vo.word_root}</a></span>
                                     </div>
                                     </div>
                                     </if>
@@ -298,7 +312,7 @@
                                    <if condition="($vo.capital eq n) or ($vo.capital eq N)">
                                    <div class="col-md-6">
                                     <div class="margin">
-                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text">{$vo.word_root}</span>
+                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text"><a href="showWordsByRoot?wordRootId={$vo.id}">{$vo.word_root}</a></span>
                                     </div>
                                     </div>
                                     </if>
@@ -314,7 +328,7 @@
                                    <if condition="($vo.capital eq o) or ($vo.capital eq O)">
                                    <div class="col-md-6">
                                     <div class="margin">
-                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text">{$vo.word_root}</span>
+                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text"><a href="showWordsByRoot?wordRootId={$vo.id}">{$vo.word_root}</a></span>
                                     </div>
                                     </div>
                                     </if>
@@ -330,7 +344,7 @@
                                    <if condition="($vo.capital eq p) or ($vo.capital eq P)">
                                    <div class="col-md-6">
                                     <div class="margin">
-                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text">{$vo.word_root}</span>
+                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text"><a href="showWordsByRoot?wordRootId={$vo.id}">{$vo.word_root}</a></span>
                                     </div>
                                     </div>
                                     </if>
@@ -346,7 +360,7 @@
                                    <if condition="($vo.capital eq q) or ($vo.capital eq Q)">
                                    <div class="col-md-6">
                                     <div class="margin">
-                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text">{$vo.word_root}</span>
+                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text"><a href="showWordsByRoot?wordRootId={$vo.id}">{$vo.word_root}</a></span>
                                     </div>
                                     </div>
                                     </if>
@@ -362,7 +376,7 @@
                                    <if condition="($vo.capital eq r) or ($vo.capital eq R)">
                                    <div class="col-md-6">
                                     <div class="margin">
-                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text">{$vo.word_root}</span>
+                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text"><a href="showWordsByRoot?wordRootId={$vo.id}">{$vo.word_root}</a></span>
                                     </div>
                                     </div>
                                     </if>
@@ -378,7 +392,7 @@
                                    <if condition="($vo.capital eq s) or ($vo.capital eq S)">
                                    <div class="col-md-6">
                                     <div class="margin">
-                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text">{$vo.word_root}</span>
+                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text"><a href="showWordsByRoot?wordRootId={$vo.id}">{$vo.word_root}</a></span>
                                     </div>
                                     </div>
                                     </if>
@@ -394,7 +408,7 @@
                                    <if condition="($vo.capital eq t) or ($vo.capital eq T)">
                                    <div class="col-md-6">
                                     <div class="margin">
-                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text">{$vo.word_root}</span>
+                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text"><a href="showWordsByRoot?wordRootId={$vo.id}">{$vo.word_root}</a></span>
                                     </div>
                                     </div>
                                     </if>
@@ -410,7 +424,7 @@
                                    <if condition="($vo.capital eq u) or ($vo.capital eq U)">
                                    <div class="col-md-6">
                                     <div class="margin">
-                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text">{$vo.word_root}</span>
+                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text"><a href="showWordsByRoot?wordRootId={$vo.id}">{$vo.word_root}</a></span>
                                     </div>
                                     </div>
                                     </if>
@@ -426,7 +440,7 @@
                                    <if condition="($vo.capital eq v) or ($vo.capital eq V)">
                                    <div class="col-md-6">
                                     <div class="margin">
-                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text">{$vo.word_root}</span>
+                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text"><a href="showWordsByRoot?wordRootId={$vo.id}">{$vo.word_root}</a></span>
                                     </div>
                                     </div>
                                     </if>
@@ -442,7 +456,7 @@
                                    <if condition="($vo.capital eq w) or ($vo.capital eq W)">
                                    <div class="col-md-6">
                                     <div class="margin">
-                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text">{$vo.word_root}</span>
+                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text"><a href="showWordsByRoot?wordRootId={$vo.id}">{$vo.word_root}</a></span>
                                     </div>
                                     </div>
                                     </if>
@@ -458,7 +472,7 @@
                                    <if condition="($vo.capital eq x) or ($vo.capital eq X)">
                                    <div class="col-md-6">
                                     <div class="margin">
-                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text">{$vo.word_root}</span>
+                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text"><a href="showWordsByRoot?wordRootId={$vo.id}">{$vo.word_root}</a></span>
                                     </div>
                                     </div>
                                     </if>
@@ -474,7 +488,7 @@
                                    <if condition="($vo.capital eq y) or ($vo.capital eq Y)">
                                    <div class="col-md-6">
                                     <div class="margin">
-                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text">{$vo.word_root}</span>
+                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text"><a href="showWordsByRoot?wordRootId={$vo.id}">{$vo.word_root}</a></span>
                                     </div>
                                     </div>
                                     </if>
@@ -490,7 +504,7 @@
                                    <if condition="($vo.capital eq z) or ($vo.capital eq Z)">
                                    <div class="col-md-6">
                                     <div class="margin">
-                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text">{$vo.word_root}</span>
+                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text"><a href="showWordsByRoot?wordRootId={$vo.id}">{$vo.word_root}</a></span>
                                     </div>
                                     </div>
                                     </if>
@@ -501,13 +515,13 @@
                                     <label for="letter_#" class="control-label" id="letter_#">#</label>
                                 </div>
                             </div> 
-                            <div class="row">
+                            <div class="row" style="margin-bottom:50px;">
                                 <foreach name="wordRootList" item="vo" >
                                    <in name="vo.capital" value="a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z">
                                     <else/>
                                         <div class="col-md-6">
                                         <div class="margin">
-                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text">{$vo.word_root}</span>
+                                        <input tabindex="{$snum}" id="wordRoot_{$snum++}" woodRootname="{$vo.word_root}" type="checkbox" name="wordRoot" value="{$vo.id}"><span class="radio-text"><a href="showWordsByRoot?wordRootId={$vo.id}">{$vo.word_root}</a></span>
                                     </div>
                                     </div>
                                     </in>

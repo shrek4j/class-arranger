@@ -1,19 +1,13 @@
 
 $(".add-word").click(function(){
 	var word = $("#word").val();
-	var rent = $("#rent").val();
-	if(isEmpty(classroom)){
-		$.scojs_message('教室名称不可为空！', $.scojs_message.TYPE_ERROR);
-		return;
-	}
-	if(classroom.length > 20){
-		$.scojs_message('教室名称长度应小于20！', $.scojs_message.TYPE_ERROR);
-		return;
-	}
+	var meaning = $("#meaning").val();
+	var wordRootInputs = $("input[name='wordRoot']:checked");
+	var wordRoots = getWordRootStr(wordRootInputs);
 	$.ajax({
 	   	type: "POST",
-	   	url: "saveClassroom",
-	   	data: "classroom="+classroom+"&rent="+rent,
+	   	url: "saveWord",
+	   	data: "word="+word+"&wordRoots="+wordRoots+"&meaning="+meaning,
 	   	success: function(msg){
 	   		if(msg == 'true'){
 	   			$.scojs_message('添加成功！', $.scojs_message.TYPE_OK);
@@ -25,6 +19,17 @@ $(".add-word").click(function(){
 	   	}
 	});
 });
+
+function getWordRootStr(wordRootInputs){
+	var wordRoots = "";
+	for(var i=0;i<wordRootInputs.length;i++){
+		wordRoots += wordRootInputs[i].value;
+		if(i<wordRootInputs.length-1){
+			wordRoots += "|";
+		}
+	}
+	return wordRoots;
+}
 
 function deleteClassroom(id,name){
   if(confirm("是否删除教室："+name+"？")){

@@ -1,6 +1,9 @@
 <?php
 
 function ismobile() {
+    if($_GET['mobile'] == 'f'){
+        return false;
+    }
     // 如果有HTTP_X_WAP_PROFILE则一定是移动设备
     if (isset ($_SERVER['HTTP_X_WAP_PROFILE']))
         return true;

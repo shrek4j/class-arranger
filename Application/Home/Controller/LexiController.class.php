@@ -17,35 +17,30 @@ class LexiController extends Controller {
         $this->display();
     }
 
-    public function saveWord($classroom,$rent){
-        if($classroom == "")
-            return;
-        $instId = session('instId');
-
+    public function saveWord($word,$wordRoots,$meaning){
         try{
-            $model = new \Home\Model\ClassroomModel();
-            $result = $model->saveClassroom($classroom,(int)$rent*100,$instId);
+            $lexi = new \Home\Model\LexiModel();
+            $lexi->startTrans();
+            $wordId = $lexi->saveWord($word,$meaning);
+            $wordRootIds = explode('|',$wordRoots);
+            if(!empty($wordRootIds)){
+                for($i=0;$i<count($wordRootIds);$i++){
+                    $lexi->saveWordAndRootRela($wordId[0]['id'],(int)$wordRootIds[$i]);
+                }
+            }
+            $lexi->commit();
             $data = "true";
         }catch(Exception $e){
+            $lexi->rollback();
             $data = "false";
         }
         $this->ajaxReturn($data);
     }
 
-    public function showWords($pageNo=1,$pageSize=10){
-        $instId = session('instId');
-        if(!$instId)
-            return;
-        $start = ($pageNo - 1)*$pageSize;
-        $model = new \Home\Model\ClassroomModel();
-        $classroomList = $model->showClassrooms($instId,$start,$pageSize);
-        $totals = $model->total($instId);
-        $total = $totals[0]['total'];
-        $this->assign('classroomList',$classroomList);
-        $this->assign('total',$total);
-        $this->assign('pageNo',$pageNo);
-        $this->assign('pageSize',$pageSize);
-        $this->assign("howMangPages",ceil($total/$pageSize-1)+1);
+    public function showWordsByRoot($wordRootId){
+        $lexi = new \Home\Model\LexiModel();
+        $wordList = $lexi->showWordsByRoot($wordRootId);
+        $this->assign('wordList',$wordList);
         $this->assign('num',1);//记录编号
         layout(true);
         $this->display();
