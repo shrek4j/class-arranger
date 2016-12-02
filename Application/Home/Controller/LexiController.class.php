@@ -8,8 +8,11 @@ class LexiController extends Controller {
         $lexi = new \Home\Model\LexiModel();
         $wordRootList = $lexi->showWordroots();
         for($i=0;$i<count($wordRootList);$i++){
-            $captial = substr($wordRootList[$i]['word_root'],0,1);
-            $wordRootList[$i]['capital'] = $captial;
+            $capital = substr($wordRootList[$i]['word_root'],0,1);
+            if($capital == '-'){
+                $capital = substr($wordRootList[$i]['word_root'],1,1);
+            }
+            $wordRootList[$i]['capital'] = $capital;
         }
         $this->assign('wordRootList',$wordRootList);
         $this->assign('cnum',1);//记录编号
