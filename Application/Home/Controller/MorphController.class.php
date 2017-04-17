@@ -7,6 +7,7 @@ class MorphController extends Controller {
         $morph = new \Home\Model\MorphModel();
         $morphList = $morph->showMorphemeByCapital($capital);
         $this->assign('morphList',$morphList);
+		$this->assign('num',1);//记录编号
         layout(true);
         $this->display();
     }
