@@ -9,7 +9,7 @@ class AuthCheckBehavior extends \Think\Behavior{
             || strpos($uri,'/Operator/showRegisterInstruction') || strpos($uri,'/Operator/showRegister') 
             || strpos($uri,'/Operator/checkLoginname') || strpos($uri,'/Operator/doRegister')
             || strpos($uri,'/Operator/registerDone') || strpos($uri,'/Region/showCities') || strpos($uri,'/Region/showDistricts') 
-            || strpos($uri,'/Lexi/')){//在这里写列表，可以不做检查
+            || strpos($uri,'/Lexi/') || strpos($uri,'/Morph/')){//在这里写列表，可以不做检查
             $return = true;
         }else{
             $operatorId = session('operatorId');
