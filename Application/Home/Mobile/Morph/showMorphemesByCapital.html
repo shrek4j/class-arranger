@@ -42,12 +42,12 @@
             <form action="showWordsByMorpheme" method="post" id="showWordsByMorpheme">
                 <input type="hidden" name="morphemeId" id="morphemeId"/>
             </form>
-            <div class="weui_cells text-center" style="margin-top:0px;">
-                <div class="weui_cell weui_cell_select weui_select_after">
-                    <div class="weui_cell_hd">
-                        <label for="" class="weui_cell_primary">根据词根首字母查询：</label>
+            <div class="weui-cells text-center" style="margin-top:0px;">
+                <div class="weui-cell weui-cell_select weui-select_after">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-cell_primary">根据词根首字母查询：</label>
                     </div>
-                    <div class="weui_cell_bd weui_cell">
+                    <div class="weui-cell__bd weui-cell">
                         <select class="weui_select select-capital" name="select2" id="selectCapital">
                             <option value="a" <if condition="$capital eq 'a'">selected="selected"</if>>a</option>
 							<option value="b" <if condition="$capital eq 'b'">selected="selected"</if>>b</option>
@@ -84,13 +84,13 @@
             <div class="class-detail-daily">
                 <notempty name="morphList">
                     <foreach name="morphList" item="morph" >
-                    <div class="weui_panel">
-                        <div class="weui_panel_bd">
-                            <div class="weui_media_box weui_media_text" onclick="showWords({$morph.id});">
+                    <div class="weui-panel">
+                        <div class="weui-panel__bd">
+                            <div class="weui-media-box weui-media-box_text" onclick="showWords({$morph.id});">
 							
-                                <h4 class="weui_media_title">{$num++}.&nbsp;{$morph.word_root}</h4>
-								<ul class="weui_media_info">
-									<li class="weui_media_info_meta">Origin：
+                                <h4 class="weui-media-box__title">{$num++}.&nbsp;{$morph.word_root}</h4>
+								<ul class="weui-media-box__info">
+									<li class="weui-media-box__info__meta" style="color:#807e7e;">Origin：
 										<switch name="morph.origin">
 											<case value="1" break="1">Latin</case>
 											<case value="2" break="2">Greek</case>
@@ -98,15 +98,15 @@
 										</switch>
 									</li>
 								</ul>
-                                <ul class="weui_media_info">
-                                    <li class="weui_media_info_meta">Meaning：{$morph.meaning}</li>
+                                <ul class="weui-media-box__info">
+                                    <li class="weui-media-box__info__meta" style="color:#807e7e;">Meaning：{$morph.meaning}</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     </foreach>
                 <else />
-                   <div style="font-size:16px;margin-top:200px;" class="text-center">今天没课呦~</div>
+                   <div style="font-size:16px;margin-top:200px;" class="text-center">此字母下没有词根哦~</div>
                 </notempty>
             </div>
         </div>

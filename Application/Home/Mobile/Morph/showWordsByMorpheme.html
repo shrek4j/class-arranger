@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link href="/Public/css/base_mobile.css" rel="stylesheet">
     <style type="text/css">
-
+    
     </style>
     
 </head>
@@ -40,6 +40,17 @@
 				<default />Unknown
 			</switch>
 		</div>
+        <div class="weui-panel weui-panel_access">
+            <div class="weui-panel__hd">相关单词</div>
+            <div class="weui-panel__bd">
+            <foreach name="wordList" item="word">
+                <div class="weui-media-box weui-media-box_text">
+                    <h4 class="weui-media-box__title">{$num++}.&nbsp;{$word.word}</h4>
+                    <p class="weui-media-box__desc">{$word.translation}</p>
+                </div>
+            </foreach>
+            </div>
+        </div>
 		<div class="weui_cells_title bold-font">相关单词：</div>
         <div class="weui_cells">
             <foreach name="wordList" item="word">
