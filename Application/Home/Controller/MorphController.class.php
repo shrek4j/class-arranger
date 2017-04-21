@@ -13,6 +13,14 @@ class MorphController extends Controller {
         $this->display();
     }
 
+    public function fuzzySearchMorph($fuzzyMorph){
+        //做安全校验,防sql注入
+        $morph = new \Home\Model\MorphModel();
+        $morphList = $morph->fuzzySearchMorph($fuzzyMorph);
+        $data = json_encode($morphList);
+        $this->ajaxReturn($data);
+    }
+
     public function showWordsByMorpheme($morphemeId=1){
         $morph = new \Home\Model\MorphModel();
         $wordList = $morph->showWordsByMorpheme($morphemeId);

@@ -14,14 +14,17 @@
     <meta name="author" content="">
 
 	<title>词根列表</title>
-    <link ref="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+    <link ref="shortcut icon" href="/morph_favicon.ico" type="image/x-icon"/>
 	<!-- 新 Bootstrap 核心 CSS 文件 -->
 	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link href="/Public/css/base_mobile.css" rel="stylesheet">
+    <link href="/Public/css/base_morph_mobile.css" rel="stylesheet">
     <style type="text/css">
-        .main-view-inner{margin:2% 2% 2% 2%;}
-        .main-view-inner-bar{margin:2% 2% 2% 2%;}
-        .class-detail-daily{margin-top:4%;}
+        .main-view-inner{margin:4% 4% 4% 4%;}
+        .main-view-inner-bar{margin:0% 0% 2% 0%;}
+        .word-root-list{margin-top:4%;}
+        .fuzzy-search{margin-top:2%;}
+        #weui-picker-confirm{color:#1875b7;}
+        .weui-picker__item{font-size:18px;}
     </style>
     
 </head>
@@ -30,9 +33,35 @@
 <include file="Public:morphNav" />
 
 <div class="main-view">
+    <div class="fuzzy-search">
+        <!-- fuzzy search -->
+        <div class="weui-search-bar" id="searchBar">
+            <form class="weui-search-bar__form">
+                <div class="weui-search-bar__box">
+                    <i class="weui-icon-search"></i>
+                    <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required/>
+                    <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+                </div>
+                <label class="weui-search-bar__label" id="searchText">
+                    <i class="weui-icon-search"></i>
+                    <span>搜索</span>
+                </label>
+            </form>
+            <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel" style="color:#1875b7;">取消</a>
+        </div>
+        <div class="weui-cells searchbar-result" id="searchResult" style="margin-top:0px;display:none;position:absolute;width:100%;z-index:10000;background-color:#f3f2f2;font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;font-size:14px;">
+            <div class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>实时搜索文本</p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
     <div class="main-view-inner">
         <div class="main-view-inner-bar">
-                <!-- Single button -->
+
             <form action="showMorphemesByCapital" method="post" id="showMorphemesByCapital">
                 <input type="hidden" name="capital" id="capital" value="{$capital}"/>
             </form>
@@ -40,37 +69,40 @@
                 <input type="hidden" name="morphemeId" id="morphemeId"/>
             </form>
 
-            <a href="javascript:;" class="weui-btn weui-btn_default" id="showPicker">选择首字母查询：<span id="capitalLetter">{$capital}</span></a>
+            <div class="alphabet-search">
+                <!-- search alphabetically -->
+                <a href="javascript:;" class="weui-btn weui-btn_default" style="font-size:14px;" id="showPicker">选择首字母查询：<span id="capitalLetter">{$capital}</span></a>
+            </div>
+            
+        </div>
 
-
-            <div class="class-detail-daily">
-                <notempty name="morphList">
-                    <foreach name="morphList" item="morph" >
-                    <div class="weui-panel">
-                        <div class="weui-panel__bd">
-                            <div class="weui-media-box weui-media-box_text" onclick="showWords({$morph.id});">
-							
-                                <h4 class="weui-media-box__title">{$num++}.&nbsp;{$morph.word_root}</h4>
-								<ul class="weui-media-box__info">
-									<li class="weui-media-box__info__meta" style="color:#807e7e;">Origin：
-										<switch name="morph.origin">
-											<case value="1" break="1">Latin</case>
-											<case value="2" break="2">Greek</case>
-											<default />Unknown
-										</switch>
-									</li>
-								</ul>
-                                <ul class="weui-media-box__info">
-                                    <li class="weui-media-box__info__meta" style="color:#807e7e;">Meaning：{$morph.meaning}</li>
-                                </ul>
-                            </div>
+        <div class="word-root-list">
+            <notempty name="morphList">
+                <foreach name="morphList" item="morph" >
+                <div class="weui-panel">
+                    <div class="weui-panel__bd">
+                        <div class="weui-media-box weui-media-box_text" onclick="showWords({$morph.id});">
+						
+                            <h4 class="weui-media-box__title">{$num++}.&nbsp;{$morph.word_root}</h4>
+							<ul class="weui-media-box__info">
+								<li class="weui-media-box__info__meta" style="color:#807e7e;">Origin：
+									<switch name="morph.origin">
+										<case value="1" break="1">Latin</case>
+										<case value="2" break="2">Greek</case>
+										<default />Unknown
+									</switch>
+								</li>
+							</ul>
+                            <ul class="weui-media-box__info">
+                                <li class="weui-media-box__info__meta" style="color:#807e7e;">Meaning：{$morph.meaning}</li>
+                            </ul>
                         </div>
                     </div>
-                    </foreach>
-                <else />
-                   <div style="font-size:16px;margin-top:200px;" class="text-center">此字母下没有词根哦~</div>
-                </notempty>
-            </div>
+                </div>
+                </foreach>
+            <else />
+               <div style="font-size:14px;margin-top:200px;" class="text-center">此字母下没有词根哦~</div>
+            </notempty>
         </div>
     </div>
 </div>
@@ -80,6 +112,71 @@
     <script type="text/javascript" src="/Public/js/zepto.min.js"></script>
     <script type="text/javascript" src="/Public/js/weixin/jweixin-1.0.0.js"></script>
     <script type="text/javascript" src="/Public/js/weixin/weui.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var $searchBar = $('#searchBar'),
+                $searchResult = $('#searchResult'),
+                $searchText = $('#searchText'),
+                $searchInput = $('#searchInput'),
+                $searchClear = $('#searchClear'),
+                $searchCancel = $('#searchCancel');
+
+            function hideSearchResult(){
+                $searchResult.hide();
+                $searchInput.val('');
+            }
+            function cancelSearch(){
+                hideSearchResult();
+                $searchBar.removeClass('weui-search-bar_focusing');
+                $searchText.show();
+            }
+
+            $searchText.on('click', function(){
+                $searchBar.addClass('weui-search-bar_focusing');
+                $searchInput.focus();
+            });
+            $searchInput
+                .on('blur', function () {
+                    if(!this.value.length) cancelSearch();
+                })
+                .on('input', function(){
+                    if(this.value.length) {
+                        $searchResult.show();
+                        $.ajax({
+                            type: "POST",
+                            url: "fuzzySearchMorph",
+                            data: "fuzzyMorph="+this.value,
+                            success: function(msg){
+                                var dataObj = eval("("+msg+")");
+                                var html = '';
+                                $.each(dataObj,function(idx,item){   
+                                    html   +=   '<div class="weui-cell weui-cell_access" onclick="showWords('+item.id+')">'+
+                                                    '<div class="weui-cell__bd weui-cell_primary">'+
+                                                        '<p>'+ item.word_root +'</p>'+
+                                                    '</div>'+
+                                                '</div>';
+                                    
+                                });
+                                $searchResult.empty();
+                                $searchResult.append(html);
+                           }
+                        });
+                    } else {
+                        $searchResult.hide();
+                    }
+                })
+            ;
+            $searchClear.on('click', function(){
+                hideSearchResult();
+                $searchInput.focus();
+            });
+            $searchCancel.on('click', function(){
+                cancelSearch();
+                $searchInput.blur();
+            });
+        });
+    </script>
+
 	<script type="text/javascript">
 
         function showWords(morphemeId){

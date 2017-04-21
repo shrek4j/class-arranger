@@ -20,5 +20,10 @@ class MorphModel extends Model {
         $sql = "select id,word_root,meaning,origin from wiki_word_root where capital_letter = '%s'";
 		return $this->query($sql,$capital);
     }
+
+    public function fuzzySearchMorph($fuzzyMorph){
+        $sql = "select id,word_root,meaning,origin from wiki_word_root where word_root like '".$fuzzyMorph."%' limit 8";
+        return $this->query($sql);
+    }
 }
 
