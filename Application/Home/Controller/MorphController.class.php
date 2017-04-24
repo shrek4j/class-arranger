@@ -14,7 +14,14 @@ class MorphController extends Controller {
     }
 
     public function fuzzySearchMorph($fuzzyMorph){
+        if(strlen($fuzzyMorph)>8){
+            $this->ajaxReturn('noresult');
+        }
         //做安全校验,防sql注入
+        $fuzzyMorph = preg_replace("/[^a-zA-Z\-]/","",$fuzzyMorph);
+        if($fuzzyMorph == ""){
+            $this->ajaxReturn('noresult');
+        }
         $morph = new \Home\Model\MorphModel();
         $morphList = $morph->fuzzySearchMorph($fuzzyMorph);
         $data = json_encode($morphList);

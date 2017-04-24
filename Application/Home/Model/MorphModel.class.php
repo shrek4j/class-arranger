@@ -22,7 +22,7 @@ class MorphModel extends Model {
     }
 
     public function fuzzySearchMorph($fuzzyMorph){
-        $sql = "select id,word_root,meaning,origin from wiki_word_root where word_root like '".$fuzzyMorph."%' limit 8";
+        $sql = "select id,word_root,meaning,origin from wiki_word_root where word_root like '%".$fuzzyMorph."%' limit 5";
         return $this->query($sql);
     }
 }
