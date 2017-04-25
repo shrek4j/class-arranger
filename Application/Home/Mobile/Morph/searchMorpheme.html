@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-	<title>词根列表</title>
+	<title>词根搜索</title>
     <link ref="shortcut icon" href="/morph_favicon.ico" type="image/x-icon"/>
 	<!-- 新 Bootstrap 核心 CSS 文件 -->
 	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -36,6 +36,7 @@
     <form action="showWordsByMorpheme" method="post" id="showWordsByMorpheme">
         <input type="hidden" name="morphemeId" id="morphemeId"/>
     </form>
+    
     <div class="fuzzy-search">
         <!-- fuzzy search -->
         <div class="weui-search-bar" id="searchBar">
@@ -144,6 +145,17 @@
         });
 
         function showWords(morphemeId){
+            var $searchBar = $('#searchBar'),
+                $searchResult = $('#searchResult'),
+                $searchText = $('#searchText'),
+                $searchInput = $('#searchInput'),
+                $searchClear = $('#searchClear'),
+                $searchCancel = $('#searchCancel');
+                
+            $searchResult.hide();
+            $searchInput.val('');
+            $searchBar.removeClass('weui-search-bar_focusing');
+            $searchText.show();
             $("#morphemeId").val(morphemeId);
             $("#showWordsByMorpheme").submit();
         }
