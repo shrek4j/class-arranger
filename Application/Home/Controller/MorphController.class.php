@@ -38,5 +38,13 @@ class MorphController extends Controller {
         layout(true);
         $this->display();
     }
-	
+
+	public function showSimilarWords($wId=1){
+        $morph = new \Home\Model\MorphModel();
+        $wordList = $morph->showSimilarWords($wId);
+        $this->assign('wordList',$wordList);
+        $this->assign('num',1);//记录编号
+        layout(true);
+        $this->display();
+    }
 }
